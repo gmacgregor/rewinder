@@ -1,0 +1,5 @@
+
+{% for article in latest %}
+<h2><a href="{{ article.get_absolute_url }}">{{ article.headline }}</a><h2>
+<hr>
+{% endfor %}

@@ -1,0 +1,6 @@
+
+video_archive_month
+
+{% for video in object_list %}
+<p><a href="{{ video.get_absolute_url }}">{{ video.title }}</p></a>
+{% endfor %}

@@ -1,0 +1,33 @@
+{% load custom_tags %}
+{% get_random_title as page_title %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="robots" content="follow" />	
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>	
+	<title>rewinder.ca ~ {% if page_title %}{{ page_title }}{% else %}This is the place that Toronto-based Web Guy Greg MacGregor calls home{% endif %}</title>
+	<link rel="openid.server" href="http://openid.claimid.com/server"/>
+	<link rel="openid.delegate" href="http://openid.claimid.com/rewinder"/>
+	<meta name="author" content="Greg MacGregor"/>
+	<meta name="description" content="rewinder.ca is the most awesome website ever created. It's where Toronto-based web technologist Greg MacGregor performs his magic."/>	
+</head>
+
+<body>
+<!-- 
+<ul id="">
+	<li class=""><a href="http://localhost:8000/blog">blog</a></li>
+	<li class=""><a href="http://localhost:8000/videos">videos</a></li>
+	<li class=""><a href="http://localhost:8000/photos">photos</a></li>
+	<li class=""><a href="http://localhost:8000/quirps">quirps</a></li>
+	<li class=""><a href="http://localhost:8000/locations">locations</a></li>
+</ul>
+-->
+
+{% get_twitter_status as tweet %}
+<h1><q cite="{{ tweet.url }}">{{ tweet.status }}</q> ({{ tweet.time }})</h1>
+
+</body>
+</html>
