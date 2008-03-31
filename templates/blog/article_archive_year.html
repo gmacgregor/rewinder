@@ -1,0 +1,6 @@
+
+<h3>Entries posted in {{ year }}</h3>
+
+{% for article in object_list %}
+<p><a href="{{ article.get_absolute_url }}">{{ article.headline }}</p></a>
+{% endfor %}

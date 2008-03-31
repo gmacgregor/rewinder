@@ -1,0 +1,7 @@
+
+video archive
+
+{% for video in latest %}
+<h2><a href="{{ video.get_absolute_url }}">{{ video.title }}</a><h2>
+<hr>
+{% endfor %}
