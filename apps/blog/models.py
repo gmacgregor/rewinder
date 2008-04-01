@@ -159,7 +159,7 @@ class Article(models.Model):
         ordering = ['-pub_date']
     
     class Admin:
-        date_hierarchy - 'pub_date'
+        date_hierarchy = 'pub_date'
         fields = (
             ('Publication details', {'fields': ('pub_date', 'headline', 'slug', 'category')}),
             ('Article Activity', {'fields': ('status', 'enable_comments',)}),
