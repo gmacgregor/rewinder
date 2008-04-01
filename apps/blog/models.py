@@ -134,10 +134,14 @@ class Article(models.Model):
         return Tag.objects.get_for_object(self)
     
     def save(self):
-        self.html_teaser = formatter(self.teaser)
-        self.html_summary = formatter(self.summary)
-        self.html_body = formatter(self.body)
-        self.html_pull_quote = formatter(self.pull_quote)
+        if self.teaser:
+            self.html_teaser = formatter(self.teaser)
+        if self.summary:
+            self.html_summary = formatter(self.summary)
+        if self.body:
+            self.html_body = formatter(self.body)
+        if self.pull_quote:
+            self.html_pull_quote = formatter(self.pull_quote)
         super(Article, self).save()
     
     @models.permalink

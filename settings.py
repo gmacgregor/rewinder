@@ -82,7 +82,7 @@ INSTALLED_APPS = (
 	'django.contrib.comments',
 	'tagging',
 	'typogrify',
-	'template_utils', #http://code.google.com/p/django-template-utils/
+	'template_utils',
 	'rewinder.apps.blog',
 	'rewinder.apps.places',
 	'rewinder.apps.photos',
@@ -92,6 +92,7 @@ INSTALLED_APPS = (
 	'rewinder.util',
 )
 
+#http://code.google.com/p/django-template-utils/
 MARKUP_FILTER = ('markdown')
 
 DELICIOUS_USERNAME = 'sixminutes'
