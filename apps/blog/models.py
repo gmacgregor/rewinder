@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core import validators
+from tagging.models import Tag
 from tagging.fields import TagField
 from rewinder.apps.places.models import Place
 from rewinder.apps.video.models import Video
@@ -50,7 +51,7 @@ class Article(models.Model):
     last_modified       = models.DateTimeField(auto_now=True)
     pub_date            = models.DateTimeField('Publication Date')
     author              = models.ForeignKey(User)
-    status              = models.CharField(max_length=1, choices=PUBLICATION_CHOICES, radio_admin=True, default=1)
+    status              = models.IntegerField(max_length=1, choices=PUBLICATION_CHOICES, radio_admin=True, default=1)
     category            = models.ForeignKey(Category)
     
     #managers
@@ -82,8 +83,8 @@ class Article(models.Model):
     inline_caption      = models.CharField(max_length=255, blank=True)
     
     #media
+    #this should, at some point, include a photo gallery
     articles            = models.ManyToManyField('self', filter_interface=models.HORIZONTAL, null=True, blank=True)
-    # photo gallery
     quirps              = models.ManyToManyField(Quirp, filter_interface=models.HORIZONTAL, null=True, blank=True)
     links               = models.ManyToManyField(Link, filter_interface=models.HORIZONTAL, null=True, blank=True)
     videos              = models.ManyToManyField(Video, filter_interface=models.HORIZONTAL, null=True, blank=True)
@@ -93,8 +94,8 @@ class Article(models.Model):
     def __unicode__(self):
         return '%s' % self.headline
     
-    #def tags:
-    #   return get_for_object(self)
+    def tags(self):
+        return Tag.objects.get_for_object(self)
     
     @models.permalink
     def get_absolute_url(self):
@@ -103,7 +104,7 @@ class Article(models.Model):
             'month': str(self.pub_date.month).zfill(2),
             'day': str(self.pub_date.day).zfill(2),
             'slug': self.slug,
-        })  
+        })
     
     class Admin:
         fields = (
