@@ -1,3 +1,9 @@
 
 <h2>{{ article.headline }}</h2>
-<p>{{ article.author }}</p>
+<p>by {{ article.author }} - {{ article.last_modified|date:"F dS Y @ P" }}</p>
+<div class="entry">
+{{ article.body|linebreaks }}
+</div>
+{% if article.tags %}
+{% for tag in article.tags %}<a href="{% url tag_detail tag %}">{{ tag }}</a>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
+{% endif %}
