@@ -7,6 +7,7 @@ from rewinder.apps.places.models import Place
 from rewinder.apps.video.models import Video
 from rewinder.apps.quirp.models import Quirp, Source, Person
 from rewinder.apps.links.models import Link
+from markdown import markdown
 
 PUBLISHED_STATUS = 1
 DRAFT_STATUS = 2
@@ -40,6 +41,9 @@ class Category(models.Model):
         pass
 
 class Article(models.Model):
+    '''
+    A blog article model. Entries that used HTML must be marked up via Python Markdown.
+    '''
     PUBLICATION_CHOICES = (
         (PUBLISHED_STATUS, 'Live on site'),
         (DRAFT_STATUS, 'Draft'),
@@ -65,8 +69,8 @@ class Article(models.Model):
     slug                = models.SlugField(max_length=255, prepopulate_from=('headline',), help_text='Automatically built from article headline.', unique=True) 
     teaser              = models.TextField(blank=True)
     summary             = models.TextField(blank=True)
-    body                = models.TextField(blank=True)
-    #html_body          = models.TextField(blank=True)
+    body                = models.TextField(blank=True, help_text=u'Use Markdown syntax for HTML formatting.')
+    html_body           = models.TextField(blank=True, null=True)
     pull_quote          = models.TextField(blank=True)
     
     #related models
@@ -94,8 +98,12 @@ class Article(models.Model):
     def __unicode__(self):
         return '%s' % self.headline
     
-    def tags(self):
+    def get_tags(self):
         return Tag.objects.get_for_object(self)
+    
+    def save(self):
+        self.html_body = markdown(self.body)
+        super(Article, self).save()
     
     @models.permalink
     def get_absolute_url(self):
