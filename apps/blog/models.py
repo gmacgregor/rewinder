@@ -153,6 +153,10 @@ class Article(models.Model):
             'slug': self.slug,
         })
     
+    class Meta:
+        get_latest_by = 'pub_date'
+        ordering = ['-pub_date']
+    
     class Admin:
         fields = (
             ('Publication details', {'fields': ('pub_date', 'headline', 'slug', 'category')}),
