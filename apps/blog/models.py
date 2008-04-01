@@ -165,14 +165,14 @@ class Article(models.Model):
             ('Article Activity', {'fields': ('status', 'enable_comments',)}),
             ('Author', {'fields': ('author',)}),
             ('Brief', {'fields': ('summary', 'teaser', 'pull_quote',), 'classes': 'collapse'}),
-            ('Categorization', {'fields': ('categories', 'tags',)})
+            ('Categorization', {'fields': ('categories', 'tags',)}),
             ('Entry', {'fields': ('body',)}),
             ('Related Material', {'fields': ('articles', 'links', 'videos', 'quirps',), 'classes': 'collapse'}),
             ('Images and Photos', {'fields': ('lead_image', 'lead_caption', 'sidebar_image', 'sidebar_caption', 'inline_image', 'inline_caption',), 'classes': 'collapse'}),
             ('Metadata: Relevant People, Places and Sources', {'fields': ('places', 'people', 'sources',), 'classes': 'collapse'}),
         )
         
-        list_display    = ('headline', 'pub_date', 'status', 'enable_comments', 'authour')
+        list_display    = ('headline', 'pub_date', 'status', 'enable_comments', 'author')
         list_filter     = ['pub_date', 'author', 'status', 'categories']
         search_fields   = ['headline', 'summary', 'body']
         date_hierarchy  = 'pub_date'
