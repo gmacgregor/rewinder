@@ -1,13 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core import validators
+
 from tagging.models import Tag
 from tagging.fields import TagField
+
+from template_utils.markup import formatter
+# formatter name is defined in settings: MARKUP_FILTER
+
 from rewinder.apps.places.models import Place
 from rewinder.apps.video.models import Video
 from rewinder.apps.quirp.models import Quirp, Source, Person
 from rewinder.apps.links.models import Link
-from markdown import markdown
+
 
 PUBLISHED_STATUS = 1
 DRAFT_STATUS = 2
@@ -18,32 +23,56 @@ class PublishedArticlesManager(models.Manager):
         qs = super(PublishedArticlesManager, self).get_query_set()
         return qs.filter(status__exact=PUBLISHED_STATUS).order_by('-pub_date').select_related()
 
+
 class DraftArticlesManager(models.Manager):
     def get_query_set(self):
         qs = super(DraftArticlesManager, self).get_query_set()
         return qs.filter(status__exact=DRAFT_STATUS).order_by('-pub_date').select_related()
+
 
 class EmbargoedArticlesManager(models.Manager):
     def get_query_set(self):
         qs = super(EmbargoedArticlesManager, self).get_query_set()
         return qs.filter(status__exact=EMBARGO_STATUS).order_by('-pub_date').select_related()
 
+
 class Category(models.Model):
-    created_on          = models.DateTimeField(auto_now_add=True)
-    last_modified       = models.DateTimeField(auto_now=True)
     title               = models.CharField(u'Title', max_length=200,)
-    slug                = models.SlugField(max_length=255, prepopulate_from=('title',), help_text=u'Automatically built from category title.', unique=True)
+    slug                = models.SlugField(max_length=200, prepopulate_from=('title',), help_text=u'Automatically built from category title.', unique=True)
+    description         = models.TextField(help_text=u'A short description of the category. Use Markdown syntax for HTML formatting. Optional.', blank=True)
+    description_html    = models.TextField(blank=True, null=True, editable=False)
     
     def __unicode__(self):
         return '%s' % self.title
     
+    def save(self):
+        if self.description:
+            self.description_html = formatter(self.description)
+        super(Category, self).save()
+    
+    @models.permalink
+    def get_absolute_url(self):
+        return ('blog_category_detail', (), {'slug': self.slug})
+     
+    def _get_live_entries(self):
+        '''
+        Returns Articles in this Category with status of "published".
+        Access this through the property ``live_entry_set``.
+        '''
+        from rewinder.apps.blog.models import Article
+        return self.entry_set.filter(status__exact=Article.PUBLISHED_STATUS)
+    
+    live_entry_set = property(_get_live_entries)
+    
+    class Meta:
+        verbose_name_plural = 'Categories'
+        ordering = ['title']
+    
     class Admin:
         pass
 
+
 class Article(models.Model):
-    '''
-    A blog article model. Entries that used HTML must be marked up via Python Markdown.
-    '''
     PUBLICATION_CHOICES = (
         (PUBLISHED_STATUS, 'Live on site'),
         (DRAFT_STATUS, 'Draft'),
@@ -56,7 +85,7 @@ class Article(models.Model):
     pub_date            = models.DateTimeField('Publication Date')
     author              = models.ForeignKey(User)
     status              = models.IntegerField(max_length=1, choices=PUBLICATION_CHOICES, radio_admin=True, default=1)
-    category            = models.ForeignKey(Category)
+    category            = models.ManyToManyField(Category, filter_interface=models.HORIZONTAL, null=True, blank=True)
     
     #managers
     objects             = models.Manager()
@@ -67,11 +96,14 @@ class Article(models.Model):
     #copy
     headline            = models.CharField(max_length=255, unique_for_date='pub_date')
     slug                = models.SlugField(max_length=255, prepopulate_from=('headline',), help_text='Automatically built from article headline.', unique=True) 
-    teaser              = models.TextField(blank=True)
-    summary             = models.TextField(blank=True)
+    teaser              = models.TextField(blank=True, help_text=u'Use Markdown syntax for HTML formatting.')
+    html_teaser         = models.TextField(blank=True, null=True)
+    summary             = models.TextField(blank=True, help_text=u'Use Markdown syntax for HTML formatting.')
+    html_summary        = models.TextField(blank=True, null=True)
     body                = models.TextField(blank=True, help_text=u'Use Markdown syntax for HTML formatting.')
     html_body           = models.TextField(blank=True, null=True)
-    pull_quote          = models.TextField(blank=True)
+    pull_quote          = models.TextField(blank=True, help_text=u'Use Markdown syntax for HTML formatting.')
+    html_pull_quote     = models.TextField(blank=True, null=True)
     
     #related models
     places              = models.ManyToManyField(Place, filter_interface=models.HORIZONTAL, null=True, blank=True)
@@ -102,7 +134,10 @@ class Article(models.Model):
         return Tag.objects.get_for_object(self)
     
     def save(self):
-        self.html_body = markdown(self.body)
+        self.html_teaser = formatter(self.teaser)
+        self.html_summary = formatter(self.summary)
+        self.html_body = formatter(self.body)
+        self.html_pull_quote = formatter(self.pull_quote)
         super(Article, self).save()
     
     @models.permalink
@@ -120,7 +155,7 @@ class Article(models.Model):
             ('Author', {'fields': ('author',)}),
             ('Brief', {'fields': ('summary', 'teaser', 'pull_quote',), 'classes': 'collapse'}),
             ('Entry', {'fields': ('body', 'tags',)}),
-            ('Related Articles, Links, Videos, Quirps', {'fields': ('articles', 'links', 'videos', 'quirps',), 'classes': 'collapse'}),
+            ('Related Material', {'fields': ('articles', 'links', 'videos', 'quirps',), 'classes': 'collapse'}),
             ('Images and Photos', {'fields': ('lead_image', 'lead_caption', 'sidebar_image', 'sidebar_caption', 'inline_image', 'inline_caption',), 'classes': 'collapse'}),
             ('Metadata: Relevant People, Places and Sources', {'fields': ('places', 'people', 'sources',), 'classes': 'collapse'}),
             ('Article Activity', {'fields': ('status', 'enable_comments',)}),
