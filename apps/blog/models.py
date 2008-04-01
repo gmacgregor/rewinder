@@ -86,6 +86,7 @@ class Article(models.Model):
     author              = models.ForeignKey(User)
     status              = models.IntegerField(max_length=1, choices=PUBLICATION_CHOICES, radio_admin=True, default=1)
     categories          = models.ManyToManyField(Category, filter_interface=models.HORIZONTAL, null=True, blank=True)
+    featured            = models.BooleanField(default=False)
     
     #managers
     objects             = models.Manager()
@@ -158,6 +159,7 @@ class Article(models.Model):
         ordering = ['-pub_date']
     
     class Admin:
+        date_hierarchy - 'pub_date'
         fields = (
             ('Publication details', {'fields': ('pub_date', 'headline', 'slug', 'category')}),
             ('Article Activity', {'fields': ('status', 'enable_comments',)}),
@@ -170,7 +172,7 @@ class Article(models.Model):
             ('Metadata: Relevant People, Places and Sources', {'fields': ('places', 'people', 'sources',), 'classes': 'collapse'}),
         )
         
-        list_display    = ('headline', 'pub_date', 'author', 'status', 'enable_comments',)
-        list_filter     = ['pub_date', 'author', 'status']
-        search_fields   = ['headline', 'author', 'summary', 'tags']
+        list_display    = ('headline', 'pub_date', 'status', 'enable_comments', 'authour')
+        list_filter     = ['pub_date', 'author', 'status', 'categories']
+        search_fields   = ['headline', 'summary', 'body']
         date_hierarchy  = 'pub_date'
