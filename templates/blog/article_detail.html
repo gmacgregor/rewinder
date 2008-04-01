@@ -4,11 +4,16 @@
 
 <h2>{{ article.headline }}</h2>
 <p>by {{ article.author }} - {{ article.last_modified|date:"F dS Y @ P" }}</p>
+
+{% autoescape off %}
+
 <div class="entry">
-{{ article.html_body|safe }}
+{{ article.html_body }}
 </div>
 {% if article.tags %}
 {% for tag in article.get_tags %}<a href="{% url tag_detail tag %}">{{ tag }}</a>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
 {% endif %}
+
+{% endautoescape %}
 
 {% endblock %}
