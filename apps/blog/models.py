@@ -85,7 +85,7 @@ class Article(models.Model):
     pub_date            = models.DateTimeField('Publication Date')
     author              = models.ForeignKey(User)
     status              = models.IntegerField(max_length=1, choices=PUBLICATION_CHOICES, radio_admin=True, default=1)
-    category            = models.ManyToManyField(Category, filter_interface=models.HORIZONTAL, null=True, blank=True)
+    categories          = models.ManyToManyField(Category, filter_interface=models.HORIZONTAL, null=True, blank=True)
     
     #managers
     objects             = models.Manager()
@@ -160,13 +160,14 @@ class Article(models.Model):
     class Admin:
         fields = (
             ('Publication details', {'fields': ('pub_date', 'headline', 'slug', 'category')}),
+            ('Article Activity', {'fields': ('status', 'enable_comments',)}),
             ('Author', {'fields': ('author',)}),
             ('Brief', {'fields': ('summary', 'teaser', 'pull_quote',), 'classes': 'collapse'}),
-            ('Entry', {'fields': ('body', 'tags',)}),
+            ('Categorization', {'fields': ('categories', 'tags',)})
+            ('Entry', {'fields': ('body',)}),
             ('Related Material', {'fields': ('articles', 'links', 'videos', 'quirps',), 'classes': 'collapse'}),
             ('Images and Photos', {'fields': ('lead_image', 'lead_caption', 'sidebar_image', 'sidebar_caption', 'inline_image', 'inline_caption',), 'classes': 'collapse'}),
             ('Metadata: Relevant People, Places and Sources', {'fields': ('places', 'people', 'sources',), 'classes': 'collapse'}),
-            ('Article Activity', {'fields': ('status', 'enable_comments',)}),
         )
         
         list_display    = ('headline', 'pub_date', 'author', 'status', 'enable_comments',)
