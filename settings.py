@@ -70,7 +70,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	'/Users/gmacgregor/dev/rewinder/templates'
+    '/Users/gmacgregor/dev/rewinder/templates'
 )
 
 INSTALLED_APPS = (
@@ -78,22 +78,21 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-	'django.contrib.admin',
-	'django.contrib.comments',
-	'tagging',
-	'typogrify',
-	'template_utils',
-	'rewinder.apps.blog',
-	'rewinder.apps.places',
-	'rewinder.apps.photos',
-	'rewinder.apps.quirp',
-	'rewinder.apps.video',
-	'rewinder.apps.links',
-	'rewinder.util',
+    'django.contrib.admin',
+    'django.contrib.comments',
+    'tagging',
+    'typogrify',
+    'rewinder.apps.blog',
+    'rewinder.apps.places',
+    'rewinder.apps.photos',
+    'rewinder.apps.quirp',
+    'rewinder.apps.video',
+    'rewinder.apps.links',
+    'rewinder.util',
 )
 
 #http://code.google.com/p/django-template-utils/
-MARKUP_FILTER = ('markdown')
+MARKUP_FILTER = ('markdown', {})
 
 DELICIOUS_USERNAME = 'sixminutes'
 DELICIOUS_PASSWORD = 'faerie'
