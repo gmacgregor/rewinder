@@ -91,6 +91,9 @@ INSTALLED_APPS = (
     'rewinder.apps.links',
     'rewinder.util',
 )
+# http://www.b-list.org/weblog/2007/nov/03/working-models/
+# app label (normalized to lowercase), model name (normalized to lowercase)
+TUMBLELOG_MODELS = ('blog.article','quirp.quirp','video.video')
 
 #http://code.google.com/p/django-template-utils/
 MARKUP_FILTER = ('markdown', {})
