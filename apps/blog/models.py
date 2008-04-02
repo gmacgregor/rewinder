@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core import validators
+
 from tagging.fields import TagField
+
 from template_utils.markup import formatter
 
-from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.apps.places.models import Place
 from rewinder.apps.video.models import Video
 from rewinder.apps.quirp.models import Quirp, Source, Person
@@ -165,3 +166,5 @@ class Article(models.Model):
         list_filter     = ['pub_date', 'author', 'status', 'categories', 'featured']
         search_fields   = ['headline', 'summary', 'body']
         date_hierarchy  = 'pub_date'
+
+#dispatcher.connect(create_tumblelog_object, signal=signals.post_save, sender=Article)
