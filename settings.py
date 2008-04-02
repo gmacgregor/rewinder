@@ -82,6 +82,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'tagging',
     'typogrify',
+    'rewinder.apps.tumblelog',
     'rewinder.apps.blog',
     'rewinder.apps.places',
     'rewinder.apps.photos',

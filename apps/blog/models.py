@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.core import validators
 from tagging.fields import TagField
 from template_utils.markup import formatter
+
+from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.apps.places.models import Place
 from rewinder.apps.video.models import Video
 from rewinder.apps.quirp.models import Quirp, Source, Person
@@ -65,7 +67,6 @@ class Article(models.Model):
     PUBLICATION_CHOICES = (
         (PUBLISHED_STATUS, 'Live on site'),
         (DRAFT_STATUS, 'Draft'),
-        (EMBARGO_STATUS, 'Embargo'),
     )
     
     #publication details
@@ -128,6 +129,9 @@ class Article(models.Model):
             self.html_body = formatter(self.body)
         if self.pull_quote:
             self.html_pull_quote = formatter(self.pull_quote)
+        # create TumbleLogItem
+        #if not self.id:
+        #    TumblelogItem.objects.create(object_id=post.id, pub_date=post.pub_date, content_type=ContentType.objects.get_for_model(Post))
         super(Article, self).save()
     
     @models.permalink
