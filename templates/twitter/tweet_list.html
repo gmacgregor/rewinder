@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Twitter Tweets{% endblock %}
+{% block content %}
+
+{% for tweet in object_list %}
+<p><a href="{{ tweet.url }}">{{ tweet.pub_time }} UTC</a></p>
+<h2>{{ tweet.text }}</h2>
+{% endfor %}
+
+{% endblock %}

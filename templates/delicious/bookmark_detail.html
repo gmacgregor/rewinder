@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Links: {{ object.description }}{% endblock %}
+{% block content %}
+<p><a href="{% url link_list %}">Back to all links...</a></p>
+<h2>{{ object.description }}</h2>
+<p>Visit: <a href="{{ object.url }}">{{ object.url }}</a></p>
+{% if object.extended_info %}
+<p>{{ extended_info }}</p>
+{% endif %}
+{% endblock %}
