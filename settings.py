@@ -90,6 +90,10 @@ INSTALLED_APPS = (
     'rewinder.apps.tumblelog',
     'rewinder.apps.photos',
     'rewinder.util',
+    'syncr.flickr',
+    'syncr.youtube',
+    'syncr.delicious',
+    'syncr.twitter',
 )
 # http://www.b-list.org/weblog/2007/nov/03/working-models/
 # app label (normalized to lowercase), model name (normalized to lowercase)
