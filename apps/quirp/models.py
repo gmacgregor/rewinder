@@ -57,6 +57,10 @@ class Quirp(models.Model):
     def __unicode__(self):
         return self.title
     
+    @models.permalink
+    def get_absolute_url(self):
+        return ('quirp_detail', (), {'slug': self.slug})
+        
     class Admin:
         list_display    = ('title', 'enable_comments', 'source',)
         list_filter     = ['created_on']

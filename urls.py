@@ -1,13 +1,16 @@
 from django.conf.urls.defaults import *
+from rewinder.apps.tumblelog.models import TumblelogItem
 
-home_dict = {
-    'template': 'home.html' 
+
+tumblelog_dict = {
+    'queryset': TumblelogItem.objects.all(),
 }
 
 urlpatterns = patterns('',
-    #homepage
-    #(r'^$', 'django.views.generic.simple.direct_to_template', home_dict),
-    (r'^$', 'rewinder.apps.blog.views.blog_home'),
+    url(r'^$', 'django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10), name="homepage"),
+)
+
+urlpatterns += patterns('',
     (r'^admin/', include('django.contrib.admin.urls')),
     (r'^comments/', include('django.contrib.comments.urls.comments')),
     (r'^words/', include('rewinder.apps.blog.urls')),
