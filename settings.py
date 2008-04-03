@@ -97,7 +97,7 @@ INSTALLED_APPS = (
 )
 # http://www.b-list.org/weblog/2007/nov/03/working-models/
 # app label (normalized to lowercase), model name (normalized to lowercase)
-TUMBLELOG_MODELS = ('quirp.quirp','video.video','links.link')
+TUMBLELOG_MODELS = ('quirp.quirp','video.video','links.link', 'delicious.bookmark')
 
 #http://code.google.com/p/django-template-utils/
 MARKUP_FILTER = ('markdown', {})
