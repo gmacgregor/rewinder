@@ -8,11 +8,13 @@ tumblelog_dict = {
 
 urlpatterns = patterns('',
     url(r'^$', 'django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10), name="homepage"),
+    url(r'^tumblelog/','django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10), name="tumblelog"),
+    url(r'^tweets/', include('rewinder.apps.twitter.urls')),
 )
 
 urlpatterns += patterns('',
     (r'^admin/', include('django.contrib.admin.urls')),
-    (r'^comments/', include('django.contrib.comments.urls.comments')),
+    #(r'^comments/', include('django.contrib.comments.urls.comments')),
     (r'^words/', include('rewinder.apps.blog.urls')),
     (r'^places/', include('rewinder.apps.places.urls')),
     (r'^videos/', include('rewinder.apps.video.urls')),
