@@ -44,6 +44,7 @@ class Source(models.Model):
 class Quirp(models.Model):
     created_on          = models.DateTimeField(u'Creation Date', auto_now_add=True)
     last_modified       = models.DateTimeField(auto_now=True)
+    pub_date            = models.DateTimeField(u'Publication Date', auto_now=True)
     title               = models.CharField(max_length=255)
     slug                = models.SlugField(max_length=255, prepopulate_from=('title',), help_text=u'Automatically built from title', unique=True)
     source              = models.ForeignKey(Source, null=True, blank=True, help_text=u'Optional')

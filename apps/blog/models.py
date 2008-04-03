@@ -1,15 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core import validators
-
-from tagging.fields import TagField
-
-from template_utils.markup import formatter
+from django.dispatch import dispatcher
+from django.db.models import signals
 
 from rewinder.apps.places.models import Place
 from rewinder.apps.video.models import Video
 from rewinder.apps.quirp.models import Quirp, Source, Person
 from rewinder.apps.links.models import Link
+from rewinder.lib.signals import create_tumblelog_article
+
+from tagging.fields import TagField
+
+from template_utils.markup import formatter
 
 
 PUBLISHED_STATUS = 1
@@ -130,9 +133,6 @@ class Article(models.Model):
             self.html_body = formatter(self.body)
         if self.pull_quote:
             self.html_pull_quote = formatter(self.pull_quote)
-        # create TumbleLogItem
-        #if not self.id:
-        #    TumblelogItem.objects.create(object_id=post.id, pub_date=post.pub_date, content_type=ContentType.objects.get_for_model(Post))
         super(Article, self).save()
     
     @models.permalink
@@ -167,4 +167,5 @@ class Article(models.Model):
         search_fields   = ['headline', 'summary', 'body']
         date_hierarchy  = 'pub_date'
 
-#dispatcher.connect(create_tumblelog_object, signal=signals.post_save, sender=Article)
+# Article uses it's own custom method so that ONLY published articles appear in the tumblelog
+dispatcher.connect(create_tumblelog_article, signal=signals.post_save, sender=Article)
