@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Twitter Tweets: {{ day|date:"F d, Y" }}{% endblock %}
+{% block content %}
+
+<h2>Tweets made on {{ day|date:"F d, Y" }}</h2>
+{% for tweet in object_list %}
+<p><a href="{{ tweet.url }}">{{ tweet.pub_time }} UTC</a></p>
+<h2>{{ tweet.text }}</h2>
+{% endfor %}
+
+{% endblock %}

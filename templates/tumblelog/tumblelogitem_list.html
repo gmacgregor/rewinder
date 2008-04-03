@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for item in object_list %}
+        {% ifequal item.content_type.name "article" %}
+            <h2>Article: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.headline }}</a></h2>
+        {% endifequal %}
+        {% ifequal item.content_type.name "bookmark" %}
+            <h2>Link: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.description }}</a></h2>
+            {% if item.get_content_object.extended_info %}
+            <p>{{ item.get_content_object.extended_info }}</p>
+            {% endif %}
+            <p><a href="{{ item.get_content_object.url }}">Visit...</a></p>
+        {% endifequal %}
+        {% ifequal item.content_type.name "video" %}
+            <h2>Video: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.title }}</a></h2>
+        {% endifequal %}
+        {% ifequal item.content_type.name "quirp" %}
+            <h2>Quirp: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.title }}</a></h2>
+        {% endifequal %}
+        {% ifequal item.content_type.name "tweet" %}
+            <h2><a href="{% url tweets %}">Tweet</a>: {{ item.get_content_object.text }} <a href="{{ item.get_content_object.url }}">View</a></h2>
+        {% endifequal %}
+    {% endfor %}
+{% endblock %}

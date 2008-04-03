@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Links{% endblock %}
+{% block content %}
+
+{% for bookmark in object_list %}
+<h2><a href="{{ bookmark.get_absolute_url }}">{{ bookmark.description }}</a></h2>
+{% if bookmark.extended_info %}
+<p>{{ bookmark.extended_info }}</p>
+{% endif %}
+{% endfor %}
+
+{% endblock %}
