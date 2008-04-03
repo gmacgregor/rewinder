@@ -11,7 +11,8 @@ from rewinder.apps.video.models import Video
 from rewinder.apps.quirp.models import Quirp, Source, Person
 from rewinder.apps.links.models import Link
 from rewinder.apps.tumblelog.models import TumblelogItem
-from rewinder.lib.signals import create_tumblelog_item
+#from rewinder.lib.signals import create_tumblelog_item
+from rewinder.lib.signals import create_article_tumblelog_item
 
 from tagging.fields import TagField
 
@@ -145,19 +146,19 @@ class Article(models.Model):
         if self.pull_quote:
             self.html_pull_quote = formatter(self.pull_quote)
         super(Article, self).save()
-        ctype = ContentType.objects.get_for_model(self)
-        if int(self.status) is PUBLISHED_STATUS:
-            try:
-                item = TumblelogItem.objects.get(object_id=self.id, content_type=ctype)
-            except ObjectDoesNotExist:
-                item = TumblelogItem(pub_date=self.pub_date, object_id=self.id, content_type=ctype)
-                item.save()
-        else:
-            try:
-                item = TumblelogItem.objects.get(object_id=self.id, content_type=ctype)
-                item.delete()
-            except ObjectDoesNotExist:
-                pass
+        #ctype = ContentType.objects.get_for_model(self)
+        #if int(self.status) is PUBLISHED_STATUS:
+        #    try:
+        #        item = TumblelogItem.objects.get(object_id=self.id, content_type=ctype)
+        #    except ObjectDoesNotExist:
+        #        item = TumblelogItem(pub_date=self.pub_date, object_id=self.id, content_type=ctype)
+        #        item.save()
+        #else:
+        #    try:
+        #        item = TumblelogItem.objects.get(object_id=self.id, content_type=ctype)
+        #        item.delete()
+        #    except ObjectDoesNotExist:
+        #        pass
     
     @models.permalink
     def get_absolute_url(self):
@@ -190,3 +191,5 @@ class Article(models.Model):
         list_filter     = ['pub_date', 'author', 'status', 'categories', 'featured']
         search_fields   = ['headline', 'summary', 'body']
         date_hierarchy  = 'pub_date'
+
+dispatcher.connect(create_article_tumblelog_item, sender=Article, signal=signals.post_save)
