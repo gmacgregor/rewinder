@@ -18,6 +18,12 @@ class SourceCategory(models.Model):
     
     def __unicode__(self):
         return u'%s' % self.title
+    
+    class Meta:
+        verbose_name_plural = 'Source Categories'
+    
+    class Admin:
+        pass
 
 
 class Source(models.Model):
