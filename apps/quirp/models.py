@@ -36,8 +36,8 @@ class Source(models.Model):
         return self.name
     
     class Admin:
-        list_display    = ('name', 'description', 'url',)
-        search_fields   = ['name', 'description', 'url', 'tags']
+        list_display    = ('title', 'description', 'url',)
+        search_fields   = ['title', 'description', 'url', 'tags']
 
 
 class Quirp(models.Model):
