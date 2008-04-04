@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% autoescape off %}
     {% for item in object_list %}
         {% ifequal item.content_type.name "article" %}
             <h2>Article: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.headline }}</a></h2>
@@ -22,4 +23,5 @@
             <h2><a href="{% url tweets %}">Tweet</a>: {{ item.get_content_object.text }} <a href="{{ item.get_content_object.url }}">View</a></h2>
         {% endifequal %}
     {% endfor %}
+{% endautoescape %}
 {% endblock %}
