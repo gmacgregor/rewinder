@@ -89,7 +89,6 @@ INSTALLED_APPS = (
     'rewinder.apps.youtube',
     'rewinder.apps.twitter',
     'rewinder.apps.quirp',
-    'rewinder.apps.quote',
     'rewinder.apps.geo',
     'rewinder.apps.video',
     'rewinder.util',
