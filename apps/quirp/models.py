@@ -18,9 +18,6 @@ class SourceCategory(models.Model):
     
     def __unicode__(self):
         return u'%s' % self.title
-    
-    class Admin:
-        pass
 
 
 class Source(models.Model):
@@ -30,7 +27,7 @@ class Source(models.Model):
     slug                = models.SlugField(max_length=255, prepopulate_from=('title',), help_text=u'Automatically built from title', unique=True)
     description         = models.CharField(max_length=255, blank=True)
     url                 = models.URLField(u'URL', blank=True, help_text=u'Optional', verify_exists=False)
-    type                = models.ForeignKey(SourceCategory)
+    category            = models.ForeignKey(SourceCategory)
     
     def __unicode__(self):
         return self.name
