@@ -2,7 +2,7 @@ import datetime, calendar
 import math
 import flickrapi
 from django.core.exceptions import ObjectDoesNotExist
-from rewinder.flickr.models import Photo, PhotoSet, FavoriteList
+from rewinder.apps.flickr.models import Photo, PhotoSet, FavoriteList
 
 class FlickrSyncr:
     """FlickrSyncr objects sync flickr photos, photo sets, and favorites

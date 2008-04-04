@@ -2,7 +2,7 @@ import time
 from datetime import datetime
 import twitter
 from django.utils.encoding import smart_unicode
-from rewinder.twitter.models import TwitterUser, Tweet
+from rewinder.apps.twitter.models import TwitterUser, Tweet
 
 class TwitterSyncr:
     """TwitterSyncr objects sync Twitter information to the Django
