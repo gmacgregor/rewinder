@@ -31,7 +31,7 @@ class Bookmark(models.Model):
             try:
                 pydelicious.add(settings.DELICIOUS_USERNAME, settings.DELICIOUS_PASSWORD, self.url, self.description, self.tags, self.extended_info)
             except:
-                pass
+                raise
         super(Bookmark, self).save()
     
     #def delete(self):
@@ -43,7 +43,7 @@ class Bookmark(models.Model):
     #   except:
     #       pass
     #   super(Link, self).delete()
-
+    
     class Meta:
         ordering = ('-saved_date',)
         get_latest_by = 'saved_date'

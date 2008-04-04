@@ -8,10 +8,11 @@ from django.db.models import signals
 
 from rewinder.apps.places.models import Place
 from rewinder.apps.video.models import Video
+from rewinder.apps.youtube.models import Video as YoutubeVideo
 from rewinder.apps.quirp.models import Quirp, Source, Person
-from rewinder.apps.links.models import Link
+from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.tumblelog.models import TumblelogItem
-#from rewinder.lib.signals import create_tumblelog_item
+
 from rewinder.lib.signals import create_article_tumblelog_item
 
 from tagging.fields import TagField
@@ -84,7 +85,7 @@ class Article(models.Model):
     author              = models.ForeignKey(User)
     status              = models.IntegerField(max_length=1, choices=PUBLICATION_CHOICES, radio_admin=True, default=1)
     categories          = models.ManyToManyField(Category, filter_interface=models.HORIZONTAL, null=True, blank=True)
-    featured            = models.BooleanField('Is this a featured article?', default=False)
+    featured            = models.BooleanField('Featured article?', default=False)
     tags                = TagField()
     enable_comments     = models.BooleanField(default=True)
     
@@ -122,8 +123,9 @@ class Article(models.Model):
     #this should, at some point, include a photo gallery
     articles            = models.ManyToManyField('self', filter_interface=models.HORIZONTAL, null=True, blank=True)
     quirps              = models.ManyToManyField(Quirp, filter_interface=models.HORIZONTAL, null=True, blank=True)
-    links               = models.ManyToManyField(Link, filter_interface=models.HORIZONTAL, null=True, blank=True)
+    links               = models.ManyToManyField(Bookmark, filter_interface=models.HORIZONTAL, null=True, blank=True)
     videos              = models.ManyToManyField(Video, filter_interface=models.HORIZONTAL, null=True, blank=True)
+    youtube_videos      = models.ManyToManyField(u'Youtube Videos', YoutubeVideo, filter_interface=models.HORIZONTAL, null=True, blank=True)
     
     def __unicode__(self):
         return u'%s' % self.headline
@@ -146,19 +148,6 @@ class Article(models.Model):
         if self.pull_quote:
             self.html_pull_quote = formatter(self.pull_quote)
         super(Article, self).save()
-        #ctype = ContentType.objects.get_for_model(self)
-        #if int(self.status) is PUBLISHED_STATUS:
-        #    try:
-        #        item = TumblelogItem.objects.get(object_id=self.id, content_type=ctype)
-        #    except ObjectDoesNotExist:
-        #        item = TumblelogItem(pub_date=self.pub_date, object_id=self.id, content_type=ctype)
-        #        item.save()
-        #else:
-        #    try:
-        #        item = TumblelogItem.objects.get(object_id=self.id, content_type=ctype)
-        #        item.delete()
-        #    except ObjectDoesNotExist:
-        #        pass
     
     @models.permalink
     def get_absolute_url(self):
@@ -177,12 +166,12 @@ class Article(models.Model):
         date_hierarchy = 'pub_date'
         fields = (
             ('Publication details', {'fields': ('pub_date', 'headline', 'slug',)}),
-            ('Article Activity', {'fields': ('status', 'enable_comments',)}),
             ('Author', {'fields': ('author',)}),
+            ('Article Activity', {'fields': ('status', 'enable_comments',)}),
             ('Brief', {'fields': ('summary', 'teaser', 'pull_quote',), 'classes': 'collapse'}),
             ('Categorization', {'fields': ('categories', 'tags', 'featured',)}),
             ('Entry', {'fields': ('body',)}),
-            ('Related Material', {'fields': ('articles', 'links', 'videos', 'quirps',), 'classes': 'collapse'}),
+            ('Related Material', {'fields': ('articles', 'links', 'youtube_videos', 'videos', 'quirps',), 'classes': 'collapse'}),
             ('Images and Photos', {'fields': ('lead_image', 'lead_caption', 'sidebar_image', 'sidebar_caption', 'inline_image', 'inline_caption',), 'classes': 'collapse'}),
             ('Metadata: Relevant People, Places and Sources', {'fields': ('places', 'people', 'sources',), 'classes': 'collapse'}),
         )
