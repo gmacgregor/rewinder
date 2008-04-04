@@ -44,7 +44,7 @@ def create_article_tumblelog_item(sender, instance):
             pass
 
 def create_twitter_tumblelog_item(sender, instance):
-    from syncr.twitter.models import Tweet
+    from rewinder.apps.twitter.models import Tweet
     ctype = get_ctype(Tweet)
     try:
         item = TumblelogItem.objects.get(object_id=instance.id, content_type=ctype)
@@ -53,12 +53,22 @@ def create_twitter_tumblelog_item(sender, instance):
         item.save()   
 
 def create_link_tumblelog_item(sender, instance):
-    from syncr.delicious.models import Bookmark
+    from rewinder.apps.delicious.models import Bookmark
     ctype = get_ctype(Bookmark)
     try: 
         item = TumblelogItem.objects.get(object_id=instance.id, content_type=ctype)
     except ObjectDoesNotExist:
         item = TumblelogItem(pub_date=instance.saved_date, object_id=instance.id, content_type=ctype)
+        item.save()
+
+
+def create_photo_tumblelog_item(sender, instance):
+    from rewinder.apps.flickr.models import Photo
+    ctype = get_ctype(Photo)
+    try: 
+        item = TumblelogItem.objects.get(object_id=instance.id, content_type=ctype)
+    except ObjectDoesNotExist:
+        item = TumblelogItem(pub_date=instance.taken_date, object_id=instance.id, content_type=ctype)
         item.save()
 
 #for model in settings.TUMBLELOG_MODELS:

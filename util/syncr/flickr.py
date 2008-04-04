@@ -57,10 +57,10 @@ class FlickrSyncr:
             try:
                 return xmlnode.clean[0].elementText
             except AttributeError:
-		try:
-		    return xmlnode.raw[0].elementText
-		except AttributeError:
-		    return ''
+                try:
+                    return xmlnode.raw[0].elementText
+                except AttributeError:
+                    return ''
 
         def testResultKey(result_elem, label):
             if result_elem['label'] == label:
@@ -79,11 +79,14 @@ class FlickrSyncr:
 
         # This is tricky, kind of a hack, because not all flickr photos
         # have a consistent set of exif information...
-        for exif_elem in result.photo[0].exif:
-            for label in exif_data.keys():
-                data = testResultKey(exif_elem, label)
-                if data:
-                    exif_data[label] = data
+        try:
+            for exif_elem in result.photo[0].exif:
+                for label in exif_data.keys():
+                    data = testResultKey(exif_elem, label)
+                    if data:
+                        exif_data[label] = data
+        except AttributeError:
+            pass
         return exif_data
 
     def getGeoLocation(self, photo_id):
@@ -132,7 +135,7 @@ class FlickrSyncr:
                         'small_url': urls['Small'],
                         'medium_url': urls['Medium'],
                         'thumbnail_url': urls['Thumbnail'],
-                        'tag_list': self._getXMLNodeTag(photo_xml),
+                        'tags': self._getXMLNodeTag(photo_xml),
                         'license': photo_xml.photo[0]['license'],
                         'geo_latitude': geo_data['Latitude'],
                         'geo_longitude': geo_data['Longitude'],
