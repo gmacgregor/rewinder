@@ -1,8 +1,7 @@
 from django.db import models
 from tagging.fields import TagField
-from rewinder.apps.places.models import Place
+from rewinder.apps.geo.models import Place
 from rewinder.apps.quirp.models import Source, Person
-from rewinder.apps.links.models import Link
 
 RATING_CHOICES = (
     ('1', '1'),
