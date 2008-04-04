@@ -2,19 +2,6 @@ from django.db import models
 from tagging.fields import TagField
 from rewinder.apps.links.models import Link
 
-
-SOURCE_CHOICES = (
-    (1, 'organization'),
-    (2, 'publication'),
-    (3, 'newspaper'),
-    (4, 'website'),
-    (5, 'television show'),
-    (6, 'movie'),
-    (7, 'radio'),
-    (8, 'person'),
-    (9, 'event'),
-)
-
 RATING_CHOICES = (
     ('1', '1'),
     ('2', '2'),
@@ -23,15 +10,27 @@ RATING_CHOICES = (
     ('5', '5'), 
 )
 
+class SourceCategory(models.Model):
+    created_on          = models.DateTimeField(auto_now_add=True)
+    last_modified       = models.DateTimeField(auto_now=True)
+    title               = models.CharField(max_length=255)
+    slug                = models.SlugField(max_length=255, prepopulate_from=('title',), help_text=u'Automatically built from title', unique=True)
+    
+    def __unicode__(self):
+        return u'%s' % self.title
+    
+    class Admin:
+        pass
+
+
 class Source(models.Model):
     created_on          = models.DateTimeField(auto_now_add=True)
     last_modified       = models.DateTimeField(auto_now=True)
-    name                = models.CharField(max_length=255)
-    slug                = models.SlugField(max_length=255, prepopulate_from=('name',), help_text=u'Automatically built from name', unique=True)
+    title               = models.CharField(max_length=255)
+    slug                = models.SlugField(max_length=255, prepopulate_from=('title',), help_text=u'Automatically built from title', unique=True)
     description         = models.CharField(max_length=255, blank=True)
     url                 = models.URLField(u'URL', blank=True, help_text=u'Optional', verify_exists=False)
-    type                = models.CharField(max_length=10, choices=SOURCE_CHOICES, radio_admin=True, default=4)
-    tags                = TagField()
+    type                = models.ForeignKey(SourceCategory)
     
     def __unicode__(self):
         return self.name
@@ -47,7 +46,7 @@ class Quirp(models.Model):
     pub_date            = models.DateTimeField(u'Publication Date', auto_now=True)
     title               = models.CharField(max_length=255)
     slug                = models.SlugField(max_length=255, prepopulate_from=('title',), help_text=u'Automatically built from title', unique=True)
-    source              = models.ForeignKey(Source, null=True, blank=True, help_text=u'Optional')
+    source              = models.ForeignKey(Source, null=True, blank=True, help_text=u'Optional, but desired')
     description         = models.TextField(blank=True, help_text=u'Optional')
     url                 = models.URLField(u'URL', blank=True, help_text=u'Optional')
     rating              = models.CharField(max_length=20, choices=RATING_CHOICES, blank=True, help_text=u'Optional')
@@ -78,9 +77,9 @@ class Person(models.Model):
     """
     created_on          = models.DateTimeField(auto_now_add=True)
     last_modified       = models.DateTimeField(auto_now=True)
-    firstname           = models.CharField(u'First name', max_length=20)
-    lastname            = models.CharField(u'Last name', max_length=30)
-    bio                 = models.TextField(u'Who is this person?', help_text=u'How do you know them? Do you know them at all? What do they do? How are the involved?', blank=True)
+    name                = models.CharField(max_length=255)
+    slug                = models.SlugField(max_length=255, prepopulate_from=('name',), help_text=u'Automatically built from name', unique=True)
+    bio                 = models.TextField(u'Biography', blank=True)
     url                 = models.URLField(u'URL', blank=True, help_text=u'Optopnal')
     
     class Meta:
