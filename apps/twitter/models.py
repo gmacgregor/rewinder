@@ -11,7 +11,7 @@ class Tweet(models.Model):
     user                = models.ForeignKey('TwitterUser')
     
     def __unicode__(self):
-        return u'%s %s' % (self.user.screen_name, self.pub_time)
+        return u'%s' % (self.text)
     
     def url(self):
         return u'http://twitter.com/%s/statuses/%s' % (self.user.screen_name, self.twitter_id)

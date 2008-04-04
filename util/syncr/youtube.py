@@ -1,7 +1,7 @@
 import urllib
 import datetime, time
 import elementtree.ElementTree as ET
-from rewinder.youtube.models import YoutubeUser, Video, Playlist, PlaylistVideo
+from rewinder.apps.youtube.models import YoutubeUser, Video, Playlist, PlaylistVideo
 
 ATOM_NS         = 'http://www.w3.org/2005/Atom'
 YOUTUBE_NS      = 'http://gdata.youtube.com/schemas/2007'
@@ -68,7 +68,7 @@ class YoutubeSyncr:
                         'title': result.findtext('{%s}title' % ATOM_NS),
                         'author': self.syncUserFeed(result.findtext('{%s}author/{%s}uri' % (ATOM_NS, ATOM_NS))),
                         'description': result.findtext('{%s}group/{%s}description' % (MRSS_NS, MRSS_NS)) or '',
-                        'tag_list': result.findtext('{%s}group/{%s}keywords' % (MRSS_NS, MRSS_NS)),
+                        'tags': result.findtext('{%s}group/{%s}keywords' % (MRSS_NS, MRSS_NS)),
                         'view_count': result.find('{%s}statistics' % YOUTUBE_NS).attrib['viewCount'],
                         'url': filter(lambda x: x.attrib['rel'] == 'alternate',
                                       result.findall('{%s}link' % ATOM_NS))[0].attrib['href'],
@@ -97,14 +97,19 @@ class YoutubeSyncr:
         """
         result = self._request(user_feed).getroot()
         username = result.findtext('{%s}id' % ATOM_NS).lstrip('http://'+self._youtubeGDataHost+self._youtubeFeedBase+'users/')
+        ## HACK TO AVOID THUMBNAIL BARF
+        try:
+            thmb = result.find('{%s}thumbnail' % MRSS_NS).attrib['url']
+        except:
+            thmb = ''
         default_dict = {'feed': user_feed,
                         'username': username,
                         'first_name': result.findtext('{%s}firstName' % YOUTUBE_NS) or '',
                         'age': result.findtext('{%s}age' % YOUTUBE_NS),
                         'gender': result.findtext('{%s}gender' % YOUTUBE_NS) or '',
-                        'thumbnail_url': result.find('{%s}thumbnail' % MRSS_NS).attrib['url'],
+                        'thumbnail_url': thmb,
                         'url': filter(lambda x: x.attrib['rel'] == 'alternate',
-                                      result.findall('{%s}link' % ATOM_NS))[0].attrib['href'],
+                                      result.findall('{%s}link' % ATOM_NS))[0].attrib['href'] or '',
                         'watch_count': result.find('{%s}statistics' % YOUTUBE_NS).attrib['videoWatchCount'],
                         }
         obj, created = YoutubeUser.objects.get_or_create(username=username,
