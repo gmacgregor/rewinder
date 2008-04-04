@@ -3,6 +3,8 @@ from tagging.fields import TagField
 from django.dispatch import dispatcher
 from django.db.models import signals
 
+from rewinder.lib.signals import create_photo_tumblelog_item
+
 FLICKR_LICENSES = (
     ('0', 'All Rights Reserved'),
     ('1', 'Attribution-NonCommercial-ShareAlike License'),
