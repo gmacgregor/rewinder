@@ -46,7 +46,6 @@ class Photo(models.Model):
     
     def save(self):
         super(Photo, self).save()
-        Tag.objects.update_tags(self, self.tag_list)
     
     class Meta:
         ordering = ('-taken_date',)
