@@ -83,21 +83,20 @@ INSTALLED_APPS = (
     'tagging',
     'typogrify',
     'rewinder.apps.blog',
-    'rewinder.apps.links',
-    'rewinder.apps.video',
-    'rewinder.apps.places',
-    'rewinder.apps.quirp',
     'rewinder.apps.tumblelog',
-    'rewinder.apps.photos',
+    'rewinder.apps.delicious',
+    'rewinder.apps.flickr',
+    'rewinder.apps.youtube',
+    'rewinder.apps.twitter',
+    'rewinder.apps.quirp',
+    'rewinder.apps.quote',
+    'rewinder.apps.geo',
+    'rewinder.apps.video',
     'rewinder.util',
-    'syncr.flickr',
-    'syncr.youtube',
-    'syncr.delicious',
-    'syncr.twitter',
 )
 # http://www.b-list.org/weblog/2007/nov/03/working-models/
 # app label (normalized to lowercase), model name (normalized to lowercase)
-TUMBLELOG_MODELS = ('quirp.quirp','video.video','links.link', 'delicious.bookmark')
+#TUMBLELOG_MODELS = ('quirp.quirp','video.video','links.link', 'delicious.bookmark')
 
 #http://code.google.com/p/django-template-utils/
 MARKUP_FILTER = ('markdown', {})
