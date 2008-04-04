@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.dispatch import dispatcher
 from django.db.models import signals
 
-from rewinder.apps.places.models import Place
+from rewinder.apps.geo.models import Place
 from rewinder.apps.video.models import Video
 from rewinder.apps.youtube.models import Video as YoutubeVideo
 from rewinder.apps.quirp.models import Quirp, Source, Person
@@ -84,6 +84,7 @@ class Article(models.Model):
     pub_date            = models.DateTimeField('Publication Date')
     author              = models.ForeignKey(User)
     status              = models.IntegerField(max_length=1, choices=PUBLICATION_CHOICES, radio_admin=True, default=1)
+    geo                 = models.ForeignKey(Place)
     categories          = models.ManyToManyField(Category, filter_interface=models.HORIZONTAL, null=True, blank=True)
     featured            = models.BooleanField('Featured article?', default=False)
     tags                = TagField()
