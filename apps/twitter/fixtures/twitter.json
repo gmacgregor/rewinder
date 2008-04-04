@@ -1,0 +1,216 @@
+[
+    {
+        "pk": 1, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "&lt;nerd&gt;This time tomorrow night I'll be an hour away from the BSG season 4 premiere!&lt;\/nerd&gt;", 
+            "pub_time": "2008-04-04 00:53:36", 
+            "twitter_id": 782500944, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "stupid date formatting...", 
+            "pub_time": "2008-04-03 18:14:02", 
+            "twitter_id": 782304873, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@jesselegg  Yeah, I did, thanks! Was late and I was being stupid...", 
+            "pub_time": "2008-04-03 13:40:44", 
+            "twitter_id": 782138520, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@saila I'm intrigued... do tell more!", 
+            "pub_time": "2008-04-03 04:50:29", 
+            "twitter_id": 781934775, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@jmcnally Nope...", 
+            "pub_time": "2008-04-01 15:21:36", 
+            "twitter_id": 780881352, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Best cereal ever: http:\/\/tinyurl.com\/3xypyy", 
+            "pub_time": "2008-04-01 04:27:05", 
+            "twitter_id": 780608974, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Let's do this already...", 
+            "pub_time": "2008-03-26 02:01:35", 
+            "twitter_id": 777117403, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@mathewi $weet! Congrats to you both!", 
+            "pub_time": "2008-03-26 02:01:17", 
+            "twitter_id": 777117282, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Thank you, missus, for the lovely meal...", 
+            "pub_time": "2008-03-23 23:52:02", 
+            "twitter_id": 775969710, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "I wish this rain was chocolate.", 
+            "pub_time": "2008-03-19 01:56:15", 
+            "twitter_id": 773659527, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@neilio Quality...", 
+            "pub_time": "2008-03-19 01:54:35", 
+            "twitter_id": 773658890, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Need new office desk. Where to buy? Suggestions?", 
+            "pub_time": "2008-03-06 01:44:35", 
+            "twitter_id": 767321268, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@neilio Enjoy her while you can :(", 
+            "pub_time": "2008-03-04 03:16:20", 
+            "twitter_id": 766345301, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Time to take a deep breath...", 
+            "pub_time": "2008-03-03 19:39:28", 
+            "twitter_id": 766182151, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@wishingline Nice! Gonna do a housewarming?", 
+            "pub_time": "2008-02-29 16:16:03", 
+            "twitter_id": 764930371, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "OK. Let's negotiate...", 
+            "pub_time": "2008-02-28 19:38:10", 
+            "twitter_id": 764597269, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@joanna so that's what i can expect?", 
+            "pub_time": "2008-02-27 01:03:35", 
+            "twitter_id": 763186752, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "I suppose it went well...", 
+            "pub_time": "2008-02-25 15:54:07", 
+            "twitter_id": 756189102, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Gary Busey is a nutcase...", 
+            "pub_time": "2008-02-25 00:26:23", 
+            "twitter_id": 753192442, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "goddammit... another wasted saturday", 
+            "pub_time": "2008-02-23 17:06:26", 
+            "twitter_id": 748529142, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "twitter.twitteruser", 
+        "fields": {
+            "screen_name": "gmacgregor", 
+            "url": "http:\/\/www.sixminutes.ca", 
+            "description": "", 
+            "thumbnail_url": "http:\/\/s3.amazonaws.com\/twitter_production\/profile_images\/18042692\/tony_normal.jpg", 
+            "followers": [], 
+            "location": "Toronto", 
+            "friends": [], 
+            "name": "Greg MacGregor"
+        }
+    }
+]
