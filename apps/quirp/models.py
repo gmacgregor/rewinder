@@ -74,6 +74,7 @@ class Quote(models.Model):
     author              = models.ForeignKey('Person', null=True, blank=True)
     source              = models.ForeignKey(Source)
     text                = models.TextField()
+    rating              = models.CharField(max_length=20, choices=RATING_CHOICES, blank=True, help_text=u'Optional')
     
     def __unicode__(self):
         return u'%s' % self.text
