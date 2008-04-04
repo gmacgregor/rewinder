@@ -84,7 +84,7 @@ class Article(models.Model):
     pub_date            = models.DateTimeField('Publication Date')
     author              = models.ForeignKey(User)
     status              = models.IntegerField(max_length=1, choices=PUBLICATION_CHOICES, radio_admin=True, default=1)
-    geo                 = models.ForeignKey(Place)
+    geography           = models.ForeignKey(Place)
     categories          = models.ManyToManyField(Category, filter_interface=models.HORIZONTAL, null=True, blank=True)
     featured            = models.BooleanField('Featured article?', default=False)
     tags                = TagField()
@@ -108,7 +108,6 @@ class Article(models.Model):
     html_pull_quote     = models.TextField(blank=True, null=True)
     
     #related models
-    places              = models.ManyToManyField(Place, filter_interface=models.HORIZONTAL, null=True, blank=True)
     people              = models.ManyToManyField(Person, filter_interface=models.HORIZONTAL, null=True, blank=True)
     sources             = models.ManyToManyField(Source, filter_interface=models.HORIZONTAL, null=True, blank=True)
     
@@ -126,7 +125,7 @@ class Article(models.Model):
     quirps              = models.ManyToManyField(Quirp, filter_interface=models.HORIZONTAL, null=True, blank=True)
     links               = models.ManyToManyField(Bookmark, filter_interface=models.HORIZONTAL, null=True, blank=True)
     videos              = models.ManyToManyField(Video, filter_interface=models.HORIZONTAL, null=True, blank=True)
-    youtube_videos      = models.ManyToManyField(u'Youtube Videos', YoutubeVideo, filter_interface=models.HORIZONTAL, null=True, blank=True)
+    youtube_videos      = models.ManyToManyField(YoutubeVideo, filter_interface=models.HORIZONTAL, null=True, blank=True)
     
     def __unicode__(self):
         return u'%s' % self.headline
