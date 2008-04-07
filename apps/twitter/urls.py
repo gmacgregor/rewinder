@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-from syncr.twitter.models import Tweet
+from rewinder.apps.twitter.models import Tweet
 
 tweet_dict = {
     'queryset': Tweet.objects.all(),
