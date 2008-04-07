@@ -106,5 +106,3 @@ DELICIOUS_PASSWORD = 'faerie'
 FORCE_LOWERCASE_TAGS = True
 
 TWITTER_USERNAME = 'gmacgregor'
-
-import local_settings
