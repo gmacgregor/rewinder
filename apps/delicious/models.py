@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from tagging.fields import TagField
 from django.dispatch import dispatcher
