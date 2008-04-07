@@ -173,7 +173,7 @@ class Article(models.Model):
             ('Entry', {'fields': ('body',)}),
             ('Related Material', {'fields': ('articles', 'links', 'youtube_videos', 'videos', 'quirps',), 'classes': 'collapse'}),
             ('Images and Photos', {'fields': ('lead_image', 'lead_caption', 'sidebar_image', 'sidebar_caption', 'inline_image', 'inline_caption',), 'classes': 'collapse'}),
-            ('Metadata: Relevant People, Places and Sources', {'fields': ('places', 'people', 'sources',), 'classes': 'collapse'}),
+            ('Metadata: Relevant People, Sources', {'fields': ('people', 'sources',), 'classes': 'collapse'}),
         )
         
         list_display    = ('headline', 'pub_date', 'last_modified', 'status', 'enable_comments', 'author')
