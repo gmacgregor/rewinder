@@ -14,7 +14,7 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('',
     (r'^admin/', include('django.contrib.admin.urls')),
-    #(r'^comments/', include('django.contrib.comments.urls.comments')),
+    (r'^comments/', include('django.contrib.comments.urls.comments')),
     (r'^words/', include('rewinder.apps.blog.urls')),
     (r'^places/', include('rewinder.apps.geo.urls')),
     (r'^videos/', include('rewinder.apps.video.urls')),
