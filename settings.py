@@ -82,6 +82,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'tagging',
     'typogrify',
+    'comment_utils',
     'rewinder.apps.blog',
     'rewinder.apps.tumblelog',
     'rewinder.apps.delicious',
@@ -93,16 +94,15 @@ INSTALLED_APPS = (
     'rewinder.apps.video',
     'rewinder.util',
 )
-# http://www.b-list.org/weblog/2007/nov/03/working-models/
-# app label (normalized to lowercase), model name (normalized to lowercase)
-#TUMBLELOG_MODELS = ('quirp.quirp','video.video','links.link', 'delicious.bookmark')
-
 #http://code.google.com/p/django-template-utils/
 MARKUP_FILTER = ('markdown', {})
 
-DELICIOUS_USERNAME = 'sixminutes'
-DELICIOUS_PASSWORD = 'faerie'
-
+#tagging
 FORCE_LOWERCASE_TAGS = True
 
-TWITTER_USERNAME = 'gmacgregor'
+#comment_utils
+AKISMET_API_KEY = '2d963b0633db'
+
+#DELICIOUS_USERNAME = 'sixminutes'
+#DELICIOUS_PASSWORD = 'faerie'
+#TWITTER_USERNAME = 'gmacgregor'

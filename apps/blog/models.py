@@ -5,7 +5,9 @@ from django.core import validators
 from django.core.exceptions import ObjectDoesNotExist
 from django.dispatch import dispatcher
 from django.db.models import signals
-
+from tagging.fields import TagField
+from template_utils.markup import formatter
+from comment_utils.moderation import CommentModerator, moderator
 from rewinder.apps.geo.models import Place
 from rewinder.apps.video.models import Video
 from rewinder.apps.youtube.models import Video as YoutubeVideo
@@ -13,10 +15,6 @@ from rewinder.apps.quirp.models import Quirp, Source, Person
 from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.lib.signals import create_tumblelog_item
-
-from tagging.fields import TagField
-
-from template_utils.markup import formatter
 
 
 PUBLISHED_STATUS = 1
@@ -180,4 +178,12 @@ class Article(models.Model):
         search_fields   = ['headline', 'summary', 'body']
         date_hierarchy  = 'pub_date'
 
+class ArticleModerator(CommentModerator):
+    akismet = True
+    auto_close_field = 'pub_date'
+    close_after = 14
+    email_notification = False
+    enable_field = 'enable_comments'
+moderator.register(Article, ArticleModerator)
+    
 dispatcher.connect(create_tumblelog_item, sender=Article, signal=signals.post_save)
