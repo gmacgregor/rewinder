@@ -3,7 +3,7 @@ from tagging.fields import TagField
 from django.dispatch import dispatcher
 from django.db.models import signals
 
-from rewinder.lib.signals import create_photo_tumblelog_item
+from rewinder.lib.signals import create_tumblelog_item
 
 FLICKR_LICENSES = (
     ('0', 'All Rights Reserved'),
@@ -92,4 +92,4 @@ class PhotoSet(models.Model):
     class Admin:
         list_display = ('flickr_id', 'owner', 'title')
 
-dispatcher.connect(create_photo_tumblelog_item, sender=Photo, signal=signals.post_save)
+dispatcher.connect(create_tumblelog_item, sender=Photo, signal=signals.post_save)
