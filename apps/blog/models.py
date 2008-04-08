@@ -12,8 +12,7 @@ from rewinder.apps.youtube.models import Video as YoutubeVideo
 from rewinder.apps.quirp.models import Quirp, Source, Person
 from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.tumblelog.models import TumblelogItem
-
-from rewinder.lib.signals import create_article_tumblelog_item
+from rewinder.lib.signals import create_tumblelog_item
 
 from tagging.fields import TagField
 
@@ -181,4 +180,4 @@ class Article(models.Model):
         search_fields   = ['headline', 'summary', 'body']
         date_hierarchy  = 'pub_date'
 
-dispatcher.connect(create_article_tumblelog_item, sender=Article, signal=signals.post_save)
+dispatcher.connect(create_tumblelog_item, sender=Article, signal=signals.post_save)
