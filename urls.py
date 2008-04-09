@@ -3,11 +3,11 @@ from rewinder.apps.tumblelog.models import TumblelogItem
 
 
 tumblelog_dict = {
-    'queryset': TumblelogItem.objects.all(),
+    'queryset': TumblelogItem.objects.all().order_by('-pub_date')
 }
 
 urlpatterns = patterns('',
-    url(r'^$', 'django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10000), name="homepage"),
+    url(r'^$', 'django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10), name="homepage"),
     url(r'^tumblelog/','django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10), name="tumblelog"),
     url(r'^tweets/', include('rewinder.apps.twitter.urls')),
 )

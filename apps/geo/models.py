@@ -4,19 +4,19 @@ from django.core import validators
 from tagging.fields import TagField
 
 PROVINCE_CHOICES = (
-    ('ab', 'Alberta'),
-    ('bc', 'British Columbia'),
-    ('man', 'Manitoba'),
-    ('nb', 'New Brunswick'),
-    ('nfld', 'Newfoundland and Labrador'),
-    ('nwt', 'Northwest Territories'),
-    ('ns', 'Nova Scotia'),
-    ('nun', 'Nunavut'),
-    ('on', 'Ontario'),
-    ('pei', 'Prince Edward Island'),
-    ('que', 'Quebec'),
-    ('sask', 'Saskatchewan'),
-    ('yuk', 'Yukon'),    
+    ('AB', 'Alberta'),
+    ('BC', 'British Columbia'),
+    ('MAN', 'Manitoba'),
+    ('NB', 'New Brunswick'),
+    ('NFLD', 'Newfoundland and Labrador'),
+    ('NWT', 'Northwest Territories'),
+    ('NS', 'Nova Scotia'),
+    ('NUN', 'Nunavut'),
+    ('ON', 'Ontario'),
+    ('PEI', 'Prince Edward Island'),
+    ('QUE', 'Quebec'),
+    ('SASK', 'Saskatchewan'),
+    ('YUK', 'Yukon'),    
 )
 
 
@@ -120,7 +120,7 @@ class Point(models.Model):
     longitude           = models.FloatField(null=True, blank=True)
     address             = models.CharField(max_length=200, blank=True, help_text=u'Optional.')
     city                = models.ForeignKey(City)
-    country             = models.ForeignKey(Country)
+    #country             = models.ForeignKey(Country)
     postal_code         = models.CharField(max_length=10, blank=True, help_text=u'Optional.')
     
     def __unicode__(self):
