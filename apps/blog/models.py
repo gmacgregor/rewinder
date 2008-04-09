@@ -14,7 +14,7 @@ from rewinder.apps.youtube.models import Video as YoutubeVideo
 from rewinder.apps.quirp.models import Quirp, Source, Person
 from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.tumblelog.models import TumblelogItem
-from rewinder.lib.signals import create_tumblelog_item
+from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
 
 PUBLISHED_STATUS = 1
@@ -81,7 +81,7 @@ class Article(models.Model):
     pub_date            = models.DateTimeField('Publication Date')
     author              = models.ForeignKey(User)
     status              = models.IntegerField(max_length=1, choices=PUBLICATION_CHOICES, radio_admin=True, default=1)
-    geography           = models.ForeignKey(Place)
+    geography           = models.ForeignKey(Place, null=True, blank=True)
     categories          = models.ManyToManyField(Category, filter_interface=models.HORIZONTAL, null=True, blank=True)
     featured            = models.BooleanField('Featured article?', default=False)
     tags                = TagField()
@@ -162,7 +162,7 @@ class Article(models.Model):
     class Admin:
         date_hierarchy = 'pub_date'
         fields = (
-            ('Publication details', {'fields': ('pub_date', 'headline', 'slug',)}),
+            ('Publication details', {'fields': ('pub_date', 'headline', 'slug', 'geography')}),
             ('Author', {'fields': ('author',)}),
             ('Article Activity', {'fields': ('status', 'enable_comments',)}),
             ('Brief', {'fields': ('summary', 'teaser', 'pull_quote',), 'classes': 'collapse'}),
@@ -187,3 +187,4 @@ class ArticleModerator(CommentModerator):
 moderator.register(Article, ArticleModerator)
     
 dispatcher.connect(create_tumblelog_item, sender=Article, signal=signals.post_save)
+dispatcher.connect(kill_tumblelog_item, sender=Article, signal=signals.post_delete)

@@ -46,5 +46,13 @@ def create_tumblelog_item(sender, instance):
         item = TumblelogItem(object_id=instance.id, content_type=ctype, pub_date=pub_date)
         item.save()
 
+def kill_tumblelog_item(sender, instance):
+    ctype = get_ctype(instance)
+    try:
+        item = TumblelogItem.objects.get(object_id=instance.id, content_type=ctype)
+        item.delete()
+    except ObjectDoesNotExist:
+        pass
+
 #for model in settings.TUMBLELOG_MODELS:
 #    dispatcher.connect(create_tumblelog_item, sender=get_model(*model.split('.')), signal=signals.post_save)
