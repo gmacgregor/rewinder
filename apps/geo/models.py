@@ -19,6 +19,7 @@ PROVINCE_CHOICES = (
     ('yuk', 'Yukon'),    
 )
 
+
 class PlaceType(models.Model):
     """
     A generic 'kind' of place. Something like 'bar', 'restaurant', 'stadium'
@@ -30,7 +31,7 @@ class PlaceType(models.Model):
     image               = models.ImageField(upload_to='/img/places/placetype/', blank=True, help_text=u'Optional.')
     
     def __unicode__(self):
-        return '%s' % self.name
+        return u'%s' % self.name
     
     @permalink
     def get_absolute_url(self):
@@ -43,6 +44,7 @@ class PlaceType(models.Model):
     class Admin:
         pass
 
+
 class Region(models.Model):
     """
     ie. Eastern Seaboard, Suffolk County
@@ -54,7 +56,7 @@ class Region(models.Model):
     image               = models.ImageField(upload_to='/img/places/region/', blank=True, help_text=u'Optional.')
     
     def __unicode__(self):
-        return '%s' % self.name
+        return u'%s' % self.name
     
     @permalink
     def get_absolute_url(self):
@@ -74,7 +76,7 @@ class Country(models.Model):
     image               = models.ImageField(upload_to='/img/places/country/', blank=True, help_text=u'Optional.')
     
     def __unicode__(self):
-        return '%s' % self.name
+        return u'%s' % self.name
     
     @permalink
     def get_absolute_url(self):
@@ -90,15 +92,14 @@ class Country(models.Model):
 
 class City(models.Model):
     name                = models.CharField(max_length=100)
-    province            = models.CharField(max_length=4, choices=PROVINCE_CHOICES, default='on', blank=True, help_text=u'Optional, but preferred.')
+    province            = models.CharField(max_length=4, choices=PROVINCE_CHOICES, default='on')
+    slug                = models.SlugField(prepopulate_from=('province', 'name'))
+    region              = models.ForeignKey(Region, null=True, blank=True, help_text=u'ie. Southwestern Ontario, GTA, Praries, Canadian Shield. Optional.')
     country             = models.ForeignKey(Country)
-    region              = models.ForeignKey(Region, blank=True, help_text=u'ie. Southwestern Ontario, GTA, Praries, Canadian Shield. Optional.')
-    postal_code         = models.CharField(max_length=10, blank=True, help_text=u'The postal/zip code of the downtown core. Optional.')
-    slug                = models.SlugField(prepopulate_from=('name', 'province',))
     image               = models.ImageField(upload_to='/img/places/city/', blank=True, help_text='Optional.')
     
     def __unicode__(self):
-        return '%s' % self.name
+        return u'%s, %s' % (self.name, self.province)
     
     @permalink
     def get_absolute_url(self):
@@ -113,24 +114,29 @@ class City(models.Model):
         unique_together = (('name', 'province',),)
         ordering        = ('province', 'name',)
 
+
 class Point(models.Model):
-    latitude            = models.FloatField()
-    longitude           = models.FloatField()
+    latitude            = models.FloatField(null=True, blank=True)
+    longitude           = models.FloatField(null=True, blank=True)
     address             = models.CharField(max_length=200, blank=True, help_text=u'Optional.')
-    city                = models.ForeignKey(City, blank=True, null=True, help_text=u'Optional.')
-    country             = models.ForeignKey(Country, blank=True, null=True, help_text=u'Optional.')
+    city                = models.ForeignKey(City)
+    country             = models.ForeignKey(Country)
     postal_code         = models.CharField(max_length=10, blank=True, help_text=u'Optional.')
-    description         = models.TextField(blank=True, help_text=u'Optional.')
     
     def __unicode__(self):
-        return '%s' % self.address
+      return u'%s' % self.address
     
     class Meta:
+        verbose_name = ('point')
+        verbose_name_plural = ('points')
         db_table = 'place_points'
         ordering = ('address',)
     
     class Admin:
-        pass
+        list_display  = ('address', 'city', 'postal_code', 'latitude', 'longitude')
+        list_filter   = ('city',)
+        search_fields = ('address',)
+
 
 class Place(models.Model):
     STATUS_CHOICES = (
@@ -140,18 +146,17 @@ class Place(models.Model):
     created             = models.DateTimeField(auto_now_add=True)
     modified            = models.DateTimeField(auto_now=True)
     point               = models.ForeignKey(Point)
-    city                = models.ForeignKey(City, help_text=u'The nearest city, town.')
     prefix              = models.CharField('Pre-name', blank=True, max_length=20, help_text=u'ie. possibly ont for Ontario. Optional.')
     name                = models.CharField(max_length=255)
     slug                = models.SlugField(prepopulate_from=('name',))
     nickname            = models.CharField(blank=True, max_length=100, help_text=u'Optional.')
-    unit                = models.CharField(blank=True, max_length=100, help_text=u'Suite or Apartment #. Optional')
-    phone               = models.CharField(blank=True, max_length=20, help_text='Optional.')
-    url                 = models.URLField(blank=True, verify_exists=False, help_text='Optional.')
-    email               = models.EmailField(blank=True, help_text='Optional.')
-    description         = models.TextField(blank=True, help_text='Optional.')
+    unit                = models.CharField(blank=True, max_length=100, help_text=u'Suite or Apartment #. Optional.')
+    phone               = models.CharField(blank=True, max_length=20, help_text=u'Optional.')
+    url                 = models.URLField(blank=True, verify_exists=False, help_text=u'Optional.')
+    email               = models.EmailField(blank=True, help_text=u'Optional.')
+    description         = models.TextField(blank=True, help_text=u'Optional.')
     status              = models.IntegerField(choices=STATUS_CHOICES, radio_admin=True, default=1)
-    place_types         = models.ManyToManyField(PlaceType, blank=True, help_text='Optional.')
+    place_types         = models.ManyToManyField(PlaceType, blank=True, help_text=u'Optional.')
     tags                = TagField()
     
     def __unicode__(self):
@@ -162,12 +167,32 @@ class Place(models.Model):
         return ('place_detail', None, {'slug':self.slug})
     
     @property
+    def city(self):
+        return u'%s' % self.point.city
+    
+    @property
+    def full_title(self):
+        return u'%s %s' % (self.prefix, self.title)
+    
+    @property
+    def longitude(self):
+        return self.point.longitude
+    
+    @property
+    def latitude(self):
+        return self.point.latitude
+    
+    @property
     def address(self):
-        return '%s, %s %s' % (self.point.address, self.point.city, self.point.postal_code)
-        
+        return u'%s, %s %s' % (self.point.address, self.point.city, self.point.postal_code)
+    
     class Meta:
+        verbose_name = ('place')
+        verbose_name_plural = ('places')
         db_table = 'places'
         ordering = ('name',)
     
     class Admin:
+        list_display  = ('name', 'point', 'city', 'status')
+        list_filter   = ('status', 'place_types')
         search_fields = ('name',)

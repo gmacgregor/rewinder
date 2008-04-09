@@ -3,9 +3,7 @@ from django.db import models
 from tagging.fields import TagField
 from django.dispatch import dispatcher
 from django.db.models import signals
-
-from rewinder.lib.signals import create_tumblelog_item
-
+from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 import datetime
 import pydelicious
 
@@ -56,3 +54,4 @@ class Bookmark(models.Model):
         date_hierarchy = 'saved_date'
 
 dispatcher.connect(create_tumblelog_item, sender=Bookmark, signal=signals.post_save)
+dispatcher.connect(kill_tumblelog_item, sender=Bookmark, signal=signals.post_delete)

@@ -3,6 +3,26 @@
         "pk": 1, 
         "model": "twitter.tweet", 
         "fields": {
+            "text": "@mathewi Come take a peek!", 
+            "pub_time": "2008-04-07 21:29:17", 
+            "twitter_id": 784657504, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Officially working on a pimped out 24&quot; iMac (@ the office)", 
+            "pub_time": "2008-04-07 20:48:18", 
+            "twitter_id": 784635722, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "twitter.tweet", 
+        "fields": {
             "text": "&lt;nerd&gt;This time tomorrow night I'll be an hour away from the BSG season 4 premiere!&lt;\/nerd&gt;", 
             "pub_time": "2008-04-04 00:53:36", 
             "twitter_id": 782500944, 
@@ -10,7 +30,7 @@
         }
     }, 
     {
-        "pk": 2, 
+        "pk": 4, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "stupid date formatting...", 
@@ -20,7 +40,7 @@
         }
     }, 
     {
-        "pk": 3, 
+        "pk": 5, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "@jesselegg  Yeah, I did, thanks! Was late and I was being stupid...", 
@@ -30,7 +50,7 @@
         }
     }, 
     {
-        "pk": 4, 
+        "pk": 6, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "@saila I'm intrigued... do tell more!", 
@@ -40,7 +60,7 @@
         }
     }, 
     {
-        "pk": 5, 
+        "pk": 7, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "@jmcnally Nope...", 
@@ -50,7 +70,7 @@
         }
     }, 
     {
-        "pk": 6, 
+        "pk": 8, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "Best cereal ever: http:\/\/tinyurl.com\/3xypyy", 
@@ -60,7 +80,7 @@
         }
     }, 
     {
-        "pk": 7, 
+        "pk": 9, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "Let's do this already...", 
@@ -70,7 +90,7 @@
         }
     }, 
     {
-        "pk": 8, 
+        "pk": 10, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "@mathewi $weet! Congrats to you both!", 
@@ -80,7 +100,7 @@
         }
     }, 
     {
-        "pk": 9, 
+        "pk": 11, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "Thank you, missus, for the lovely meal...", 
@@ -90,7 +110,7 @@
         }
     }, 
     {
-        "pk": 10, 
+        "pk": 12, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "I wish this rain was chocolate.", 
@@ -100,7 +120,7 @@
         }
     }, 
     {
-        "pk": 11, 
+        "pk": 13, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "@neilio Quality...", 
@@ -110,7 +130,7 @@
         }
     }, 
     {
-        "pk": 12, 
+        "pk": 14, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "Need new office desk. Where to buy? Suggestions?", 
@@ -120,7 +140,7 @@
         }
     }, 
     {
-        "pk": 13, 
+        "pk": 15, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "@neilio Enjoy her while you can :(", 
@@ -130,7 +150,7 @@
         }
     }, 
     {
-        "pk": 14, 
+        "pk": 16, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "Time to take a deep breath...", 
@@ -140,7 +160,7 @@
         }
     }, 
     {
-        "pk": 15, 
+        "pk": 17, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "@wishingline Nice! Gonna do a housewarming?", 
@@ -150,7 +170,7 @@
         }
     }, 
     {
-        "pk": 16, 
+        "pk": 18, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "OK. Let's negotiate...", 
@@ -160,7 +180,7 @@
         }
     }, 
     {
-        "pk": 17, 
+        "pk": 19, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "@joanna so that's what i can expect?", 
@@ -170,32 +190,12 @@
         }
     }, 
     {
-        "pk": 18, 
+        "pk": 20, 
         "model": "twitter.tweet", 
         "fields": {
             "text": "I suppose it went well...", 
             "pub_time": "2008-02-25 15:54:07", 
             "twitter_id": 756189102, 
-            "user": 1
-        }
-    }, 
-    {
-        "pk": 19, 
-        "model": "twitter.tweet", 
-        "fields": {
-            "text": "Gary Busey is a nutcase...", 
-            "pub_time": "2008-02-25 00:26:23", 
-            "twitter_id": 753192442, 
-            "user": 1
-        }
-    }, 
-    {
-        "pk": 20, 
-        "model": "twitter.tweet", 
-        "fields": {
-            "text": "goddammit... another wasted saturday", 
-            "pub_time": "2008-02-23 17:06:26", 
-            "twitter_id": 748529142, 
             "user": 1
         }
     }, 
