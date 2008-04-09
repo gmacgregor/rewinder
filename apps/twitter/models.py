@@ -16,9 +16,6 @@ class Tweet(models.Model):
     def url(self):
         return u'http://twitter.com/%s/statuses/%s' % (self.user.screen_name, self.twitter_id)
     
-    def eastern_time(self):
-        pass
-        
     class Meta:
         ordering = ('-pub_time',)
         get_latest_by = 'pub_time'
