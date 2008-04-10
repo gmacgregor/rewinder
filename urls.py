@@ -20,6 +20,7 @@ urlpatterns += patterns('',
     (r'^photos/', include('rewinder.apps.flickr.urls')),
     (r'^quirps/', include('rewinder.apps.quirp.urls')),
     (r'^videos/', include('rewinder.apps.video.urls')),
+    (r'^youtube/', include('rewinder.apps.youtube.urls')),
     (r'^words/', include('rewinder.apps.blog.urls')),
     url(r'^tag/(?P<tag>[-\w]+)/$', 'tag', name='tag_detail'),
 )
