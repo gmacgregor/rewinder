@@ -1,8 +1,8 @@
 from django.conf import settings
 from django.db import models
-from tagging.fields import TagField
 from django.dispatch import dispatcher
 from django.db.models import signals
+from tagging.fields import TagField
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
 import datetime
@@ -11,10 +11,11 @@ import pydelicious
 
 class Bookmark(models.Model):
     saved_date              = models.DateTimeField(default=datetime.datetime.today)
-    description             = models.CharField(max_length=250, blank=True)
+    description             = models.CharField(max_length=255, blank=True)
+    slug                    = models.SlugField(max_length=255, prepopulate_from=('description',), help_text='Automatically built from description.', unique_for_date='saved_date') 
     url                     = models.URLField()
     tags                    = TagField()
-    extended_info           = models.CharField(max_length=250, blank=True)
+    extended_info           = models.CharField(max_length=255, blank=True)
     post_hash               = models.CharField(max_length=100, null=True, blank=True)
     via_url                 = models.URLField(u'Via URL', verify_exists=False, blank=True, null=True, help_text=u'The URL of the site where you spotted the link. Optional.')
     enable_comments         = models.BooleanField(default=True)
@@ -25,14 +26,17 @@ class Bookmark(models.Model):
     
     @models.permalink
     def get_absolute_url(self):
-        return ('link_detail', (), {
-            'object_id': self.id,
+        return ('bookmark_detail', (), {
             'year': self.saved_date.year,
             'month': str(self.saved_date.month).zfill(2),
             'day': str(self.saved_date.day).zfill(2),
+            'slug': self.slug,
         })
     
     def save(self):
+        if not self.id:
+            from django.template.defaultfilters import slugify
+            self.slug = slugify(self.description)
         if self.post_elsewhere:
             try:
                 pydelicious.add(settings.DELICIOUS_USERNAME, settings.DELICIOUS_PASSWORD, self.url, self.description, self.tags, self.extended_info)
