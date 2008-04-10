@@ -96,7 +96,7 @@ INSTALLED_APPS = (
     'rewinder.apps.video',
     'rewinder.util',
 )
-TUMBLELOG_MODELS = ('blog.article','delicious.bookmark','flickr.photo','twitter.tweet')
+#TUMBLELOG_MODELS = ('blog.article','delicious.bookmark','flickr.photo','twitter.tweet')
 
 #http://code.google.com/p/django-template-utils/
 MARKUP_FILTER = ('markdown', {})
@@ -107,6 +107,6 @@ FORCE_LOWERCASE_TAGS = True
 #comment_utils
 AKISMET_API_KEY = '2d963b0633db'
 
-#DELICIOUS_USERNAME = 'sixminutes'
-#DELICIOUS_PASSWORD = 'faerie'
+DELICIOUS_USERNAME = 'sixminutes'
+DELICIOUS_PASSWORD = 'faerie'
 #TWITTER_USERNAME = 'gmacgregor'

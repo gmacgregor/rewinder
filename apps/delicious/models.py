@@ -25,7 +25,12 @@ class Bookmark(models.Model):
     
     @models.permalink
     def get_absolute_url(self):
-        return ('link_detail', (), {'object_id': self.id})
+        return ('link_detail', (), {
+            'object_id': self.id,
+            'year': self.saved_date.year,
+            'month': str(self.saved_date.month).zfill(2),
+            'day': str(self.saved_date.day).zfill(2),
+        })
     
     def save(self):
         if self.post_elsewhere:
