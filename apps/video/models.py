@@ -11,6 +11,7 @@ RATING_CHOICES = (
     ('5', '5'), 
 )
 
+
 class Video(models.Model):
     created_on          = models.DateTimeField(u'Creation Date', auto_now_add=True)
     last_modified       = models.DateTimeField(auto_now=True)   

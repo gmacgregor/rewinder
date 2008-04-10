@@ -6,7 +6,6 @@ from tagging.fields import TagField
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
 import datetime
-import pydelicious
 
 
 class Bookmark(models.Model):
@@ -37,22 +36,13 @@ class Bookmark(models.Model):
         if not self.id:
             from django.template.defaultfilters import slugify
             self.slug = slugify(self.description)
-        if self.post_elsewhere:
-            try:
-                pydelicious.add(settings.DELICIOUS_USERNAME, settings.DELICIOUS_PASSWORD, self.url, self.description, self.tags, self.extended_info)
-            except:
-                raise
+            if self.post_elsewhere:
+                import pydelicious
+                try:
+                    pydelicious.add(settings.DELICIOUS_USERNAME, settings.DELICIOUS_PASSWORD, self.url, self.description, self.tags, self.extended_info)
+                except:
+                    pass
         super(Bookmark, self).save()
-    
-    #def delete(self):
-    #   """
-    #   Always try to delete from del.icio.us first
-    #   """
-    #   try:
-    #       pydelicious.delete(settings.DELICIOUS_USERNAME, settings.DELICIOUS_PASSWORD, self.url)
-    #   except:
-    #       pass
-    #   super(Link, self).delete()
     
     class Meta:
         ordering = ('-saved_date',)

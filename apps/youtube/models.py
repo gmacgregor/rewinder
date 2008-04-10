@@ -15,6 +15,7 @@ class Video(models.Model):
     url                 = models.URLField()
     thumbnail_url       = models.URLField()
     length              = models.PositiveIntegerField()
+    #enable_comments     = models.BooleanField(default=True)
     
     def __unicode__(self):
         return u'%s' % self.title
@@ -25,8 +26,15 @@ class Video(models.Model):
     def embed_url(self):
         return u'http://www.youtube.com/v/%s' % self.video_id
     
+    #def embed_code(self):
+    #    return '<object width="%s" height="250"><param name="movie" value="http://www.youtube.com/v/wnVJZkDuVBM&hl=en&rel=0&color1=0x3a3a3a&color2=0x999999"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/wnVJZkDuVBM&hl=en&rel=0&color1=0x3a3a3a&color2=0x999999" type="application/x-shockwave-flash" wmode="transparent" width="300" height="250"></embed></object>'
+    
+    class Meta:
+        ordering = ('-published',)
+    
     class Admin:
         list_display = ('title', 'author', 'video_id', 'view_count')
+    
 
 
 class Playlist(models.Model):
