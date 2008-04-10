@@ -1,10 +1,18 @@
 {% extends "base.html" %}
 {% block title %}Links: {{ object.description }}{% endblock %}
+
 {% block content %}
 <p><a href="{% url link_list %}">Back to all links...</a></p>
 <h2>{{ object.description }}</h2>
-<p>Visit: <a href="{{ object.url }}">{{ object.url }}</a></p>
 {% if object.extended_info %}
-<p>{{ extended_info }}</p>
+<p>{{ object.extended_info }}</p>
 {% endif %}
+<p>Visit: <a href="{{ object.url }}">{{ object.url }}</a></p>
+
+{% load tagging_tags %}
+{% tags_for_object object as tag_list %}
+{% if tag_list %}
+<p><strong>Related tags:</strong>{% for tag in tag_list %} <a href="{% url tag_detail tag %}" title="View all items tagged '{{ tag }}'">{{ tag }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+{% endif %}
+
 {% endblock %}
