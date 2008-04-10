@@ -1,7 +1,13 @@
 from django.db import models
+<<<<<<< .mine
+#from django.dispatch import dispatcher
+#from django.db.models import signals
+#from rewinder.lib.signals import create_twitter_tumblelog_item
+=======
 from django.dispatch import dispatcher
 from django.db.models import signals
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
+>>>>>>> .r82
 
 
 class Tweet(models.Model):
@@ -46,5 +52,10 @@ class TwitterUser(models.Model):
     class Admin:
         list_display = ('screen_name', 'name', 'location', 'numFriends', 'numFollowers')
 
+<<<<<<< .mine
+<<<<<<< .mine
+#dispatcher.connect(create_twitter_tumblelog_item, sender=Tweet, signal=signals.post_save)=======
+dispatcher.connect(create_tumblelog_item, sender=Tweet, signal=signals.post_save)>>>>>>> .r82
+=======
 dispatcher.connect(create_tumblelog_item, sender=Tweet, signal=signals.post_save)
-dispatcher.connect(kill_tumblelog_item, sender=Tweet, signal=signals.post_delete)
+dispatcher.connect(kill_tumblelog_item, sender=Tweet, signal=signals.post_delete)>>>>>>> .r84
