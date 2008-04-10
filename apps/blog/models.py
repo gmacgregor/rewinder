@@ -1,13 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
-#from django.contrib.contenttypes.models import ContentType
-from django.core import validators
-#from django.core.exceptions import ObjectDoesNotExist
-#from django.dispatch import dispatcher
-#from django.db.models import signals
+#from django.core import validators
+from django.dispatch import dispatcher
+from django.db.models import signals
+
 from tagging.fields import TagField
+
 from template_utils.markup import formatter
+
 from comment_utils.moderation import CommentModerator, moderator
+
 from rewinder.apps.geo.models import Place
 from rewinder.apps.video.models import Video
 from rewinder.apps.youtube.models import Video as YoutubeVideo
@@ -16,10 +18,6 @@ from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
-<<<<<<< .mine
-#from rewinder.lib.signals import create_article_tumblelog_item, create_tumblelog_item
-=======
->>>>>>> .r82
 
 PUBLISHED_STATUS = 1
 DRAFT_STATUS = 2
@@ -182,8 +180,7 @@ class Article(models.Model):
         search_fields   = ['headline', 'summary', 'body']
         date_hierarchy  = 'pub_date'
 
-<<<<<<< .mine
-#dispatcher.connect(create_article_tumblelog_item, sender=Article, signal=signals.post_save)=======
+
 class ArticleModerator(CommentModerator):
     akismet = True
     auto_close_field = 'pub_date'
@@ -191,9 +188,7 @@ class ArticleModerator(CommentModerator):
     email_notification = False
     enable_field = 'enable_comments'
 moderator.register(Article, ArticleModerator)
-    
-<<<<<<< .mine
-dispatcher.connect(create_tumblelog_item, sender=Article, signal=signals.post_save)>>>>>>> .r82
-=======
+
+
 dispatcher.connect(create_tumblelog_item, sender=Article, signal=signals.post_save)
-dispatcher.connect(kill_tumblelog_item, sender=Article, signal=signals.post_delete)>>>>>>> .r84
+dispatcher.connect(kill_tumblelog_item, sender=Article, signal=signals.post_delete)

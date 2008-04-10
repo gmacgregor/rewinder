@@ -1,13 +1,7 @@
 from django.db import models
-<<<<<<< .mine
-#from django.dispatch import dispatcher
-#from django.db.models import signals
-#from rewinder.lib.signals import create_twitter_tumblelog_item
-=======
 from django.dispatch import dispatcher
 from django.db.models import signals
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
->>>>>>> .r82
 
 
 class Tweet(models.Model):
@@ -39,23 +33,19 @@ class TwitterUser(models.Model):
     url                 = models.URLField(blank=True, null=True)
     friends             = models.ManyToManyField('TwitterUser', related_name='friends_user_set', blank=True, null=True)
     followers           = models.ManyToManyField('TwitterUser', related_name='followers_user_set', blank=True, null=True)
-
+    
     def numFriends(self):
         return self.friends.count()
-
+    
     def numFollowers(self):
         return self.followers.count()
-
+    
     def __unicode__(self):
         return self.screen_name
-
+    
     class Admin:
         list_display = ('screen_name', 'name', 'location', 'numFriends', 'numFollowers')
 
-<<<<<<< .mine
-<<<<<<< .mine
-#dispatcher.connect(create_twitter_tumblelog_item, sender=Tweet, signal=signals.post_save)=======
-dispatcher.connect(create_tumblelog_item, sender=Tweet, signal=signals.post_save)>>>>>>> .r82
-=======
+
 dispatcher.connect(create_tumblelog_item, sender=Tweet, signal=signals.post_save)
-dispatcher.connect(kill_tumblelog_item, sender=Tweet, signal=signals.post_delete)>>>>>>> .r84
+dispatcher.connect(kill_tumblelog_item, sender=Tweet, signal=signals.post_delete)
