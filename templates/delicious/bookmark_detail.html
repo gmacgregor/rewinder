@@ -2,8 +2,9 @@
 {% block title %}Links: {{ object.description }}{% endblock %}
 
 {% block content %}
-<p><a href="{% url link_list %}">Back to all links...</a></p>
+<p><a href="{% url bookmark_list %}">Back to all links...</a></p>
 <h2>{{ object.description }}</h2>
+
 {% if object.extended_info %}
 <p>{{ object.extended_info }}</p>
 {% endif %}
