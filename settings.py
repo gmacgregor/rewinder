@@ -96,6 +96,8 @@ INSTALLED_APPS = (
     'rewinder.apps.video',
     'rewinder.util',
 )
+TUMBLELOG_MODELS = ('blog.article','delicious.bookmark','flickr.photo','twitter.tweet')
+
 #http://code.google.com/p/django-template-utils/
 MARKUP_FILTER = ('markdown', {})
 

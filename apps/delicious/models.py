@@ -1,9 +1,21 @@
 from django.conf import settings
 from django.db import models
 from tagging.fields import TagField
+<<<<<<< .mine
+#from django.dispatch import dispatcher
+#from django.db.models import signals
+#from rewinder.lib.signals import create_link_tumblelog_item
+=======
 from django.dispatch import dispatcher
 from django.db.models import signals
+<<<<<<< .mine
+>>>>>>> .r82
+
+from rewinder.lib.signals import create_tumblelog_item
+
+=======
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
+>>>>>>> .r84
 import datetime
 import pydelicious
 
@@ -53,5 +65,10 @@ class Bookmark(models.Model):
         search_fields = ['description', 'extended_info']
         date_hierarchy = 'saved_date'
 
+<<<<<<< .mine
+<<<<<<< .mine
+#dispatcher.connect(create_link_tumblelog_item, sender=Bookmark, signal=signals.post_save)=======
+dispatcher.connect(create_tumblelog_item, sender=Bookmark, signal=signals.post_save)>>>>>>> .r82
+=======
 dispatcher.connect(create_tumblelog_item, sender=Bookmark, signal=signals.post_save)
-dispatcher.connect(kill_tumblelog_item, sender=Bookmark, signal=signals.post_delete)
+dispatcher.connect(kill_tumblelog_item, sender=Bookmark, signal=signals.post_delete)>>>>>>> .r84
