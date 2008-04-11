@@ -89,12 +89,10 @@ INSTALLED_APPS = (
     'rewinder.apps.tumblelog',
     'rewinder.apps.delicious',
     'rewinder.apps.flickr',
-    'rewinder.apps.youtube',
     'rewinder.apps.twitter',
-    'rewinder.apps.quirp',
-    'rewinder.apps.geo',
     'rewinder.apps.video',
-    'rewinder.util',
+    'rewinder.apps.generic',
+    'rewinder.apps.geo',
 )
 #TUMBLELOG_MODELS = ('blog.article','delicious.bookmark','flickr.photo','twitter.tweet')
 

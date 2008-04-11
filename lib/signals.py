@@ -40,6 +40,8 @@ def create_tumblelog_item(sender, instance):
         pub_date = instance.saved_date
     elif ctype.name == "photo":
         pub_date = instance.taken_date
+    elif ctype.name == "video":
+        pub_date = instance.pub_date
     try:
         item = TumblelogItem.objects.get(object_id=instance.id, content_type=ctype)
     except ObjectDoesNotExist:

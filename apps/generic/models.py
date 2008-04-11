@@ -37,7 +37,7 @@ class Source(models.Model):
     category            = models.ForeignKey(SourceCategory)
     
     def __unicode__(self):
-        return self.name
+        return self.title
     
     class Admin:
         list_display    = ('title', 'description', 'url',)
@@ -52,7 +52,7 @@ class Quote(models.Model):
     source              = models.ForeignKey(Source)
     url                 = models.URLField(u'URL', blank=True, help_text=u'Optional.', verify_exists=False)
     text                = models.TextField()
-    html_text           = models.TextField(blank=True)
+    html_text           = models.TextField(blank=True, editable=False)
     rating              = models.CharField(max_length=20, choices=RATING_CHOICES, blank=True, help_text=u'Optional')
     tags                = TagField()
     
@@ -63,8 +63,8 @@ class Quote(models.Model):
         self.html_text = formatter(self.text)
             
     class Admin:
-        list_display    = ('title', 'authour', 'source', 'url')
-        search_fields   = ['title', 'description', 'url', 'tags']
+        list_display    = ('text', 'author', 'source', 'url')
+        search_fields   = ['text', 'description']
 
 
 class Person(models.Model):
