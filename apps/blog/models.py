@@ -1,19 +1,14 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
-#from django.core import validators
 from django.dispatch import dispatcher
 from django.db.models import signals
-
 from tagging.fields import TagField
-
 from template_utils.markup import formatter
-
 from comment_utils.moderation import CommentModerator, moderator
-
 from rewinder.apps.geo.models import Place
 from rewinder.apps.video.models import Video
-from rewinder.apps.youtube.models import Video as YoutubeVideo
-from rewinder.apps.quirp.models import Quirp, Source, Person
+from rewinder.apps.generic.models import Quote, Source, Person
 from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
@@ -106,6 +101,12 @@ class Article(models.Model):
     pull_quote          = models.TextField(blank=True, help_text=u'Use Markdown syntax for HTML formatting.')
     html_pull_quote     = models.TextField(blank=True, null=True)
     
+    #media -- this should, at some point, include a photo gallery
+    articles            = models.ManyToManyField('self', filter_interface=models.HORIZONTAL, null=True, blank=True)
+    links               = models.ManyToManyField(Bookmark, filter_interface=models.HORIZONTAL, null=True, blank=True)
+    videos              = models.ManyToManyField(Video, filter_interface=models.HORIZONTAL, null=True, blank=True)
+    quotes              = models.ManyToManyField(Quote, filter_interface=models.HORIZONTAL, null=True, blank=True)
+    
     #related models
     people              = models.ManyToManyField(Person, filter_interface=models.HORIZONTAL, null=True, blank=True)
     sources             = models.ManyToManyField(Source, filter_interface=models.HORIZONTAL, null=True, blank=True)
@@ -117,14 +118,6 @@ class Article(models.Model):
     sidebar_caption     = models.CharField(max_length=255, blank=True)
     inline_image        = models.ImageField(upload_to='img/articles/inline/%Y%m%d/', blank=True)
     inline_caption      = models.CharField(max_length=255, blank=True)
-    
-    #media
-    #this should, at some point, include a photo gallery
-    articles            = models.ManyToManyField('self', filter_interface=models.HORIZONTAL, null=True, blank=True)
-    quirps              = models.ManyToManyField(Quirp, filter_interface=models.HORIZONTAL, null=True, blank=True)
-    links               = models.ManyToManyField(Bookmark, filter_interface=models.HORIZONTAL, null=True, blank=True)
-    videos              = models.ManyToManyField(Video, filter_interface=models.HORIZONTAL, null=True, blank=True)
-    youtube_videos      = models.ManyToManyField(YoutubeVideo, filter_interface=models.HORIZONTAL, null=True, blank=True)
     
     def __unicode__(self):
         return u'%s' % self.headline
@@ -170,9 +163,9 @@ class Article(models.Model):
             ('Brief', {'fields': ('summary', 'teaser', 'pull_quote',), 'classes': 'collapse'}),
             ('Categorization', {'fields': ('categories', 'tags', 'featured',)}),
             ('Entry', {'fields': ('body',)}),
-            ('Related Material', {'fields': ('articles', 'links', 'youtube_videos', 'videos', 'quirps',), 'classes': 'collapse'}),
+            ('Related Material', {'fields': ('articles', 'links', 'videos', 'quotes',), 'classes': 'collapse'}),
             ('Images and Photos', {'fields': ('lead_image', 'lead_caption', 'sidebar_image', 'sidebar_caption', 'inline_image', 'inline_caption',), 'classes': 'collapse'}),
-            ('Metadata: Relevant People, Sources', {'fields': ('people', 'sources',), 'classes': 'collapse'}),
+            ('Relevant People, Sources', {'fields': ('people', 'sources',), 'classes': 'collapse'}),
         )
         
         list_display    = ('headline', 'pub_date', 'last_modified', 'status', 'enable_comments', 'author')
@@ -182,11 +175,11 @@ class Article(models.Model):
 
 
 class ArticleModerator(CommentModerator):
-    akismet = True
+    akismet = settings.COMMENTS_AKISMET
     auto_close_field = 'pub_date'
-    close_after = 14
-    email_notification = False
-    enable_field = 'enable_comments'
+    close_after = settings.COMMENTS_CLOSE_AFTER
+    email_notification = settings.COMMENTS_EMAIL
+    enable_field = settings.COMMENTS_ENABLE_FIELD
 moderator.register(Article, ArticleModerator)
 
 
