@@ -1,35 +1,47 @@
 from django.db import models
+from django.conf import settings
+from django.dispatch import dispatcher
+from django.db.models import signals
 from tagging.fields import TagField
+from comment_utils.moderation import CommentModerator, moderator
+from template_utils.markup import formatter
 from rewinder.apps.geo.models import Place
-from rewinder.apps.quirp.models import Source, Person
-
-RATING_CHOICES = (
-    ('1', '1'),
-    ('2', '2'),
-    ('3', '3'),
-    ('4', '4'),
-    ('5', '5'), 
-)
+from rewinder.apps.generic import RATING_CHOICES
+from rewinder.apps.genric.models import Source, Person
+from rewinder.apps.tumblelog.models import TumblelogItem
+from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
 
 class Video(models.Model):
-    created_on          = models.DateTimeField(u'Creation Date', auto_now_add=True)
-    last_modified       = models.DateTimeField(auto_now=True)   
+    #publication details
+    created_on          = models.DateTimeField(auto_now_add=True)
+    last_modified       = models.DateTimeField(auto_now=True)
     pub_date            = models.DateTimeField(u'Publication Date', auto_now=True)
-    title               = models.CharField(max_length=255, unique_for_date='pub_date')                                    
+    original_date       = models.DateTimeField(blank=True, help_text=u'The original creation date of the video. Optional, but preferred.')
+    title               = models.CharField(max_length=255, unique_for_date='pub_date')
     slug                = models.SlugField(max_length=255, prepopulate_from=('title',), help_text=u'Automatically built from video title.', unique=True)
-    description         = models.TextField(blank=True, help_text=u'Optional.')
+    description         = models.TextField(blank=True, help_text=u'Use Markdown syntax for HTML formatting. Optional.')
+    html_description    = models.TextField(blank=True, null=True)
+    commentary          = models.TextField(blank=True, help_text=u'Your opinion/additional comments about the video.  Use Markdown syntax for HTML formatting. Optional.')
+    html_commentary     = models.TextField(blank=True, null=True)
+    tags                = TagField()
+    enable_comments     = models.BooleanField(default=True)
+    
+    #meta
     running_time        = models.CharField(max_length=10, blank=True, help_text=u'Optional.')
     nsfw                = models.BooleanField(u'NSFW?', help_text=u'Is this video Not Suitable For Work?')
     source              = models.ForeignKey(Source, help_text=u'Youtube, CBC, CNN etc...')
+    url                 = models.URLField(u'URL', blank=True, help_text=u'For example: http://youtube.com/watch?v=rTZ6oDgUzkU. Optional.', verify_exists=False)
+    embed_code          = models.TextField(max_length=400, blank=True, help_text=u'Optional.')
+    rating              = models.CharField(max_length=20, choices=RATING_CHOICES, blank=True, help_text=u'Totally arbitray and completely optional.')
+    
+    #related items
+    videos              = models.ManyToManyField('self', filter_interface=models.HORIZONTAL, null=True, blank=True, help_text=u'Optional.')
     people              = models.ManyToManyField(Person, filter_interface=models.HORIZONTAL, null=True, blank=True, help_text=u'Optional.')
     places              = models.ManyToManyField(Place, filter_interface=models.HORIZONTAL, null=True, blank=True, help_text=u'Optional.')
-    url                 = models.URLField(u'URL', blank=True, help_text=u'For example: http://youtube.com/watch?v=rTZ6oDgUzkU. Optional.', verify_exists=False)
-    embed_code          = models.TextField(max_length=400, blank=True, help_text=u"Paste video embed code in here if you're grabbing it from Youtube or something. Optional.")
+    
+    #uploaded video
     path                = models.FileField(upload_to='video/%Y/%m/%d', blank=True)
-    rating              = models.CharField(max_length=20, choices=RATING_CHOICES, blank=True, help_text=u'Totally arbitray and completely optional.')
-    tags                = TagField()
-    enable_comments     = models.BooleanField(default=True)
     
     def __unicode__(self):
         return self.title
@@ -43,7 +55,35 @@ class Video(models.Model):
             'slug': self.slug,
         })
     
+    def save(self):
+        if self.description:
+                self.html_description = formatter(self.description)
+        if self.commentary:
+                self.html_commentary = formatter(self.commentary)
+        super(Video, self).save()
+    
     class Admin:
+        date_hierarchy = 'pub_date'
+        fields = (
+            ('Upload your own', {'fields': ('path',), 'classes': 'collapse'}),
+            ('Publication details', {'fields': ('pub_date', 'original_date', 'title', 'slug', 'description', 'commentary', 'tags', 'enable_comments',)}),
+            ('Details', {'fields': ('url', 'source', 'embed_code', 'running_time', 'rating', 'nsfw',)}),
+            ('Related Material', {'fields': ('videos', 'people', 'places',), 'classes': 'collapse'}),
+        )
+        
         list_display    = ('title', 'url', 'source', 'enable_comments', 'running_time',)
         search_fields   = ['title', 'description', 'source', 'people', 'url', 'tags']
         date_hierarchy  = 'created_on'
+
+
+class VideoModerator(CommentModerator):
+    akismet = settings.COMMENTS_AKISMET
+    auto_close_field = 'pub_date'
+    close_after = settings.COMMENTS_CLOSE_AFTER
+    email_notification = settings.COMMENTS_EMAIL
+    enable_field = settings.COMMENTS_ENABLE_FIELD
+moderator.register(Video, VideoModerator)
+
+
+dispatcher.connect(create_tumblelog_item, sender=Video, signal=signals.post_save)
+dispatcher.connect(kill_tumblelog_item, sender=Video, signal=signals.post_delete

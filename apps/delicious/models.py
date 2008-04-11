@@ -2,11 +2,11 @@ from django.conf import settings
 from django.db import models
 from django.dispatch import dispatcher
 from django.db.models import signals
+from comment_utils.moderation import CommentModerator, moderator
 from tagging.fields import TagField
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
 import datetime
-
 
 class Bookmark(models.Model):
     saved_date              = models.DateTimeField(default=datetime.datetime.today)
@@ -52,6 +52,14 @@ class Bookmark(models.Model):
         list_display = ('description', 'saved_date', 'extended_info')
         search_fields = ['description', 'extended_info']
         date_hierarchy = 'saved_date'
+
+class BookmarkModerator(CommentModerator):
+    akismet = settings.COMMENTS_AKISMET
+    auto_close_field = 'saved_date'
+    close_after = settings.COMMENTS_CLOSE_AFTER
+    email_notification = settings.COMMENTS_EMAIL
+    enable_field = settings.COMMENTS_ENABLE_FIELD
+moderator.register(Bookmark, BookmarkModerator)
 
 
 dispatcher.connect(create_tumblelog_item, sender=Bookmark, signal=signals.post_save)
