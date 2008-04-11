@@ -6,8 +6,7 @@ from tagging.fields import TagField
 from comment_utils.moderation import CommentModerator, moderator
 from template_utils.markup import formatter
 from rewinder.apps.geo.models import Place
-from rewinder.apps.generic import RATING_CHOICES
-from rewinder.apps.genric.models import Source, Person
+from rewinder.apps.generic.models import RATING_CHOICES, Source, Person
 from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
@@ -28,10 +27,11 @@ class Video(models.Model):
     enable_comments     = models.BooleanField(default=True)
     
     #meta
+    video_id            = models.CharField(u'Video ID', max_length=100, blank=True, help_text=u"The 'id' of the video. For example: http://youtube.com/watch?v=NakX-vtxYhI the 'id' is 'NakX-vtxYhI'. If this is a youtube.com video then it can be determined for you. Optional.")
     running_time        = models.CharField(max_length=10, blank=True, help_text=u'Optional.')
     nsfw                = models.BooleanField(u'NSFW?', help_text=u'Is this video Not Suitable For Work?')
     source              = models.ForeignKey(Source, help_text=u'Youtube, CBC, CNN etc...')
-    url                 = models.URLField(u'URL', blank=True, help_text=u'For example: http://youtube.com/watch?v=rTZ6oDgUzkU. Optional.', verify_exists=False)
+    url                 = models.URLField(u'URL', help_text=u'For example: http://youtube.com/watch?v=rTZ6oDgUzkU', verify_exists=False)
     embed_code          = models.TextField(max_length=400, blank=True, help_text=u'Optional.')
     rating              = models.CharField(max_length=20, choices=RATING_CHOICES, blank=True, help_text=u'Totally arbitray and completely optional.')
     
@@ -56,6 +56,13 @@ class Video(models.Model):
         })
     
     def save(self):
+        if not self.id:
+            if self.source.title.lower().count("youtube"):
+                params = self.url.split("v=")[1]
+                if params.find("&"):
+                    self.video_id = params.split("&")[0]
+                else:
+                    self.video_id = params[0]
         if self.description:
                 self.html_description = formatter(self.description)
         if self.commentary:
@@ -67,7 +74,7 @@ class Video(models.Model):
         fields = (
             ('Upload your own', {'fields': ('path',), 'classes': 'collapse'}),
             ('Publication details', {'fields': ('pub_date', 'original_date', 'title', 'slug', 'description', 'commentary', 'tags', 'enable_comments',)}),
-            ('Details', {'fields': ('url', 'source', 'embed_code', 'running_time', 'rating', 'nsfw',)}),
+            ('Details', {'fields': ('url', 'video_id', 'source', 'embed_code', 'running_time', 'rating', 'nsfw',)}),
             ('Related Material', {'fields': ('videos', 'people', 'places',), 'classes': 'collapse'}),
         )
         
@@ -86,4 +93,4 @@ moderator.register(Video, VideoModerator)
 
 
 dispatcher.connect(create_tumblelog_item, sender=Video, signal=signals.post_save)
-dispatcher.connect(kill_tumblelog_item, sender=Video, signal=signals.post_delete
+dispatcher.connect(kill_tumblelog_item, sender=Video, signal=signals.post_delete)
