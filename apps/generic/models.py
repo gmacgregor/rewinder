@@ -1,6 +1,6 @@
 from django.db import models
 from tagging.fields import TagField
-from rewinder.apps.links.models import Link
+from template_utils.markup import formatter
 
 RATING_CHOICES = (
     ('1', '1'),
@@ -9,6 +9,7 @@ RATING_CHOICES = (
     ('4', '4'),
     ('5', '5'), 
 )
+
 
 class SourceCategory(models.Model):
     created_on          = models.DateTimeField(auto_now_add=True)
@@ -43,47 +44,27 @@ class Source(models.Model):
         search_fields   = ['title', 'description', 'url', 'tags']
 
 
-class Quirp(models.Model):
-    created_on          = models.DateTimeField(u'Creation Date', auto_now_add=True)
-    last_modified       = models.DateTimeField(auto_now=True)
-    pub_date            = models.DateTimeField(u'Publication Date', auto_now=True)
-    title               = models.CharField(max_length=255)
-    slug                = models.SlugField(max_length=255, prepopulate_from=('title',), help_text=u'Automatically built from title', unique=True)
-    source              = models.ForeignKey(Source, null=True, blank=True, help_text=u'Optional, but desired')
-    description         = models.TextField(blank=True, help_text=u'Optional')
-    url                 = models.URLField(u'URL', blank=True, help_text=u'Optional')
-    rating              = models.CharField(max_length=20, choices=RATING_CHOICES, blank=True, help_text=u'Optional')
-    tags                = TagField()
-    enable_comments     = models.BooleanField(default=True)
-    
-    def __unicode__(self):
-        return self.title
-    
-    @models.permalink
-    def get_absolute_url(self):
-        return ('quirp_detail', (), {'slug': self.slug})
-        
-    class Admin:
-        list_display    = ('title', 'enable_comments', 'source',)
-        list_filter     = ['created_on']
-        search_fields   = ['title', 'description', 'url', 'tags']
-        date_hierarchy  = 'created_on'
-
-
 class Quote(models.Model):
     created_on          = models.DateTimeField(auto_now_add=True)
     last_modified       = models.DateTimeField(auto_now=True)
     pub_date            = models.DateTimeField('Publication Date')
     author              = models.ForeignKey('Person', null=True, blank=True)
     source              = models.ForeignKey(Source)
+    url                 = models.URLField(u'URL', blank=True, help_text=u'Optional.', verify_exists=False)
     text                = models.TextField()
+    html_text           = models.TextField(blank=True)
     rating              = models.CharField(max_length=20, choices=RATING_CHOICES, blank=True, help_text=u'Optional')
+    tags                = TagField()
     
     def __unicode__(self):
         return u'%s' % self.text
     
+    def save(self):
+        self.html_text = formatter(self.text)
+            
     class Admin:
-        pass
+        list_display    = ('title', 'authour', 'source', 'url')
+        search_fields   = ['title', 'description', 'url', 'tags']
 
 
 class Person(models.Model):
