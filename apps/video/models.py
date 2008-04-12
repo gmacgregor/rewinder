@@ -6,7 +6,7 @@ from tagging.fields import TagField
 from comment_utils.moderation import CommentModerator, moderator
 from template_utils.markup import formatter
 from rewinder.apps.geo.models import Place
-from rewinder.apps.generic.models import RATING_CHOICES, Source, Person
+from rewinder.apps.generic.models import Source, Person
 from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
@@ -33,7 +33,7 @@ class Video(models.Model):
     source              = models.ForeignKey(Source, help_text=u'Youtube, CBC, CNN etc...')
     url                 = models.URLField(u'URL', help_text=u'For example: http://youtube.com/watch?v=rTZ6oDgUzkU', verify_exists=False)
     embed_code          = models.TextField(max_length=400, blank=True, help_text=u'Optional.')
-    rating              = models.CharField(max_length=20, choices=RATING_CHOICES, blank=True, help_text=u'Totally arbitray and completely optional.')
+    rating              = models.CharField(max_length=20, choices=settings.RATING_CHOICES, blank=True, help_text=u'Totally arbitray and completely optional.')
     
     #related items
     videos              = models.ManyToManyField('self', filter_interface=models.HORIZONTAL, null=True, blank=True, help_text=u'Optional.')

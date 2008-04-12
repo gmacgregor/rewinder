@@ -109,6 +109,14 @@ COMMENTS_CLOSE_AFTER = 14
 COMMENTS_EMAIL = False
 COMMENTS_ENABLE_FIELD = 'enable_comments'
 
+RATING_CHOICES = (
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+    ('4', '4'),
+    ('5', '5'), 
+)
+
 YOUTUBE_API_KEY = 'AI39si7dE0uopXa7u6wVFzAQZF0_B3NOtztaYqK9pLzSafZOu7TScU-g2dvLmaMEmgpvocgoCGnZQUBUGMjr-4MnxfulgA7KWA'
 YOUTUBE_DEV_ID = 'MlRUm9Gt1ro'
 YOUTUBE_EMBED_WIDTH = '300'
