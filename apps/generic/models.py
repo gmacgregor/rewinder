@@ -1,6 +1,13 @@
 from django.db import models
 from tagging.fields import TagField
 from template_utils.markup import formatter
+from rewinder.apps.blog.models import Article
+from rewinder.apps.delicious.models import Bookmark
+from rewinder.apps.flickr.models import Photo
+from rewinder.apps.geo.models import Place
+from rewinder.apps.twitter.models import Tweet
+from rewinder.apps.video.models import Video
+
 
 RATING_CHOICES = (
     ('1', '1'),
@@ -21,7 +28,7 @@ class SourceCategory(models.Model):
         return u'%s' % self.title
     
     class Meta:
-        verbose_name_plural = 'Source Categories'
+        verbose_name_plural = 'Types of sources'
     
     class Admin:
         pass
@@ -55,6 +62,7 @@ class Quote(models.Model):
     html_text           = models.TextField(blank=True, editable=False)
     rating              = models.CharField(max_length=20, choices=RATING_CHOICES, blank=True, help_text=u'Optional')
     tags                = TagField()
+    enable_comments     = models.BooleanField(default=True)
     
     def __unicode__(self):
         return u'%s' % self.text
@@ -68,22 +76,43 @@ class Quote(models.Model):
 
 
 class Person(models.Model):
-    """
-    Just a first and last name + (optional) brief bio and website
-    should suffice.
-    
-    Could eventually use a PersonType class - occupation, source etc...
-    
-    """
     created_on          = models.DateTimeField(auto_now_add=True)
     last_modified       = models.DateTimeField(auto_now=True)
     name                = models.CharField(max_length=255)
     slug                = models.SlugField(max_length=255, prepopulate_from=('name',), help_text=u'Automatically built from name', unique=True)
-    bio                 = models.TextField(u'Biography', blank=True)
-    url                 = models.URLField(u'URL', blank=True, help_text=u'Optopnal')
+    bio                 = models.TextField(u'Biography', blank=True, help_text=u'Optional')
+    url                 = models.URLField(u'URL', blank=True, help_text=u'Optional')
+    
+    def __unicode__(self):
+        return u'%s' % self.name
     
     class Meta:
         verbose_name_plural = 'people'
+    
+    class Admin:
+        pass
+
+
+class Series(models.Model):
+    created_on          = models.DateTimeField(auto_now_add=True)
+    last_modified       = models.DateTimeField(auto_now=True)
+    title               = models.CharField(max_length=255)
+    slug                = models.SlugField(max_length=255, prepopulate_from=('title',), help_text=u'Automatically built from title', unique=True)
+    articles            = models.ManyToManyField(Article, null=True, blank=True, filter_interface=models.HORIZONTAL)
+    tweets              = models.ManyToManyField(Tweet, null=True, blank=True, filter_interface=models.HORIZONTAL)
+    videos              = models.ManyToManyField(Video, null=True, blank=True, filter_interface=models.HORIZONTAL)
+    photos              = models.ManyToManyField(Photo, null=True, blank=True, filter_interface=models.HORIZONTAL)
+    bookmarks           = models.ManyToManyField(Bookmark, null=True, blank=True, filter_interface=models.HORIZONTAL)
+    quotes              = models.ManyToManyField(Quote, null=True, blank=True, filter_interface=models.HORIZONTAL)
+    people              = models.ManyToManyField(Person, null=True, blank=True, filter_interface=models.HORIZONTAL)
+    places              = models.ManyToManyField(Place, null=True, blank=True, filter_interface=models.HORIZONTAL)
+    enable_comments     - models.BooleanField(default=True)
+    
+    def __unicode__(self):
+        retrun u'%s' % self.title
+    
+    class Meta:
+        verbose_name_plural = 'series'
     
     class Admin:
         pass
