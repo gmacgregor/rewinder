@@ -1,21 +1,14 @@
 from django.db import models
+from django.conf import settings
 from tagging.fields import TagField
+from comment_utils.moderation import CommentModerator, moderator
 from template_utils.markup import formatter
-from rewinder.apps.blog.models import Article
 from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.flickr.models import Photo
+from rewinder.apps.blog.models import Article
 from rewinder.apps.geo.models import Place
-from rewinder.apps.twitter.models import Tweet
 from rewinder.apps.video.models import Video
-
-
-RATING_CHOICES = (
-    ('1', '1'),
-    ('2', '2'),
-    ('3', '3'),
-    ('4', '4'),
-    ('5', '5'), 
-)
+from rewinder.apps.twitter.models import Tweet
 
 
 class SourceCategory(models.Model):
@@ -60,7 +53,7 @@ class Quote(models.Model):
     url                 = models.URLField(u'URL', blank=True, help_text=u'Optional.', verify_exists=False)
     text                = models.TextField()
     html_text           = models.TextField(blank=True, editable=False)
-    rating              = models.CharField(max_length=20, choices=RATING_CHOICES, blank=True, help_text=u'Optional')
+    rating              = models.CharField(max_length=20, choices=settings.RATING_CHOICES, blank=True, help_text=u'Optional')
     tags                = TagField()
     enable_comments     = models.BooleanField(default=True)
     
@@ -73,6 +66,15 @@ class Quote(models.Model):
     class Admin:
         list_display    = ('text', 'author', 'source', 'url')
         search_fields   = ['text', 'description']
+
+
+class QuoteModerator(CommentModerator):
+    akismet = settings.COMMENTS_AKISMET
+    auto_close_field = 'pub_date'
+    close_after = settings.COMMENTS_CLOSE_AFTER
+    email_notification = settings.COMMENTS_EMAIL
+    enable_field = settings.COMMENTS_ENABLE_FIELD
+moderator.register(Quote, QuoteModerator)
 
 
 class Person(models.Model):
@@ -106,13 +108,22 @@ class Series(models.Model):
     quotes              = models.ManyToManyField(Quote, null=True, blank=True, filter_interface=models.HORIZONTAL)
     people              = models.ManyToManyField(Person, null=True, blank=True, filter_interface=models.HORIZONTAL)
     places              = models.ManyToManyField(Place, null=True, blank=True, filter_interface=models.HORIZONTAL)
-    enable_comments     - models.BooleanField(default=True)
+    enable_comments     = models.BooleanField(default=True)
     
     def __unicode__(self):
-        retrun u'%s' % self.title
+        return u'%s' % self.title
     
     class Meta:
         verbose_name_plural = 'series'
     
     class Admin:
         pass
+
+
+class SeriesModerator(CommentModerator):
+    akismet = settings.COMMENTS_AKISMET
+    auto_close_field = 'pub_date'
+    close_after = settings.COMMENTS_CLOSE_AFTER
+    email_notification = settings.COMMENTS_EMAIL
+    enable_field = settings.COMMENTS_ENABLE_FIELD
+moderator.register(Series, SeriesModerator)
