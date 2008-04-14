@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if is_paginated %}
+    {% if has_next %}<a href="{% url tumblelog_list next %}">Next</a>{% endif %}
+    {% if has_previous %}<a href="{% url tumblelog_list previous %}">Previous</a>{% endif %} 
+{% endif %}
+<p>There are {{ hits }} things in the tumblelog. You're on page {{ page }} of {{ pages }}</p>
+
 {% autoescape off %}
     {% for item in object_list %}
         {% ifequal item.content_type.name "article" %}
@@ -16,12 +22,19 @@
         {% ifequal item.content_type.name "video" %}
             <h2>Video: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.title }}</a></h2>
         {% endifequal %}
-        {% ifequal item.content_type.name "quirp" %}
-            <h2>Quirp: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.title }}</a></h2>
+        {% ifequal item.content_type.name "photo" %}
+            <h2>Photo: <a href="{{ item.get_content_object.get_absolute_url }}">{% if item.get_content_object.title %}{{ item.get_content_object.title }}{% else %}Untitled{% endif %}</a></h2>
+            <img src="{{ item.get_content_object.small_url }}" alt="{{item.get_content_object.title }}">
         {% endifequal %}
         {% ifequal item.content_type.name "tweet" %}
             <h2><a href="{% url tweets %}">Tweet</a>: {{ item.get_content_object.text }} <a href="{{ item.get_content_object.url }}">View</a></h2>
-        {% endifequal %}
+        {% endifequal %} 
     {% endfor %}
 {% endautoescape %}
+
+{% if is_paginated %}
+    {% if has_next %}<a href="{% url tumblelog_list next %}">Next</a>{% endif %}
+    {% if has_previous %}<a href="{% url tumblelog_list previous %}">Previous</a>{% endif %} 
+{% endif %}
+
 {% endblock %}
