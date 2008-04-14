@@ -21,6 +21,9 @@
         {% endifequal %}
         {% ifequal item.content_type.name "video" %}
             <h2>Video: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.title }}</a></h2>
+            {% if item.get_content_object.youtube_small_image %}
+            <img src="{{ item.get_content_object.youtube_small_image }}" width="130" height="97" style="border: 1px solid #ddd; padding: 2px;">
+            {% endif %}
         {% endifequal %}
         {% ifequal item.content_type.name "photo" %}
             <h2>Photo: <a href="{{ item.get_content_object.get_absolute_url }}">{% if item.get_content_object.title %}{{ item.get_content_object.title }}{% else %}Untitled{% endif %}</a></h2>
