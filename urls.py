@@ -8,7 +8,8 @@ tumblelog_dict = {
 
 urlpatterns = patterns('',
     url(r'^$', 'django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10), name="homepage"),
-    url(r'^tumblelog/','django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10), name="tumblelog"),
+    url(r'^tumblelog/?page=(?P<page>[0-9]+)$', 'django.views.generic.list_detail.object_list', dict(tumblelog_dict), name="tumblelog_list"),
+    url(r'^tumblelog/','django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10), name="tumblelog_home"),
     url(r'^tweets/', include('rewinder.apps.twitter.urls')),
 )
 

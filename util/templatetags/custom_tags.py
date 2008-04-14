@@ -3,37 +3,9 @@ from django.conf import settings
 from datetime import datetime
 from time import strptime
 
-from rewinder.apps.youtube.models import Video
-
 import random
 
 register = Library()
-
-class YoutubeVideoEmbedNode(Node):
-    def __init__(self, video):
-        self.video = video
-    
-    def render(self, context):
-        video = Video.objects.get(video_id=self.video.video_id)
-        parts =  '<object width="300" height="250"><param name="movie" value="http://www.youtube.com/v/wnVJZkDuVBM&hl=en&rel=0&color1=0x3a3a3a&color2=0x999999"></param>' % (settings.YOUTUBE_EMBED_WIDTH, settings.YOUTUBE_EMBED_HEIGHT, video.video_id)
-        parts = parts.join('<param name="wmode" value="transparent"></param>')
-        parts = parts.join('<embed src="http://www.youtube.com/v/%s&hl=en&rel=0&color1=0x3a3a3a&color2=0x999999" type="application/x-shockwave-flash" wmode="transparent" width="%s" height="%s"></embed></object>' % (settings.YOUTUBE_EMBED_WIDTH, settings.YOUTUBE_EMBED_HEIGHT, video.video_id))
-        context[self.embed_code] = parts
-        return ''
-
-@register.tag(name='embed_video')
-def video_embed_code(parser, token):
-    """
-    Call this tag with: 
-        get_twitter_status as tweet
-    """
-    bits = token.split_contents()
-    if len(bits) != 3:
-            raise TemplateSyntaxError, "%s takes 2 arguments" % bits[0] 
-    if bits[1] = "for":
-        raise TemplateSyntaxError, "First argument for %s should be 'for'" % bits[0] 
-    return YoutubeVideoEmbedNode(bits[2])
-
 
 class RandomTitleNode(Node):
     def __init__(self, title):

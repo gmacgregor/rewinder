@@ -3,8 +3,9 @@ from django.conf import settings
 from django.dispatch import dispatcher
 from django.db.models import signals
 from tagging.fields import TagField
-from comment_utils.moderation import CommentModerator, moderator
 from template_utils.markup import formatter
+from comment_utils.moderation import CommentModerator, moderator
+
 from rewinder.apps.geo.models import Place
 from rewinder.apps.generic.models import Source, Person
 from rewinder.apps.tumblelog.models import TumblelogItem
