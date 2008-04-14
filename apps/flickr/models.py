@@ -48,6 +48,15 @@ class Photo(models.Model):
     def __unicode__(self):
         return u'%s' % self.title
     
+    @models.permalink
+    def get_absolute_url(self):
+       return ('photo_detail', (), {
+            'object_id': self.id,
+            'year': self.taken_date.year,
+            'month': str(self.taken_date.month).zfill(2),
+            'day': str(self.taken_date.day).zfill(2),
+        })
+    
     def save(self):
         super(Photo, self).save()
     
