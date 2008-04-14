@@ -1,3 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ video.title }}{% endblock %}
+{% block content %}
 
 <h2>{{ video.title }}</h2>
-<p>{{ video.url }}</p>
+<p><a href="{{ video.url }}">View it on {{ video.source }}</a></p>
+<p>Rating: {{ video.rating }}</p>
+<object width="425" height="373"><param name="movie" value="http://www.youtube.com/v/{{ video.video_id }}&hl=en&color1=0x3a3a3a&color2=0x999999&border=1"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/{{ video.video_id }}&hl=en&color1=0x3a3a3a&color2=0x999999&border=0" type="application/x-shockwave-flash" wmode="transparent" width="425" height="373"></embed></object>
+<p>{{ video.description }}</p>
+
+{% endblock %}
