@@ -56,6 +56,16 @@ class Video(models.Model):
             'slug': self.slug,
         })
     
+    def youtube_small_image(self):
+        if self.url.find('youtube') and self.video_id:
+            return "http://i.ytimg.com/vi/%s/default.jpg" % self.video_id
+        else:
+            return None
+        
+    def related_videos(self):
+        videos = Video.objects.all().filter(tags__icontains='%s') % self.tags
+        return videos
+    
     def save(self):
         if not self.id:
             if self.source.title.lower().count("youtube"):
