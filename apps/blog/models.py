@@ -6,6 +6,7 @@ from django.db.models import signals
 from tagging.fields import TagField
 from template_utils.markup import formatter
 from comment_utils.moderation import CommentModerator, moderator
+
 from rewinder.apps.geo.models import Place
 from rewinder.apps.video.models import Video
 from rewinder.apps.generic.models import Quote, Source, Person
