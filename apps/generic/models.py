@@ -1,14 +1,15 @@
 from django.db import models
 from django.conf import settings
 from tagging.fields import TagField
-from comment_utils.moderation import CommentModerator, moderator
 from template_utils.markup import formatter
-from rewinder.apps.delicious.models import Bookmark
-from rewinder.apps.flickr.models import Photo
-from rewinder.apps.blog.models import Article
-from rewinder.apps.geo.models import Place
-from rewinder.apps.video.models import Video
-from rewinder.apps.twitter.models import Tweet
+from comment_utils.moderation import CommentModerator, moderator
+
+#import rewinder.apps.delicious.models as delicious
+#import rewinder.apps.flickr.models as flickr
+#import rewinder.apps.blog.models as blog
+#import rewinder.apps.geo.models as geo
+#import rewinder.apps.video.models as video
+#import rewinder.apps.twitter.models as twitter
 
 
 class SourceCategory(models.Model):
@@ -95,35 +96,35 @@ class Person(models.Model):
         pass
 
 
-class Series(models.Model):
-    created_on          = models.DateTimeField(auto_now_add=True)
-    last_modified       = models.DateTimeField(auto_now=True)
-    title               = models.CharField(max_length=255)
-    slug                = models.SlugField(max_length=255, prepopulate_from=('title',), help_text=u'Automatically built from title', unique=True)
-    articles            = models.ManyToManyField(Article, null=True, blank=True, filter_interface=models.HORIZONTAL)
-    tweets              = models.ManyToManyField(Tweet, null=True, blank=True, filter_interface=models.HORIZONTAL)
-    videos              = models.ManyToManyField(Video, null=True, blank=True, filter_interface=models.HORIZONTAL)
-    photos              = models.ManyToManyField(Photo, null=True, blank=True, filter_interface=models.HORIZONTAL)
-    bookmarks           = models.ManyToManyField(Bookmark, null=True, blank=True, filter_interface=models.HORIZONTAL)
-    quotes              = models.ManyToManyField(Quote, null=True, blank=True, filter_interface=models.HORIZONTAL)
-    people              = models.ManyToManyField(Person, null=True, blank=True, filter_interface=models.HORIZONTAL)
-    places              = models.ManyToManyField(Place, null=True, blank=True, filter_interface=models.HORIZONTAL)
-    enable_comments     = models.BooleanField(default=True)
-    
-    def __unicode__(self):
-        return u'%s' % self.title
-    
-    class Meta:
-        verbose_name_plural = 'series'
-    
-    class Admin:
-        pass
+#class Series(models.Model):
+#    created_on          = models.DateTimeField(auto_now_add=True)
+#    last_modified       = models.DateTimeField(auto_now=True)
+#    title               = models.CharField(max_length=255)
+#    slug                = models.SlugField(max_length=255, prepopulate_from=('title',), help_text=u'Automatically built from title', unique=True)
+#    articles            = models.ManyToManyField(blog.Article, null=True, blank=True, filter_interface=models.HORIZONTAL)
+#    tweets              = models.ManyToManyField(twiter.Tweet, null=True, blank=True, filter_interface=models.HORIZONTAL)
+#    videos              = models.ManyToManyField(video.Video, null=True, blank=True, filter_interface=models.HORIZONTAL)
+#    photos              = models.ManyToManyField(flickr.Photo, null=True, blank=True, filter_interface=models.HORIZONTAL)
+#    bookmarks           = models.ManyToManyField(delicious.Bookmark, null=True, blank=True, filter_interface=models.HORIZONTAL)
+#    places              = models.ManyToManyField(geo.Place, null=True, blank=True, filter_interface=models.HORIZONTAL)
+#    quotes              = models.ManyToManyField(Quote, null=True, blank=True, filter_interface=models.HORIZONTAL)
+#    people              = models.ManyToManyField(Person, null=True, blank=True, filter_interface=models.HORIZONTAL)
+#    enable_comments     = models.BooleanField(default=True)
+#   
+#    def __unicode__(self):
+#        return u'%s' % self.title
+#   
+#    class Meta:
+#        verbose_name_plural = 'series'
+#    
+#    class Admin:
+#        pass
 
 
-class SeriesModerator(CommentModerator):
-    akismet = settings.COMMENTS_AKISMET
-    auto_close_field = 'pub_date'
-    close_after = settings.COMMENTS_CLOSE_AFTER
-    email_notification = settings.COMMENTS_EMAIL
-    enable_field = settings.COMMENTS_ENABLE_FIELD
-moderator.register(Series, SeriesModerator)
+#class SeriesModerator(CommentModerator):
+#    akismet = settings.COMMENTS_AKISMET
+#    auto_close_field = 'pub_date'
+#    close_after = settings.COMMENTS_CLOSE_AFTER
+#    email_notification = settings.COMMENTS_EMAIL
+#    enable_field = settings.COMMENTS_ENABLE_FIELD
+#moderator.register(Series, SeriesModerator)
