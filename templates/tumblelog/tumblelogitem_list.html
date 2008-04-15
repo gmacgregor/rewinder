@@ -30,7 +30,8 @@
             <img src="{{ item.get_content_object.small_url }}" alt="{{item.get_content_object.title }}">
         {% endifequal %}
         {% ifequal item.content_type.name "tweet" %}
-            <h2><a href="{% url tweets %}">Tweet</a>: {{ item.get_content_object.text }} <a href="{{ item.get_content_object.url }}">View</a></h2>
+            {% load custom_tags %}
+            <h2><a href="{% url tweets %}">Tweet</a>: {{ item.get_content_object.text|with_owners }} <a href="{{ item.get_content_object.url }}">View</a></h2>
         {% endifequal %} 
     {% endfor %}
 {% endautoescape %}

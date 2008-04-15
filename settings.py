@@ -42,7 +42,7 @@ MEDIA_ROOT = '/Users/gmacgregor/dev/rewinder/site_media/'
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = 'http://localhost/site_media/'
+MEDIA_URL = 'http://localhost:8000/site_media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -93,6 +93,7 @@ INSTALLED_APPS = (
     'rewinder.apps.video',
     'rewinder.apps.generic',
     'rewinder.apps.geo',
+    'rewinder.util', #templatetags
 )
 #TUMBLELOG_MODELS = ('blog.article','delicious.bookmark','flickr.photo','twitter.tweet')
 

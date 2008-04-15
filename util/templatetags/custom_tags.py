@@ -1,5 +1,7 @@
 from django.template import Library, Node, TemplateSyntaxError
 from django.conf import settings
+from django.template.defaultfilters import stringfilter
+
 from datetime import datetime
 from time import strptime
 
@@ -67,3 +69,21 @@ def twitter_status(parser, token):
     if bits[1] != "as":
         raise TemplateSyntaxError, "First argument for %s should be 'as'" % bits[0]
     return TwitterStatusNode(bits[2])
+    
+
+@register.filter(name='with_owners')
+@stringfilter
+def with_owners(tweet):
+    '''
+    Takes a twitter tweet and makes all @'s link to the @owner profile
+    '''
+    words = tweet.split()
+    li = []
+    for word in words:
+        if word.find('@') != -1:
+            owner = word.replace('@','')
+            if owner.isalpha():
+                word = '<a href="http://twitter.com/%s">%s</a>' % (owner, word)
+        li.append(word)
+    return ' '.join(li)
+with_owners.is_safe = True 

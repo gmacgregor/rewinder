@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import *
+from django.conf import settings
 from rewinder.apps.tumblelog.models import TumblelogItem
 
 
@@ -23,3 +24,8 @@ urlpatterns += patterns('',
     (r'^words/', include('rewinder.apps.blog.urls')),
     url(r'^tag/(?P<tag>[-\w]+)/$', 'tag', name='tag_detail'),
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': '/Users/gmacgregor/dev/rewinder/site_media'}),
+    )
