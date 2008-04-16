@@ -71,19 +71,22 @@ def twitter_status(parser, token):
     return TwitterStatusNode(bits[2])
     
 
-@register.filter(name='with_owners')
+@register.filter(name='with_links')
 @stringfilter
-def with_owners(tweet):
+def with_links(tweet):
     '''
-    Takes a twitter tweet and makes all @'s link to the @owner profile
+    Takes a twitter tweet and makes all @'s link to the @owner profile. Also creates links to URLs
     '''
+    import re
+    reg = re.compile('(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?')
     words = tweet.split()
     li = []
     for word in words:
         if word.find('@') != -1:
             owner = word.replace('@','')
             if owner.isalpha():
-                word = '<a href="http://twitter.com/%s">%s</a>' % (owner, word)
+                word = '<a href="http://twitter.com/%s" title="Go to %s\'s Twitter page">%s</a>' % (owner, owner, word)
+        if reg.match(word):
+            word = '<a href="%s" title="Visit this link">%s</a>' % (word, word)
         li.append(word)
     return ' '.join(li)
-with_owners.is_safe = True 
