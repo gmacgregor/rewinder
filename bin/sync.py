@@ -1,6 +1,6 @@
 from django.core.management import setup_environ
 import sys
-sys.path.append('/home/webapps/gmacgregor/django/')
+sys.path.append('/home/gmacgregor/webapps/django/')
 from rewinder import settings
 setup_environ(settings)
 
