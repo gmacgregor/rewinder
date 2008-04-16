@@ -1,6 +1,6 @@
 from django.core.management import setup_environ
 import rewinder.settings
-setup_environ(settings)
+setup_environ(rewinder.settings)
 
 from rewinder.util.syncr import sync_delicious
 from rewinder.util.syncr import sync_flickr
