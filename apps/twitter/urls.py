@@ -6,7 +6,7 @@ tweet_dict = {
 }
 
 urlpatterns = patterns('django.views.generic.list_detail',
-    url(r'^$', 'object_list', dict(tweet_dict, paginate_by=10), name='tweets_list'),
+    url(r'^$', 'object_list', dict(tweet_dict, paginate_by=10), name='tweets_home'),
 )
 
 urlpatterns += patterns('django.views.generic.date_based',

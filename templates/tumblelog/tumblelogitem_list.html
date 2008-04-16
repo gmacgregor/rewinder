@@ -10,28 +10,38 @@
 {% autoescape off %}
     {% for item in object_list %}
         {% ifequal item.content_type.name "article" %}
+        <div class="tumbelog-entry article">
             <h2>Article: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.headline }}</a></h2>
+        </div>
         {% endifequal %}
         {% ifequal item.content_type.name "bookmark" %}
-            <h2>Link: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.description }}</a></h2>
+        <div class="tumbelog-entry link">
+            <h2><a href="{% url bookmark_list %}">Link</a>: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.description }}</a></h2>
             {% if item.get_content_object.extended_info %}
             <p>{{ item.get_content_object.extended_info }}</p>
             {% endif %}
             <p><a href="{{ item.get_content_object.url }}">Visit...</a></p>
+        </div>
         {% endifequal %}
         {% ifequal item.content_type.name "video" %}
-            <h2>Video: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.title }}</a></h2>
+        <div class="tumbelog-entry video">
+            <h2><a href="{% url videos_home %}">Video</a>: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.title }}</a></h2>
             {% if item.get_content_object.youtube_small_image %}
             <img src="{{ item.get_content_object.youtube_small_image }}" width="130" height="97" style="border: 1px solid #ddd; padding: 2px;">
             {% endif %}
+        </div>
         {% endifequal %}
         {% ifequal item.content_type.name "photo" %}
-            <h2>Photo: <a href="{{ item.get_content_object.get_absolute_url }}">{% if item.get_content_object.title %}{{ item.get_content_object.title }}{% else %}Untitled{% endif %}</a></h2>
+        <div class="tumbelog-entry photo">
+            <h2><a href="{% url photos_home %}">Photo</a>: <a href="{{ item.get_content_object.get_absolute_url }}">{% if item.get_content_object.title %}{{ item.get_content_object.title }}{% else %}Untitled{% endif %}</a></h2>
             <img src="{{ item.get_content_object.small_url }}" alt="{{item.get_content_object.title }}">
+        </div>
         {% endifequal %}
         {% ifequal item.content_type.name "tweet" %}
+        <div class="tumbelog-entry tweet">
             {% load custom_tags %}
-            <h2><a href="{% url tweets %}">Tweet</a>: {{ item.get_content_object.text|with_owners }} <a href="{{ item.get_content_object.url }}">View</a></h2>
+            <h2><a href="{% url tweets_home %}">Tweet</a>: {{ item.get_content_object.text|with_links }} <a href="{{ item.get_content_object.url }}">View</a></h2>
+        </div>
         {% endifequal %} 
     {% endfor %}
 {% endautoescape %}
