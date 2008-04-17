@@ -3,9 +3,9 @@
         "pk": 1, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "@mathewi Come take a peek!", 
-            "pub_time": "2008-04-07 21:29:17", 
-            "twitter_id": 784657504, 
+            "text": "Torstar cuts their entire internet production staff: http:\/\/tinyurl.com\/6rw7z6. What the?", 
+            "pub_time": "2008-04-17 14:39:34", 
+            "twitter_id": 791289044, 
             "user": 1
         }
     }, 
@@ -13,9 +13,9 @@
         "pk": 2, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "Officially working on a pimped out 24&quot; iMac (@ the office)", 
-            "pub_time": "2008-04-07 20:48:18", 
-            "twitter_id": 784635722, 
+            "text": "...what @saila said.", 
+            "pub_time": "2008-04-16 23:07:10", 
+            "twitter_id": 790818980, 
             "user": 1
         }
     }, 
@@ -23,9 +23,9 @@
         "pk": 3, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "&lt;nerd&gt;This time tomorrow night I'll be an hour away from the BSG season 4 premiere!&lt;\/nerd&gt;", 
-            "pub_time": "2008-04-04 00:53:36", 
-            "twitter_id": 782500944, 
+            "text": "My cron cherry has officially been broken (blushes)...", 
+            "pub_time": "2008-04-15 23:51:23", 
+            "twitter_id": 790030662, 
             "user": 1
         }
     }, 
@@ -33,9 +33,9 @@
         "pk": 4, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "stupid date formatting...", 
-            "pub_time": "2008-04-03 18:14:02", 
-            "twitter_id": 782304873, 
+            "text": "Beige is to color as Comic Sans is to type.", 
+            "pub_time": "2008-04-15 21:07:24", 
+            "twitter_id": 789948657, 
             "user": 1
         }
     }, 
@@ -43,9 +43,9 @@
         "pk": 5, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "@jesselegg  Yeah, I did, thanks! Was late and I was being stupid...", 
-            "pub_time": "2008-04-03 13:40:44", 
-            "twitter_id": 782138520, 
+            "text": "@saila Must be the midlife pot ;)", 
+            "pub_time": "2008-04-15 14:13:44", 
+            "twitter_id": 789729133, 
             "user": 1
         }
     }, 
@@ -53,9 +53,9 @@
         "pk": 6, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "@saila I'm intrigued... do tell more!", 
-            "pub_time": "2008-04-03 04:50:29", 
-            "twitter_id": 781934775, 
+            "text": "@joanna Agreed: totally bush-league.", 
+            "pub_time": "2008-04-14 15:08:23", 
+            "twitter_id": 789062404, 
             "user": 1
         }
     }, 
@@ -63,9 +63,9 @@
         "pk": 7, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "@jmcnally Nope...", 
-            "pub_time": "2008-04-01 15:21:36", 
-            "twitter_id": 780881352, 
+            "text": "@wishingline Nice! I scored 30...", 
+            "pub_time": "2008-04-14 14:19:25", 
+            "twitter_id": 789032823, 
             "user": 1
         }
     }, 
@@ -73,9 +73,9 @@
         "pk": 8, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "Best cereal ever: http:\/\/tinyurl.com\/3xypyy", 
-            "pub_time": "2008-04-01 04:27:05", 
-            "twitter_id": 780608974, 
+            "text": "I'm running in circles.", 
+            "pub_time": "2008-04-13 00:34:15", 
+            "twitter_id": 788116593, 
             "user": 1
         }
     }, 
@@ -83,9 +83,9 @@
         "pk": 9, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "Let's do this already...", 
-            "pub_time": "2008-03-26 02:01:35", 
-            "twitter_id": 777117403, 
+            "text": "@jmcnally &quot;even a girl&quot;... EEEEEEEEEWWWWWWWWWWWWW!", 
+            "pub_time": "2008-04-11 17:31:02", 
+            "twitter_id": 787465290, 
             "user": 1
         }
     }, 
@@ -93,9 +93,9 @@
         "pk": 10, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "@mathewi $weet! Congrats to you both!", 
-            "pub_time": "2008-03-26 02:01:17", 
-            "twitter_id": 777117282, 
+            "text": "@wishingline Blustery.", 
+            "pub_time": "2008-04-11 09:39:15", 
+            "twitter_id": 787174607, 
             "user": 1
         }
     }, 
@@ -103,9 +103,9 @@
         "pk": 11, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "Thank you, missus, for the lovely meal...", 
-            "pub_time": "2008-03-23 23:52:02", 
-            "twitter_id": 775969710, 
+            "text": "America is awesome.", 
+            "pub_time": "2008-04-10 23:54:10", 
+            "twitter_id": 786929498, 
             "user": 1
         }
     }, 
@@ -113,9 +113,9 @@
         "pk": 12, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "I wish this rain was chocolate.", 
-            "pub_time": "2008-03-19 01:56:15", 
-            "twitter_id": 773659527, 
+            "text": "Dear IT: People around here would like you more if you didn't choose to block Groove Salad or anything else Soma...", 
+            "pub_time": "2008-04-10 14:56:14", 
+            "twitter_id": 786657743, 
             "user": 1
         }
     }, 
@@ -123,9 +123,9 @@
         "pk": 13, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "@neilio Quality...", 
-            "pub_time": "2008-03-19 01:54:35", 
-            "twitter_id": 773658890, 
+            "text": "My Spanish is good enough to know that the design &amp; implementation here rocks: http:\/\/www.soitu.es\/", 
+            "pub_time": "2008-04-10 12:30:16", 
+            "twitter_id": 786569873, 
             "user": 1
         }
     }, 
@@ -133,9 +133,9 @@
         "pk": 14, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "Need new office desk. Where to buy? Suggestions?", 
-            "pub_time": "2008-03-06 01:44:35", 
-            "twitter_id": 767321268, 
+            "text": "@jmcnally Nice! I'll keep my fingers crossed...", 
+            "pub_time": "2008-04-09 20:10:42", 
+            "twitter_id": 786117867, 
             "user": 1
         }
     }, 
@@ -143,9 +143,9 @@
         "pk": 15, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "@neilio Enjoy her while you can :(", 
-            "pub_time": "2008-03-04 03:16:20", 
-            "twitter_id": 766345301, 
+            "text": "Your daily dose of awesome: http:\/\/tinyurl.com\/3yvwue", 
+            "pub_time": "2008-04-09 15:02:36", 
+            "twitter_id": 785956011, 
             "user": 1
         }
     }, 
@@ -153,9 +153,9 @@
         "pk": 16, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "Time to take a deep breath...", 
-            "pub_time": "2008-03-03 19:39:28", 
-            "twitter_id": 766182151, 
+            "text": "@mathewi Come take a peek!", 
+            "pub_time": "2008-04-07 17:29:17", 
+            "twitter_id": 784657504, 
             "user": 1
         }
     }, 
@@ -163,9 +163,9 @@
         "pk": 17, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "@wishingline Nice! Gonna do a housewarming?", 
-            "pub_time": "2008-02-29 16:16:03", 
-            "twitter_id": 764930371, 
+            "text": "Officially working on a pimped out 24&quot; iMac (@ the office)", 
+            "pub_time": "2008-04-07 16:48:18", 
+            "twitter_id": 784635722, 
             "user": 1
         }
     }, 
@@ -173,9 +173,9 @@
         "pk": 18, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "OK. Let's negotiate...", 
-            "pub_time": "2008-02-28 19:38:10", 
-            "twitter_id": 764597269, 
+            "text": "&lt;nerd&gt;This time tomorrow night I'll be an hour away from the BSG season 4 premiere!&lt;\/nerd&gt;", 
+            "pub_time": "2008-04-03 20:53:36", 
+            "twitter_id": 782500944, 
             "user": 1
         }
     }, 
@@ -183,9 +183,9 @@
         "pk": 19, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "@joanna so that's what i can expect?", 
-            "pub_time": "2008-02-27 01:03:35", 
-            "twitter_id": 763186752, 
+            "text": "stupid date formatting...", 
+            "pub_time": "2008-04-03 14:14:02", 
+            "twitter_id": 782304873, 
             "user": 1
         }
     }, 
@@ -193,9 +193,9 @@
         "pk": 20, 
         "model": "twitter.tweet", 
         "fields": {
-            "text": "I suppose it went well...", 
-            "pub_time": "2008-02-25 15:54:07", 
-            "twitter_id": 756189102, 
+            "text": "@jesselegg  Yeah, I did, thanks! Was late and I was being stupid...", 
+            "pub_time": "2008-04-03 09:40:44", 
+            "twitter_id": 782138520, 
             "user": 1
         }
     }, 
