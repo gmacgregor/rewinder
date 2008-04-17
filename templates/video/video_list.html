@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Videos{% endblock %}
+{% block content %}
+
+{% for video in object_list %}
+<h2><a href="{{ video.get_absolute_url }}">{{ video.title }}</a></h2>
+{% if video.youtube_small_image %}
+<a href="{{ video.get_absolute_url }}"><img src="{{ video.youtube_small_image }}" width="130" height="97" style="border: 1px solid #ddd; padding: 2px;"></a>
+{% endif %}
+<p>Rating: {{ video.rating }}</p>
+{% endfor %}
+
+{% endblock %}
