@@ -22,10 +22,6 @@ class TumblelogItem(models.Model):
         except ObjectDoesNotExist:
             return None
     
-    def pubdate_to_eastern(self):
-        pub_date = self.pub_date
-        pass
-    
     class Meta:
         ordering = ['-pub_date']
         unique_together = (('content_type', 'object_id'),)
