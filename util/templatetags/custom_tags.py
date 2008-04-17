@@ -71,9 +71,9 @@ def twitter_status(parser, token):
     return TwitterStatusNode(bits[2])
     
 
-@register.filter(name='with_links')
+@register.filter(name='twitter_links')
 @stringfilter
-def with_links(tweet):
+def twitter_links(tweet):
     '''
     Takes a twitter tweet and makes all @'s link to the @owner profile. Also creates links to URLs
     '''
