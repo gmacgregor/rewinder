@@ -7,7 +7,7 @@ video_dict = {
 }
 
 urlpatterns = patterns('django.views.generic.list_detail',
-    url(r'^$', 'object_list', dict(queryset=Bookmark.objects.all(), paginate_by=10), name='video_list'),
+    url(r'^$', 'object_list', dict(queryset=Video.objects.all(), paginate_by=10), name='video_list'),
 )
 
 urlpatterns = patterns('django.views.generic.date_based',
