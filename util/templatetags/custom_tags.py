@@ -87,6 +87,7 @@ def with_links(tweet):
             if owner.isalpha():
                 word = '<a href="http://twitter.com/%s" title="Go to %s\'s Twitter page">%s</a>' % (owner, owner, word)
         if reg.match(word):
-            word = '<a href="%s" title="Visit this link">%s</a>' % (word, word)
+            link = word
+            word = '<a href="%s" title="Visit this link">%s</a>' % (link, word)
         li.append(word)
     return ' '.join(li)
