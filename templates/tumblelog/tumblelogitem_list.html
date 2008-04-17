@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load custom_tags %}
 {% block content %}
 {% if is_paginated %}
     {% if has_next %}<a href="{% url tumblelog_list next %}">Next</a>{% endif %}
@@ -39,8 +39,7 @@
         {% endifequal %}
         {% ifequal item.content_type.name "tweet" %}
         <div class="tumbelog-entry tweet">
-            {% load custom_tags %}
-            <h2><a href="{% url tweets_home %}">Tweet</a>: {{ item.get_content_object.text|with_links }} <a href="{{ item.get_content_object.url }}">View</a></h2>
+            <h2><a href="{% url tweets_home %}">Tweet</a>: {{ item.get_content_object.text|twitter_links }} <a href="{{ item.get_content_object.url }}">View</a></h2>
         </div>
         {% endifequal %} 
     {% endfor %}
