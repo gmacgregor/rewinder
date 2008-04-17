@@ -1,6 +1,7 @@
 from django.db import models
 from django.dispatch import dispatcher
 from django.db.models import signals
+from rewinder.util.timeconverter import time_to_settings
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
 
@@ -15,6 +16,11 @@ class Tweet(models.Model):
     
     def url(self):
         return u'http://twitter.com/%s/statuses/%s' % (self.user.screen_name, self.twitter_id)
+    
+    def save(self):
+        if not self.id:
+            self.pub_time = time_to_settings(self.pub_time)
+        super(Tweet, self).save()
     
     class Meta:
         ordering = ('-pub_time',)
