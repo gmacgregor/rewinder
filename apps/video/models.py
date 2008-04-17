@@ -11,6 +11,8 @@ from rewinder.apps.generic.models import Source, Person
 from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
+EXTERNAL_VIDEO_WIDTH = 400
+EXTERNAL_VIDEO_HEIGHT = 300
 
 class Video(models.Model):
     #publication details
@@ -28,12 +30,12 @@ class Video(models.Model):
     enable_comments     = models.BooleanField(default=True)
     
     #meta
-    video_id            = models.CharField(u'Video ID', max_length=100, blank=True, help_text=u"The 'id' of the video. For example: http://youtube.com/watch?v=NakX-vtxYhI the 'id' is 'NakX-vtxYhI'. If this is a youtube.com video then it can be determined for you. Optional.")
+    video_id            = models.CharField(u'Video ID', max_length=100, null=True, blank=True, help_text=u"The 'id' of the video. For example: http://youtube.com/watch?v=NakX-vtxYhI the 'id' is 'NakX-vtxYhI'. Optional.")
     running_time        = models.CharField(max_length=10, blank=True, help_text=u'Optional.')
     nsfw                = models.BooleanField(u'NSFW?', help_text=u'Is this video Not Suitable For Work?')
     source              = models.ForeignKey(Source, help_text=u'Youtube, CBC, CNN etc...')
     url                 = models.URLField(u'URL', help_text=u'For example: http://youtube.com/watch?v=rTZ6oDgUzkU', verify_exists=False)
-    embed_code          = models.TextField(max_length=400, blank=True, help_text=u'Optional.')
+    embed_code          = models.TextField(max_length=700, blank=True, help_text=u'Optional.')
     rating              = models.CharField(max_length=20, choices=settings.RATING_CHOICES, blank=True, help_text=u'Totally arbitray and completely optional.')
     
     #related items
@@ -72,14 +74,55 @@ class Video(models.Model):
         videos = Video.objects.all().filter(tags__icontains='%s') % self.tags
         return videos
     
+    def is_youtube(self):
+        if self.url.find("youtube.com") != -1:
+            return True
+        else:
+            return False
+                
+    def is_vimeo(self):
+        if self.url.find("vimeo.com") != -1:
+            return True
+        else:
+            return False
+    
+    def is_college_humor(self):
+        if self.url.find("collegehumor.com") != -1:
+            return True
+        else:
+            return False
+    
+    def get_video_id(self):
+        if self.is_youtube():
+            params = self.url.split("v=")[1]
+            if params.find("&") != -1:
+                return params.split("&")[0]
+            else:
+                return params
+        elif self.is_vimeo():
+            return self.url.split("/")[3]
+        elif self.is_college_humor():
+            return self.url.split(":")[2]
+        else:
+            return None
+    
+    def get_embed_code(self):
+        if self.is_youtube():
+            embed = '<object width="%s" height="%s"><param name="movie" value="http://www.youtube.com/v/%s&hl=en&color1=0x3a3a3a&color2=0x999999&border=1"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/%s&hl=en&color1=0x3a3a3a&color2=0x999999&border=0" type="application/x-shockwave-flash" wmode="transparent" width="%s" height="%s"></embed></object>' % (EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT, self.video_id, self.video_id, EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT)
+        elif self.is_vimeo():
+            embed = '<object type="application/x-shockwave-flash" width="%s" height="%s" data="http://www.vimeo.com/moogaloop.swf?clip_id=%s&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=1a1819"><param name="quality" value="best" /><param name="allowfullscreen" value="true" /><param name="scale" value="showAll" /><param name="movie" value="http://www.vimeo.com/moogaloop.swf?clip_id=%s&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=1a1819" /></object>' % (EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT, self.video_id, self.video_id)
+        elif self.is_college_humor():
+            embed = '<object type="application/x-shockwave-flash" data="http://www.collegehumor.com/moogaloop/moogaloop.swf?clip_id=%s&fullscreen=1" width="%s" height="%s" ><param name="allowfullscreen" value="true" /><param name="movie" quality="best" value="http://www.collegehumor.com/moogaloop/moogaloop.swf?clip_id=%s&fullscreen=1" /></object>' % (self.video_id, EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT, self.video_id)
+        else:
+            embed = None
+        return embed
+    
     def save(self):
         if not self.id:
-            if self.source.title.lower().count("youtube"):
-                params = self.url.split("v=")[1]
-                if params.find("&"):
-                    self.video_id = params.split("&")[0]
-                else:
-                    self.video_id = params[0]
+            print 'getting id...'
+            self.video_id = self.get_video_id()
+            if self.video_id:
+                self.embed_code = self.get_embed_code()
         if self.description:
                 self.html_description = formatter(self.description)
         if self.commentary:
