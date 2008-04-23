@@ -78,16 +78,15 @@ def twitter_links(tweet):
     Takes a twitter tweet and makes all @'s link to the @owner profile. Also creates links to URLs
     '''
     import re
-    reg = re.compile('(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?')
+    url_re = re.compile('(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?')
+    tweeter_re = re.compile('[A-Za-z0-9]+')
     words = tweet.split()
     li = []
     for word in words:
-        if word.find('@') != -1:
-            owner = word.replace('@','')
-            if owner.isalpha():
-                word = '<a href="http://twitter.com/%s" title="Go to %s\'s Twitter page">%s</a>' % (owner, owner, word)
-        if reg.match(word):
-            link = word
-            word = '<a href="%s" title="Visit this link">%s</a>' % (link, word)
+        if word.startswith('@'):
+            owner = re.search(tweeter_re, word).group(0)
+            word = '<a href="http://twitter.com/%s/" title="Go to %s\'s Twitter page">%s</a>' % (owner, owner, word)
+        if url_re.match(word):
+            word = '<a href="%s" title="Visit this link">%s</a>' % (word, word)
         li.append(word)
     return ' '.join(li)
