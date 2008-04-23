@@ -124,7 +124,7 @@ class Point(models.Model):
     postal_code         = models.CharField(max_length=10, blank=True, help_text=u'Optional.')
     
     def __unicode__(self):
-      return u'%s' % self.address
+      return u'%s - %s' % (self.city, self.address)
     
     class Meta:
         verbose_name = ('point')
