@@ -114,24 +114,19 @@ class Article(models.Model):
     
     #images
     lead_image          = models.ImageField(upload_to='img/articles/lead/%Y%m%d/', blank=True)
-    lead_caption        = models.CharField(max_length=255, blank=True)
+    lead_caption        = models.CharField(max_length=255, blank=True, help_text=u'Use Markdown syntax for HTML formatting.')
+    html_lead_caption   = models.CharField(max_length=255, blank=True, null=True)
     sidebar_image       = models.ImageField(upload_to='img/articles/sidebar/%Y%m%d/', blank=True)
-    sidebar_caption     = models.CharField(max_length=255, blank=True)
+    sidebar_caption     = models.CharField(max_length=255, blank=True, help_text=u'Use Markdown syntax for HTML formatting.')
+    html_sidebar_caption= models.CharField(max_length=255, blank=True, null=True)
     inline_image        = models.ImageField(upload_to='img/articles/inline/%Y%m%d/', blank=True)
-    inline_caption      = models.CharField(max_length=255, blank=True)
+    inline_caption      = models.CharField(max_length=255, blank=True, help_text=u'Use Markdown syntax for HTML formatting.')
+    html_inline_caption = models.CharField(max_length=255, blank=True, null=True)
     
     def __unicode__(self):
         return u'%s' % self.headline
     
     def save(self):
-        '''
-        A few things happening here:
-            Format teaser, summary, body and pull_quote properly
-            
-            If this is article has a PUBLISHED_STATUS, make sure it's added to the tumblelog,
-            otherwise, try to remove it from the tumblelog (status possibly changed 
-            from PUBLISHED_STATUS to DRAFT_STATUS)
-        '''
         if self.teaser:
             self.html_teaser = formatter(self.teaser)
         if self.summary:
@@ -140,6 +135,12 @@ class Article(models.Model):
             self.html_body = formatter(self.body)
         if self.pull_quote:
             self.html_pull_quote = formatter(self.pull_quote)
+        if self.lead_caption:
+            self.html_lead_caption = formatter(self.lead_caption)
+        if self.sidebar_caption:
+            self.html_sidebar_caption = formatter(self.sidebar_caption)
+        if self.inline_caption:
+            self.html_inline_caption = formatter(self.inline_caption)
         super(Article, self).save()
     
     @models.permalink
