@@ -18,8 +18,7 @@ class Video(models.Model):
     #publication details
     created_on          = models.DateTimeField(auto_now_add=True)
     last_modified       = models.DateTimeField(auto_now=True)
-    pub_date            = models.DateTimeField(u'Publication Date', auto_now=True)
-    original_date       = models.DateTimeField(blank=True, help_text=u'The original creation date of the video. Optional, but preferred.')
+    pub_date            = models.DateTimeField(u'Publication Date')
     title               = models.CharField(max_length=255, unique_for_date='pub_date')
     slug                = models.SlugField(max_length=255, prepopulate_from=('title',), help_text=u'Automatically built from video title.', unique=True)
     description         = models.TextField(blank=True, help_text=u'Use Markdown syntax for HTML formatting. Optional.')
@@ -30,12 +29,12 @@ class Video(models.Model):
     enable_comments     = models.BooleanField(default=True)
     
     #meta
-    video_id            = models.CharField(u'Video ID', max_length=100, null=True, blank=True, help_text=u"The 'id' of the video. For example: http://youtube.com/watch?v=NakX-vtxYhI the 'id' is 'NakX-vtxYhI'. Optional.")
+    video_id            = models.CharField(u'Video ID', max_length=100, null=True, blank=True, help_text=u"The 'id' of the video. For example: http://youtube.com/watch?v=NakX-vtxYhI the 'id' is 'NakX-vtxYhI'. The system will make an attempt to determine this if not supplied.")
     running_time        = models.CharField(max_length=10, blank=True, help_text=u'Optional.')
     nsfw                = models.BooleanField(u'NSFW?', help_text=u'Is this video Not Suitable For Work?')
     source              = models.ForeignKey(Source, help_text=u'Youtube, CBC, CNN etc...')
     url                 = models.URLField(u'URL', help_text=u'For example: http://youtube.com/watch?v=rTZ6oDgUzkU', verify_exists=False)
-    embed_code          = models.TextField(max_length=700, blank=True, help_text=u'Optional.')
+    embed_code          = models.TextField(max_length=700, blank=True, help_text=u'The system will make an attempt to determine this if not supplied.')
     rating              = models.CharField(max_length=20, choices=settings.RATING_CHOICES, blank=True, help_text=u'Totally arbitray and completely optional.')
     
     #related items
@@ -59,13 +58,13 @@ class Video(models.Model):
         })
     
     def youtube_small_image(self):
-        if self.url.find('youtube') and self.video_id:
+        if self.is_type('youtube.com') and self.video_id:
             return "http://i.ytimg.com/vi/%s/default.jpg" % self.video_id
         else:
             return None
     
     def youtube_small_image(self):
-        if self.url.find('youtube') and self.video_id:
+        if self.is_type('youtube.com') and self.video_id:
             return "http://i.ytimg.com/vi/%s/default.jpg" % self.video_id
         else:
             return None
@@ -74,44 +73,32 @@ class Video(models.Model):
         videos = Video.objects.all().filter(tags__icontains='%s') % self.tags
         return videos
     
-    def is_youtube(self):
-        if self.url.find("youtube.com") != -1:
-            return True
-        else:
-            return False
-                
-    def is_vimeo(self):
-        if self.url.find("vimeo.com") != -1:
-            return True
-        else:
-            return False
-    
-    def is_college_humor(self):
-        if self.url.find("collegehumor.com") != -1:
+    def is_type(self, type):
+        if self.url.find(type) != -1:
             return True
         else:
             return False
     
     def get_video_id(self):
-        if self.is_youtube():
+        if self.is_type('youtube.com'):
             params = self.url.split("v=")[1]
             if params.find("&") != -1:
                 return params.split("&")[0]
             else:
                 return params
-        elif self.is_vimeo():
+        elif self.is_type('vimeo.com'):
             return self.url.split("/")[3]
-        elif self.is_college_humor():
+        elif self.is_type('collegehumor.com'):
             return self.url.split(":")[2]
         else:
             return None
     
     def get_embed_code(self):
-        if self.is_youtube():
+        if self.is_type('youtube.com'):
             embed = '<object width="%s" height="%s"><param name="movie" value="http://www.youtube.com/v/%s&hl=en&color1=0x3a3a3a&color2=0x999999&border=1"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/%s&hl=en&color1=0x3a3a3a&color2=0x999999&border=0" type="application/x-shockwave-flash" wmode="transparent" width="%s" height="%s"></embed></object>' % (EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT, self.video_id, self.video_id, EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT)
-        elif self.is_vimeo():
+        elif self.is_type('vimeo.com'):
             embed = '<object type="application/x-shockwave-flash" width="%s" height="%s" data="http://www.vimeo.com/moogaloop.swf?clip_id=%s&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=1a1819"><param name="quality" value="best" /><param name="allowfullscreen" value="true" /><param name="scale" value="showAll" /><param name="movie" value="http://www.vimeo.com/moogaloop.swf?clip_id=%s&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=1a1819" /></object>' % (EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT, self.video_id, self.video_id)
-        elif self.is_college_humor():
+        elif self.is_type('collegehumor.com'):
             embed = '<object type="application/x-shockwave-flash" data="http://www.collegehumor.com/moogaloop/moogaloop.swf?clip_id=%s&fullscreen=1" width="%s" height="%s" ><param name="allowfullscreen" value="true" /><param name="movie" quality="best" value="http://www.collegehumor.com/moogaloop/moogaloop.swf?clip_id=%s&fullscreen=1" /></object>' % (self.video_id, EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT, self.video_id)
         else:
             embed = None
@@ -119,10 +106,9 @@ class Video(models.Model):
     
     def save(self):
         if not self.id:
-            print 'getting id...'
             self.video_id = self.get_video_id()
-            if self.video_id:
-                self.embed_code = self.get_embed_code()
+        if not self.embed_code:
+            self.embed_code = self.get_embed_code()
         if self.description:
                 self.html_description = formatter(self.description)
         if self.commentary:
@@ -133,12 +119,12 @@ class Video(models.Model):
         date_hierarchy = 'pub_date'
         fields = (
             ('Upload your own', {'fields': ('path',), 'classes': 'collapse'}),
-            ('Publication details', {'fields': ('pub_date', 'original_date', 'title', 'slug', 'description', 'commentary', 'tags', 'enable_comments',)}),
+            ('Publication details', {'fields': ('pub_date', 'title', 'slug', 'description', 'commentary', 'tags', 'enable_comments',)}),
             ('Details', {'fields': ('url', 'video_id', 'source', 'embed_code', 'running_time', 'rating', 'nsfw',)}),
             ('Related Material', {'fields': ('videos', 'people', 'places',), 'classes': 'collapse'}),
         )
         
-        list_display    = ('title', 'url', 'source', 'enable_comments', 'running_time',)
+        list_display    = ('title', 'url', 'source', 'pub_date', 'enable_comments',)
         search_fields   = ['title', 'description', 'source', 'people', 'url', 'tags']
         date_hierarchy  = 'created_on'
 
