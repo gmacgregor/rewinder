@@ -16,4 +16,28 @@
 <p><strong>Related tags:</strong>{% for tag in tag_list %} <a href="{% url tag_detail tag %}" title="View all items tagged '{{ tag }}'">{{ tag }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
 {% endif %}
 
+{% load threadedcommentstags %}
+{% get_free_threaded_comment_tree for object as tree %}
+{% for comment in tree %}
+<div class="comment" id="c{{ comment.id }}">
+{% if comment.website %}
+<p><a href="{{ comment.website }}">{{ comment.name }}</a></p>
+{% else %}
+<p>{{ comment.name }}</p>
+{% endif %}
+{% load generic_markup %}
+{% autoescape off %}
+{{ comment|apply_markup }}
+{% endautoescape %}
+</div>
+{% endfor %}
+<p>Reply to Original:</p>
+<form method="POST" action="{% get_free_comment_url object %}">
+<p><label for="id_name">Name:</label> <input id="id_name" type="text" name="name" maxlength="128" /></p>
+<p><label for="id_website">Site:</label> <input id="id_website" type="text" name="website" maxlength="200" /></p>
+<p><label for="id_email">E-mail address:</label> <input id="id_email" type="text" name="email" maxlength="75" /></p>
+<p><label for="id_comment">Comment:</label> <textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></p>
+<p><input type="submit" value="Submit Comment" /></p>
+</form>
+
 {% endblock %}
