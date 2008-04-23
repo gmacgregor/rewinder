@@ -81,7 +81,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
-    'django.contrib.comments',
+    #'django.contrib.comments',
+    'threadedcomments',
+    #template utils -- ie. using markdown for presentation
+    'template_utils',
     'tagging',
     'typogrify',
     'comment_utils',
@@ -123,8 +126,6 @@ FLICKR_API_SECRET = '072822dd97710515'
 
 YOUTUBE_API_KEY = 'AI39si7dE0uopXa7u6wVFzAQZF0_B3NOtztaYqK9pLzSafZOu7TScU-g2dvLmaMEmgpvocgoCGnZQUBUGMjr-4MnxfulgA7KWA'
 YOUTUBE_DEV_ID = 'MlRUm9Gt1ro'
-YOUTUBE_EMBED_WIDTH = '300'
-YOUTUBE_EMBED_HEIGHT = '250'
 
 DIGG_AUTH = 'http://www.example.com/digg'
 
