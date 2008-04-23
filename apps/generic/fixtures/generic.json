@@ -1,0 +1,51 @@
+[
+    {
+        "pk": 1, 
+        "model": "generic.source", 
+        "fields": {
+            "category": 1, 
+            "description": "", 
+            "title": "youtube.com", 
+            "url": "http:\/\/youtube.com", 
+            "created_on": "2008-04-23 00:09:34", 
+            "last_modified": "2008-04-23 00:09:34", 
+            "slug": "youtube"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "generic.source", 
+        "fields": {
+            "category": 1, 
+            "description": "", 
+            "title": "vimeo.com", 
+            "url": "http:\/\/www.vimeo.com", 
+            "created_on": "2008-04-23 00:12:41", 
+            "last_modified": "2008-04-23 00:12:41", 
+            "slug": "vimeo"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "generic.source", 
+        "fields": {
+            "category": 1, 
+            "description": "", 
+            "title": "collegehumor.com", 
+            "url": "http:\/\/www.collegehumor.com", 
+            "created_on": "2008-04-23 00:15:06", 
+            "last_modified": "2008-04-23 00:15:06", 
+            "slug": "collegehumor"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "generic.sourcecategory", 
+        "fields": {
+            "created_on": "2008-04-23 00:09:32", 
+            "last_modified": "2008-04-23 00:09:32", 
+            "slug": "video", 
+            "title": "Video"
+        }
+    }
+]
