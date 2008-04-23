@@ -2,7 +2,6 @@ from django.conf.urls.defaults import *
 from django.conf import settings
 from rewinder.apps.tumblelog.models import TumblelogItem
 
-
 tumblelog_dict = {
     'queryset': TumblelogItem.objects.all().order_by('-pub_date')
 }
@@ -22,7 +21,8 @@ urlpatterns += patterns('',
     (r'^photos/', include('rewinder.apps.flickr.urls')),
     (r'^videos/', include('rewinder.apps.video.urls')),
     (r'^words/', include('rewinder.apps.blog.urls')),
-    url(r'^tag/(?P<tag>[-\w]+)/$', 'tag', name='tag_detail'),
+    url(r'^tags/(?P<tag>[-\w]+)/$', 'rewinder.apps.blog.views.tag_detail', name='tag_detail'),
+    url(r'^tags/$', 'rewinder.apps.blog.views.all_tags', name='tags_list'),
 )
 
 if settings.DEBUG:
