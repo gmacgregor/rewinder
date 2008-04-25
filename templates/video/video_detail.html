@@ -1,13 +1,15 @@
 {% extends "base.html" %}
-{% block title %}{{ video.title }}{% endblock %}
+{% block title %}{{ object.title }}{% endblock %}
 {% block content %}
 
-<h2>{{ video.title }}</h2>
-<p><a href="{{ video.url }}">View it on {{ video.source }}</a></p>
-<p>Rating: {{ video.rating }}</p>
-{% if video.embed_code %}
-    {% autoescape off %}{{ video.embed_code }}{% endautoescape %}
+<h2>{{ object.title }}</h2>
+<p><a href="{{ object.url }}">View it on {{ object.source }}</a></p>
+<p>Rating: {{ object.rating }}</p>
+{% if object.embed_code %}
+    {% autoescape off %}{{ object.embed_code }}{% endautoescape %}
 {% endif %}
-<p>{{ video.description }}</p>
+<p>{{ object.description }}</p>
+
+{% include "threadedcomments/comments_list.html" %}
 
 {% endblock %}
