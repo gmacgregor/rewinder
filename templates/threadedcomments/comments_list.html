@@ -1,0 +1,26 @@
+
+{% load threadedcommentstags %}
+{% load gravatar %}
+{% get_free_threaded_comment_tree for object as tree %}
+{% get_gravatar_url for comment.email as gravatar %}
+
+{% if tree %}
+<ol>
+{% for comment in tree %}
+<li>
+<div class="comment" id="c{{ comment.id }}">
+<p>{% if comment.website %}<a href="{{ comment.website }}">{% endif %}<img src="{{ comment.email|gravatar }}" alt="Gravatar for {{ comment.name }}" />{% if comment.website %}</a>{% endif %}{% if comment.website %}<a href="{{ comment.website }}">{% endif %}{{ comment.name }}{% if comment.website %}</a>{% endif %}</p>
+{% auto_transform_markup comment %}
+</div>
+</li>
+{% endfor %}
+</ol>
+{% else %}
+<p>Be the first to post a comment!</p>
+{% endif %}
+
+{% if object.enable_comments %}
+    {% include "threadedcomments/freeform.html" %}
+{% else %}
+<p>Comments are closed.</p>
+{% endif %}
