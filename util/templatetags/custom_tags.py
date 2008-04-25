@@ -74,9 +74,9 @@ def twitter_status(parser, token):
 @register.filter(name='twitter_links')
 @stringfilter
 def twitter_links(tweet):
-    '''
+    """
     Takes a twitter tweet and makes all @'s link to the @owner profile. Also creates links to URLs
-    '''
+    """
     import re
     url_re = re.compile('(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?')
     tweeter_re = re.compile('[A-Za-z0-9]+')
@@ -90,3 +90,15 @@ def twitter_links(tweet):
             word = '<a href="%s" title="Visit this link">%s</a>' % (word, word)
         li.append(word)
     return ' '.join(li)
+
+@register.tag(name='tag_percentage')
+def tag_percentage(tag):
+    """
+    Calcualtes the frequency of use for a given tag based on all tags
+    """
+    from tagging.models import Tag
+    from rewinder.apps.tumblelog.models import TumblelogItem
+    total_items = TumblelogItem.all().count()
+    total_tags = Tag.objects.all().count()
+    count_for_tag = tag.items.count()
+    pass
