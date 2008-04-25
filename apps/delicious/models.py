@@ -35,10 +35,24 @@ class Bookmark(models.Model):
         })
     
     def save(self):
+        """
+        If this link is being saved for the first time (ie. imported from del.icou.us):
+            1. create self.slug based on self.description
+            2. remove any tags that contain the characters: :+./&#
+            3. check if post_elsewhere is true, and if so, attempt to post to del.icio.us
+        """
         if not self.id:
+            import re
             from django.template.defaultfilters import slugify
             self.slug = slugify(self.description)
             self.saved_date = time_to_settings(self.saved_date)
+            tags_re = re.compile('[\:|\+|\&|\/|\#|\.]+')
+            tags = self.tags.split()
+            new_tags = []
+            for tag in tags:
+                if not tags_re.search(tag):
+                    new_tags.append(tag)
+            self.tags = ' '.join(new_tags)
             if self.post_elsewhere:
                 import pydelicious
                 try:
