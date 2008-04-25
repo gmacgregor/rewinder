@@ -1,5 +1,4 @@
-from django.shortcuts import get_object_or_404, render_to_response
-from django.views.generic.list_detail import object_list
+from django.shortcuts import render_to_response
 from tagging.models import Tag, TaggedItem
 
 from rewinder.apps.blog.models import Article
@@ -8,9 +7,17 @@ from rewinder.apps.video.models import Video
 from rewinder.apps.flickr.models import Photo
 
 def all_tags(request):
-    tags = Tag.objects.all().exclude(name__icontains='for:')
-    return render_to_response('tags_list.html', {'tags': tags})
-
+    all_tags = Tag.objects.all()
+    count = all_tags.count()
+    #tags = {}
+    #for tag in all_tags:
+    #    tags[tag] = tag.items.count()
+    #items = tags.items()
+    #items = [(v, k) for (k, v) in items]
+    #items.sort()
+    #items.reverse()
+    return render_to_response('tag_list.html', {'tags': all_tags, 'count': count})
+    
 def tag_detail(request, tag):
     articles = TaggedItem.objects.get_by_model(Article, tag)
     links = TaggedItem.objects.get_by_model(Bookmark, tag)
@@ -24,4 +31,3 @@ def tag_detail(request, tag):
         'photos': photos,
     }
     return render_to_response('tag_detail.html', tag_dict)
-    
