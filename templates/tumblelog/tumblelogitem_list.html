@@ -25,7 +25,7 @@
         {% endifequal %}
         {% ifequal item.content_type.name "video" %}
         <div class="tumbelog-entry video">
-            <h2><a href="{% url videos_home %}">Video</a>: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.title }}</a></h2>
+            <h2><a href="{% url video_list %}">Video</a>: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.title }}</a></h2>
             {% if item.get_content_object.youtube_small_image %}
             <img src="{{ item.get_content_object.youtube_small_image }}" width="130" height="97" style="border: 1px solid #ddd; padding: 2px;">
             {% endif %}
