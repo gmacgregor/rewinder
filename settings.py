@@ -103,9 +103,9 @@ INSTALLED_APPS = (
 #http://code.google.com/p/django-template-utils/
 MARKUP_FILTER = ('markdown', {})
 
-from threadedcomments.models import MARKDOWN, DEFAULT_MAX_COMMENT_LENGTH
-DEFAULT_MARKUP = MARKDOWN
+DEFAULT_MARKUP = 1
 DEFAULT_MAX_COMMENT_LENGTH = '2000'
+DEFAULT_MAX_COMMENT_DEPTH = '5'
 
 GRAVATAR_DEFAULT_IMG = 'http://up1.vox.com/6a00c2251e54f18fdb00c2251f46818e1d-50si'
 GRAVATAR_SIZE = 50
