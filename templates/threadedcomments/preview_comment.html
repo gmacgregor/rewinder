@@ -1,5 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Preview your comment{% endblock %}
 {% load threadedcommentstags %}
 
+{% block content %}
 {% if comment %}
 {% load gravatar %}
 {% get_gravatar_url for comment.email as gravatar %}
@@ -13,14 +16,31 @@
 {% endif %}
 
 {% if form.errors %}
-<p>Slow down, Tiger! There was an error with your comment submission...</p>
+<p>Slow down, Tiger!</p>
+<ul class="errorlist">
+{% for error in form.errors %}
+    {% ifequal error "name" %}
+    <li>Your name is required</li>
+    {% endifequal %}
+    {% ifequal error "comment" %}
+    <li>A comment is required (duh!)</li>
+    {% endifequal %}
+    {% ifequal error "website" %}
+    <li>You need to format your website url like: http://www.example.com</li>
+    {% endifequal %}
+    {% ifequal error "email" %}
+    <li>The format of your email address is invalid</li>
+    {% endifequal %}
+{% endfor %}
+</ul>
 {% endif %}
-<form method="post" action="">
-<p>{{ form.name.label_tag }}{{ form.name }}{% if form.name.errors %}{{ form.name.errors }}{% endif %}</p>
-<p>{{ form.email.label_tag }}{{ form.email }}{% if form.email.errors %}{{ form.email.errors }}{% endif %}</p>
-<p>{{ form.website.label_tag }}{{ form.website }}{% if form.website.errors %}{{ form.website.errors }}{% endif %}</p>
-<p>{{ form.comment.label_tag }}{{ form.comment }}{% if form.comment.errors %}{{ form.comment.errors }}{% endif %}</p>
-<input type="submit" name="preview" value="Preview" />
-<input type="submit" name="post" value="Post" />
-<input type="hidden" name="next" value="{{ next }}" />
+<form method="post" action="" id="comment-form">
+    <p><label for="id_comment">Comment</label>{{ form.comment }}</p>
+    <p><label for="id_name">Name</label>{{ form.name }}</p>
+    <p><label for="id_email">Email</label>{{ form.email }}</p>
+    <p><label for="id_website">Website</label>{{ form.website }}</p>
+    <input type="submit" name="preview" value="Preview" />
+    <input type="submit" name="post" value="Post" />
+    <input type="hidden" name="next" value="{{ next }}" />
 </form>
+{% endblock %}
