@@ -167,10 +167,9 @@ class FlickrSyncr:
             photo_result = self.flickr.photos_getInfo(photo_id = photo['id'])
             photo_list.append(self._syncPhoto(photo_result))
         return photo_list
-
+    
     def syncPhoto(self, photo_id, refresh=False):
         """Synchronize a single flickr photo with Django ORM.
-
         Required Arguments
           photo_id: A flickr photo_id
         Optional Arguments
@@ -179,25 +178,25 @@ class FlickrSyncr:
         photo_result = self.flickr.photos_getInfo(photo_id = photo_id)
         photo = self._syncPhoto(photo_result, refresh=refresh)
         return photo
-
+    
     def syncAllPublic(self, username):
-        """Synchronize all of a flickr user's photos with Django.
-        WARNING: This could take a while!
-
-        Required arguments
-          username: a flickr username as a string
-        """
-        nsid = self.user2nsid(username)
-        count = int(self.flickr.people_getInfo(user_id=nsid).person[0].photos[0].count[0].elementText)
-        pages = int(math.ceil(count / 500))
-
-        for page in range(1, pages + 1):
-            result = self.flickr.people_getPublicPhotos(user_id=nsid, per_page=500, page=page)
-            self._syncPhotoXMLList(result.photos[0].photo)
+            """Synchronize all of a flickr user's photos with Django.
+            WARNING: This could take a while!
             
+            Required arguments
+              username: a flickr username as a string
+            """
+            nsid = self.user2nsid(username)
+            count = int(self.flickr.people_getInfo(user_id=nsid).person[0].photos[0].count[0].text)
+            pages = int(math.ceil(count / 500))
+            
+            for page in range(1, pages + 1):
+                result = self.flickr.people_getPublicPhotos(user_id=nsid, per_page=500, page=page)
+                self._syncPhotoXMLList(result.photos[0].photo)
+    
     def syncRecentPhotos(self, username, days=1):
         """Synchronize recent public photos from a flickr user.
-
+        
         Required arguments
           username: a flickr username as a string
         Optional arguments
@@ -214,7 +213,7 @@ class FlickrSyncr:
         for page in range(1, int(page_count)+1):
             photo_list = self._syncPhotoXMLList(result.photos[0].photo)
             result = self.flickr.photos_search(user_id=nsid, page=page+1, per_page=500, min_upload_date=timestamp)
-
+    
     def syncPublicFavorites(self, username):
         """Synchronize a flickr user's public favorites.
 
