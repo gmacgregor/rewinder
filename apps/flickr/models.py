@@ -4,7 +4,6 @@ from django.dispatch import dispatcher
 from django.db.models import signals
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
-
 FLICKR_LICENSES = (
     ('0', 'All Rights Reserved'),
     ('1', 'Attribution-NonCommercial-ShareAlike License'),
@@ -20,6 +19,7 @@ class Photo(models.Model):
     owner               = models.CharField(max_length=50)
     owner_nsid          = models.CharField(max_length=50)
     title               = models.CharField(max_length=200)
+    slug                = models.SlugField()
     description         = models.CharField(max_length=250, blank=True)
     taken_date          = models.DateTimeField()
     photopage_url       = models.URLField()
@@ -51,13 +51,24 @@ class Photo(models.Model):
     @models.permalink
     def get_absolute_url(self):
        return ('photo_detail', (), {
-            'object_id': self.id,
             'year': self.taken_date.year,
             'month': str(self.taken_date.month).zfill(2),
             'day': str(self.taken_date.day).zfill(2),
+            'object_id': self.id,
         })
     
     def save(self):
+        """
+        Assign photo.slug to a slugified version of the photo title.
+        If the title is empty, slugify to "untitled-photo.id"
+        """
+        if not self.id:
+            from django.template.defaultfilters import slugify
+            if not self.title:
+                self.title = "Untitled"
+                self.slug = "untitled-%s" % self.flickr_id
+            else:
+                self.slug = slugify(self.title)
         super(Photo, self).save()
     
     class Meta:
