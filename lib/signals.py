@@ -55,6 +55,3 @@ def kill_tumblelog_item(sender, instance):
         item.delete()
     except ObjectDoesNotExist:
         pass
-
-#for model in settings.TUMBLELOG_MODELS:
-#    dispatcher.connect(create_tumblelog_item, sender=get_model(*model.split('.')), signal=signals.post_save)
