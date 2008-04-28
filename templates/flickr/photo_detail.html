@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block content %}
+
+<h2>{{ object.title }}</h2>
+<img src="{{ object.medium_url }}" alt="{{ object.title }}">
+{% if object.description %}
+{% autoescape off %}
+<p>{{ object.description }}</p>
+{% endautoescape %}
+{% endif %}
+<p>Photo Details:</p>
+<dl>
+    <dt>Taken on</dt>
+    <dd>{{ object.taken_date|date:"F d Y \a\t h:i a" }}</dd>
+    <dt>Camera model</dt>
+    <dd>{{ object.exif_model }}</dd>
+    <dt>Exposure</dt>
+    <dd>{{ object.exif_exposure }}</dd>
+    <dt>Aperture</dt>
+    <dd>{{ object.exif_aperture }}</dd>
+    <dt>Focal length</dt>
+    <dd>{{ object.exif_focal_length }}</dd>
+</dl>
+
+{% load tagging_tags %}
+{% tags_for_object object as tag_list %}
+<p><strong>Related tags:</strong> {% for tag in tag_list %}<a href="{% url tag_detail tag %}" title="View all items tagged '{{ tag }}'">{{ tag }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+
+{% include "threadedcomments/comments_list.html" %}
+
+{% endblock %}
