@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ object.title }}{% endblock %}
+{% block title %}photos: {{ object.title }}{% endblock %}
 
 {% block content %}
 
@@ -10,6 +10,8 @@
 <p>{{ object.description }}</p>
 {% endautoescape %}
 {% endif %}
+
+{% if object.exif_model %}
 <p>Photo Details:</p>
 <dl>
     <dt>Taken on</dt>
@@ -23,6 +25,7 @@
     <dt>Focal length</dt>
     <dd>{{ object.exif_focal_length }}</dd>
 </dl>
+{% endif %}
 
 {% load tagging_tags %}
 {% tags_for_object object as tag_list %}
