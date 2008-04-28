@@ -5,5 +5,4 @@ api_secret = '072822dd97710515'
 
 def run():
     f = FlickrSyncr(api_key, api_secret)
-    #f.syncAllPublic('sixminutes')
-    f.syncRecentPhotos('sixminutes', days=1)
+    f.syncRecentPhotos('sixminutes', days=2000)
