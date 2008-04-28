@@ -35,7 +35,7 @@
 <h3><a href="{% url photo_list %}">Photos</h3>
 <ul>
 {% for photo in photos %}
-    <li><a href="{{ photo.get_absolute_url }}"><img src="{{ photo.small_url }}" alt="{{ photo }}" /></a></li>
+    <li><a href="{{ photo.get_absolute_url }}"><img src="{{ photo.square_url }}" width="75" height="75" alt="{{ photo }}" /></a></li>
 {% endfor %}
 </ul>
 {% endif %}
