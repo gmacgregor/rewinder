@@ -198,7 +198,87 @@
             "twitter_id": 786657743, 
             "user": 1
         }
+    },
+    {
+        "pk": 21, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "My Spanish is good enough to know that the design &amp; implementation here rocks: http:\/\/www.soitu.es\/", 
+            "pub_time": "2008-04-10 12:30:16", 
+            "twitter_id": 786569873, 
+            "user": 1
+        }
     }, 
+    {
+        "pk": 22, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@jmcnally Nice! I'll keep my fingers crossed...", 
+            "pub_time": "2008-04-09 20:10:42", 
+            "twitter_id": 786117867, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Your daily dose of awesome: http:\/\/tinyurl.com\/3yvwue", 
+            "pub_time": "2008-04-09 15:02:36", 
+            "twitter_id": 785956011, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@mathewi Come take a peek!", 
+            "pub_time": "2008-04-07 17:29:17", 
+            "twitter_id": 784657504, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Officially working on a pimped out 24&quot; iMac (@ the office)", 
+            "pub_time": "2008-04-07 16:48:18", 
+            "twitter_id": 784635722, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "&lt;nerd&gt;This time tomorrow night I'll be an hour away from the BSG season 4 premiere!&lt;\/nerd&gt;", 
+            "pub_time": "2008-04-03 20:53:36", 
+            "twitter_id": 782500944, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "stupid date formatting...", 
+            "pub_time": "2008-04-03 14:14:02", 
+            "twitter_id": 782304873, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@jesselegg  Yeah, I did, thanks! Was late and I was being stupid...", 
+            "pub_time": "2008-04-03 09:40:44", 
+            "twitter_id": 782138520, 
+            "user": 1
+        }
+    },
     {
         "pk": 1, 
         "model": "twitter.twitteruser", 
