@@ -1,3 +1,4 @@
+from django.template import RequestContext
 from django.shortcuts import render_to_response
 from tagging.models import Tag, TaggedItem
 
@@ -16,7 +17,7 @@ def all_tags(request):
     #items = [(v, k) for (k, v) in items]
     #items.sort()
     #items.reverse()
-    return render_to_response('tag_list.html', {'tags': all_tags, 'count': count})
+    return render_to_response('tag_list.html', {'tags': all_tags, 'count': count}, context_instance=RequestContext(request))
     
 def tag_detail(request, tag):
     articles = TaggedItem.objects.get_by_model(Article, tag)
@@ -30,4 +31,4 @@ def tag_detail(request, tag):
         'videos': videos,
         'photos': photos,
     }
-    return render_to_response('tag_detail.html', tag_dict)
+    return render_to_response('tag_detail.html', tag_dict, context_instance=RequestContext(request))
