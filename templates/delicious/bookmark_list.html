@@ -1,10 +1,9 @@
-{% extends "base.html" %}
+{% extends "delicious/base.html" %}
 {% block title %}Links{% endblock %}
 {% block content %}
 
 {% for bookmark in object_list %}
 <h2><a href="{{ bookmark.get_absolute_url }}">{{ bookmark.description }}</a></h2>
-<a href="{% url bookmark_archive_year year=bookmark.saved_date|date:"Y" %}">{{ bookmark.saved_date|date:"Y"}}</a>//<a href="{% url bookmark_archive_month year=bookmark.saved_date|date:"Y",month=bookmark.saved_date|date:"m" %}">{{ bookmark.saved_date|date:"m"}}</a>//<a href="{% url bookmark_archive_day year=bookmark.saved_date|date:"Y",month=bookmark.saved_date|date:"m",day=bookmark.saved_date|date:"d" %}">{{ bookmark.saved_date|date:"d"}}</a> at {{ bookmark.saved_date|date:"g:i a" }}
 {% if bookmark.extended_info %}
 <p>{{ bookmark.extended_info }}</p>
 {% endif %}

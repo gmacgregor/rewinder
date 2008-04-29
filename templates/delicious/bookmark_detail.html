@@ -1,8 +1,14 @@
-{% extends "base.html" %}
+{% extends "delicious/base.html" %}
 {% block title %}Links: {{ object.description }}{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+    <li><a href="{% url bookmark_archive_year year=object.saved_date|date:"Y" %}">{{ object.saved_date|date:"Y"}}</a></li>
+    <li><a href="{% url bookmark_archive_month year=object.saved_date|date:"Y",month=object.saved_date|date:"m" %}">{{ object.saved_date|date:"m"}}</a></li>
+    <li><a href="{% url bookmark_archive_day year=object.saved_date|date:"Y",month=object.saved_date|date:"m",day=object.saved_date|date:"d" %}">{{ object.saved_date|date:"d"}}</a></li>
+    <li class="last">{{ object.description }}</li>
+{% endblock %}
 
 {% block content %}
-<p><a href="{% url bookmark_list %}">Back to all links...</a></p>
 <h2>{{ object.description }}</h2>
 
 {% if object.extended_info %}
