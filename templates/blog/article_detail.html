@@ -1,5 +1,6 @@
-{% extends "base.html" %}
-{% block title %}{{ article.headline }}{% endblock %}
+{% extends "blog/base.html" %}
+{% block title %}Blog: {{ article.headline }}{% endblock %}
+{% block breadcrumb %}{{ block.super }} > <a href="{% url blog_index %}">Blog</a>{% endblock %}
 {% block content %}
 
 <h2>{{ article.headline }}</h2>
