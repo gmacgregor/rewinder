@@ -1,25 +1,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-ca">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="robots" content="follow" /> 
     <title>rewinder.ca ~ {% block title %}{{ value|default_if_none:"This is the place that Toronto-based WebMaker Greg MacGregor calls home"}}{% endblock %}</title>
     <link rel="openid.server" href="http://openid.claimid.com/server"/>
     <link rel="openid.delegate" href="http://openid.claimid.com/rewinder"/>
-    <meta name="author" rel="me" content="Greg MacGregor"/>
-    <meta name="description" content="rewinder.ca is the most awesome website ever created."/>
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/base.css" type="text/css" media="screen">
+    <meta name="author" content="Greg MacGregor"/>
+    <meta name="description" content="{% block description %}{{ value|default_if_none:"rewinder.ca is the place that Toronto-based WebMaker Greg MacGregor calls home" }}{% endblock %}"/>
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/base.css?ord=1234" type="text/css" media="screen">
     {% block extrahead %}{% endblock %}
 </head>
 
 <body>
+<div id="wrapper">
+<div id="nav">
+<ul>
+    <li><a href="{% url homepage %}">Home</a></li>
+    <li><a href="{% url tumblelog_home %}">Tumblelog</a></li>
+    <li><a href="{% url bookmark_list %}">Links</a></li>
+    <li><a href="{% url photo_list %}">Photos</a></li>
+    <li><a href="{% url video_list %}">Videos</a></li>
+    <li><a href="{% url tweet_list %}">Tweets</a></li>
+</ul>
+</div>
 
-{% block content %}
-
+{% spaceless %}
+<div id="breadcrumb">
+<ul>{% block breadcrumb %}
+    <li class="first"><a href="{% url homepage %}">Home</a></li>
 {% endblock %}
+</ul>
+</div>
+{% endspaceless %}
 
-{% block extrafoot %}{% endblock %}
+<div id="main-content">
+{% block content %}{% endblock %}
+</div><!-- /#main-content -->
 
+<div id="footer">
+{% block footer %}{% endblock %}
+</div><!-- /#footer -->
+
+
+</div><!-- /#wrapper -->
 </body>
 </html>
