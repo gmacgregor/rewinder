@@ -1,5 +1,5 @@
-{% extends "base.html" %}
-{% block title %}photos: {{ object.title }}{% endblock %}
+{% extends "flickr/base.html" %}
+{% block title %}{{ block.super }}: {{ object.title }}{% endblock %}
 
 {% block content %}
 
