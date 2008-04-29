@@ -33,13 +33,13 @@
         {% endifequal %}
         {% ifequal item.content_type.name "photo" %}
         <div class="tumbelog-entry photo">
-            <h2><a href="{% url photos_home %}">Photo</a>: <a href="{{ item.get_content_object.get_absolute_url }}">{% if item.get_content_object.title %}{{ item.get_content_object.title }}{% else %}Untitled{% endif %}</a></h2>
+            <h2><a href="{% url photo_list %}">Photo</a>: <a href="{{ item.get_content_object.get_absolute_url }}">{% if item.get_content_object.title %}{{ item.get_content_object.title }}{% else %}Untitled{% endif %}</a></h2>
             <img src="{{ item.get_content_object.small_url }}" alt="{{item.get_content_object.title }}">
         </div>
         {% endifequal %}
         {% ifequal item.content_type.name "tweet" %}
         <div class="tumbelog-entry tweet">
-            <h2><a href="{% url tweets_home %}">Tweet</a>: {{ item.get_content_object.text|twitter_links }} <a href="{{ item.get_content_object.url }}">View</a></h2>
+            <h2><a href="{% url tweet_list %}">Tweet</a>: {{ item.get_content_object.text|twitter_links }} <a href="{{ item.get_content_object.url }}">View</a></h2>
         </div>
         {% endifequal %} 
     {% endfor %}
