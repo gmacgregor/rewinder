@@ -1,0 +1,3 @@
+{% extends "base.html" %}
+{% block title %}Tumblelog{% endblock %}
+{% block breadcrumb %}{{ block.super }} > <a href="{% url tumblelog_list %}">Tumblelog</a>{% endblock %}
