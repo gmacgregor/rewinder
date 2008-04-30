@@ -7,7 +7,8 @@ tumblelog_dict = {
 }
 
 urlpatterns = patterns('',
-    url(r'^$', 'django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10), name="homepage"),
+    #url(r'^$', 'django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10), name="homepage"),
+    url(r'^$', 'rewinder.apps.tumblelog.views.list', name="homepage")
 )
 
 urlpatterns += patterns('',
@@ -17,8 +18,10 @@ urlpatterns += patterns('',
     (r'^links/', include('rewinder.apps.delicious.urls')),
     (r'^places/', include('rewinder.apps.geo.urls')),
     (r'^photos/', include('rewinder.apps.flickr.urls')),
-    url(r'^tumblelog/?page=(?P<page>[0-9]+)$', 'django.views.generic.list_detail.object_list', dict(tumblelog_dict), name="tumblelog_list"),
-    url(r'^tumblelog/','django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10), name="tumblelog_home"),
+    #url(r'^tumblelog/?page=(?P<page>[0-9]+)$', 'django.views.generic.list_detail.object_list', dict(tumblelog_dict), name="tumblelog_list"),
+    #url(r'^tumblelog/','django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10), name="tumblelog_home"),
+    url(r'^tumblelog/','rewinder.apps.tumblelog.views.list', name="tumblelog_home"),
+    url(r'^tumblelog/?page=(?P<page>[0-9]+)$', 'rewinder.apps.tumblelog.views.list', name="tumblelog_list"),
     (r'^tweets/', include('rewinder.apps.twitter.urls')),
     (r'^videos/', include('rewinder.apps.video.urls')),
     (r'^words/', include('rewinder.apps.blog.urls')),
