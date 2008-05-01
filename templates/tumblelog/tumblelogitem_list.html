@@ -1,56 +1,57 @@
 {% extends "tumblelog/base.html" %}
 {% load custom_tags %}
+
+{% block breadcrumb %}{{ block.super }}<li class="last">There are <span>{{ paginator.hits }}</span> things in the tumblelog</li>{% endblock %}
+
 {% block content %}
+<p id="paginator">{% if paginator.has_previous %}<span class="previous"><a href="{% url tumblelog_list paginator.previous %}">Previous page</a></span>{% endif %}<span class="pages">{% for page in paginator.page_range %}{% if not page %}...{% else %}<a href="{% url tumblelog_list page %}">{% ifequal page paginator.page %}[{{ page }}]{% else %}{{ page }}{% endifequal %}</a>{% endif %}{% endfor %}</span>{% if paginator.has_next %}<span class="next"><a href="{% url tumblelog_list paginator.next %}">Next page</a></span>{% endif %}</p>
 
-<p>{% if paginator.has_next %}<a href="{% url tumblelog_list paginator.next %}">Next page</a>{% endif %}</p>
-
-<p>{% for page in paginator.page_range %}
-    {% if not page %}...
-    {% else %}<a href="{% url tumblelog_list page %}">{% ifequal page paginator.page %}[{{ page }}]{% else %}{{ page }}{% endifequal %}</a>
-    {% endif %}
-{% endfor %}</p>
-
-<p>{% if paginator.has_previous %}<a href="{% url tumblelog_list paginator.previous %}">Previous page</a>{% endif %}</p>
-
-<p>There are {{ paginator.hits }} things in the tumblelog. You're on page {{ page }} of {{ paginator.pages }}</p>
-
+<div id="tumblelog">
 {% autoescape off %}
     {% for item in paginator.object_list %}
         {% ifequal item.content_type.name "article" %}
-        <div class="tumbelog-entry article">
+        <div class="tumblelog-entry article">
             <h2>Article: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.headline }}</a></h2>
         </div>
         {% endifequal %}
         {% ifequal item.content_type.name "bookmark" %}
-        <div class="tumbelog-entry link">
-            <h2><a href="{% url bookmark_list %}">Link</a>: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.description }}</a></h2>
+        <div class="tumblelog-entry link">
+            <p class="tag"><a href="{% url bookmark_home %}">Link</a></p>
+            <h2><a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.description }}</a></h2>
             {% if item.get_content_object.extended_info %}
-            <p>{{ item.get_content_object.extended_info }}</p>
+            <p class="description">{{ item.get_content_object.extended_info }}</p>
             {% endif %}
-            <p><a href="{{ item.get_content_object.url }}">Visit...</a></p>
+            <p class="visit"><a href="{{ item.get_content_object.url }}">View</a></p>
         </div>
         {% endifequal %}
         {% ifequal item.content_type.name "video" %}
-        <div class="tumbelog-entry video">
-            <h2><a href="{% url video_list %}">Video</a>: <a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.title }}</a></h2>
+        <div class="tumblelog-entry video">
+            <p class="tag"><a href="{% url video_list %}">Video</a></p>
+            <h2><a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.title }}</a></h2>
             {% if item.get_content_object.youtube_small_image %}
             <img src="{{ item.get_content_object.youtube_small_image }}" width="130" height="97" style="border: 1px solid #ddd; padding: 2px;">
             {% endif %}
         </div>
         {% endifequal %}
         {% ifequal item.content_type.name "photo" %}
-        <div class="tumbelog-entry photo">
-            <h2><a href="{% url photo_list %}">Photo</a>: <a href="{{ item.get_content_object.get_absolute_url }}">{% if item.get_content_object.title %}{{ item.get_content_object.title }}{% else %}Untitled{% endif %}</a></h2>
-            <img src="{{ item.get_content_object.small_url }}" alt="{{item.get_content_object.title }}">
+        <div class="tumblelog-entry photo">
+            <p class="tag"><a href="{% url photo_home %}">Photo</a></p>
+            <p class="photo">
+            <a href="{{ item.get_content_object.get_absolute_url }}" style="background-image: url({{ item.get_content_object.medium_url }}); background-repeat: no-repeat;" title="{{ item.get_content_object.title }}">{{ item.get_content_object.title }}</a>
+            </p>
         </div>
         {% endifequal %}
         {% ifequal item.content_type.name "tweet" %}
-        <div class="tumbelog-entry tweet">
-            <h2><a href="{% url tweet_list %}">Tweet</a>: {{ item.get_content_object.text|twitter_links }} <a href="{{ item.get_content_object.url }}">View</a></h2>
+        <div class="tumblelog-entry tweet">
+            <p class="tag"><a href="{% url tweet_list %}">Tweet</a></p>
+            <h2>{{ item.get_content_object.text|twitter_links }}</h2>
+            <p class="visit"><a href="{{ item.get_content_object.url }}">View</a></p>
         </div>
         {% endifequal %} 
     {% endfor %}
 {% endautoescape %}
+</div><!-- /#tumblelog -->
 
+<p id="paginator">{% if paginator.has_previous %}<span class="previous"><a href="{% url tumblelog_list paginator.previous %}">Previous page</a></span>{% endif %}<span class="pages">{% for page in paginator.page_range %}{% if not page %}...{% else %}<a href="{% url tumblelog_list page %}">{% ifequal page paginator.page %}[{{ page }}]{% else %}{{ page }}{% endifequal %}</a>{% endif %}{% endfor %}</span>{% if paginator.has_next %}<span class="next"><a href="{% url tumblelog_list paginator.next %}">Next page</a></span>{% endif %}</p>
 
 {% endblock %}

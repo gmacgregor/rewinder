@@ -6,8 +6,8 @@ video_dict = {
     'date_field': 'pub_date',
 }
 
-urlpatterns = patterns('django.views.generic.list_detail',
-    url(r'^$', 'object_list', dict(queryset=Video.objects.all().order_by('-pub_date'), paginate_by=10), name='video_list'),
+urlpatterns = patterns('',
+    url(r'^$', 'rewinder.apps.video.views.list', name='video_home'),
 )
 
 urlpatterns += patterns('django.views.generic.date_based',

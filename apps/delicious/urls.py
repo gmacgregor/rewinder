@@ -12,8 +12,8 @@ bookmark_archive_dict = {
     'date_field': 'saved_date',   
 }
 
-urlpatterns = patterns('django.views.generic.list_detail',
-    url(r'^$', 'object_list', dict(queryset=Bookmark.objects.all(), paginate_by=10), name='bookmark_list'),
+urlpatterns = patterns('',
+    url(r'^$', 'rewinder.apps.delicious.views.list', name='bookmark_home'),
 )
 
 urlpatterns += patterns('django.views.generic.date_based',

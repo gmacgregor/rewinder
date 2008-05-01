@@ -15,21 +15,10 @@
 
 <body>
 <div id="wrapper">
-<div id="nav">
-<ul>
-    <li><a href="{% url homepage %}">Home</a></li>
-    <li><a href="{% url tumblelog_home %}">Tumblelog</a></li>
-    <li><a href="{% url bookmark_list %}">Links</a></li>
-    <li><a href="{% url photo_list %}">Photos</a></li>
-    <li><a href="{% url video_list %}">Videos</a></li>
-    <li><a href="{% url tweet_list %}">Tweets</a></li>
-</ul>
-</div>
-
 {% spaceless %}
 <div id="breadcrumb">
 <ul>{% block breadcrumb %}
-    <li class="first"><a href="{% url homepage %}">Home</a></li>
+    <li class="first"><a href="{% url homepage %}">rewinder</a></li>
 {% endblock %}
 </ul>
 </div>
@@ -39,10 +28,27 @@
 {% block content %}{% endblock %}
 </div><!-- /#main-content -->
 
+<div id="sidebar">
+<div id="nav">
+<ul>
+    <li><a href="{% url homepage %}">Home</a></li>
+    <li><a href="{% url blog_home %}">Blog</a></li>
+    <li><a href="{% url tumblelog_home %}">Tumblelog</a></li>
+    <li><a href="{% url bookmark_home %}">Links</a></li>
+    <li><a href="{% url photo_home %}">Photos</a></li>
+    <li><a href="{% url video_home %}">Videos</a></li>
+    <li><a href="{% url tweet_home %}">Tweets</a></li>
+    <li><a href="#">Quotes</a></li>
+    <li><a href="#">About/Contact</a></li>
+    
+</ul>
+</div><!-- /#nav -->
+{% block sidebar %}{% endblock %}
+</div><!-- /#sidebar -->
+
 <div id="footer">
 {% block footer %}{% endblock %}
 </div><!-- /#footer -->
-
 
 </div><!-- /#wrapper -->
 </body>

@@ -11,7 +11,7 @@ from rewinder.apps.generic.models import Source, Person
 from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
-EXTERNAL_VIDEO_WIDTH = 400
+EXTERNAL_VIDEO_WIDTH = 500
 EXTERNAL_VIDEO_HEIGHT = 300
 
 class Video(models.Model):

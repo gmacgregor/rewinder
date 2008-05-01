@@ -1,9 +1,11 @@
 @import url("reset.css");
+@import url("tumblelog.css");
+
 body {
     font-size: 0.75em;
     line-height: 1.2em;
     color: #333434;
-    font-family: "Helvetica Neue", Helvetica;
+    font-family: Helvetica, Arial, sans-serif;
 }
 a {
     text-decoration: none;
@@ -19,13 +21,36 @@ h2 {
 }
 #wrapper {
     width: 1000px;
-    margin: 0 auto;
+    margin: 1em 0 0 1em;
+    padding: 0 0 2em 0;
+    overflow: auto;
 }
+#nav ul {
+    float: right;
+    text-align: right;
+}
+#main-content,
+#sidebar {
+    padding-top: 1em;
+    float: left;
+}
+#main-content {
+    min-height: 50em;
+    width: 489px;
+    padding: 10px 10px 0 0;
+    border-right: 1px solid #ccc;
+}
+#sidebar {
+    width: 490px;
+    padding-left: 10px;
+}
+
+/* ----------------------------------------------------------------- breadcrumb */
+
 #breadcrumb {
     border-top: 1px solid #000;
     border-bottom: 1px solid #ccc;
     overflow: auto;
-    margin: 1em 0;
     font-weight: bold;
 }
 #breadcrumb li {
@@ -39,13 +64,44 @@ h2 {
     padding-left: 0;
 }
 #breadcrumb li.last {
-    clear: left;
-    padding-left: 0;
-    border-right: none;
     font-weight: bold;
-    font-size: 1.4em;
-    line-height: 1.2em;
+    border-right: none;
 }
+
+/* ----------------------------------------------------------------- pagination */
+#paginator {
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    position: relative;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+#paginator .pages a {
+    margin-right: 0.5em;
+}
+#paginator .next,
+#paginator .previous {
+    position: absolute;
+    /*top: 50%;*/
+    top: 0;
+}
+/*
+#paginator .next a,
+#paginator .previous a {
+    -webkit-border-radius: 5px;
+    background: #ddd;
+    padding: 5px;
+}
+*/
+#paginator .previous {
+    left: 0;
+}
+#paginator .next {
+    right: 0;
+}
+
+/* ----------------------------------------------------------------- comment */
+
 #comment-form label {
     display: block;
     font-weight: bold;
@@ -61,4 +117,16 @@ h2 {
 }
 #comment-form input[type="text"] {
     margin-bottom: 1em;
+}
+p.photo {
+    margin-bottom: 10px;
+    width: 500px;
+    background: #ddd;
+}
+p.photo a {
+    display: block;
+    height: 0;
+    padding-top: 100px;
+    overflow: hidden;
+    background-position: 50% 50%;
 }
