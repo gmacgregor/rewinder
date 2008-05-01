@@ -18,6 +18,7 @@ def create_tumblelog_item(sender, instance):
     In the case of a blog post, if the article's status is PUBLISHED_STATUS, attempt to create a new TumblelogItem.
     If it's not (ie. it is DRAFT_STATUS), try to remove it from the Tumblelog
     '''
+    create =True
     ctype = get_ctype(instance)
     if ctype.name == "article":
         pub_date = instance.pub_date
@@ -39,14 +40,19 @@ def create_tumblelog_item(sender, instance):
     elif ctype.name == "bookmark":
         pub_date = instance.saved_date
     elif ctype.name == "photo":
+        if instance.owner is not "sixminutes":
+            create = False
         pub_date = instance.taken_date
     elif ctype.name == "video":
         pub_date = instance.pub_date
-    try:
-        item = TumblelogItem.objects.get(object_id=instance.id, content_type=ctype)
-    except ObjectDoesNotExist:
-        item = TumblelogItem(object_id=instance.id, content_type=ctype, pub_date=pub_date)
-        item.save()
+    if create:
+        try:
+            item = TumblelogItem.objects.get(object_id=instance.id, content_type=ctype)
+        except ObjectDoesNotExist:
+            item = TumblelogItem(object_id=instance.id, content_type=ctype, pub_date=pub_date)
+            item.save()
+    else:
+        pass
 
 def kill_tumblelog_item(sender, instance):
     ctype = get_ctype(instance)
