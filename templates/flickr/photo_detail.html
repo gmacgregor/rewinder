@@ -5,19 +5,26 @@
     <li><a href="{% url photo_archive_year year=object.taken_date|date:"Y" %}">{{ object.taken_date|date:"Y"}}</a></li>
     <li><a href="{% url photo_archive_month year=object.taken_date|date:"Y",month=object.taken_date|date:"m" %}">{{ object.taken_date|date:"m"}}</a></li>
     <li><a href="{% url photo_archive_day year=object.taken_date|date:"Y",month=object.taken_date|date:"m",day=object.taken_date|date:"d" %}">{{ object.taken_date|date:"d"}}</a></li>
-    <li class="last"><h2>{{ object.title }}</h2></li>
 {% endblock %}
 
 {% block content %}
+<div id="photo-detail" class="detail">
+<h2>{{ object.title }}</h2>
 <img src="{{ object.medium_url }}" alt="{{ object.title }}">
 {% if object.description %}
 {% autoescape off %}
 <p>{{ object.description }}</p>
 {% endautoescape %}
 {% endif %}
+</div>
+{% include "tag/tags_for_object.html" %}
+{% include "threadedcomments/comments_list.html" %}
+{% endblock %}
 
+{% block sidebar %}
 {% if object.exif_model %}
-<p>Photo Details:</p>
+<div id="photo-details">
+<h2>Photo Details:</h2>
 <dl>
     <dt>Taken on</dt>
     <dd>{{ object.taken_date|date:"F d Y \a\t h:i a" }}</dd>
@@ -30,7 +37,6 @@
     <dt>Focal length</dt>
     <dd>{{ object.exif_focal_length }}</dd>
 </dl>
+</div>
 {% endif %}
-{% include "tag/tags_for_object.html" %}
-{% include "threadedcomments/comments_list.html" %}
 {% endblock %}
