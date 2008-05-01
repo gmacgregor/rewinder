@@ -3,15 +3,15 @@
     padding-bottom: 1em;
     margin-bottom: 1em;
 }
-.tumblelog-entry .tag a {
+.tumblelog-entry .tag {
     text-transform: uppercase;
     color: #ccc;
     font-size: 0.8em;
 }
+.tumblelog-entry .tag .date {
+}
 .tumblelog-entry h2 {
-    line-height: 1em;
-    font-size: 1.4em;
-    margin-bottom: 0.3em;
+
 }
 .tumblelog-entry h2,
 .tumblelog-entry p.description {
