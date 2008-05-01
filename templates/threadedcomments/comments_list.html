@@ -4,6 +4,7 @@
 {% get_free_threaded_comment_tree for object as tree %}
 {% get_gravatar_url for comment.email as gravatar %}
 
+<div id="comments">
 {% if tree %}
 <ol>
 {% for comment in tree %}
@@ -22,3 +23,4 @@
 {% else %}
 <p>Comments are closed.</p>
 {% endif %}
+</div>
