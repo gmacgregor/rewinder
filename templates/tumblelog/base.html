@@ -1,4 +1,3 @@
 {% extends "base.html" %}
-{% block description %}A running list of (most of) the things I do online{% endblock %}
 {% block title %}Tumblelog{% endblock %}
-{% block breadcrumb %}{{ block.super }}<li><a href="{% url tumblelog_home %}">Tumblelog</a></li>{% endblock %}
+{% block breadcrumb %}{{ block.super }}<li class="last">Tumblelog</li>{% endblock %}
