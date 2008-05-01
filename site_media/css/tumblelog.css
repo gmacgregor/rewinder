@@ -1,0 +1,28 @@
+.tumblelog-entry {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+}
+.tumblelog-entry .tag a {
+    text-transform: uppercase;
+    color: #888;
+    font-size: 0.8em;
+}
+.tumblelog-entry h2 {
+    line-height: 1em;
+    font-size: 1.4em;
+    margin-bottom: 0.3em;
+}
+.tumblelog-entry h2,
+.tumblelog-entry p.description {
+    width: 80%;
+}
+.tumblelog-entry p.description {
+    line-height: 1.4em;
+}
+.tumblelog-entry .visit {
+    text-align: right;
+}
+.tumblelog-entry .visit a {
+    color: #888;
+}

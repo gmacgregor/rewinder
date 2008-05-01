@@ -1,0 +1,4 @@
+{% extends "base.html" %}
+{% block description %}Videos that I find entertaining or informtaive{% endblock %}
+{% block title %}Videos{% endblock %}
+{% block breadcrumb %}{{ block.super }}<li><a href="{% url video_home %}">Videos</a></li>{% endblock %}

@@ -1,9 +1,14 @@
 {% extends "flickr/base.html" %}
 {% block title %}{{ block.super }}: {{ object.title }}{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+    <li><a href="{% url photo_archive_year year=object.taken_date|date:"Y" %}">{{ object.taken_date|date:"Y"}}</a></li>
+    <li><a href="{% url photo_archive_month year=object.taken_date|date:"Y",month=object.taken_date|date:"m" %}">{{ object.taken_date|date:"m"}}</a></li>
+    <li><a href="{% url photo_archive_day year=object.taken_date|date:"Y",month=object.taken_date|date:"m",day=object.taken_date|date:"d" %}">{{ object.taken_date|date:"d"}}</a></li>
+    <li class="last"><h2>{{ object.title }}</h2></li>
+{% endblock %}
 
 {% block content %}
-
-<h2>{{ object.title }}</h2>
 <img src="{{ object.medium_url }}" alt="{{ object.title }}">
 {% if object.description %}
 {% autoescape off %}
@@ -26,11 +31,6 @@
     <dd>{{ object.exif_focal_length }}</dd>
 </dl>
 {% endif %}
-
-{% load tagging_tags %}
-{% tags_for_object object as tag_list %}
-<p><strong>Related tags:</strong> {% for tag in tag_list %}<a href="{% url tag_detail tag %}" title="View all items tagged '{{ tag }}'">{{ tag }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-
+{% include "tag/tags_for_object.html" %}
 {% include "threadedcomments/comments_list.html" %}
-
 {% endblock %}
