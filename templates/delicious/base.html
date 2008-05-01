@@ -1,6 +1,3 @@
 {% extends "base.html" %}
 {% block title %}Links{% endblock %}
-{% block breadcrumb %}
-{{ block.super }}
-    <li><a href="{% url bookmark_list %}">Links</a></li>
-{% endblock %}
+{% block breadcrumb %}{{ block.super }}<li>Links</li>{% endblock %}

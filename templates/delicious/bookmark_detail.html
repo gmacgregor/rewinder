@@ -5,14 +5,16 @@
     <li><a href="{% url bookmark_archive_year year=object.saved_date|date:"Y" %}">{{ object.saved_date|date:"Y"}}</a></li>
     <li><a href="{% url bookmark_archive_month year=object.saved_date|date:"Y",month=object.saved_date|date:"m" %}">{{ object.saved_date|date:"m"}}</a></li>
     <li><a href="{% url bookmark_archive_day year=object.saved_date|date:"Y",month=object.saved_date|date:"m",day=object.saved_date|date:"d" %}">{{ object.saved_date|date:"d"}}</a></li>
-    <li class="last"><h2>{{ object.description }}</h2></li>
 {% endblock %}
 
 {% block content %}
+<div id="link-detail" class="detail">
+<h2>{{ object.description }}</h2>
 {% if object.extended_info %}
 <p>{{ object.extended_info }}</p>
 {% endif %}
-<p>Visit: <a href="{{ object.url }}">{{ object.url }}</a></p>
+<p><a href="{{ object.url }}">{{ object.url }}</a></p>
+</div>
 
 {% include "tag/tags_for_object.html" %}
 {% include "threadedcomments/comments_list.html" %}
