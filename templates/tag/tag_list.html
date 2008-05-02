@@ -1,9 +1,11 @@
-{% extends "base.html" %}
+{% extends "tag/base.html" %}
 
 {% block content %}
-<ul>
-{% for tag in tags %}
-    <li><a href="{% url tag_detail tag %}">{{ tag }}</a> ({{ tag.items.count }})</li>
+
+<ul class="chart" style="width: 995px;">
+{% for num, tag in tags %}
+ <li><span style="width: {% widthratio num top_count 995 %}px"><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span></span></li>
 {% endfor %}
 </ul>
+
 {% endblock %}
