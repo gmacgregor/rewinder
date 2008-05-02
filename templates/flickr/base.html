@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Photos{% endblock %}
 {% block breadcrumb %}{{ block.super }}<li><a href="{% url photo_home %}">Photos</a></li>{% endblock %}
-{% block sidebar %}
+{% block sidebarcontent %}
 <p><a href="{% url photo_faves %}">My favourite flickr photos</a></p>
 {% endblock %}
