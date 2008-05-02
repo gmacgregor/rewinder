@@ -1,81 +1,17 @@
 from django.template import Library, Node, TemplateSyntaxError
+from django.db.models import get_model
 from django.conf import settings
-from django.template.defaultfilters import stringfilter
-
-from datetime import datetime
-from time import strptime
-
-import random
+from django.template.defaultfilters import stringfilter, date
+from rewinder.apps.blog.models import Article
 
 register = Library()
-
-class RandomTitleNode(Node):
-    def __init__(self, title):
-        self.title = title
-    
-    def render(self, context):
-        titles = [
-            "hoopla!",
-            "coffee me!",
-            "I'm in yr base...",
-            "Julius Caesar or rollerblades? Why?",
-            "I should have been in bed 3 hours ago",
-        ]
-        choice = random.choice(titles)
-        context[self.title] = choice
-        return ''
-
-@register.tag(name='get_random_title')
-def random_title(parser, token):
-    """ get_random_title as title """
-    bits = token.split_contents()
-    if len(bits) != 3:
-        raise TemplateSyntaxError, "%s takes 2 arguments" % bits[0]
-    if bits[1] != "as":
-        raise TemplateSyntaxError, "First argument for %s should be 'as'" % bits[0] 
-    return RandomTitleNode(bits[2])
-
-class TwitterStatusNode(Node):
-    def __init__(self, tweet):
-        self.tweet = tweet
-    
-    def render(self, context):
-        import twitter
-        try:
-            api = twitter.Api()
-            most_recent_status = api.GetUserTimeline(settings.TWITTER_USERNAME)[0]
-            context[self.tweet] = {
-                "status": "%s" % most_recent_status.text,
-                "url": "http://twitter.com/%s/statuses/%s" % (settings.TWITTER_USERNAME, most_recent_status.id),
-                "time": "%s" % most_recent_status.relative_created_at,
-            }           
-        except:
-            context[self.tweet] = {
-                "status": "Ack! Looks like Twitter's codes are broken!",
-                "url": "",
-                "time": "",
-            }           
-        return ''
-
-@register.tag(name='get_twitter_status')
-def twitter_status(parser, token):
-    """
-    Call this tag with: 
-        get_twitter_status as tweet
-    """
-    bits = token.split_contents()
-    if len(bits) != 3:
-            raise TemplateSyntaxError, "%s takes 2 arguments" % bits[0] 
-    if bits[1] != "as":
-        raise TemplateSyntaxError, "First argument for %s should be 'as'" % bits[0]
-    return TwitterStatusNode(bits[2])
-    
 
 @register.filter(name='twitter_links')
 @stringfilter
 def twitter_links(tweet):
     """
-    Takes a twitter tweet and makes all @'s link to the @owner profile. Also creates links to URLs
+    Takes a twitter tweet and makes all @'s link to the @owner profile. 
+    Also creates links to URLs.
     """
     import re
     url_re = re.compile('(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?')
@@ -91,14 +27,45 @@ def twitter_links(tweet):
         li.append(word)
     return ' '.join(li)
 
-@register.tag(name='tag_percentage')
-def tag_percentage(tag):
-    """
-    Calcualtes the frequency of use for a given tag based on all tags
-    """
-    from tagging.models import Tag
-    from rewinder.apps.tumblelog.models import TumblelogItem
-    total_items = TumblelogItem.all().count()
-    total_tags = Tag.objects.all().count()
-    count_for_tag = tag.items.count()
-    pass
+
+class LatestArticleNode(Node):
+    def __init__(self, num, varname):
+        self.num, self.varname = num, varname
+    
+    def render(self, context):
+        context[self.varname] = Article.published_articles.all()[:self.num]
+        return ''
+
+@register.tag(name="get_latest_posts")
+def get_latest_posts(parser, token):
+    bits = token.contents.split()
+    if len(bits) != 4:
+        raise TemplateSyntaxError, "get_latest_posts tag takes exactly four arguments"
+    if bits[2] != 'as':
+        raise TemplateSyntaxError, "third argument to get_latest_posts tag must be 'as'"
+    return LatestArticleNode(bits[1], bits[3])
+
+
+class LatestContentNode(Node):
+    def __init__(self, model, num, varname):
+        self.num, self.varname = num, varname
+        self.model = get_model(*model.split('.'))
+    
+    def render(self, context):
+        context[self.varname] = self.model._default_manager.all()[:self.num]
+        return ''
+
+@register.tag(name="get_latest")
+def get_latest(parser, token):
+    bits = token.contents.split()
+    if len(bits) != 5:
+        raise TemplateSyntaxError, "get_latest tag takes exactly four arguments"
+    if bits[3] != 'as':
+        raise TemplateSyntaxError, "third argument to get_latest tag must be 'as'"
+    return LatestContentNode(bits[1], bits[2], bits[4])
+
+@register.simple_tag
+def date_format(token):
+    mdy = date(token, "F jS, Y")
+    hma = date(token, "g:i a")
+    return "%s at %s" % (mdy, hma)
