@@ -1,5 +1,65 @@
 [
     {
+        "pk": 29, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Fully aware that I am losing an hour of my life to Rock of Love.", 
+            "pub_time": "2008-04-30 21:23:31", 
+            "twitter_id": 800837845, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Yeah, great reading. But dude needs a life... Really.", 
+            "pub_time": "2008-04-30 01:17:45", 
+            "twitter_id": 800123086, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@saila: Painful indeed! Too many returns in the internets have clogged the tubes!", 
+            "pub_time": "2008-04-30 01:02:36", 
+            "twitter_id": 800115851, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "For a second there I thought I'd lost her T4 :{", 
+            "pub_time": "2008-04-29 21:56:03", 
+            "twitter_id": 800010458, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Where do you find design inspiration?", 
+            "pub_time": "2008-04-28 22:10:39", 
+            "twitter_id": 799190211, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 34, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Brightkite invite but no mobile device... I'm such a loser.", 
+            "pub_time": "2008-04-28 09:55:57", 
+            "twitter_id": 798712148, 
+            "user": 1
+        }
+    }, 
+    {
         "pk": 1, 
         "model": "twitter.tweet", 
         "fields": {
@@ -198,7 +258,7 @@
             "twitter_id": 786657743, 
             "user": 1
         }
-    },
+    }, 
     {
         "pk": 21, 
         "model": "twitter.tweet", 
@@ -278,7 +338,7 @@
             "twitter_id": 782138520, 
             "user": 1
         }
-    },
+    }, 
     {
         "pk": 1, 
         "model": "twitter.twitteruser", 
