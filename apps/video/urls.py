@@ -7,7 +7,7 @@ video_dict = {
 }
 
 urlpatterns = patterns('',
-    url(r'^$', 'rewinder.apps.video.views.list', name='video_home'),
+    url(r'^$', 'rewinder.views.list', {'app': 'video', 'model': Video} name='video_home'),
 )
 
 urlpatterns += patterns('django.views.generic.date_based',
