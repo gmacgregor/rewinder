@@ -20,12 +20,15 @@ a:hover {
 h2 {
     color: #333;
     line-height: 1.2em;
-    font-size: 1.3em;
+    font-size: 1.6em;
     font-weight: normal;
-    margin-bottom: 0em;
 }
 h2 a {
     font-weight: normal;
+    color: #000;
+}
+p {
+    margin-top: 1em;
 }
 #wrapper {
     width: 1000px;
@@ -69,6 +72,11 @@ h2 a {
     width: 489px;
     padding: 10px 10px 0 0;
     border-right: 1px solid #ccc;
+}
+.meta {
+    text-transform: uppercase;
+    color: #888;
+    font-size: 10px;
 }
 #sidebar {
     width: 490px;
