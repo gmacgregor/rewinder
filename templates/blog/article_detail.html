@@ -1,21 +1,18 @@
 {% extends "blog/base.html" %}
-{% block title %}Blog: {{ article.headline }}{% endblock %}
-{% block breadcrumb %}{{ block.super }} > <a href="{% url blog_index %}">Blog</a>{% endblock %}
+{% block title %}Blog: {{ object.headline }}{% endblock %}
+
 {% block content %}
 
-<h2>{{ article.headline }}</h2>
-<p>{{ article.last_modified|date:"F DS Y" }} in {% for category in article.categories.all %}<a href="{% url blog_category_detail category.slug %}">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</a></p>
+<h2>{{ object.headline }}</h2>
+<p>{{ object.last_modified|date:"F DS Y" }} in {% for category in article.categories.all %}<a href="{% url blog_category_detail category.slug %}">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</a></p>
 
 {% autoescape off %}
 <div class="entry">
-{{ article.html_body }}
+{{ object.html_body }}
 </div>
 {% endautoescape %}
 
-{% load tagging_tags %}
-{% tags_for_object article as tag_list %}
-{% if tag_list %}
-<p><strong>Related tags:</strong>{% for tag in tag_list %} <a href="{% url tag_detail tag %}" title="View all items tagged '{{ tag }}'">{{ tag }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-{% endif %}
+{% include "tag/tags_for_object.html" %}
+{% include "threadedcomments/comments_list.html" %}
 
 {% endblock %}
