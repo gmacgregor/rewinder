@@ -13,7 +13,7 @@ bookmark_archive_dict = {
 }
 
 urlpatterns = patterns('',
-    url(r'^$', 'rewinder.apps.delicious.views.list', name='bookmark_home'),
+    url(r'^$', 'rewinder.views.list', {'app': 'delicious', 'model': Bookmark, 'ordering': '-saved_date'}, name='bookmark_home'),
 )
 
 urlpatterns += patterns('django.views.generic.date_based',
