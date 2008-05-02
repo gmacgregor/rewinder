@@ -3,21 +3,14 @@
     padding-bottom: 1em;
     margin-bottom: 1em;
 }
-.tumblelog-entry .tag {
-    text-transform: uppercase;
-    color: #ccc;
-    font-size: 0.8em;
-}
-.tumblelog-entry .tag .date {
-}
-.tumblelog-entry h2 {
-
-}
 .tumblelog-entry h2,
-.tumblelog-entry p.description {
+.tumblelog-entry p {
     width: 80%;
 }
-.tumblelog-entry p.description {
+.tumblelog-entry p.visit {
+    width: 100%;
+}
+.tumblelog-entry p {
     line-height: 1.4em;
 }
 .tumblelog-entry .visit {
