@@ -61,6 +61,9 @@ class Photo(models.Model):
         """
         Assign photo.slug to a slugified version of the photo title.
         If the title is empty, slugify to "untitled-photo.id"
+        
+        If this photo doesn't belong to me, DO NOT save associated tags
+        
         """
         if not self.id:
             from django.template.defaultfilters import slugify
@@ -69,6 +72,8 @@ class Photo(models.Model):
                 self.slug = "untitled-%s" % self.flickr_id
             else:
                 self.slug = slugify(self.title)
+            if self.owner is not "sixminutes":
+                self.tags = ''
         super(Photo, self).save()
     
     class Meta:
