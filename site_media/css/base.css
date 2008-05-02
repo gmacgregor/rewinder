@@ -6,7 +6,7 @@ body {
     font-size: 0.8em;
     line-height: 1.2em;
     color: #333434;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
 }
 a {
     text-decoration: none;
@@ -20,12 +20,11 @@ a:hover {
 h2 {
     color: #333;
     line-height: 1.2em;
-    font-size: 1.6em;
+    font-size: 1.4em;
     font-weight: normal;
 }
 h2 a {
     font-weight: normal;
-    color: #000;
 }
 p {
     margin-top: 1em;
@@ -147,6 +146,45 @@ p {
     right: 0;
 }
 
+
+ul.chart {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #fff;
+}
+ul.chart li {
+    font-size: 11px;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    border-bottom: 1px solid #ebeff2;
+    background-color: #fff;
+    position: relative;
+}
+
+ul.chart li:hover,
+ul.chart li:hover span {
+    background-color: #a9d2f2;
+}
+ul.chart li span {
+    background-color: #dfdfdf;
+    display: block;
+    color: #125a95;
+    font-weight: bold;
+    padding: 0 0 0 5px;
+    white-space: nowrap;
+}
+ul.chart li span.count {
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #888;
+    font-weight: normal;
+}
+  
 /* ----------------------------------------------------------------- comment */
 #comments {
     border-top: 1px solid #ccc;
