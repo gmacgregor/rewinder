@@ -46,9 +46,11 @@
 {% block content %}{% endblock %}
 </div><!-- /#main-content -->
 
+{% block sidebar %}
 <div id="sidebar">
-{% block sidebar %}{% endblock %}
+{% block sidebarcontent %}{% endblock %}
 </div><!-- /#sidebar -->
+{% endblock %}
 
 <div id="footer">
 {% block footer %}{% endblock %}

@@ -1,1 +1,22 @@
 {% extends "base.html" %}
+{% block breadcrumb %}{% endblock %}
+{% load custom_tags %}
+
+{% block content %}
+{% get_latest tumblelog.TumblelogItem 15 as logs %}
+<div id="tumblelog">
+{% for item in logs %}
+    {% include "tumblelog/tumblelogitem.html" %}
+{% endfor %}
+</div><!-- /#tumblelog -->
+{% endblock %}
+
+{% block sidebar %}
+{% get_latest_posts 3 as latest_posts %}
+{% for post in latest_posts %}
+{% autoescape off %}
+<h2><a href="{{ post.get_absolute_url }}">{{ post.headline }}</a></h2>
+{% if post.teaser %}{{ post.html_teaser }}{% endif %}
+{% endautoescape %}
+{% endfor %}
+{% endblock %}
