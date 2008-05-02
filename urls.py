@@ -1,32 +1,30 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from rewinder.apps.tumblelog.models import TumblelogItem
-
-tumblelog_dict = {
-    'queryset': TumblelogItem.objects.all().order_by('-pub_date')
-}
+from rewinder.apps.video.models import Video
+from rewinder.apps.delicious.models import Bookmark
 
 urlpatterns = patterns('',
     #url(r'^$', 'django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10), name="homepage"),
-    url(r'^$', 'rewinder.apps.tumblelog.views.list', name="homepage")
+    url(r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'home.html'}, name="homepage")
 )
 
 urlpatterns += patterns('',
     (r'^admin/', include('django.contrib.admin.urls')),
     (r'^remarks/', include('threadedcomments.urls')),
-    url(r'^links/?page=(?P<page>[0-9]+)$', 'rewinder.apps.delicious.views.list', name="bookmark_list"),
+    url(r'^links/?page=(?P<page>[0-9]+)$', 'rewinder.views.list', {'app': 'delicious', 'model': Bookmark, 'ordering': '-saved_date'}, name="bookmark_list"),
     (r'^links/', include('rewinder.apps.delicious.urls')),
     (r'^places/', include('rewinder.apps.geo.urls')),
     url(r'^photos/?page=(?P<page>[0-9]+)$', 'rewinder.apps.flickr.views.list', name="photo_list"),
     (r'^photos/', include('rewinder.apps.flickr.urls')),
-    url(r'^tumblelog/','rewinder.apps.tumblelog.views.list', name="tumblelog_home"),
-    url(r'^tumblelog/?page=(?P<page>[0-9]+)$', 'rewinder.apps.tumblelog.views.list', name="tumblelog_list"),
+    url(r'^tumblelog/', 'rewinder.views.list', {'app': 'tumblelog', 'model': TumblelogItem}, name="tumblelog_home"),
+    url(r'^tumblelog/?page=(?P<page>[0-9]+)$', 'rewinder.views.list', {'app': 'tumblelog', 'model': TumblelogItem}, name="tumblelog_list"),
     (r'^tweets/', include('rewinder.apps.twitter.urls')),
-    url(r'^videos/?page=(?P<page>[0-9]+)$', 'rewinder.apps.video.views.list', name="video_list"),
+    url(r'^videos/?page=(?P<page>[0-9]+)$', 'rewinder.views.list', {'app': 'video', 'model': Video}, name="video_list"),
     (r'^videos/', include('rewinder.apps.video.urls')),
     (r'^words/', include('rewinder.apps.blog.urls')),
-    url(r'^tags/(?P<tag>[-\w]+)/$', 'rewinder.apps.blog.views.tag_detail', name='tag_detail'),
-    url(r'^tags/$', 'rewinder.apps.blog.views.all_tags', name='tags_list'),
+    url(r'^tags/(?P<tag>[-\w]+)/$', 'rewinder.views.tag_detail', name='tag_detail'),
+    url(r'^tags/$', 'rewinder.views.all_tags', name='tags_list'),
 )
 
 if settings.DEBUG:
