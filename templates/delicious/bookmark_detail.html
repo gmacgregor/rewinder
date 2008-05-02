@@ -1,4 +1,5 @@
 {% extends "delicious/base.html" %}
+{% load custom_tags %}
 {% block title %}Links: {{ object.description }}{% endblock %}
 {% block breadcrumb %}
 {{ block.super }}
@@ -9,6 +10,7 @@
 
 {% block content %}
 <div id="link-detail" class="detail">
+<p class="date">{% date_format object.saved_date %}</p>
 <h2>{{ object.description }}</h2>
 {% if object.extended_info %}
 <p>{{ object.extended_info }}</p>
