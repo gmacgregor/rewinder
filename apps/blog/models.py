@@ -145,7 +145,7 @@ class Article(models.Model):
     
     @models.permalink
     def get_absolute_url(self):
-        return ('blog_entry_detail', (), {
+        return ('article_detail', (), {
             'year': self.pub_date.year,
             'month': str(self.pub_date.month).zfill(2),
             'day': str(self.pub_date.day).zfill(2),
