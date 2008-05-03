@@ -13,32 +13,32 @@
     {% block extrahead %}{% endblock %}
 </head>
 
-<body>
+<body class="{% block body_class %}{{ value|default_if_none:""}}{% endblock %}">
 <div id="wrapper">
 
 <div id="nav">
 <ul>
     <li><a href="{% url homepage %}">Home</a></li>
     <li><a href="{% url blog_home %}">Blog</a></li>
-    <li><a href="{% url tumblelog_home %}">Tumblelog</a></li>
+    <li><a href="{% url tumblelog_home %}" class="last">Tumblelog</a></li>
 </ul>
 <ul>
     <li><a href="{% url bookmark_home %}">Links</a></li>
     <li><a href="{% url photo_home %}">Photos</a></li>
-    <li><a href="{% url video_home %}">Videos</a></li>
+    <li><a href="{% url video_home %}" class="last">Videos</a></li>
 </ul>
 <ul class="last">
     <li><a href="{% url tweet_home %}">Tweets</a></li>
     <li><a href="#">Quotes</a></li>
-    <li><a href="#">About/Contact</a></li>
+    <li><a href="#" class="last">About/Contact</a></li>
 </ul>
 </div><!-- /#nav -->
 
 {% spaceless %}
-<div id="breadcrumb">
-<ul>{% block breadcrumb %}
-    <li class="first"><a href="{% url homepage %}">rewinder</a></li>
-{% endblock %}</ul>
+<div id="breadcrumb" class="clearfix">
+<ul>
+{% block breadcrumb %}{% endblock %}
+</ul>
 </div>
 {% endspaceless %}
 

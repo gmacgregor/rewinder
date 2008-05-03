@@ -3,46 +3,44 @@
 {% get_free_comment_count for item.get_content_object as comments %}
 {% autoescape off %}
 {% ifequal item.content_type.name "article" %}
-<div class="tumblelog-entry article">
+<div class="entry article">
+    <p class="meta"><a href="{% url blog_home %}">Post</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>    
     <h2><a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.headline }}</a></h2>
     {% if item.get_content_object.teaser %}
     {{ item.get_content_object.html_teaser }}
     {% endif %}
     <p><a href="{{ item.get_content_object.get_absolute_url }}">Continue reading...</a></p>
-    <p class="meta"><a href="{% url blog_home %}">Post</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comments</a></span></p>
 </div>
 {% endifequal %}
 {% ifequal item.content_type.name "bookmark" %}
-<div class="tumblelog-entry link">
+<div class="entry link">
+    <p class="meta"><a href="{% url bookmark_home %}">Link</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
     <h2><a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.description }}</a></h2>
     {% if item.get_content_object.extended_info %}
     <p>{{ item.get_content_object.extended_info }}</p>
     {% endif %}
-    <p class="meta"><a href="{% url bookmark_home %}">Link</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comments</a></span></p>
     <p class="visit"><a href="{{ item.get_content_object.url }}">Visit</a></p>
 </div>
 {% endifequal %}
 {% ifequal item.content_type.name "video" %}
-<div class="tumblelog-entry video">
+<div class="entry video">
+    <p class="meta"><a href="{% url video_list %}">Video</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p> 
     <h2><a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.title }}</a></h2>
     {% if item.get_content_object.youtube_small_image %}
     <img src="{{ item.get_content_object.youtube_small_image }}" width="130" height="97" style="border: 1px solid #ddd; padding: 2px;">
-    <p class="meta"><a href="{% url video_list %}">Video</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comments</a></span></p> 
     {% endif %}
 </div>
 {% endifequal %}
 {% ifequal item.content_type.name "photo" %}
-<div class="tumblelog-entry photo">
-    <p class="photo">
-    <a href="{{ item.get_content_object.get_absolute_url }}" style="background-image: url({{ item.get_content_object.medium_url }}); background-repeat: no-repeat;" title="{{ item.get_content_object.title }}">{{ item.get_content_object.title }}</a>
-    </p>
-    <p class="meta"><a href="{% url photo_home %}">Photo</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comments</a></span></p>
+<div class="entry photo">
+    <p class="meta"><a href="{% url photo_home %}">Photo</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+    <p class="photo"><a href="{{ item.get_content_object.get_absolute_url }}" style="background-image: url({{ item.get_content_object.medium_url }}); background-repeat: no-repeat;" title="{{ item.get_content_object.title }}">{{ item.get_content_object.title }}</a></p>
 </div>
 {% endifequal %}
 {% ifequal item.content_type.name "tweet" %}
-<div class="tumblelog-entry tweet">
+<div class="entry tweet">
+    <p class="meta"><a href="{% url tweet_list %}">Tweet</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>    
     <h2>{{ item.get_content_object.text|twitter_links }}</h2>
-    <p class="meta"><a href="{% url tweet_list %}">Tweet</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comments</a></span></p>
     <p class="visit"><a href="{{ item.get_content_object.url }}">View</a></p>
 </div>
 {% endifequal %}

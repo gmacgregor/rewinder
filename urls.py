@@ -3,6 +3,7 @@ from django.conf import settings
 from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.apps.video.models import Video
 from rewinder.apps.delicious.models import Bookmark
+from rewinder.apps.twitter.models import Tweet
 
 urlpatterns = patterns('',
     #url(r'^$', 'django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10), name="homepage"),
@@ -19,6 +20,7 @@ urlpatterns += patterns('',
     (r'^photos/', include('rewinder.apps.flickr.urls')),
     url(r'^tumblelog/', 'rewinder.views.list', {'app': 'tumblelog', 'model': TumblelogItem}, name="tumblelog_home"),
     url(r'^tumblelog/?page=(?P<page>[0-9]+)$', 'rewinder.views.list', {'app': 'tumblelog', 'model': TumblelogItem}, name="tumblelog_list"),
+    url(r'^tweets/?page=(?P<page>[0-9]+)$', 'rewinder.views.list', {'app': 'twitter', 'model': Tweet, 'ordering': '-pub_time'}, name="tweet_list"),
     (r'^tweets/', include('rewinder.apps.twitter.urls')),
     url(r'^videos/?page=(?P<page>[0-9]+)$', 'rewinder.views.list', {'app': 'video', 'model': Video}, name="video_list"),
     (r'^videos/', include('rewinder.apps.video.urls')),

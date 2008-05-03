@@ -1,0 +1,4 @@
+{% extends "base.html" %}
+{% block title %}Twitter Tweets{% endblock %}
+{% block body_class %}twitter{% endblock %}
+{% block breadcrumb %}{{ block.super }}<li><a href="{% url tweet_home %}" title="Back to all tweets">Tweets</a></li>{% endblock %}

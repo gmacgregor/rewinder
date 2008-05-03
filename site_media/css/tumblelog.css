@@ -1,21 +1,32 @@
-.tumblelog-entry {
+.entry {
     border-bottom: 1px solid #e6e6e6;
     padding-bottom: 1em;
     margin-bottom: 1em;
 }
-.tumblelog-entry h2,
-.tumblelog-entry p {
-    width: 80%;
+.entry p {
+    margin-top: 0.6em;
 }
-.tumblelog-entry p.visit {
-    width: 100%;
+.entry p.visit {
+    margin-top: 1em;
 }
-.tumblelog-entry p {
+.entry p {
     line-height: 1.4em;
 }
-.tumblelog-entry .visit {
+.entry .visit {
     text-align: right;
 }
-.tumblelog-entry .visit a {
+.entry .visit a {
     color: #ccc;
+}
+.tumblelog #sidebar p {
+    text-align: center;
+    color: #888;
+    text-transform: uppercase;
+}
+.tumblelog #sidebar span {
+    display: block;
+    font-size: 18em;
+    font-weight: bold;
+    color: #333;
+    text-shadow: #aeaeae 2px 2px 2px;
 }
