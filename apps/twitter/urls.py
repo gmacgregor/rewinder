@@ -5,8 +5,8 @@ tweet_dict = {
     'queryset': Tweet.objects.all(),
 }
 
-urlpatterns = patterns('django.views.generic.list_detail',
-    url(r'^$', 'object_list', dict(tweet_dict, paginate_by=20), name='tweet_list'),
+urlpatterns = patterns('',
+    url(r'^$', 'rewinder.views.list', {'app': 'twitter', 'model': Tweet, 'ordering': '-pub_time'}, name="tweet_home"),
 )
 
 urlpatterns += patterns('django.views.generic.date_based',

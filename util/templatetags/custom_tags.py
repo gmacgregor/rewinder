@@ -4,8 +4,17 @@ from django.conf import settings
 from tagging.models import Tag
 from django.template.defaultfilters import stringfilter, date
 from rewinder.apps.blog.models import Article
+from rewinder.apps.flickr.models import Photo
+
 
 register = Library()
+
+@register.simple_tag
+def date_format(token):
+    mdy = date(token, "F jS, Y")
+    hma = date(token, "g:i a")
+    return "%s at %s" % (mdy, hma)
+
 
 @register.filter(name='twitter_links')
 @stringfilter
@@ -21,8 +30,11 @@ def twitter_links(tweet):
     li = []
     for word in words:
         if word.startswith('@'):
-            owner = re.search(tweeter_re, word).group(0)
-            word = '<a href="http://twitter.com/%s/" title="Go to %s\'s Twitter page">%s</a>' % (owner, owner, word)
+            try:
+                owner = re.search(tweeter_re, word).group(0)
+                word = '<a href="http://twitter.com/%s/" title="Go to %s\'s Twitter page">%s</a>' % (owner, owner, word)
+            except:
+                pass
         if url_re.match(word):
             word = '<a href="%s" title="Visit this link">%s</a>' % (word, word)
         li.append(word)
@@ -90,8 +102,22 @@ def get_popular_tags(parser, token):
         raise TemplateSyntaxError, "third argument to get_popular_tags tag must be 'as'"
     return TagCountForModelNode(bits[1], bits[2], bits[4], bits[5])
 
-@register.simple_tag
-def date_format(token):
-    mdy = date(token, "F jS, Y")
-    hma = date(token, "g:i a")
-    return "%s at %s" % (mdy, hma)
+
+class RandomPhotoNode(Node):
+    def __init__(self, varname):
+        self.varname = varname
+    
+    def render(self, context):
+        import random
+        photos = Photo.objects.all().filter(owner='sixminutes')
+        context[self.varname] = random.choice(photos)
+        return ''
+
+@register.tag(name="get_random_photo")
+def get_popular_tags(parser, token):
+    bits = token.contents.split()
+    if len(bits) != 3:
+        raise TemplateSyntaxError, "get_random_photo tag takes exactly 2 arguments"
+    if bits[1] != 'as':
+        raise TemplateSyntaxError, "first argument to get_random_photo tag must be 'as'"
+    return RandomPhotoNode(bits[2])
