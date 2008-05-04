@@ -34,6 +34,17 @@ class Bookmark(models.Model):
             'slug': self.slug,
         })
     
+    def _next_previous_helper(self, direction):
+        return getattr(self, 'get_%s_by_saved_date' % direction)
+    
+    @property
+    def get_next(self):
+        return self._next_previous_helper('next')
+    
+    @property
+    def get_previous(self):
+        return self._next_previous_helper('previous')
+    
     def save(self):
         """
         If this link is being saved for the first time (ie. imported from del.icou.us):

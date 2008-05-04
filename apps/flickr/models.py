@@ -57,6 +57,17 @@ class Photo(models.Model):
             'object_id': self.id,
         })
     
+    def _next_previous_helper(self, direction):
+            return getattr(self, 'get_%s_by_taken_date' % direction)(owner__exact='sixminutes')
+    
+    @property
+    def get_next(self):
+        return self._next_previous_helper('next')
+    
+    @property
+    def get_previous(self):
+        return self._next_previous_helper('previous')
+    
     def save(self):
         """
         Assign photo.slug to a slugified version of the photo title.

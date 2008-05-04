@@ -1,5 +1,6 @@
 {% extends "flickr/base.html" %}
 {% block title %}{{ block.super }}: {{ object.title }}{% endblock %}
+{% block body_class %}detail photo{% endblock %}
 {% block breadcrumb %}
 {{ block.super }}
     <li><a href="{% url photo_archive_year year=object.taken_date|date:"Y" %}">{{ object.taken_date|date:"Y"}}</a></li>
@@ -16,16 +17,9 @@
 <p>{{ object.description }}</p>
 {% endautoescape %}
 {% endif %}
-</div>
-{% include "tag/tags_for_object.html" %}
-{% include "threadedcomments/comments_list.html" %}
-{% endblock %}
-
-{% block sidebar %}
 {% if object.exif_model %}
-<div id="photo-details">
-<h2>Photo Details:</h2>
-<dl>
+<h3>Photo Details</h3>
+<dl class="clearfix">
     <dt>Taken on</dt>
     <dd>{{ object.taken_date|date:"F d Y \a\t h:i a" }}</dd>
     <dt>Camera model</dt>
@@ -34,9 +28,20 @@
     <dd>{{ object.exif_exposure }}</dd>
     <dt>Aperture</dt>
     <dd>{{ object.exif_aperture }}</dd>
-    <dt>Focal length</dt>
-    <dd>{{ object.exif_focal_length }}</dd>
+    <dt class="last">Focal length</dt>
+    <dd class="last">{{ object.exif_focal_length }}</dd>
 </dl>
+{% endif %}
 </div>
+{% include "tag/tags_for_object.html" %}
+{% include "threadedcomments/comments_list.html" %}
+{% endblock %}
+
+{% block sidebarcontent %}
+{% if object.get_next %}
+<p><a href="{{ object.get_next.get_absolute_url }}"><img src="{{ object.get_next.square_url }}" alt="{{ object.get_next.title }}"></a></p>
+{% endif %}
+{% if object.get_previous %}
+<p><a href="{{ object.get_previous.get_absolute_url }}"><img src="{{ object.get_previous.square_url }}" alt="{{ object.get_previous.title }}"></a></p>
 {% endif %}
 {% endblock %}

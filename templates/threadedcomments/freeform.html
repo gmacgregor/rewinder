@@ -2,10 +2,12 @@
 {% load threadedcommentstags %}
 {% get_free_threaded_comment_form as form %}
 <form method="post" action="{% get_free_comment_url object %}" id="comment-form">
-    <p><label for="id_comment">Comment</label>{{ form.comment }}</p>
-    <p><label for="id_name">Name</label>{{ form.name }}</p>
-    <p><label for="id_email">Email</label>{{ form.email }}</p>
-    <p><label for="id_website">Website</label>{{ form.website }}</p>
+    <label for="id_comment">Comment</label>{{ form.comment }}
+    <p>{{ form.name }}<label for="id_name">Name</label></p>
+    <p>{{ form.email }}<label for="id_email">Email</label></p>
+    <p>{{ form.website }}<label for="id_website">Website</label></p>
+    <div id="comment-submit">
     <input type="submit" name="preview" value="Preview" />
     <input type="submit" name="post" value="Post" />
+    </div>
 </form>

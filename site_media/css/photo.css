@@ -7,6 +7,43 @@
     font-weight: normal;
     color: #888;
 }
+p.photo {
+    margin-bottom: 10px;
+    width: 500px;
+    background: #000;
+}
+p.photo a {
+    display: block;
+    height: 0;
+    padding-top: 150px;
+    overflow: hidden;
+    background-position: 50% 50%;
+}
+#photo-detail dl {
+    margin: 1em 0;
+}
+#photo-detail h3 {
+    border-top: 1px solid #ccc;
+    margin: 2em 0 1em 0;
+    padding-top: 0.5em;
+}
+#photo-detail dt,
+#photo-detail dd {
+    float: left;
+    padding: 0.5em 0;
+    border-bottom: 1px solid #eee;
+}
+#photo-detail dt {
+    width: 60%;
+    font-weight: bold;
+}
+#photo-detail dd {
+    width: 40%;
+}
+#photo-detail dt.last,
+#photo-detail dd.last {
+    border-bottom: none;
+}
 #photo-faves p {
     margin-bottom: 1em;
 }
