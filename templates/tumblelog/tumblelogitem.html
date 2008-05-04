@@ -39,7 +39,7 @@
 {% endifequal %}
 {% ifequal item.content_type.name "tweet" %}
 <div class="entry tweet">
-    <p class="meta"><a href="{% url tweet_list %}">Tweet</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>    
+    <p class="meta"><a href="{% url tweet_home %}">Tweet</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>    
     <h2>{{ item.get_content_object.text|twitter_links }}</h2>
     <p class="visit"><a href="{{ item.get_content_object.url }}">View</a></p>
 </div>

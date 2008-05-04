@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Preview your comment{% endblock %}
+{% block breadcrumb %}<li><a href="{% url homepage %}">rewinder</a></li><li>Preview your comment</li>{% endblock %}
 {% load threadedcommentstags %}
 
 {% block content %}
@@ -7,7 +8,7 @@
 {% load gravatar %}
 {% get_gravatar_url for comment.email as gravatar %}
 <div id="comment_preview">
-<h2>Here's what your comment will look like:</h2>
+<h3>Here's what your comment will look like</h3>
 <div class="comment">
 <p>{% if comment.website %}<a href="{{ comment.website }}">{% endif %}<img src="{{ comment.email|gravatar }}" alt="Gravatar for {{ comment.name }}" />{% if comment.website %}</a>{% endif %}{% if comment.website %}<a href="{{ comment.website }}">{% endif %}{{ comment.name }}{% if comment.website %}</a>{% endif %}</p>
 {% auto_transform_markup comment %}
@@ -16,7 +17,7 @@
 {% endif %}
 
 {% if form.errors %}
-<p>Slow down, Tiger!</p>
+<h2>Slow down, tiger!</h2>
 <ul class="errorlist">
 {% for error in form.errors %}
     {% ifequal error "name" %}
@@ -36,11 +37,13 @@
 {% endif %}
 <form method="post" action="" id="comment-form">
     <p><label for="id_comment">Comment</label>{{ form.comment }}</p>
-    <p><label for="id_name">Name</label>{{ form.name }}</p>
-    <p><label for="id_email">Email</label>{{ form.email }}</p>
-    <p><label for="id_website">Website</label>{{ form.website }}</p>
+    <p>{{ form.name }}<label for="id_name">Name</label></p>
+    <p>{{ form.email }}<label for="id_email">Email</label></p>
+    <p>{{ form.website }}<label for="id_website">Website</label></p>
+    <div id="comment-submit">
     <input type="submit" name="preview" value="Preview" />
     <input type="submit" name="post" value="Post" />
+    </div>
     <input type="hidden" name="next" value="{{ next }}" />
 </form>
 {% endblock %}

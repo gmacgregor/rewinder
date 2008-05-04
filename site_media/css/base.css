@@ -74,7 +74,7 @@ p {
     float: left;
 }
 #main-content {
-    min-height: 50em;
+    min-height: 40em;
     width: 489px;
     padding: 10px 10px 0 0;
     border-right: 1px solid #ccc;
@@ -90,7 +90,7 @@ p {
 }
 .detail h2 {
     margin-bottom: 0.5em;
-    padding-bottom: 0.5em;
+    padding-bottom: 0.2em;
     border-bottom: 1px solid #ccc;
 }
 .detail p {
@@ -104,6 +104,7 @@ p {
     border-bottom: 1px solid #ccc;
     font-weight: bold;
     background-color: #e6e6e6;
+    min-height: 23px;
 }
 #breadcrumb ul li {
     background-color: #fff;
@@ -115,15 +116,12 @@ p {
 #breadcrumb ul li a {
     display: block;
     float: left;
-    margin: -5px -7px -7px -5px;
+    margin: -5px -7px -6px -5px;
     padding: inherit;
 }
 #breadcrumb ul li.first {
-    padding-left: 0;
 }
 #breadcrumb ul li.last {
-    font-weight: bold;
-    /*border-right: none;*/
 }
 
 /* ----------------------------------------------------------------- pagination */
@@ -203,28 +201,56 @@ ul.chart li span.index {
 #comment-form label {
     display: block;
     font-weight: bold;
+    padding-bottom: 0.3em;
+}
+#comments #post-comment {
+    border-top: 1px solid #ccc;
+    margin: 2em 0 1em 0;
+    padding-top: 0.5em;
+}
+#comment-form input {
+    font-size: 1em;
+    font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
 }
 #comment-form p {
-    margin: 0;
-}
-#comment-form textarea {
     float: left;
-    width: 350px;
-    height: 200px;
-    margin-right: 1em;
+    margin-top: 0;
 }
 #comment-form input[type="text"] {
-    margin-bottom: 1em;
+    width: 149px;
+    padding: 2px;
+    margin: 0 10px 0.2em 0;
 }
-p.photo {
-    margin-bottom: 10px;
-    width: 500px;
-    background: #000;
+#comment-form input[type="text"] {
+    border: 1px solid #ccc;
 }
-p.photo a {
-    display: block;
-    height: 0;
-    padding-top: 100px;
-    overflow: hidden;
-    background-position: 50% 50%;
+#comment-form #id_website {
+    margin-right: 0;
+    width: 151px;
+}
+#comment-form textarea {
+    width: 475px;
+    height: 150px;
+    margin: 0 0 0.5em 0;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+#comment-form #comment-submit {
+    clear: left;
+}
+#comment-form #comment-submit input {
+    margin-right: 1em;
+}
+ul.errorlist {
+    list-style-type: square;
+    margin: 0.5em 0 1em 0;
+}
+ul.errorlist li {
+    margin-bottom: 0.5em;
+}
+/* ----------------------------------------------------------------- tags */
+#object-tags h3 {
+    border-top: 1px solid #ccc;
+    margin: 2em 0 1em 0;
+    padding-top: 0.5em;
 }

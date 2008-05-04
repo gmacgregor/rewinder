@@ -13,6 +13,15 @@ class Tweet(models.Model):
     
     def __unicode__(self):
         return u'%s' % (self.text)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('tweet_detail', (), {
+            'year': self.pub_time.year,
+            'month': str(self.pub_time.month).zfill(2),
+            'day': str(self.pub_time.day).zfill(2),
+            'object_id': self.id,
+            })
     
     def url(self):
         return u'http://twitter.com/%s/statuses/%s' % (self.user.screen_name, self.twitter_id)

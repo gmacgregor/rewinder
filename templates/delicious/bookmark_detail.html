@@ -1,6 +1,7 @@
 {% extends "delicious/base.html" %}
 {% load custom_tags %}
 {% block title %}Links: {{ object.description }}{% endblock %}
+{% block body_class %}detail link{% endblock %}
 {% block breadcrumb %}
 {{ block.super }}
     <li><a href="{% url bookmark_archive_year year=object.saved_date|date:"Y" %}">{{ object.saved_date|date:"Y"}}</a></li>
@@ -21,4 +22,13 @@
 {% include "tag/tags_for_object.html" %}
 {% include "threadedcomments/comments_list.html" %}
 
+{% endblock %}
+
+{% block sidebarcontent %}
+{% if object.get_next %}
+<p><a href="{{ object.get_next.get_absolute_url }}">Next link</a></p>
+{% endif %}
+{% if object.get_previous %}
+<p><a href="{{ object.get_previous.get_absolute_url }}">Previous link</a></p>
+{% endif %}
 {% endblock %}

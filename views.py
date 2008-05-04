@@ -6,7 +6,7 @@ from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.video.models import Video
 from rewinder.apps.flickr.models import Photo
 
-def list(request, app, model, ordering='-pub_date'):
+def list(request, app, model, ordering='-pub_date', extra_context=None):
     """
     I love you, Django!
     """
@@ -14,7 +14,7 @@ def list(request, app, model, ordering='-pub_date'):
     page = request.GET.get('page', 1)
     paginator = DiggPaginator(items, 10, page=page, body=7, tail=2, padding=3)
     template_name = '%s/%s_list.html' % (app.lower(), model.__name__.lower())
-    return render_response(request, template_name, {'page': page, 'paginator': paginator})
+    return render_response(request, template_name, {'page': page, 'paginator': paginator, 'extra_context': extra_context})
 
 def all_tags(request):
     all_tags = Tag.objects.all()

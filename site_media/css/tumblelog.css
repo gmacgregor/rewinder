@@ -22,11 +22,16 @@
     text-align: center;
     color: #888;
     text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 0.8em;
 }
-.tumblelog #sidebar span {
+.tumblelog #sidebar ul li {
+    margin-bottom: 0.5em;
+}
+.tumblelog #sidebar span#total-tumblelog-items {
     display: block;
     font-size: 18em;
     font-weight: bold;
     color: #333;
-    text-shadow: #aeaeae 2px 2px 2px;
+    letter-spacing: normal;
 }
