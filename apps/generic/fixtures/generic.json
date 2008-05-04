@@ -4,46 +4,20 @@
         "model": "generic.source", 
         "fields": {
             "category": 1, 
-            "description": "", 
+            "description": "The world's most popular video sharing site", 
             "title": "youtube.com", 
-            "url": "http:\/\/youtube.com", 
-            "created_on": "2008-04-23 00:09:34", 
-            "last_modified": "2008-04-23 00:09:34", 
+            "url": "http:\/\/www.youtube.com\/watch?v=kJmvYFZwPco", 
+            "created_on": "2008-05-03 15:51:58", 
+            "last_modified": "2008-05-03 15:51:58", 
             "slug": "youtube"
-        }
-    }, 
-    {
-        "pk": 2, 
-        "model": "generic.source", 
-        "fields": {
-            "category": 1, 
-            "description": "", 
-            "title": "vimeo.com", 
-            "url": "http:\/\/www.vimeo.com", 
-            "created_on": "2008-04-23 00:12:41", 
-            "last_modified": "2008-04-23 00:12:41", 
-            "slug": "vimeo"
-        }
-    }, 
-    {
-        "pk": 3, 
-        "model": "generic.source", 
-        "fields": {
-            "category": 1, 
-            "description": "", 
-            "title": "collegehumor.com", 
-            "url": "http:\/\/www.collegehumor.com", 
-            "created_on": "2008-04-23 00:15:06", 
-            "last_modified": "2008-04-23 00:15:06", 
-            "slug": "collegehumor"
         }
     }, 
     {
         "pk": 1, 
         "model": "generic.sourcecategory", 
         "fields": {
-            "created_on": "2008-04-23 00:09:32", 
-            "last_modified": "2008-04-23 00:09:32", 
+            "created_on": "2008-05-03 15:51:55", 
+            "last_modified": "2008-05-03 15:51:55", 
             "slug": "video", 
             "title": "Video"
         }
