@@ -1,0 +1,26 @@
+#tag-detail h3 {
+    margin: 2em 0 1.2em 0;
+}
+#tag-detail ul li {
+    margin-bottom: 0.5em;
+}
+body.tag.list #main-content,
+body.tag.list ul.chart {
+    width: 1000px;
+}
+body.tag.list #main-content {
+    padding-right: 0;
+    border-right: none;
+}
+body.tag.list #sidebar {
+    display: none;
+}
+body.tag.list ul.chart {
+    margin-top: 2em;
+}
+.tag.detail #tag-photos li {
+    float: left;
+    width: 75px;
+    height: 75px;
+    margin: 0 3px 3px 0;
+}
