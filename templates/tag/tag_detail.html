@@ -1,38 +1,53 @@
 {% extends "tag/base.html" %}
 {% block title %}{{ block.super }}: {{ tag }}{% endblock %}
-{% block breadcrumb %}{{ block.super }}<li class="last"><h2>{{ tag }}</h2></li>{% endblock %}
+{% block breadcrumb %}{{ block.super }}<li class="last">{{ tag }}</li>{% endblock %}
+{% block body_class %}tag detail{% endblock %}
 
 {% block content %}
-{% if articles %}
-<h3><a href="{% url blog_index %}">Blog posts</a></h3>
+<h2>Things tagged '{{ tag }}'</h2>
+<div id="tag-detail">
 <ul>
+{% if articles %}<li><a href="{% url tag_detail tag %}#tag-articles">Articles ({{ articles.count }})</a></li>{% endif %}
+{% if photos %}<li><a href="{% url tag_detail tag %}#tag-photos">Photos ({{ photos.count }})</a></li>{% endif %}
+{% if links %}<li><a href="{% url tag_detail tag %}#tag-links">Links ({{ links.count }})</a></li>{% endif %}
+{% if videos %}<li><a href="{% url tag_detail tag %}#tag-videos">Videos ({{ videos.count }})</a></li>{% endif %}
+</ul>
+
+{% if articles %}
+<h3><a href="{% url blog_home %}">Blog posts</a></h3>
+<ul id="tag-articles">
 {% for article in articles %}
     <li><a href="{{ article.get_absolute_url }}">{{ article }}</a></li>
 {% endfor %}
 </ul>
 {% endif %}
+
 {% if photos %}
-<h3><a href="{% url photo_list %}">Photos</h3>
-<ul>
+<h3><a href="{% url photo_home %}">Photos</h3>
+<ul id="tag-photos" class="clearfix">
 {% for photo in photos %}
-    <li><a href="{{ photo.get_absolute_url }}"><img src="{{ photo.square_url }}" width="75" height="75" alt="{{ photo }}" /></a></li>
+    <li><a href="{{ photo.get_absolute_url }}" title="View a larger version of this photo"><img class="thumbnail" src="{{ photo.square_url }}" width="75" height="75" alt="{{ photo }}" /></a></li>
 {% endfor %}
 </ul>
 {% endif %}
+
 {% if links %}
-<h3><a href="{% url bookmark_list %}">Links</a></h3>
-<ul>
+<h3><a href="{% url bookmark_home %}">Links</a></h3>
+<ul id="tag-links">
 {% for link in links %}
     <li><a href="{{ link.get_absolute_url }}">{{ link }}</a></li>
 {% endfor %}
 </ul>
 {% endif %}
+
 {% if videos %}
-<h3><a href="{% url video_list %}">Videos</a></h3>
-<ul>
+<h3><a href="{% url video_home %}">Videos</a></h3>
+<ul id="tag-videos">
 {% for video in videos %}
     <li><a href="{{ video.get_absolute_url }}">{{ video }}</a></li>
 {% endfor %}
 </ul>
 {% endif %}
+
+</div>
 {% endblock %}

@@ -104,20 +104,24 @@ def get_popular_tags(parser, token):
 
 
 class RandomPhotoNode(Node):
-    def __init__(self, varname):
-        self.varname = varname
+    def __init__(self, varname, related_by_tag):
+        self.varname, self.related_by_tag = varname, related_by_tag
     
     def render(self, context):
         import random
-        photos = Photo.objects.all().filter(owner='sixminutes')
-        context[self.varname] = random.choice(photos)
+        photo = random.choice(Photo.objects.filter(owner__exact='sixminutes'))
+        tags = Tag.objects.get_for_object(photo)[:1]
+        context[self.varname] = photo
+        context[self.related_by_tag] = Photo.objects.filter(owner__exact='sixminutes', tags__icontains=tags[0]).exclude(id__exact=photo.id)[:6]
+        print context[self.related_by_tag]
         return ''
 
 @register.tag(name="get_random_photo")
-def get_popular_tags(parser, token):
+def get_random_photo(parser, token):
     bits = token.contents.split()
-    if len(bits) != 3:
+    if len(bits) != 4:
         raise TemplateSyntaxError, "get_random_photo tag takes exactly 2 arguments"
     if bits[1] != 'as':
         raise TemplateSyntaxError, "first argument to get_random_photo tag must be 'as'"
-    return RandomPhotoNode(bits[2])
+    return RandomPhotoNode(bits[2], bits[3])
+
