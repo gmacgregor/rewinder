@@ -1,26 +1,37 @@
-
+{% load custom_tags %}
 {% load threadedcommentstags %}
 {% load gravatar %}
 {% get_free_threaded_comment_tree for object as tree %}
 {% get_gravatar_url for comment.email as gravatar %}
 
 <div id="comments">
+<h3>Comments</h3>
 {% if tree %}
 <ol>
 {% for comment in tree %}
 <li>
-<div class="comment" id="c{{ comment.id }}">
-<p>{% if comment.website %}<a href="{{ comment.website }}" title="Visit {{ comment.name }}'s website">{% endif %}<img src="{{ comment.email|gravatar }}" alt="Gravatar for {{ comment.name }}" />{% if comment.website %}</a>{% endif %}{% if comment.website %}<a href="{{ comment.website }}" title="Visit {{ comment.name }}'s website">{% endif %}{{ comment.name }}{% if comment.website %}</a>{% endif %}</p>
-{% auto_transform_markup comment %} <a href="#c{{ comment.id }}">#</a>
+<div class="comment clearfix{% if forloop.first %} first{% endif %}" id="c{{ comment.id }}">
+<div class="comment-meta">
+<p class="author">{% if comment.website %}<a href="{{ comment.website }}" title="Visit {{ comment.name }}'s website">{% endif %}{{ comment.name }}{% if comment.website %}</a>{% endif %}</p>
+{% if comment.website %}<a href="{{ comment.website }}" title="Visit {{ comment.name }}'s website">{% endif %}<img src="{{ comment.email|gravatar }}" alt="Gravatar for {{ comment.name }}" width="50" height="50" />{% if comment.website %}</a>{% endif %}
+<p class="meta date"><a href="#c{{ comment.id }}" title="Permanent link to this comment">{{ comment.date_submitted|date:"M d Y"}}<br />{{ comment.date_submitted|date:"g:h a" }}</a><p>
+</div>
+<div class="remark">
+{% auto_transform_markup comment %}
+<div>
 </div>
 </li>
 {% endfor %}
 </ol>
+{% else %}
+    {% if object.enable_comments %}
+    <p><strong>No comments have been posted yet</strong></p>
+    {% endif %}
 {% endif %}
 {% if object.enable_comments %}
 <h3 id="post-comment">Post a comment</h3>
 {% include "threadedcomments/freeform.html" %}
 {% else %}
-<p>Comments are closed.</p>
+<p><strong>Comments are closed</strong></p>
 {% endif %}
 </div>

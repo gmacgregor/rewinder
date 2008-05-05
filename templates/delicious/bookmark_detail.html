@@ -10,13 +10,11 @@
 {% endblock %}
 
 {% block content %}
-<div id="link-detail" class="detail">
-<p class="date">{% date_format object.saved_date %}</p>
+<div id="link-detail">
+<p class="meta date">Saved on {% date_format object.saved_date %}</p>
 <h2>{{ object.description }}</h2>
-{% if object.extended_info %}
-<p>{{ object.extended_info }}</p>
-{% endif %}
-<p><a href="{{ object.url }}" title="Visit site">Visit site</a></p>
+{% if object.extended_info %}<p>{{ object.extended_info }}</p>{% endif %}
+<p><a href="{{ object.url }}" title="Visit site" class="visit">Visit site</a></p>
 </div>
 
 {% include "tag/tags_for_object.html" %}

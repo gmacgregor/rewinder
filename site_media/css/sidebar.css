@@ -1,0 +1,24 @@
+#sidebar {
+    padding: 20px 0 0 10px;
+    width: 490px;
+}
+#sidebar #random-link {
+    margin-top: 2em;
+}
+#sidebar #random-link p {
+    margin-top: 0.5em;
+}
+#sidebar #random-link #more-links {
+}
+
+#sidebar #random-link #more-links h3 {
+    margin-top: 1em;
+    border: none;
+}
+#sidebar #random-link #more-links ul {
+    margin-top: 0.5em;
+    line-height: 1.4em;
+    color: #888;
+    list-style-type: square;
+    list-style-position: inside;
+}

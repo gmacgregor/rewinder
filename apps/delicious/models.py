@@ -77,7 +77,7 @@ class Bookmark(models.Model):
         get_latest_by = 'saved_date'
         
     class Admin:
-        list_display = ('description', 'saved_date', 'extended_info')
+        list_display = ('description', 'saved_date', 'extended_info', 'enable_comments')
         search_fields = ['description', 'extended_info']
         date_hierarchy = 'saved_date'
 
