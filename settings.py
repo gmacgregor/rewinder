@@ -64,6 +64,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
+    #'rewinder.lib.sql_debug.SqlPrintingMiddleware',
 )
 
 ROOT_URLCONF = 'rewinder.urls'

@@ -1,6 +1,10 @@
 #random-photo {
     overflow: hidden;
 }
+#random-photo h2 {
+    margin: 0.5em 0 1em 0;
+    text-align: right;
+}
 #random-photo p a {
     font-size: 10px;
     text-transform: uppercase;
@@ -18,6 +22,16 @@ p.photo a {
     padding-top: 150px;
     overflow: hidden;
     background-position: 50% 50%;
+}
+.thumbnail {
+    float: left;
+    margin: 0 10px 10px 0;
+}
+.home .thumbnail {
+    margin-right: 8px;
+}
+.thumbnail.last {
+    margin-right: 0;
 }
 #photo-detail dl {
     margin: 1em 0;

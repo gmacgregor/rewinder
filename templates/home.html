@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block breadcrumb %}{% endblock %}
+{% block body_class %}home{% endblock %}
 {% load custom_tags %}
 
 {% block content %}
@@ -12,12 +13,19 @@
 {% endblock %}
 
 {% block sidebarcontent %}
-
-{% get_random_photo as photo %}
+{% get_random_photo as photo related_photos %}
 <div id="random-photo">
-<a href="{{ photo.get_absolute_url }}"><img src="{{ photo.medium_url }}"></a>
-<p><a href="{% url photo_home %}">More photos...</a></p>
+<h3>Random Photo</h3>
+<p><a href="{{ photo.get_absolute_url }}" title="View details and comment on this photo"><img src="{{ photo.medium_url }}"></a></p>
+<h2><a href="{{ photo.get_absolute_url }}" title="View details and comment on this photo">{{ photo.title }}</a></h2>
+{% if related_photos %}
+<h3>Related Photos</h3>
+{% for related in related_photos %}
+<div class="thumbnail{% if forloop.last %} last{% endif %}"><a href="{{ related.get_absolute_url }}" title="View larger size of this photo"><img src="{{ related.square_url }}" alt="{{ related.title }}"></a></div>
+{% endfor %}
+{% endif %}
 </div>
+
 {% get_latest_posts 3 as latest_posts %}
 {% for post in latest_posts %}
 {% autoescape off %}
