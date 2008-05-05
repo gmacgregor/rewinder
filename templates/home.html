@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block breadcrumb %}{% endblock %}
+{% block breadcrumb %}<li>10 latest additions to the Tumblelog</li>{% endblock %}
 {% block body_class %}home{% endblock %}
 {% load custom_tags %}
 
@@ -21,7 +21,7 @@
 {% if related_photos %}
 <h3>Related Photos</h3>
 {% for related in related_photos %}
-<div class="thumbnail{% if forloop.last %} last{% endif %}"><a href="{{ related.get_absolute_url }}" title="View larger size of this photo"><img src="{{ related.square_url }}" alt="{{ related.title }}"></a></div>
+<div class="thumbnail{% if forloop.last %} last{% endif %}"><a href="{{ related.get_absolute_url }}" title="View larger size of this photo"><img src="{{ related.square_url }}" width="75" height="75" alt="{{ related.title }}"></a></div>
 {% endfor %}
 {% endif %}
 </div>
