@@ -2,6 +2,7 @@
 @import url("tumblelog.css");
 @import url("photo.css");
 @import url("tags.css");
+@import url("sidebar.css");
 
 body {
     font-size: 0.8em;
@@ -17,6 +18,9 @@ a:hover {
     text-decoration: underline;
     color: #ab0b31;
 }
+strong {
+    font-weight: bold;
+}
 h1 {
     float: left;
     width: 500px;
@@ -24,6 +28,7 @@ h1 {
     font-size: 18px;
 }
 h1 a,
+h4,
 #nav ul li a {
     color: #000;
 }
@@ -36,10 +41,12 @@ h2 {
 h2 a {
     font-weight: normal;
 }
-h3 {
+h3, h4 {
     font-size: 10px;
     font-weight: bold;
     text-transform: uppercase;
+}
+h3 {
     margin-bottom: 1em;
     padding-top: 0.5em;
     color: #888;
@@ -97,18 +104,18 @@ p {
     color: #888;
     font-size: 10px;
 }
-#sidebar {
-    padding: 20px 0 0 10px;
-    width: 490px;
+.visit a {
+    color: #ccc;
 }
 .detail h2 {
     margin-bottom: 0.5em;
     padding-bottom: 0.2em;
-    border-bottom: 1px solid #ccc;
+    /*border-bottom: 1px solid #ccc;*/
 }
+/*
 .detail p {
     margin-bottom: 0.5em;
-}
+}*/
 /* ----------------------------------------------------------------- breadcrumb */
 
 #breadcrumb {
@@ -204,24 +211,32 @@ ul.chart li span.index {
     left: 0;
     height: 100%;    
     background-color: #e9e8e8;
+    text-indent: -3000em;
 }
 /* ----------------------------------------------------------------- comment */
 #comments {
-    border-top: 1px solid #ccc;
-    margin-top: 2em;
-    padding-top: 1em;
+    margin-top: 4em;
+}
+#comment-form {
+    margin-top: 1.5em;
 }
 #comment-form label {
     display: block;
     font-weight: bold;
     padding-bottom: 0.3em;
 }
+/*
 #comments #post-comment {
     border-top: 1px solid #ccc;
     margin: 2em 0 1em 0;
     padding-top: 0.5em;
 }
-#comment-form input {
+*/
+#comments #post-comment {
+    margin-top: 4em;
+}
+#comment-form input,
+#comment-form textarea {
     font-size: 1em;
     font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
 }
@@ -249,10 +264,45 @@ ul.chart li span.index {
     border: 1px solid #ccc;
 }
 #comment-form #comment-submit {
-    clear: left;
 }
 #comment-form #comment-submit input {
-    margin-right: 1em;
+    margin: 2em 1em 0 0;
+}
+#comments .comment {
+    margin-bottom: 2em;
+}
+#comments .remark {
+}
+#comments .comment img {
+    border: 1px solid #ccc;
+    padding: 2px;
+    margin: 0 10px 10px 0;
+}
+#comments .comment {
+    clear: left;
+    border-top: 1px solid #ccc;
+}
+#comments .comment.first {
+    border-top-color: transparent;
+}
+#comments .comment .comment-meta {
+    float: left;
+    width: 115px;
+    padding-right: 10px;
+    line-height: 1.4em;
+}
+#comments .comment .date a {
+    color: #888;
+}
+#comments .comment .author {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+#comments .comment p.meta {
+    margin-top: 0;
+}
+#comments .comment .remark {
+    margin-left: 125px;
 }
 ul.errorlist {
     list-style-type: square;
@@ -262,7 +312,31 @@ ul.errorlist li {
     margin-bottom: 0.5em;
 }
 /* ----------------------------------------------------------------- tags */
+/*
 #object-tags h3 {
     margin: 2em 0 1em 0;
     padding-top: 0.5em;
+}
+*/
+/*
+.detail.link h2 {
+    border-bottom: none;
+}
+#link-detail {
+    margin-bottom: 2em;
+}*/
+.detail.link #object-tags {
+    margin-top: 1em;
+}
+
+.detail.photo #next-previous {
+    margin-top: 0.70em;
+}
+.detail.photo #next-previous p {
+    width: 75px;
+    float: left;
+    margin-right: 10px;
+}
+.detail.photo #next-previous p.previous {
+    text-align: right;
 }

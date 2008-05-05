@@ -26,6 +26,14 @@
 {% endif %}
 </div>
 
+{% get_random delicious.Bookmark 200 as random_link %}
+<div id="random-link">
+<h3>Random link</h3>
+<h2><a href="{{ random_link.get_absolute_url }}" title="View link details">{{ random_link.description }}</a></h2>
+<p>{% if random_link.extended_info %}{{ random_link.extended_info }} {% endif %}<span class="meta date">Saved on {% date_format random_link.saved_date %}</span></p>
+<p class="visit"><a href="{{ random_link.url }}" title="Visit site">Visit</a></p>
+</div>
+
 {% get_latest_posts 3 as latest_posts %}
 {% for post in latest_posts %}
 {% autoescape off %}

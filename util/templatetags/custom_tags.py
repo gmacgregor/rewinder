@@ -6,6 +6,7 @@ from django.template.defaultfilters import stringfilter, date
 from rewinder.apps.blog.models import Article
 from rewinder.apps.flickr.models import Photo
 
+import random
 
 register = Library()
 
@@ -108,16 +109,17 @@ class RandomPhotoNode(Node):
         self.varname, self.related_by_tag = varname, related_by_tag
     
     def render(self, context):
-        import random
         photo = random.choice(Photo.objects.filter(owner__exact='sixminutes'))
         tags = Tag.objects.get_for_object(photo)[:1]
         context[self.varname] = photo
         context[self.related_by_tag] = Photo.objects.filter(owner__exact='sixminutes', tags__icontains=tags[0]).exclude(id__exact=photo.id)[:6]
-        print context[self.related_by_tag]
         return ''
 
 @register.tag(name="get_random_photo")
 def get_random_photo(parser, token):
+    """
+    get_random_photo as photo related_photos
+    """
     bits = token.contents.split()
     if len(bits) != 4:
         raise TemplateSyntaxError, "get_random_photo tag takes exactly 2 arguments"
@@ -125,3 +127,57 @@ def get_random_photo(parser, token):
         raise TemplateSyntaxError, "first argument to get_random_photo tag must be 'as'"
     return RandomPhotoNode(bits[2], bits[3])
 
+
+class RandomContentNode(Node):
+    def __init__(self, model, pool, varname):
+        self.pool, self.varname = pool, varname
+        self.model = get_model(*model.split('.'))
+    
+    def render(self, context):
+        import random
+        context[self.varname] = random.choice(self.model._default_manager.all()[:self.pool])
+        return ''
+
+@register.tag(name="get_random")
+def get_random(parser, token):
+    """
+    get_random delicious.Bookmark 5 as random_link
+    """
+    bits = token.contents.split()
+    if len(bits) != 5:
+        raise TemplateSyntaxError, "get_random tag takes exactly four arguments"
+    if bits[3] != 'as':
+        raise TemplateSyntaxError, "third argument to get_random tag must be 'as'"
+    return RandomContentNode(bits[1], bits[2], bits[4])
+
+
+class RandomContentWithRelatedNode(Node):
+    def __init__(self, model, num, varname, related, related_num, relator_varname):
+        self.num, self.varname, self.related, self.related_num, self.relator_varname = num, varname, related, related_num, relator_varname
+        self.model = get_model(*model.split('.'))
+    
+    def render(self, context):
+        import random
+        content = random.choice(self.model._default_manager.all()[:self.num])
+        tags = content.tags.split()
+        tag = random.choice(tags)
+        try:
+            related_content = self.model.objects.filter(tags__icontains=tag).exclude(id__exact=content.id)[:self.related_num]
+            context[self.varname] = content
+            context[self.related] = related_content
+            context[self.relator_varname] = tag
+        except IndexError:
+            pass
+        return ''
+
+@register.tag(name="get_random_with_related")
+def get_random_with_related(parser, token):
+    """
+    get_random_with_related delicious.Bookmark 5 as random_link related_links 3 relator
+    """
+    bits = token.contents.split()
+    if len(bits) != 8:
+        raise TemplateSyntaxError, "get_random tag takes exactly five arguments"
+    if bits[3] != 'as':
+        raise TemplateSyntaxError, "third argument to get_random tag must be 'as'"
+    return RandomContentWithRelatedNode(bits[1], bits[2], bits[4], bits[5], bits[6], bits[7])
