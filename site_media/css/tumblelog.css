@@ -24,6 +24,7 @@
     text-transform: uppercase;
     letter-spacing: 5px;
     font-size: 0.8em;
+    line-height: 1;
 }
 .tumblelog #sidebar ul li {
     margin-bottom: 0.5em;
