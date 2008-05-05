@@ -17,6 +17,16 @@ a:hover {
     text-decoration: underline;
     color: #ab0b31;
 }
+h1 {
+    float: left;
+    width: 500px;
+    font-weight: bold;
+    font-size: 18px;
+}
+h1 a,
+#nav ul li a {
+    color: #000;
+}
 h2 {
     color: #333;
     line-height: 1.2em;
@@ -62,7 +72,6 @@ p {
     width: 159px;
     padding: 2px 2px 5px 2px;
     border-bottom: 1px solid #ccc;
-    color: #000;
 }
 #nav ul li a.last {
     border-bottom: none;
