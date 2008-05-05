@@ -37,6 +37,7 @@ h3 {
 }
 p {
     margin-top: 1em;
+    line-height: 1.4em;
 }
 #wrapper {
     width: 1000px;
