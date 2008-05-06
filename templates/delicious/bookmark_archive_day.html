@@ -1,10 +1,29 @@
-{% extends "base.html" %}
-{% block title %}Bookmarks: {{ day|date:"F d, Y" }}{% endblock %}
+{% extends "delicious/base.html" %}
+{% block title %}Links: {{ day|date:"F d, Y" }}{% endblock %}
+{% block description %}Links saved on {{ day|date:"F d, Y" }}{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+    <li><a href="{% url bookmark_archive_year year=day|date:"Y" %}">{{ day|date:"Y" }}</a></li>
+    <li><a href="{% url bookmark_archive_month year=day|date:"Y", month=day|date:"m" %}">{{ day|date:"m" }}</a></li>
+    <li><a href="{% url bookmark_archive_day year=day|date:"Y", month=day|date:"m",day=day|date:"d" %}">{{ day|date:"d" }}</a></li>
+{% endblock %}
+
+{% load custom_tags %}
+{% load threadedcommentstags %}
+
 {% block content %}
-
-<h2>Bookmarks saved on {{ day|date:"F d, Y" }} ({{ object_list.count }})</h2>
+<h2>Links saved on {{ day|date:"F d, Y" }} ({{ object_list.count }})</h2>
+<div id="day-archive">
 {% for link in object_list %}
-<p><a href="{{ link.get_absolute_url }}">{{ link.description }}</p></a>
+{% get_free_comment_count for link as comments %}
+<div class="entry">
+<p class="meta"><span class="date">{{ link.saved_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ link.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+<h2><a href="{{ link.get_absolute_url }}">{{ link.description }}</a></h2>
+{% if link.extended_info %}
+<p>{{ link.extended_info }}</p>
+{% endif %}
+<p class="visit"><a href="{{ link.url }}" title="Visit site">Visit site</a></p>
+</div>
 {% endfor %}
-
+</div>
 {% endblock %}
