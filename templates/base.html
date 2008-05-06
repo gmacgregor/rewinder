@@ -13,6 +13,9 @@
     <link rel="top start" href="/" title="rewinder.ca">
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/base.css?ord=1234" type="text/css" media="screen">
     {% block extrahead %}{% endblock %}
+    <!--[if lte IE7]>
+        <link rel="stylesheet" href="{{ MEDIA_URL }}css/ie.css" type="text/css" media="screen">
+    <![endif]-->
 </head>
 
 <body class="{% block body_class %}{{ value|default_if_none:""}}{% endblock %}">
