@@ -77,8 +77,8 @@ class TwitterUser(models.Model):
 
 class TweetModerator(CommentModerator):
     akismet = settings.COMMENTS_AKISMET
-    auto_close_field = 'pub_time'
-    close_after = settings.COMMENTS_CLOSE_AFTER
+    auto_moderate_field = 'pub_time'
+    moderate_after = settings.COMMENTS_MODERATE_AFTER
     email_notification = settings.COMMENTS_EMAIL
     enable_field = settings.COMMENTS_ENABLE_FIELD
 moderator.register(Tweet, TweetModerator)
