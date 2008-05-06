@@ -1,14 +1,40 @@
 {% extends "video/base.html" %}
+{% block body_class %}video list{% endblock %}
+{% load custom_tags %}
+{% load threadedcommentstags %}
 
 {% block content %}
 <p id="paginator">{% if paginator.has_previous %}<span class="previous"><a href="{% url tumblelog_list paginator.previous %}">Previous page</a></span>{% endif %}<span class="pages">{% for page in paginator.page_range %}{% if not page %}...{% else %}<a href="{% url tumblelog_list page %}">{% ifequal page paginator.page %}[{{ page }}]{% else %}{{ page }}{% endifequal %}</a>{% endif %}{% endfor %}</span>{% if paginator.has_next %}<span class="next"><a href="{% url tumblelog_list paginator.next %}">Next page</a></span>{% endif %}</p>
 
 {% for video in paginator.object_list %}
-<h2><a href="{{ video.get_absolute_url }}">{{ video.title }}</a></h2>
+{% get_free_comment_count for video as comments %}
+<div class="entry video clearfix">
+<p class="meta"><span class="date">{{ video.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ video.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
 {% if video.youtube_small_image %}
-<a href="{{ video.get_absolute_url }}"><img src="{{ video.youtube_small_image }}" width="130" height="97" style="border: 1px solid #ddd; padding: 2px;"></a>
+<a href="{{ video.get_absolute_url }}"><img src="{{ video.youtube_small_image }}" width="120" height="90" /></a>
 {% endif %}
-<p>Rating: {{ video.rating }}</p>
+<h2><a href="{{ video.get_absolute_url }}">{{ video.title }}</a></h2>
+{% if video.html_description %}{% autoescape off %}{{ video.html_description }}{% endautoescape %}{% endif %}
+</div>
 {% endfor %}
 
+{% endblock %}
+
+{% block sidebarcontent %}
+{% get_random video.Video 10 as random_video %}
+{% get_free_comment_count for random_video as comments %}
+{% if random_video.embed_code %}
+<div id="random-video">
+<h3>Random Video</h3>
+<p class="meta"><span class="date">{{ random_video.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ video.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+<h2><a href="{{ random_video.get_absolute_url }}" title="View video details">{{ random_video.title }}</a></h2>
+<div id="video-embed">
+{% autoescape off %}{{ random_video.embed_code }}{% endautoescape %}
+</div>
+<p>Source: <a href="{{ random_video.url }}">{{ random_video.source }}</a></p>
+{% else %}
+<p><a href="{{ random_video.url }}">View it on {{ random_video.source }}</a></p>
+{% endif %}
+{% if random_video.description %}{% autoescape off %}{{ random_video.html_description }}{% endautoescape %}{% endif %}
+</div>
 {% endblock %}

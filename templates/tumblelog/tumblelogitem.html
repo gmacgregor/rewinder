@@ -23,12 +23,13 @@
 </div>
 {% endifequal %}
 {% ifequal item.content_type.name "video" %}
-<div class="entry video">
+<div class="entry video clearfix">
     <p class="meta"><a href="{% url video_list %}">Video</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p> 
-    <h2><a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.title }}</a></h2>
     {% if item.get_content_object.youtube_small_image %}
-    <img src="{{ item.get_content_object.youtube_small_image }}" width="130" height="97" style="border: 1px solid #ddd; padding: 2px;">
+    <a href="{{ item.get_content_object.get_absolute_url }}"><img src="{{ item.get_content_object.youtube_small_image }}" width="120" height="90" /></a>
     {% endif %}
+    <h2><a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.title }}</a></h2>
+    {% if item.get_content_object.html_description %}{% autoescape off %}{{ item.get_content_object.html_description }}{% endautoescape %}{% endif %}
 </div>
 {% endifequal %}
 {% ifequal item.content_type.name "photo" %}
