@@ -2,5 +2,6 @@
 {% block title %}Photos{% endblock %}
 {% block breadcrumb %}{{ block.super }}<li><a href="{% url photo_home %}">Photos</a></li>{% endblock %}
 {% block sidebarcontent %}
-<p><a href="{% url photo_faves %}">My favourite flickr photos</a></p>
+{% include "flickr/archive_year_list.html" %}
+{% include "flickr/popular_tags.html" %}
 {% endblock %}
