@@ -1,7 +1,9 @@
+from django.conf import settings
 from django.db import models
 from tagging.fields import TagField
 from django.dispatch import dispatcher
 from django.db.models import signals
+from threadedcomments.moderation import CommentModerator, moderator
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
 FLICKR_LICENSES = (
@@ -128,5 +130,13 @@ class PhotoSet(models.Model):
     class Admin:
         list_display = ('flickr_id', 'owner', 'title')
 
+class PhotoModerator(CommentModerator):
+    akismet = settings.COMMENTS_AKISMET
+    auto_close_field = 'taken_date'
+    close_after = settings.COMMENTS_CLOSE_AFTER
+    email_notification = settings.COMMENTS_EMAIL
+    enable_field = settings.COMMENTS_ENABLE_FIELD
+moderator.register(Photo, PhotoModerator)
+        
 dispatcher.connect(create_tumblelog_item, sender=Photo, signal=signals.post_save)
 dispatcher.connect(kill_tumblelog_item, sender=Photo, signal=signals.post_delete)
