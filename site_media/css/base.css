@@ -3,6 +3,7 @@
 @import url("photo.css");
 @import url("tags.css");
 @import url("sidebar.css");
+@import url("video.css");
 
 body {
     font-size: 0.8em;
@@ -125,7 +126,7 @@ p {
 /* ----------------------------------------------------------------- breadcrumb */
 
 #breadcrumb {
-    clear: right;
+    clear: both;
     border-top: 1px solid #000;
     border-bottom: 1px solid #ccc;
     font-weight: bold;
@@ -311,10 +312,7 @@ ul.errorlist {
 ul.errorlist li {
     margin-bottom: 0.5em;
 }
-/* ----------------------------------------------------------------- tags */
-.detail.link #object-tags {
-    margin-top: 1em;
-}
+/* ----------------------------------------------------------------- next/prev */
 #next-previous {
     margin-bottom: 1em;
 }
@@ -344,4 +342,17 @@ ul.errorlist li {
 
 #archive-list ul li {
     line-height: 1.4em;
+}
+
+
+.detail #related-content {
+    margin: 1em 0 2em 0;
+}
+#related-content ul {
+    margin-top: 0.5em;
+    line-height: 1.4em;
+    color: #888;
+    list-style-type: square;
+    list-style-position: inside;
+
 }

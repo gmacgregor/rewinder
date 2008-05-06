@@ -15,10 +15,3 @@
     margin-top: 1em;
     border: none;
 }
-#sidebar #random-link #more-links ul {
-    margin-top: 0.5em;
-    line-height: 1.4em;
-    color: #888;
-    list-style-type: square;
-    list-style-position: inside;
-}
