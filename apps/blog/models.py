@@ -5,7 +5,7 @@ from django.dispatch import dispatcher
 from django.db.models import signals
 from tagging.fields import TagField
 from template_utils.markup import formatter
-from comment_utils.moderation import CommentModerator, moderator
+from threadedcomments.moderation import CommentModerator, moderator
 
 from rewinder.apps.geo.models import Place
 from rewinder.apps.video.models import Video
@@ -178,8 +178,8 @@ class Article(models.Model):
 
 class ArticleModerator(CommentModerator):
     akismet = settings.COMMENTS_AKISMET
-    auto_close_field = 'pub_date'
-    close_after = settings.COMMENTS_CLOSE_AFTER
+    auto_moderate_field = 'pub_date'
+    moderate_after = settings.COMMENTS_MODERATE_AFTER
     email_notification = settings.COMMENTS_EMAIL
     enable_field = settings.COMMENTS_ENABLE_FIELD
 moderator.register(Article, ArticleModerator)
