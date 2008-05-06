@@ -99,7 +99,7 @@
         "pk": 4, 
         "model": "video.video", 
         "fields": {
-            "html_description": "<p>In October of 2004, photographer Alec Soth went on assignment for LIFE magazine to capture weekend soldiers at an Airsoft military simulation in Joelton, Tennessee.\n<\/p>\n<p>In anticipation of his upcoming Minnesota Artists Exhibition Program exhibition, filmmaker Mike Dust traveled alongside Soth for this three-day excursion, interviewing and shooting alongside him as he worked to capture images for, both the magazine shoot as well as for his personal work.\n<\/p>\n<p>A number of these photographs (Odessa, Joelton, Tennessee, 2004 and Josh, Joelton, Tennessee, 2004) became part of the exhibition Alec Soth: Portraits at the Minneapolis Institute of Arts the following spring. The video piece created during that shoot was installed in the gallery as an accompaniment to the exhibition.\n<\/p>", 
+            "html_description": "<p>In October of 2004, photographer Alec Soth went on assignment for LIFE magazine to capture weekend soldiers at an Airsoft military simulation in Joelton, Tennessee.\n<\/p>", 
             "rating": "3", 
             "videos": [
                 1, 
@@ -113,9 +113,9 @@
             "title": "Alec Soth: Portraits - The Ground Glass", 
             "source": 1, 
             "enable_comments": true, 
-            "description": "In October of 2004, photographer Alec Soth went on assignment for LIFE magazine to capture weekend soldiers at an Airsoft military simulation in Joelton, Tennessee.\r\n\r\nIn anticipation of his upcoming Minnesota Artists Exhibition Program exhibition, filmmaker Mike Dust traveled alongside Soth for this three-day excursion, interviewing and shooting alongside him as he worked to capture images for, both the magazine shoot as well as for his personal work.\r\n\r\nA number of these photographs (Odessa, Joelton, Tennessee, 2004 and Josh, Joelton, Tennessee, 2004) became part of the exhibition Alec Soth: Portraits at the Minneapolis Institute of Arts the following spring. The video piece created during that shoot was installed in the gallery as an accompaniment to the exhibition.", 
+            "description": "In October of 2004, photographer Alec Soth went on assignment for LIFE magazine to capture weekend soldiers at an Airsoft military simulation in Joelton, Tennessee.", 
             "tags": "video photography", 
-            "last_modified": "2008-05-03 16:16:03", 
+            "last_modified": "2008-05-06 15:13:16", 
             "commentary": "", 
             "path": "", 
             "pub_date": "2007-08-16 16:12:18", 
@@ -152,6 +152,62 @@
             "places": [], 
             "url": "http:\/\/youtube.com\/watch?v=fOIM1_xOSro", 
             "video_id": "fOIM1_xOSro", 
+            "html_commentary": null
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "video.video", 
+        "fields": {
+            "html_description": null, 
+            "rating": "", 
+            "videos": [], 
+            "people": [], 
+            "created_on": "2008-05-06 17:33:42", 
+            "nsfw": false, 
+            "embed_code": "<object type=\"application\/x-shockwave-flash\" width=\"500\" height=\"300\" data=\"http:\/\/www.vimeo.com\/moogaloop.swf?clip_id=832162&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=1a1819\"><param name=\"quality\" value=\"best\" \/><param name=\"allowfullscreen\" value=\"true\" \/><param name=\"scale\" value=\"showAll\" \/><param name=\"movie\" value=\"http:\/\/www.vimeo.com\/moogaloop.swf?clip_id=832162&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=1a1819\" \/><\/object>", 
+            "title": "Words and Thoughts in RGB", 
+            "source": 2, 
+            "enable_comments": true, 
+            "description": "", 
+            "tags": "colour", 
+            "last_modified": "2008-05-06 17:33:42", 
+            "commentary": "", 
+            "path": "", 
+            "pub_date": "2008-05-06 17:33:20", 
+            "slug": "words-and-thoughts-rgb", 
+            "running_time": "", 
+            "places": [], 
+            "url": "http:\/\/www.vimeo.com\/832162", 
+            "video_id": "832162", 
+            "html_commentary": null
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "video.video", 
+        "fields": {
+            "html_description": "<p>Absolutely beautiful!\n<\/p>", 
+            "rating": "4", 
+            "videos": [], 
+            "people": [], 
+            "created_on": "2008-05-06 17:42:32", 
+            "nsfw": false, 
+            "embed_code": "<object type=\"application\/x-shockwave-flash\" width=\"500\" height=\"300\" data=\"http:\/\/www.vimeo.com\/moogaloop.swf?clip_id=805717&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=1a1819\"><param name=\"quality\" value=\"best\" \/><param name=\"allowfullscreen\" value=\"true\" \/><param name=\"scale\" value=\"showAll\" \/><param name=\"movie\" value=\"http:\/\/www.vimeo.com\/moogaloop.swf?clip_id=805717&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=1a1819\" \/><\/object>", 
+            "title": "Florian", 
+            "source": 2, 
+            "enable_comments": true, 
+            "description": "Absolutely beautiful!", 
+            "tags": "", 
+            "last_modified": "2008-05-06 17:42:32", 
+            "commentary": "", 
+            "path": "", 
+            "pub_date": "2008-05-06 17:41:59", 
+            "slug": "florian", 
+            "running_time": "", 
+            "places": [], 
+            "url": "http:\/\/www.vimeo.com\/805717", 
+            "video_id": "805717", 
             "html_commentary": null
         }
     }
