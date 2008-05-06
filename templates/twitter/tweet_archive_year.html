@@ -1,11 +1,24 @@
-{% extends "base.html" %}
+{% extends "twitter/base.html" %}
 {% block title %}Twitter Tweets: {{ year }}{% endblock %}
+{% block description %}Twitter tweets made in {{ year }}{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+<li><a href="{% url tweet_archive_year year=year %}" title="View tweets made in {{ year }}">{{ year }}</a></li>{% endblock %}
+{% load custom_tags %}
+{% load threadedcommentstags %}
+
 {% block content %}
-
-<h2>Tweets in {{ year }}</h2>
+<h2>Twitter tweets for {{ year }} ({{ object_list.count }})</h2>
+<div id="year-archive">
 {% for tweet in object_list %}
-<p><a href="{{ tweet.url }}">{{ tweet.pub_time }} UTC</a></p>
-<h2>{{ tweet.text }}</h2>
+{% get_free_comment_count for tweet as comments %}
+{% autoescape off %}
+<div class="entry tweet">
+    <p class="meta"><a href="{% url tweet_home %}">Tweet</a> <span class="date">{{ tweet.pub_time|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ tweet.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>    
+    <h2>{{ tweet.text|twitter_links }}</h2>
+    <p class="visit"><a href="{{ tweet.url }}">View</a></p>
+</div>
+{% endautoescape %}
 {% endfor %}
-
+</div>
 {% endblock %}

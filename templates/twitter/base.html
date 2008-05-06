@@ -2,3 +2,9 @@
 {% block title %}Twitter Tweets{% endblock %}
 {% block body_class %}twitter{% endblock %}
 {% block breadcrumb %}{{ block.super }}<li><a href="{% url tweet_home %}" title="Back to all tweets">Tweets</a></li>{% endblock %}
+
+{% block sidebarcontent %}
+<h3>What is a Tweet?</h3>
+<p>A tweet is a 140 character-or-less description of what I am doing. Tweets are posted to the website <a href="http://www.twitter.com">twitter.com</a> via twitter.com's web interface, a mobile device or instant messaging.</p>
+<p>My twitter profile page is located at: <a href="http://www.twitter.com/gmacgregor/" title="View my twitter profile page">twitter.com/gmacgregor</a></p>
+{% endblock %}
