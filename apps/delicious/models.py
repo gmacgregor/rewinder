@@ -2,7 +2,6 @@ from django.conf import settings
 from django.db import models
 from django.dispatch import dispatcher
 from django.db.models import signals
-#from comment_utils.moderation import CommentModerator, moderator
 from threadedcomments.moderation import CommentModerator, moderator
 from tagging.fields import TagField
 from rewinder.util.timeconverter import time_to_settings
