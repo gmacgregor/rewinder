@@ -13,6 +13,19 @@
         }
     }, 
     {
+        "pk": 2, 
+        "model": "generic.source", 
+        "fields": {
+            "category": 1, 
+            "description": "Video site.", 
+            "title": "vimeo.com", 
+            "url": "http:\/\/www.vimeo.com\/", 
+            "created_on": "2008-05-06 16:23:09", 
+            "last_modified": "2008-05-06 16:23:09", 
+            "slug": "vimeo"
+        }
+    }, 
+    {
         "pk": 1, 
         "model": "generic.sourcecategory", 
         "fields": {
