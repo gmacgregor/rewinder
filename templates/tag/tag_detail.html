@@ -1,7 +1,9 @@
 {% extends "tag/base.html" %}
 {% block title %}{{ block.super }}: {{ tag }}{% endblock %}
+{% block description %}All things at rewinder.ca tagged '{{ tag }}'{% endblock %}
 {% block breadcrumb %}{{ block.super }}<li class="last">{{ tag }}</li>{% endblock %}
 {% block body_class %}tag detail{% endblock %}
+{% load custom_tags %}
 
 {% block content %}
 <h2>Things tagged '{{ tag }}'</h2>
@@ -50,4 +52,14 @@
 {% endif %}
 
 </div>
+{% endblock %}
+
+{% block sidebarcontent %}
+{% get_popular_tags 200 as limit tags total_count top_count %}
+<h3>Top {{ limit }} used tags among all <a href="{% url bookmark_home %}" title="Browse all links">links</a>, <a href="{% url photo_home %}" title="Browse all photos">photos</a>, <a href="{% url video_home %}" title="Browse all videos">videos</a> and <a href="{% url blog_home %}" title="Browse all blog posts">blog posts</a> of {{ total_count }} total tags</h3>
+<ul class="chart">
+{% for num, tag in tags %}
+ <li><a href="{% url tag_detail tag %}" rel="tag">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 495 %}px" class="index">({% widthratio num top_count 100 %}%)</span></a></li>
+{% endfor %}
+</ul>
 {% endblock %}
