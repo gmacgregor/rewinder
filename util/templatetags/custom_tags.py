@@ -78,6 +78,42 @@ def get_latest(parser, token):
         raise TemplateSyntaxError, "third argument to get_latest tag must be 'as'"
     return LatestContentNode(bits[1], bits[2], bits[4])
 
+class PopularTagsNode(Node):
+    def __init__(self, limit, limit_varname, tags_varname, count_varname, top_count_varname):
+        self.limit, self.limit_varname, self.tags_varname, self.count_varname, self.top_count_varname = limit, limit_varname, tags_varname, count_varname, top_count_varname
+    
+    def render(self, context):
+        all_tags = Tag.objects.all()
+        count = all_tags.count()
+        tags = {}
+        for tag in all_tags:
+            tags[tag] = tag.items.count()
+        items = tags.items()
+        items = [(v, k) for (k, v) in items]
+        items.sort()
+        items.reverse()
+        context[self.limit_varname] = self.limit
+        context[self.count_varname] = count
+        context[self.tags_varname] = items[:int(self.limit)]
+        context[self.top_count_varname] = items[0][0]
+        return ''
+        
+@register.tag(name="get_popular_tags")
+def get_popular_tags(parser, token):
+    """
+    get_popular_tags 200 as limit tags total_count top_count
+    """
+    bits = token.contents.split()
+    print bits
+    print bits[0]
+    print bits[6]
+    if len(bits) != 7:
+        raise TemplateSyntaxError, "get_popular_tags tag takes exactly 6 arguments"
+    if bits[2] != 'as':
+        raise TemplateSyntaxError, "second argument to get_popular_tags tag must be 'as'"
+    return PopularTagsNode(bits[1], bits[3], bits[4], bits[5], bits[6])
+
+
 class TagCountForModelNode(Node):
     def __init__(self, model, num, varname, count_name):
         self.num, self.varname, self.top_count = num, varname, count_name
@@ -94,8 +130,11 @@ class TagCountForModelNode(Node):
         context[self.top_count] = items[0][0]
         return ''
 
-@register.tag(name="get_popular_tags")
-def get_popular_tags(parser, token):
+@register.tag(name="get_popular_tags_for")
+def get_popular_tags_for(parser, token):
+    """
+    get_popular_tags_for delicious.Bookmark 40 as top_tags top_count
+    """
     bits = token.contents.split()
     if len(bits) != 6:
         raise TemplateSyntaxError, "get_popular_tags tag takes exactly five arguments"
