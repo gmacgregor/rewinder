@@ -16,19 +16,8 @@ def list(request, app, model, ordering='-pub_date', extra_context=None):
     template_name = '%s/%s_list.html' % (app.lower(), model.__name__.lower())
     return render_response(request, template_name, {'page': page, 'paginator': paginator, 'extra_context': extra_context})
 
-def all_tags(request, limit=200):
-    all_tags = Tag.objects.all()
-    count = all_tags.count()
-    tags = {}
-    for tag in all_tags:
-        tags[tag] = tag.items.count()
-    items = tags.items()
-    items = [(v, k) for (k, v) in items]
-    items.sort()
-    items.reverse()
-    items = items[:limit]
-    top_count = items[0][0]
-    return render_response(request, 'tag/tag_list.html', {'tags': items, 'total_count': count, 'limit': limit, 'top_count': top_count})
+def all_tags(request):
+    return render_response(request, 'tag/tag_list.html')
 
 def tag_detail(request, tag):
     articles = TaggedItem.objects.get_by_model(Article, tag)
