@@ -1,0 +1,8 @@
+{% load custom_tags %}
+{% get_popular_tags_for flickr.Photo 40 as top_tags top_count %}
+<h3>Top 40 Photo Tags</h3>
+<ul class="chart">
+{% for num, tag in top_tags %}
+<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 490 %}px" class="index"></span></a></li>
+{% endfor %}
+</ul>
