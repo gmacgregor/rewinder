@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block breadcrumb %}<li>Latest online activity</li><li class="last"><a href="{% url tumblelog_home %}" title="Browse all online activity since 2005">Browse all activity since 2005</a></li>{% endblock %}
 {% block body_class %}home{% endblock %}
+{% load threadedcommentstags %}
 {% load custom_tags %}
 
 {% block content %}
@@ -14,10 +15,12 @@
 
 {% block sidebarcontent %}
 {% get_random_photo as photo related_photos %}
+{% get_free_comment_count for photo as comments %}
 <div id="random-photo">
 <h3>Random Photo</h3>
-<p><a href="{{ photo.get_absolute_url }}" title="View details and comment on this photo"><img src="{{ photo.medium_url }}"></a></p>
+<p class="meta"><span class="date">{{ photo.taken_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ photo.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
 <h2><a href="{{ photo.get_absolute_url }}" title="View details and comment on this photo">{{ photo.title }}</a></h2>
+<p id="photo"><a href="{{ photo.get_absolute_url }}" title="View details and comment on this photo"><img src="{{ photo.medium_url }}"></a></p>
 {% if related_photos %}
 <h3>Related Photos</h3>
 {% for related in related_photos %}
@@ -27,10 +30,14 @@
 </div>
 
 {% get_random delicious.Bookmark 200 as random_link %}
+{% get_free_comment_count for random_link as comments %}
 <div id="random-link">
 <h3>Random link</h3>
+<p class="meta"><span class="date">{{ random_link.saved_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ random_link.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
 <h2><a href="{{ random_link.get_absolute_url }}" title="View link details">{{ random_link.description }}</a></h2>
-<p>{% if random_link.extended_info %}{{ random_link.extended_info }} {% endif %}<span class="meta date">Saved on {% date_format random_link.saved_date %}</span></p>
+{% if random_link.extended_info %}
+<p>{{ random_link.extended_info }}</p>
+{% endif %}
 <p class="visit"><a href="{{ random_link.url }}" title="Visit site">Visit</a></p>
 </div>
 
