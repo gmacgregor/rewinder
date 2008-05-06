@@ -1,0 +1,32 @@
+{% extends "twitter/base.html" %}
+{% block title %}{{ block.super }}: {{ object.text }}{% endblock %}
+{% block body_class %}detail tweet{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+    <li><a href="{% url tweet_archive_year year=object.pub_time|date:"Y" %}">{{ object.pub_time|date:"Y"}}</a></li>
+    <li><a href="{% url tweet_archive_month year=object.pub_time|date:"Y",month=object.pub_time|date:"m" %}">{{ object.pub_time|date:"m"}}</a></li>
+    <li><a href="{% url tweet_archive_day year=object.pub_time|date:"Y",month=object.pub_time|date:"m",day=object.pub_time|date:"d" %}">{{ object.pub_time|date:"d"}}</a></li>
+{% endblock %}
+{% load custom_tags %}
+
+{% block content %}
+<div id="tweet-detail" class="detail">
+<p class="meta date">Tweeted on {% date_format object.pub_time %}</p>
+{% autoescape off %}
+<h2>{{ object.text|twitter_links }}</h2>
+{% endautoescape %}
+<p class="visit"><a href="{{ object.url }}" title="View status on twitter.com">View</a></p>
+</div>
+{% include "threadedcomments/comments_list.html" %}
+{% endblock %}
+
+{% block sidebarcontent %}
+<div id="next-previous">
+{% if object.get_next %}
+<p class="next"><a href="{{ object.get_next.get_absolute_url }}"><img src="{{ object.get_next.square_url }}" alt="{{ object.get_next.title }}"></a><a href="{{ object.get_next.get_absolute_url }}">Next</a></p>
+{% endif %}
+{% if object.get_previous %}
+<p class="previous"><a href="{{ object.get_previous.get_absolute_url }}"><img src="{{ object.get_previous.square_url }}" alt="{{ object.get_previous.title }}"></a><a href="{{ object.get_previous.get_absolute_url }}">Previous</a></p>
+{% endif %}
+</div>
+{% endblock %}
