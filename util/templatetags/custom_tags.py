@@ -52,6 +52,9 @@ class LatestArticleNode(Node):
 
 @register.tag(name="get_latest_posts")
 def get_latest_posts(parser, token):
+    """
+    get_latest_posts 3 as latest_posts
+    """
     bits = token.contents.split()
     if len(bits) != 4:
         raise TemplateSyntaxError, "get_latest_posts tag takes exactly four arguments"
@@ -71,6 +74,9 @@ class LatestContentNode(Node):
 
 @register.tag(name="get_latest")
 def get_latest(parser, token):
+    """
+    get_latest delicious.Bookmark as latest_link
+    """
     bits = token.contents.split()
     if len(bits) != 5:
         raise TemplateSyntaxError, "get_latest tag takes exactly four arguments"
