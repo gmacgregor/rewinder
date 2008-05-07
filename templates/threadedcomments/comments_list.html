@@ -30,6 +30,7 @@
 {% endif %}
 {% if object.enable_comments %}
 <h3 id="post-comment">Post a comment</h3>
+<p>You can use <a href="http://daringfireball.net/projects/markdown/syntax">Markdown syntax</a> to format your comment as need be: HTML will do you no good.</p>
 {% include "threadedcomments/freeform.html" %}
 {% else %}
 <p><strong>Comments are closed</strong></p>
