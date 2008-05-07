@@ -42,10 +42,17 @@
 </div>
 
 {% get_latest_posts 3 as latest_posts %}
+<div id="latest-posts">
+<h3>Latest 3 Blog Posts</h3>
 {% for post in latest_posts %}
-{% autoescape off %}
+{% get_free_comment_count for post as comments %}
+<p class="meta"><span class="date">{{ post.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ post.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
 <h2><a href="{{ post.get_absolute_url }}">{{ post.headline }}</a></h2>
-{% if post.teaser %}{{ post.html_teaser }}{% endif %}
-{% endautoescape %}
+{% if post.teaser %}
+    {% autoescape off %}
+    {{ post.html_teaser }}
+    {% endautoescape %}
+{% endif %}
 {% endfor %}
+</div>
 {% endblock %}
