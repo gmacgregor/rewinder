@@ -5,6 +5,21 @@
 {% load custom_tags %}
 
 {% block content %}
+
+{% get_latest_posts 1 as latest_posts %}
+{% if latest_posts %}
+<div id="latest-posts">
+    {% for post in latest_posts %}
+    {% get_free_comment_count for post as comments %}
+    <p class="meta"><span class="date">{{ post.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ post.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+    <h2><a href="{{ post.get_absolute_url }}">{{ post.headline }}</a></h2>
+    {% if post.teaser %}
+        {% autoescape off %}{{ post.html_teaser }}{% endautoescape %}
+        {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+
 {% get_latest tumblelog.TumblelogItem 10 as logs %}
 <div id="tumblelog">
 {% for item in logs %}
@@ -39,20 +54,5 @@
 <p>{{ random_link.extended_info }}</p>
 {% endif %}
 <p class="visit"><a href="{{ random_link.url }}" title="Visit site">Visit</a></p>
-</div>
-
-{% get_latest_posts 3 as latest_posts %}
-<div id="latest-posts">
-<h3>Latest 3 Blog Posts</h3>
-{% for post in latest_posts %}
-{% get_free_comment_count for post as comments %}
-<p class="meta"><span class="date">{{ post.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ post.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
-<h2><a href="{{ post.get_absolute_url }}">{{ post.headline }}</a></h2>
-{% if post.teaser %}
-    {% autoescape off %}
-    {{ post.html_teaser }}
-    {% endautoescape %}
-{% endif %}
-{% endfor %}
 </div>
 {% endblock %}
