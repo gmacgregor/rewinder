@@ -13,8 +13,8 @@ from rewinder.apps.geo.models import Place
 from rewinder.apps.video.models import Video
 from rewinder.apps.generic.models import Quote, Source, Person
 from rewinder.apps.delicious.models import Bookmark
-from rewinder.apps.tumblelog.models import TumblelogItem
-from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
+#from rewinder.apps.tumblelog.models import TumblelogItem
+#from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
 
 PUBLISHED_STATUS = 1
@@ -184,5 +184,5 @@ class ArticleModerator(CommentModerator):
 moderator.register(Article, ArticleModerator)
 
 
-dispatcher.connect(create_tumblelog_item, sender=Article, signal=signals.post_save)
-dispatcher.connect(kill_tumblelog_item, sender=Article, signal=signals.post_delete)
+#dispatcher.connect(create_tumblelog_item, sender=Article, signal=signals.post_save)
+#dispatcher.connect(kill_tumblelog_item, sender=Article, signal=signals.post_delete)
