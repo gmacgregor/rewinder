@@ -2,16 +2,20 @@
 {% load threadedcommentstags %}
 {% get_free_comment_count for item.get_content_object as comments %}
 {% autoescape off %}
+{% comment %}
 {% ifequal item.content_type.name "article" %}
 <div class="entry article">
     <p class="meta"><a href="{% url blog_home %}">Post</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>    
     <h2><a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.headline }}</a></h2>
     {% if item.get_content_object.teaser %}
+    <div class="teaser">
     {{ item.get_content_object.html_teaser }}
+    </div>
     {% endif %}
     <p><a href="{{ item.get_content_object.get_absolute_url }}">Continue reading...</a></p>
 </div>
 {% endifequal %}
+{% endcomment %}
 {% ifequal item.content_type.name "bookmark" %}
 <div class="entry link">
     <p class="meta"><a href="{% url bookmark_home %}">Link</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
@@ -24,7 +28,7 @@
 {% endifequal %}
 {% ifequal item.content_type.name "video" %}
 <div class="entry video clearfix">
-    <p class="meta"><a href="{% url video_list %}">Video</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p> 
+    <p class="meta"><a href="{% url video_home %}">Video</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p> 
     {% if item.get_content_object.youtube_small_image %}
     <a href="{{ item.get_content_object.get_absolute_url }}"><img src="{{ item.get_content_object.youtube_small_image }}" width="120" height="90" /></a>
     {% endif %}

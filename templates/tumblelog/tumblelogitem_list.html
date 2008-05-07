@@ -16,10 +16,10 @@
 {% block sidebarcontent %}
     <p>Items in the tumblelog<span id="total-tumblelog-items">{{ extra_context.logs }}</span></p>
     <ul class="chart">
-        <li><a href="{% url bookmark_home %}" title="View all links">Links</a><span class="count">{{ extra_context.links }}</span><span style="width: {% widthratio extra_context.links extra_context.logs 490 %}px" class="index"></span></li>
-        <li><a href="{% url tweet_home %}" title="View all twitter status updates">Tweets</a><span class="count">{{ extra_context.tweets }} </span><span style="width: {% widthratio extra_context.tweets extra_context.logs 490 %}px" class="index"></span></li>
-        <li><a href="{% url video_home %}" title="View all videos">Videos</a><span class="count">{{ extra_context.videos }} </span><span style="width: {% widthratio extra_context.videos extra_context.logs 490 %}px" class="index"></span></li>
-        <li><a href="{% url photo_home %}" title="View all photos">Photos</a><span class="count">{{ extra_context.photos }} </span><span style="width: {% widthratio extra_context.photos extra_context.logs 490 %}px" class="index"></span></li>
-        <li><a href="{% url blog_home %}" title="View all blog posts">Blog posts</a><span class="count">{{ extra_context.articles }} </span><span style="width: {% widthratio extra_context.photos extra_context.articles 490 %}px" class="index"></span></li>
+        <li><a href="{% url bookmark_home %}" title="View all links">Links</a><span class="count">{{ extra_context.links }}</span><span style="width: {% widthratio extra_context.links extra_context.logs 490 %}px" class="index">{% widthratio extra_context.links extra_context.logs 100 %}%</span></li>
+        <li><a href="{% url tweet_home %}" title="View all twitter status updates">Tweets</a><span class="count">{{ extra_context.tweets }}</span><span style="width: {% widthratio extra_context.tweets extra_context.logs 490 %}px" class="index">{% widthratio extra_context.tweets extra_context.logs 100 %}%</span></li>
+        <li><a href="{% url video_home %}" title="View all videos">Videos</a><span class="count">{{ extra_context.videos }}</span><span style="width: {% widthratio extra_context.videos extra_context.logs 490 %}px" class="index">{% widthratio extra_context.videos extra_context.logs 100 %}%</span></li>
+        <li><a href="{% url photo_home %}" title="View all photos">Photos</a><span class="count">{{ extra_context.photos }}</span><span style="width: {% widthratio extra_context.photos extra_context.logs 490 %}px" class="index">{% widthratio extra_context.photos extra_context.logs 100 %}%</span></li>
+        {% comment %}<li><a href="{% url blog_home %}" title="View all blog posts">Blog posts</a><span class="count">{{ extra_context.articles }}</span><span style="width: {% widthratio extra_context.articles extra_context.logs 490 %}px" class="index">{% widthratio extra_context.articles extra_context.logs 100 %}%</span></li>{% endcomment %}
     </ul>
 {% endblock %}
