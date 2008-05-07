@@ -4,6 +4,7 @@ from django.dispatch import dispatcher
 from django.db.models import signals
 from tagging.fields import TagField
 from template_utils.markup import formatter
+from typogrify.templatetags.typogrify import typogrify
 from comment_utils.moderation import CommentModerator, moderator
 
 from rewinder.apps.geo.models import Place
@@ -57,6 +58,17 @@ class Video(models.Model):
             'slug': self.slug,
         })
     
+    def _next_previous_helper(self, direction):
+        return getattr(self, 'get_%s_by_pub_date' % direction)
+    
+    @property
+    def get_next(self):
+        return self._next_previous_helper('next')
+    
+    @property
+    def get_previous(self):
+        return self._next_previous_helper('previous')
+    
     def youtube_small_image(self):
         if self.is_type('youtube.com') and self.video_id:
             return "http://i.ytimg.com/vi/%s/default.jpg" % self.video_id
@@ -95,7 +107,7 @@ class Video(models.Model):
     
     def get_embed_code(self):
         if self.is_type('youtube.com'):
-            embed = '<object width="%s" height="%s"><param name="movie" value="http://www.youtube.com/v/%s&hl=en&color1=0x3a3a3a&color2=0x999999&border=1"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/%s&hl=en&color1=0x3a3a3a&color2=0x999999&border=0" type="application/x-shockwave-flash" wmode="transparent" width="%s" height="%s"></embed></object>' % (EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT, self.video_id, self.video_id, EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT)
+            embed = '<object width="%s" height="%s"><param name="movie" value="http://www.youtube.com/v/%s&hl=en&color1=0x000000&color2=0x000000&border=1"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/%s&hl=en&color1=0x3a3a3a&color2=0x999999&border=0" type="application/x-shockwave-flash" wmode="transparent" width="%s" height="%s"></embed></object>' % (EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT, self.video_id, self.video_id, EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT)
         elif self.is_type('vimeo.com'):
             embed = '<object type="application/x-shockwave-flash" width="%s" height="%s" data="http://www.vimeo.com/moogaloop.swf?clip_id=%s&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=1a1819"><param name="quality" value="best" /><param name="allowfullscreen" value="true" /><param name="scale" value="showAll" /><param name="movie" value="http://www.vimeo.com/moogaloop.swf?clip_id=%s&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=1a1819" /></object>' % (EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT, self.video_id, self.video_id)
         elif self.is_type('collegehumor.com'):
@@ -104,15 +116,17 @@ class Video(models.Model):
             embed = None
         return embed
     
+    def _process_markup(self):
+        self.html_description = typogrify(formatter(self.description))
+        self.html_commentary = typogrify(formatter(self.commentary))
+        return self
+    
     def save(self):
         if not self.id:
             self.video_id = self.get_video_id()
         if not self.embed_code:
             self.embed_code = self.get_embed_code()
-        if self.description:
-                self.html_description = formatter(self.description)
-        if self.commentary:
-                self.html_commentary = formatter(self.commentary)
+        self._process_markup()
         super(Video, self).save()
     
     class Admin:
