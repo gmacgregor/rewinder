@@ -1,20 +1,25 @@
 from tagging.models import Tag, TaggedItem
 from rewinder.lib.stateful_paginator import DiggPaginator
 from rewinder.lib.shortcuts import render_response
-from rewinder.apps.blog.models import Article
 from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.video.models import Video
 from rewinder.apps.flickr.models import Photo
+from rewinder.apps.twitter.models import Tweet
 
-def list(request, app, model, ordering='-pub_date', extra_context=None):
-    """
-    I love you, Django!
-    """
+
+def list(request, app, model, ordering='-pub_date'):
+    ctx = None
     items = model.objects.all().order_by('%s' % ordering)
+    if model.__name__.lower() == "tumblelogitem":
+        links = Bookmark.objects.count()
+        photos = Photo.objects.all().filter(owner__exact="sixminutes").count()
+        videos = Video.objects.count()
+        tweets = Tweet.objects.count()
+        ctx = {'total': items.count(), 'links': links, 'photos': photos, 'videos': videos, 'tweets': tweets}
     page = request.GET.get('page', 1)
     paginator = DiggPaginator(items, 10, page=page, body=7, tail=2, padding=3)
     template_name = '%s/%s_list.html' % (app.lower(), model.__name__.lower())
-    return render_response(request, template_name, {'page': page, 'paginator': paginator, 'extra_context': extra_context})
+    return render_response(request, template_name, {'page': page, 'paginator': paginator, 'log': ctx})
 
 def all_tags(request):
     return render_response(request, 'tag/tag_list.html')
