@@ -1,16 +1,26 @@
 {% extends "blog/base.html" %}
 {% block title %}Blog: {{ object.headline }}{% endblock %}
+{% load custom_tags %}
+{% load threadedcommentstags %}
 
 {% block content %}
-
+<div id="article-detail">
+<p class="meta date">Posted on {% date_format object.pub_date %} in {% for category in object.categories.all %}<a href="{% url blog_category_detail slug=category.slug %}">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</a></p>
 <h2>{{ object.headline }}</h2>
-<p>{{ object.last_modified|date:"F DS Y" }} in {% for category in article.categories.all %}<a href="{% url blog_category_detail category.slug %}">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</a></p>
 
+<div id="teaser">
 {% autoescape off %}
-<div class="entry">
-{{ object.html_body }}
-</div>
+{{ object.html_teaser }}
 {% endautoescape %}
+</div>
+
+<div id="article-entry">
+{% autoescape off %}
+{{ object.html_body }}
+{% endautoescape %}
+</div>
+
+</div>
 
 {% include "tag/tags_for_object.html" %}
 {% include "threadedcomments/comments_list.html" %}
