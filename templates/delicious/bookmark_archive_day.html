@@ -3,9 +3,9 @@
 {% block description %}Links saved on {{ day|date:"F d, Y" }}{% endblock %}
 {% block breadcrumb %}
 {{ block.super }}
-    <li><a href="{% url bookmark_archive_year year=day|date:"Y" %}">{{ day|date:"Y" }}</a></li>
-    <li><a href="{% url bookmark_archive_month year=day|date:"Y", month=day|date:"m" %}">{{ day|date:"m" }}</a></li>
-    <li><a href="{% url bookmark_archive_day year=day|date:"Y", month=day|date:"m",day=day|date:"d" %}">{{ day|date:"d" }}</a></li>
+    <li><a href="{% url bookmark_archive_year year=day|date:"Y" %}" title="View all links saved in {{ day|date:"Y" }}">{{ day|date:"Y" }}</a></li>
+    <li><a href="{% url bookmark_archive_month year=day|date:"Y", month=day|date:"m" %}" title="View all videos saved in {{ day|date:"F, Y" }}">{{ day|date:"m" }}</a></li>
+    <li><a href="{% url bookmark_archive_day year=day|date:"Y", month=day|date:"m",day=day|date:"d" %}" title="View all videos saved on  {{ day|date:"F d, Y" }}">{{ day|date:"d" }}</a></li>
 {% endblock %}
 
 {% load custom_tags %}

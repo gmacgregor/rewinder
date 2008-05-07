@@ -1,5 +1,6 @@
 {% extends "delicious/base.html" %}
 {% load custom_tags %}
+{% load typogrify %}
 {% block title %}Links: {{ object.description }}{% endblock %}
 {% block body_class %}detail link{% endblock %}
 {% block breadcrumb %}
@@ -12,8 +13,8 @@
 {% block content %}
 <div id="link-detail">
 <p class="meta date">Saved on {% date_format object.saved_date %}</p>
-<h2>{{ object.description }}</h2>
-{% if object.extended_info %}<p>{{ object.extended_info }}</p>{% endif %}
+<h2>{% autoescape off %}{{ object.description|typogrify }}{% endautoescape %}</h2>
+{% if object.extended_info %}<p>{% autoescape off %}{{ object.extended_info|typogrify }}{% endautoescape %}</p>{% endif %}
 <p><a href="{{ object.url }}" title="Visit site" class="visit">Visit site</a></p>
 </div>
 
@@ -26,11 +27,11 @@
 <div id="next-previous" class="clearfix">
 {% if object.get_previous %}
 <h3>Previous link</h3>
-<p><a href="{{ object.get_previous.get_absolute_url }}">{{ object.get_previous.description }}</a></p>
+<p><a href="{{ object.get_previous.get_absolute_url }}">{% autoescape off %}{{ object.get_previous.description|typogrify }}{% endautoescape %}</a></p>
 {% endif %}
 {% if object.get_next %}
 <h3>Next link</h3>
-<p><a href="{{ object.get_next.get_absolute_url }}">{{ object.get_next.description }}</a></p>
+<p><a href="{{ object.get_next.get_absolute_url }}">{% autoescape off %}{{ object.get_next.description|typogrify }}{% endautoescape %}</a></p>
 {% endif %}
 </div>
 {{ block.super }}
