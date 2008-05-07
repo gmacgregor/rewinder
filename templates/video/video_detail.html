@@ -49,3 +49,16 @@
 {% include "threadedcomments/comments_list.html" %}
 
 {% endblock %}
+
+{% block sidebarcontent %}
+<div id="next-previous" class="clearfix">
+{% if object.get_previous %}
+<h3>Previous Video</h3>
+<p><a href="{{ object.get_previous.get_absolute_url }}">{{ object.get_previous.title }}</a></p>
+{% endif %}
+{% if object.get_next %}
+<h3>Next Video</h3>
+<p><a href="{{ object.get_next.get_absolute_url }}">{{ object.get_next.title }}</a></p>
+{% endif %}
+</div>
+{% endblock %}

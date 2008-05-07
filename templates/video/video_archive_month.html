@@ -1,6 +1,27 @@
+{% extends "video/base.html" %}
+{% block title %}Videos: {{ month|date:"F, Y" }}{% endblock %}
+{% block description %}Videos saved in {{ month|date:"F, Y" }}{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+    <li><a href="{% url video_archive_year year=month|date:"Y" %}" title="View all videos saved in {{ month|date:"Y" }}">{{ month|date:"Y" }}</a></li>
+    <li><a href="{% url video_archive_month year=month|date:"Y", month=month|date:"m" %}" title="View all videos saved in {{ month|date:"F, Y" }}">{{ month|date:"m" }}</a></li>
+{% endblock %}
+{% load custom_tags %}
+{% load threadedcommentstags %}
 
-video_archive_month
-
+{% block content %}
+<h2>Videos saved in {{ month|date:"F Y" }} ({{ object_list.count }})</h2>
+<div id="month-archive">
 {% for video in object_list %}
-<p><a href="{{ video.get_absolute_url }}">{{ video.title }}</p></a>
+<div class="entry video clearfix">
+<p class="meta"><span class="date">{{ video.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ video.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+{% if video.youtube_small_image %}
+<a href="{{ video.get_absolute_url }}"><img src="{{ video.youtube_small_image }}" width="120" height="90" /></a>
+{% endif %}
+<h2><a href="{{ video.get_absolute_url }}">{{ video.title }}</a></h2>
+{% if video.html_description %}{% autoescape off %}{{ video.html_description }}{% endautoescape %}{% endif %}
+</div>
 {% endfor %}
+
+</div>
+{% endblock %}
