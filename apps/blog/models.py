@@ -3,8 +3,10 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.dispatch import dispatcher
 from django.db.models import signals
+from django.contrib.sitemaps import ping_google
 from tagging.fields import TagField
 from template_utils.markup import formatter
+from typogrify.templatetags.typogrify import typogrify
 from threadedcomments.moderation import CommentModerator, moderator
 
 from rewinder.apps.geo.models import Place
@@ -42,7 +44,7 @@ class Category(models.Model):
     
     def save(self):
         if self.description:
-            self.description_html = formatter(self.description)
+            self.description_html =  typogrify(formatter(self.description))
         super(Category, self).save()
     
     @models.permalink
@@ -127,21 +129,18 @@ class Article(models.Model):
         return u'%s' % self.headline
     
     def save(self):
-        if self.teaser:
-            self.html_teaser = formatter(self.teaser)
-        if self.summary:
-            self.html_summary = formatter(self.summary)
-        if self.body:
-            self.html_body = formatter(self.body)
-        if self.pull_quote:
-            self.html_pull_quote = formatter(self.pull_quote)
-        if self.lead_caption:
-            self.html_lead_caption = formatter(self.lead_caption)
-        if self.sidebar_caption:
-            self.html_sidebar_caption = formatter(self.sidebar_caption)
-        if self.inline_caption:
-            self.html_inline_caption = formatter(self.inline_caption)
+        self = self._process_markup()
         super(Article, self).save()
+    
+    def _process_markup(self):
+        self.html_teaser =  typogrify(formatter(self.teaser))
+        self.html_summary =  typogrify(formatter(self.summary))
+        self.html_body =  typogrify(formatter(self.body))
+        self.html_pull_quote =  typogrify(formatter(self.pull_quote))
+        self.html_lead_caption =  typogrify(formatter(self.lead_caption))
+        self.html_sidebar_caption =  typogrify(formatter(self.sidebar_caption))
+        self.html_inline_caption =  typogrify(formatter(self.inline_caption))
+        return self
     
     @models.permalink
     def get_absolute_url(self):
