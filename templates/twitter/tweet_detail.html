@@ -21,12 +21,14 @@
 {% endblock %}
 
 {% block sidebarcontent %}
-<div id="next-previous">
-{% if object.get_next %}
-<p class="next"><a href="{{ object.get_next.get_absolute_url }}"><img src="{{ object.get_next.square_url }}" alt="{{ object.get_next.title }}"></a><a href="{{ object.get_next.get_absolute_url }}">Next</a></p>
-{% endif %}
+<div id="next-previous" class="clearfix">
 {% if object.get_previous %}
-<p class="previous"><a href="{{ object.get_previous.get_absolute_url }}"><img src="{{ object.get_previous.square_url }}" alt="{{ object.get_previous.title }}"></a><a href="{{ object.get_previous.get_absolute_url }}">Previous</a></p>
+<h3>Previous Tweet</h3>
+<p><a href="{{ object.get_previous.get_absolute_url }}">{{ object.get_previous.text }}</a></p>
+{% endif %}
+{% if object.get_next %}
+<h3>Next Tweet</h3>
+<p><a href="{{ object.get_next.get_absolute_url }}">{{ object.get_next.text }}</a></p>
 {% endif %}
 </div>
 {% endblock %}
