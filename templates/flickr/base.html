@@ -2,6 +2,17 @@
 {% block title %}Photos{% endblock %}
 {% block breadcrumb %}{{ block.super }}<li><a href="{% url photo_home %}">Photos</a></li>{% endblock %}
 {% block sidebarcontent %}
-{% include "flickr/archive_year_list.html" %}
+
+{% load custom_tags %}
+{% get_archive_dates flickr.Photo as years taken_date %}
+<div id="archive-list">
+<h3>Browse the Photo archive</h3>
+<ul>
+    {% for year in years %}
+    <li><a href="{% url photo_archive_year year=year|date:"Y" %}">{{ year|date:"Y" }}</a></li>
+    {% endfor %}
+</ul>
+</div>
+
 {% include "flickr/popular_tags.html" %}
 {% endblock %}
