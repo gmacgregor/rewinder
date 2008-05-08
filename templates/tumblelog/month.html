@@ -1,0 +1,68 @@
+{% extends "tumblelog/base.html" %}
+{% block breadcrumb %}
+<li><a href="{% url tumblelog_home %}">Tumblelog</a></li>
+<li><a href="{% url tumblelog_archive_year year=year %}">{{ year }}</a></li>
+<li>{{ month_name }}</li>
+{% endblock %}
+{% load threadedcommentstags %}
+
+{% block content %}
+<div id="month-detail">
+{% for m in entries.values %}
+    {% if m.content %}
+        <div class="day">
+        <h2>{{ m.day }}</h2>
+        {% if m.links %}
+            <h3><a href="{% url bookmark_home %}">Links</a></h3>
+            {% for link in m.links %}
+            {% get_free_comment_count for link.get_content_object as comments %}
+            <div class="entry link">
+            <p class="meta"><span class="date">{{ link.pub_date|date:"g:i a" }}</span> <span class="comments"><a href="{{ link.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+            <h2><a href="{{ link.get_content_object.get_absolute_url }}">{{ link.get_content_object.description }}</a></h2>
+            {% if link.get_content_object.extended_info %}
+            <p>{{ link.get_content_object.extended_info }}</p>
+            {% endif %}
+            <p class="visit"><a href="{{ link.get_content_object.url }}">Visit</a></p>
+            </div>
+            {% endfor %}
+        {% endif %}
+        
+        {% if m.tweets %}
+            <h3><a href="{% url tweet_home %}">Tweets</a></h3>
+            <ul>
+            {% for tweet in m.tweets %}
+                <li><a href="{{ link.get_content_object.get_absolute_url }}">{{ link.get_content_object.text }}</a></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        
+        {% if m.photos %}
+            <h3><a href="{% url photo_home %}">Photos</a></h3>
+            {% for photo in m.photos %}
+            {% get_free_comment_count for photo.get_content_object as comments %}
+            <div class="entry photo">
+            <p class="meta"><span class="date">{{ photo.pub_date|date:"g:i a" }}</span> <span class="comments"><a href="{{ photo.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+            <p class="photo"><a href="{{ photo.get_content_object.get_absolute_url }}" style="background-image: url({{ photo.get_content_object.medium_url }}); background-repeat: no-repeat;" title="{{ photo.get_content_object.title }}">{{ photo.title }}</a></p>
+            </div>
+            {% endfor %}
+        {% endif %}
+        
+        {% if m.videos %}
+            <h3><a href="{% url video_home %}">Videos</a></h3>
+            {% for video in m.videos %}
+                {% get_free_comment_count for video.get_content_object as comments %}
+                <div class="entry video clearfix">
+                <p class="meta"><span class="date">{{ video.pub_date|date:"g:i a" }}</span> <span class="comments"><a href="{{ video.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p> 
+                {% if video.get_content_object.youtube_small_image %}
+                <a href="{{ video.get_content_object.get_absolute_url }}"><img src="{{ video.get_content_object.youtube_small_image }}" width="120" height="90" /></a>
+                {% endif %}
+                <h2><a href="{{ video.get_content_object.get_absolute_url }}">{{ video.get_content_object.title }}</a></h2>
+                {% if video.get_content_object.html_description %}{% autoescape off %}{{ video.get_content_object.html_description }}{% endautoescape %}{% endif %}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    {% endif %}
+{% endfor %}
+</div>
+{% endblock %}

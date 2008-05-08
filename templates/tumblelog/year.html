@@ -3,19 +3,20 @@
 {% block content %}
 
 {% for m in entries.values %}
-    
-    <h3>{{ m.name }}</h3>
-    {% if m.links %}
-    Links: {{ m.links.count }}
-    {% endif %}
-    {% if m.tweets %}
-    Tweets: {{ m.tweets.count }}
-    {% endif %}
-    {% if m.photos %}
-    Photos: {{ m.photos.count }}
-    {% endif %}
-    {% if m.videos %}
-    Videos: {{ m.videos.count }}
+    {% if m.content %}
+        <h3><a href="{% url tumblelog_archive_month year=year,month=m.month %}">{{ m.name }}</a></h3>
+        {% if m.links %}
+        Links: {{ m.links.count }}
+        {% endif %}
+        {% if m.tweets %}
+        Tweets: {{ m.tweets.count }}
+        {% endif %}
+        {% if m.photos %}
+        Photos: {{ m.photos.count }}
+        {% endif %}
+        {% if m.videos %}
+        Videos: {{ m.videos.count }}
+        {% endif %}
     {% endif %}
 {% endfor %}
 
