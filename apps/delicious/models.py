@@ -4,6 +4,7 @@ from django.dispatch import dispatcher
 from django.db.models import signals
 from threadedcomments.moderation import CommentModerator, moderator
 from tagging.fields import TagField
+
 from rewinder.util.timeconverter import time_to_settings
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
@@ -43,7 +44,7 @@ class Bookmark(models.Model):
     @property
     def get_previous(self):
         return self._next_previous_helper('previous')
-    
+            
     def save(self):
         """
         If this link is being saved for the first time (ie. imported from del.icou.us):
