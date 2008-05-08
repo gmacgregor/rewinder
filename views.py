@@ -1,6 +1,7 @@
 from tagging.models import Tag, TaggedItem
 from rewinder.lib.stateful_paginator import DiggPaginator
 from rewinder.lib.shortcuts import render_response
+from rewinder.apps.blog.models import Article
 from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.video.models import Video
 from rewinder.apps.flickr.models import Photo
