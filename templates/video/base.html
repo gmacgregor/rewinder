@@ -2,3 +2,16 @@
 {% block description %}Videos that I find entertaining or informtaive{% endblock %}
 {% block title %}Videos{% endblock %}
 {% block breadcrumb %}{{ block.super }}<li><a href="{% url video_home %}">Videos</a></li>{% endblock %}
+
+{% block sidebarcontent %}
+{% load custom_tags %}
+{% get_archive_dates video.Video as years pub_date %}
+<div id="archive-list">
+<h3>Browse the Video archive</h3>
+<ul>
+    {% for year in years %}
+    <li><a href="{% url video_archive_year year=year|date:"Y" %}">{{ year|date:"Y" }}</a></li>
+    {% endfor %}
+</ul>
+</div>
+{% endblock %}

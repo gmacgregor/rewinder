@@ -23,6 +23,9 @@
 {% endblock %}
 
 {% block sidebarcontent %}
+
+{{ block.super }}
+
 {% get_random video.Video 10 as random_video %}
 {% get_free_comment_count for random_video as comments %}
 {% if random_video.embed_code %}
