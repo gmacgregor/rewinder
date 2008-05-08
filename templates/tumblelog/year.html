@@ -1,0 +1,22 @@
+{% extends "tumblelog/base.html" %}
+
+{% block content %}
+
+{% for m in entries.values %}
+    
+    <h3>{{ m.name }}</h3>
+    {% if m.links %}
+    Links: {{ m.links.count }}
+    {% endif %}
+    {% if m.tweets %}
+    Tweets: {{ m.tweets.count }}
+    {% endif %}
+    {% if m.photos %}
+    Photos: {{ m.photos.count }}
+    {% endif %}
+    {% if m.videos %}
+    Videos: {{ m.videos.count }}
+    {% endif %}
+{% endfor %}
+
+{% endblock %}
