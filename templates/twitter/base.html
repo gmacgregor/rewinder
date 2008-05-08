@@ -7,4 +7,16 @@
 <h3>What is a Tweet?</h3>
 <p>A tweet is a 140 character-or-less description of what I am doing. Tweets are posted to the website <a href="http://www.twitter.com">twitter.com</a> via twitter.com's web interface, a mobile device or instant messaging.</p>
 <p>My twitter profile page is located at: <a href="http://www.twitter.com/gmacgregor/" title="View my twitter profile page">twitter.com/gmacgregor</a></p>
+
+{% load custom_tags %}
+{% get_archive_dates twitter.Tweet as years pub_time %}
+<div id="archive-list">
+<h3>Browse the Twitter archive</h3>
+<ul>
+    {% for year in years %}
+    <li><a href="{% url tweet_archive_year year=year|date:"Y" %}">{{ year|date:"Y" }}</a></li>
+    {% endfor %}
+</ul>
+</div>
+
 {% endblock %}
