@@ -226,3 +226,24 @@ def get_random_with_related(parser, token):
     if bits[3] != 'as':
         raise TemplateSyntaxError, "third argument to get_random tag must be 'as'"
     return RandomContentWithRelatedNode(bits[1], bits[2], bits[4], bits[5], bits[6], bits[7])
+    
+class DatesForModelNode(Node):
+    def __init__(self, model, varname, field):
+        self.varname, self.field = varname, field
+        self.model = get_model(*model.split('.'))
+    
+    def render(self, context):
+        context[self.varname] = self.model._default_manager.dates(self.field, 'year').order_by('DESC')
+        return ''
+
+@register.tag(name="get_archive_dates")
+def get_archive_dates(parser, token):
+    """
+    get_archive_dates delicious.Bookmark as archive date_field
+    """
+    bits = token.contents.split()
+    if len(bits) != 5:
+        raise TemplateSyntaxError, "get_archive_dates tag takes exactly four arguments"
+    if bits[2] != 'as':
+        raise TemplateSyntaxError, "third argument to get_latest tag must be 'as'"
+    return DatesForModelNode(bits[1], bits[3], bits[4])
