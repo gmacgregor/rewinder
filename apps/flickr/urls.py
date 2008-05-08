@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 from rewinder.apps.flickr.models import Photo
 
 photo_dict = {
-    'queryset': Photo.objects.all(),
+    'queryset': Photo.sixminutes.all(),
     'date_field': 'taken_date',
 }
 urlpatterns = patterns('',

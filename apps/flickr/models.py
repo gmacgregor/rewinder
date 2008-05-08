@@ -16,6 +16,11 @@ FLICKR_LICENSES = (
     ('6', 'Attribution-NoDerivs License'),
 )
 
+class MyPhotosManager(models.Manager):
+    def get_query_set(self):
+        qs = super(MyPhotosManager, self).get_query_set()
+        return qs.filter(owner="sixminutes").order_by('-taken_date').select_related()
+
 class Photo(models.Model):
     flickr_id           = models.PositiveIntegerField()
     owner               = models.CharField(max_length=50)
@@ -46,6 +51,10 @@ class Photo(models.Model):
     exif_flash          = models.CharField(max_length=50, blank=True)
     exif_focal_length   = models.CharField(max_length=50, blank=True)
     exif_color_space    = models.CharField(max_length=50, blank=True)
+    
+    #managers
+    objects             = models.Manager()
+    sixminutes          = MyPhotosManager()
     
     def __unicode__(self):
         return u'%s' % self.title
