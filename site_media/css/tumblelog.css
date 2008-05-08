@@ -38,3 +38,14 @@
     color: #333;
     letter-spacing: normal;
 }
+.tumblelog #month-detail div.entry,
+.tumblelog #month-detail h4 {
+    padding-left: 40px;
+}
+.tumblelog #month-detail .day h2 {
+    font-weight: bold;
+    font-size: 24px;
+}
+.tumblelog #month-detail div.entry h2 {
+    font-size: 1.3em;
+}
