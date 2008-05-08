@@ -5,6 +5,15 @@
 {% load custom_tags %}
 
 {% block content %}
+{% get_latest tumblelog.TumblelogItem 10 as logs %}
+<div id="tumblelog">
+{% for item in logs %}
+    {% include "tumblelog/tumblelogitem.html" %}
+{% endfor %}
+</div><!-- /#tumblelog -->
+{% endblock %}
+
+{% block sidebarcontent %}
 
 {% get_latest_posts 1 as latest_posts %}
 {% if latest_posts %}
@@ -20,15 +29,6 @@
 </div>
 {% endif %}
 
-{% get_latest tumblelog.TumblelogItem 10 as logs %}
-<div id="tumblelog">
-{% for item in logs %}
-    {% include "tumblelog/tumblelogitem.html" %}
-{% endfor %}
-</div><!-- /#tumblelog -->
-{% endblock %}
-
-{% block sidebarcontent %}
 {% get_random_photo as photo related_photos %}
 {% get_free_comment_count for photo as comments %}
 <div id="random-photo">
