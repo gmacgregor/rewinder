@@ -1,0 +1,33 @@
+{% extends "tumblelog/base.html" %}
+
+{% block content %}
+
+{% regroup entries by pub_date|date:"F" as date_list %}
+
+{% for date in date_list %}
+
+<h2>{{ date.grouper }}</h2>
+{% comment %}
+    {% regroup date.list by pub_date|date:"d" as day_list %}
+    {% for day in day_list %}
+        <h2>{{ day.grouper }}</h2>
+        {% for item in day.list %}
+            {% include "tumblelog/tumblelogitem.html" %}
+        {% endfor %}
+    {% endfor %}
+{% endcomment %}
+
+{% regroup date.list|dictsort:"content_type.name" by content_type as type_list %}
+    {% for type in type_list %}
+        <h4>{{ type.grouper }}</h4>
+        {% for item in type.list %}
+            {% include "tumblelog/tumblelogitem.html" %}
+            
+        {% endfor %}
+    {% endfor %}
+
+
+{% endfor %}
+
+
+{% endblock %}
