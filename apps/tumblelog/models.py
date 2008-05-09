@@ -30,4 +30,3 @@ class TumblelogItem(models.Model):
         date_hierarchy = 'pub_date'
         list_display = ('get_content_object', 'pub_date', 'content_type')
         list_filter = ('pub_date', 'content_type',)
-

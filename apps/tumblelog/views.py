@@ -94,4 +94,11 @@ def items_by_month(request, year, month):
 #    logs = TumblelogItem.objects.filter(pub_date__year=year).filter(pub_date__month=month).filter(pub_date__day=day).order_by('pub_date')
 #    day_items = day_filter(entries, logs)
 #    return render_response(request, 'tumblelog/day.html', {'entries': day_items, 'year': year, 'month': str(month).zfill(2), 'day': day})
+
+
+def group(request, year):
+    from itertools import groupby
+    logs = TumblelogItem.objects.filter(pub_date__year=year).order_by('pub_date')
+    return render_response(request, 'tumblelog/test.html', {'entries': logs})
+    
     

@@ -8,6 +8,7 @@ log_dict = {
 
 urlpatterns = patterns('',
     url(r'^$', 'rewinder.views.list', {'app': 'tumblelog', 'model': TumblelogItem}, name="tumblelog_home"),
+    url(r'test/(?P<year>\d{4})/$', 'rewinder.apps.tumblelog.views.group'),
 )
 
 #urlpatterns += patterns('django.views.generic.date_based',
