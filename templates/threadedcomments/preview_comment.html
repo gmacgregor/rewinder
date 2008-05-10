@@ -1,29 +1,12 @@
 {% extends "base.html" %}
+{% block body_class %}preview{% endblock %}
 {% block title %}Preview your comment{% endblock %}
 {% block breadcrumb %}<li>Preview your comment</li>{% endblock %}
 {% load threadedcommentstags %}
 
 {% block content %}
-{% if comment %}
 {% load gravatar %}
 {% get_gravatar_url for comment.email as gravatar %}
-<h2>This is what your comment will look like</h2>
-<div id="comments">
-<ol>
-    <li><div class="comment clearfix">
-        <div class="comment-meta">
-            <p class="author">{% if comment.website %}<a href="{{ comment.website }}" title="Visit {{ comment.name }}'s website">{% endif %}{{ comment.name }}{% if comment.website %}</a>{% endif %}</p>
-            {% if comment.website %}<a href="{{ comment.website }}" title="Visit {{ comment.name }}'s website">{% endif %}<img src="{{ comment.email|gravatar }}" alt="Gravatar for {{ comment.name }}" width="50" height="50" />{% if comment.website %}</a>{% endif %}
-            <p class="meta date"><a href="#c{{ comment.id }}" title="Permanent link to this comment">{{ comment.date_submitted|date:"M d Y"}}<br />{{ comment.date_submitted|date:"g:h a" }}</a><p>
-        </div>
-        <div class="remark">
-            {% auto_transform_markup comment %}
-        <div>
-        </div>
-    </li>
-</ol>
-</div>
-{% endif %}
 
 {% if form.errors %}
 <h2>Slow down, tiger!</h2>
@@ -44,6 +27,26 @@
 {% endfor %}
 </ul>
 {% endif %}
+
+<div id="comments">
+<ol>
+    <li><div class="comment clearfix">
+        <div class="comment-meta">
+            <p class="author">{% if comment.website %}<a href="{{ comment.website }}" title="Visit {{ comment.name }}'s website">{% endif %}{{ comment.name }}{% if comment.website %}</a>{% endif %}</p>
+            {% if comment.website %}<a href="{{ comment.website }}" title="Visit {{ comment.name }}'s website">{% endif %}<img src="{{ comment.email|gravatar }}" alt="Gravatar for {{ comment.name }}" width="50" height="50" />{% if comment.website %}</a>{% endif %}
+            <p class="meta date"><a href="#c{{ comment.id }}" title="Permanent link to this comment">{{ comment.date_submitted|date:"M d Y"}}<br />{{ comment.date_submitted|date:"g:h a" }}</a><p>
+        </div>
+        <div class="remark">
+            {% if comment %}
+                {% auto_transform_markup comment %}
+            {% endif %}
+        <div>
+        </div>
+    </li>
+</ol>
+</div>
+
+
 <p>You can use <a href="http://daringfireball.net/projects/markdown/syntax">Markdown syntax</a> to format your comment as need be: HTML will do you no good.</p>
 <form method="post" action="" id="comment-form">
     <p><label for="id_comment">Comment (required)</label>{{ form.comment }}</p>

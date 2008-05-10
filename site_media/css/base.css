@@ -37,7 +37,7 @@ h4,
 h2 {
     color: #333;
     line-height: 1.2em;
-    font-size: 1.3em;
+    font-size: 1.4em;
     font-weight: normal;
 }
 h2 a {
@@ -51,11 +51,11 @@ h3, h4 {
 h3 {
     margin-bottom: 1em;
     padding-top: 0.5em;
-    color: #888;
-    border-top: 1px solid #ccc;
+    /*color: #888;*/
+    border-top: 1px solid #eaebeb;
 }
 p {
-    margin-top: 1em;
+    margin-top: 0.5em;
     line-height: 1.4em;
 }
 #wrapper {
@@ -78,14 +78,14 @@ p {
     display: block;
     width: 159px;
     padding: 2px 2px 5px 2px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #eaebeb;
 }
 #nav ul li a.last {
     border-bottom: none;
 }
 #nav ul li a:hover,
 #breadcrumb ul li a:hover {
-    background-color: #035378;
+    background-color: #42758d;
     color: #fff;
     text-decoration: none;
 }
@@ -97,20 +97,28 @@ p {
     min-height: 40em;
     width: 489px;
     padding: 10px 10px 4em 0;
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #eaebeb;
+    overflow: hidden;
 }
+/*
+body.detail #sidebar {
+    margin-top: 50px;
+}*/
 .meta {
     text-transform: uppercase;
     color: #888;
     font-size: 10px;
 }
-.visit a {
-    color: #ccc;
+.meta a {
 }
-.detail h2 {
+.visit a {
+    /*color: #eaebeb;*/
+}
+body.detail h2 {
     margin-bottom: 0.5em;
     padding-bottom: 0.2em;
-    /*border-bottom: 1px solid #ccc;*/
+    font-size: 1.8em;
+    /*border-bottom: 1px solid #eaebeb;*/
 }
 /*
 .detail p {
@@ -129,7 +137,7 @@ p {
 #breadcrumb {
     clear: both;
     border-top: 1px solid #000;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #eaebeb;
     font-weight: bold;
     background-color: #e6e6e6;
     min-height: 23px;
@@ -138,7 +146,7 @@ p {
     background-color: #fff;
     display: block;
     float: left;
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #eaebeb;
     padding: 5px 7px 6px 5px;
 }
 #breadcrumb ul li a {
@@ -159,7 +167,7 @@ p {
     padding-bottom: 0.5em;
     position: relative;
     text-align: center;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #eaebeb;
 }
 .paginator .pages a {
     margin-right: 0.5em;
@@ -227,6 +235,9 @@ ul.chart li span.index {
 #comments {
     margin-top: 4em;
 }
+body.preview #comments {
+    margin-top: 1em;
+}
 #comment-form {
     margin-top: 1.5em;
 }
@@ -252,8 +263,9 @@ ul.chart li span.index {
     padding: 2px;
     margin: 0 10px 0.2em 0;
 }
-#comment-form input[type="text"] {
-    border: 1px solid #ccc;
+#comment-form input[type="text"],
+#comment-form textarea {
+   border: 1px solid #ccc; 
 }
 #comment-form #id_website {
     margin-right: 0;
@@ -264,24 +276,19 @@ ul.chart li span.index {
     height: 150px;
     margin: 0 0 0.5em 0;
     padding: 5px;
-    border: 1px solid #ccc;
 }
 #comment-form #comment-submit input {
     margin: 2em 1em 0 0;
 }
-#comments .comment {
-    margin-bottom: 2em;
-}
-#comments .remark {
-}
 #comments .comment img {
-    border: 1px solid #ccc;
+    border: 1px solid #eaebeb;
     padding: 2px;
     margin: 0 10px 10px 0;
 }
 #comments .comment {
-    clear: left;
-    border-top: 1px solid #ccc;
+    width: 500px;
+    border-top: 1px solid #eaebeb;
+    margin-bottom: 2em;
 }
 #comments .comment.first {
     border-top-color: transparent;
@@ -303,7 +310,14 @@ ul.chart li span.index {
     margin-top: 0;
 }
 #comments .comment .remark {
-    margin-left: 125px;
+    /*margin-left: 125px;*/
+    width: 320px;
+    padding-right: 25px;
+    float: left;
+}
+#comment-submit {
+    clear: left;
+    padding-bottom: 1em;
 }
 ul.errorlist {
     list-style-type: square;
@@ -322,15 +336,16 @@ ul.errorlist li {
 #next-previous p {
     margin: 0 0 1em 0;
 }
+/*
 .detail.photo #next-previous {
     margin-top: 0.80em;
 }
+*/
 .detail.photo #next-previous p {
     width: 75px;
     float: left;
     margin-right: 10px;
 }
-
 #day-archive,
 #month-archive,
 #year-archive  {

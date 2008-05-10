@@ -1,5 +1,4 @@
 {% extends "tumblelog/base.html" %}
-{% load custom_tags %}
 
 {% block content %}
 <p class="paginator">{% if paginator.has_previous %}<span class="previous"><a href="{% url tumblelog_list paginator.previous %}">Previous page</a></span>{% endif %}<span class="pages">{% for page in paginator.page_range %}{% if not page %}...{% else %}<a href="{% url tumblelog_list page %}">{% ifequal page paginator.page %}[{{ page }}]{% else %}{{ page }}{% endifequal %}</a>{% endif %}{% endfor %}</span>{% if paginator.has_next %}<span class="next"><a href="{% url tumblelog_list paginator.next %}">Next page</a></span>{% endif %}</p>
@@ -11,27 +10,4 @@
 </div><!-- /#tumblelog -->
 
 <p class="paginator">{% if paginator.has_previous %}<span class="previous"><a href="{% url tumblelog_list paginator.previous %}">Previous page</a></span>{% endif %}<span class="pages">{% for page in paginator.page_range %}{% if not page %}...{% else %}<a href="{% url tumblelog_list page %}">{% ifequal page paginator.page %}[{{ page }}]{% else %}{{ page }}{% endifequal %}</a>{% endif %}{% endfor %}</span>{% if paginator.has_next %}<span class="next"><a href="{% url tumblelog_list paginator.next %}">Next page</a></span>{% endif %}</p>
-{% endblock %}
-
-{% block sidebarcontent %}
-
-{% get_archive_dates tumblelog.TumblelogItem as years pub_date %}
-<div id="archive-list">
-<h3>Browse the Tumblelog archive</h3>
-<ul>
-    {% for year in years %}
-    <li><a href="{% url tumblelog_archive_year year=year|date:"Y" %}">{{ year|date:"Y" }}</a></li>
-    {% endfor %}
-</ul>
-</div>
-
-<p>Items in the tumblelog<span id="total-tumblelog-items">{{ extra.total }}</span></p>
-<ul class="chart">
-    <li><a href="{% url bookmark_home %}" title="View all links">Links</a><span class="count">{{ extra.links }}</span><span style="width: {% widthratio extra.links extra.total 490 %}px" class="index">{% widthratio extra.links extra.total 100 %}%</span></li>
-    <li><a href="{% url tweet_home %}" title="View all twitter status updates">Tweets</a><span class="count">{{ extra.tweets }}</span><span style="width: {% widthratio extra.tweets extra.total 490 %}px" class="index">{% widthratio extra.tweets extra.total 100 %}%</span></li>
-    <li><a href="{% url video_home %}" title="View all videos">Videos</a><span class="count">{{ extra.videos }}</span><span style="width: {% widthratio extra.videos extra.total 490 %}px" class="index">{% widthratio extra.videos extra.total 100 %}%</span></li>
-    <li><a href="{% url photo_home %}" title="View all photos">Photos</a><span class="count">{{ extra.photos }}</span><span style="width: {% widthratio extra.photos extra.total 490 %}px" class="index">{% widthratio extra.photos extra.total 100 %}%</span></li>
-    {% comment %}<li><a href="{% url blog_home %}" title="View all blog posts">Blog posts</a><span class="count">{{ extra.articles }}</span><span style="width: {% widthratio extra.articles extra.total 490 %}px" class="index">{% widthratio extra.articles extra.total 100 %}%</span></li>{% endcomment %}
-</ul>
-
 {% endblock %}

@@ -1,4 +1,5 @@
 {% extends "twitter/base.html" %}
+{% load typogrify %}
 {% block title %}{{ block.super }}: {{ object.text }}{% endblock %}
 {% block body_class %}detail tweet{% endblock %}
 {% block breadcrumb %}
@@ -13,7 +14,7 @@
 <div id="tweet-detail" class="detail">
 <p class="meta date">Tweeted on {% date_format object.pub_time %}</p>
 {% autoescape off %}
-<h2>{{ object.text|twitter_links }}</h2>
+<h2>{{ object.text|twitter_links|typogrify }}</h2>
 {% endautoescape %}
 <p class="visit"><a href="{{ object.url }}" title="View status on twitter.com">View</a></p>
 </div>
