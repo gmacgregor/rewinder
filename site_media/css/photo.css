@@ -2,8 +2,9 @@
     /*position: relative;*/
     overflow: hidden;
 }
+
 #random-photo #photo {
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 /*
 #random-photo h2 {
@@ -46,6 +47,9 @@ p.photo a {
     border-top: 1px solid #ccc;
     margin: 2em 0 1em 0;
     padding-top: 0.5em;
+}
+#photo-detail img {
+    margin-bottom: 1em;
 }
 #photo-detail dt,
 #photo-detail dd {

@@ -7,9 +7,29 @@
 #tag-detail ul li {
     margin-bottom: 0.5em;
 }
+
 body.tag.list #main-content,
-body.tag.list ul.chart {
+body.tag.list #top-tags ul.chart {
     width: 1000px;
+}
+body.tag.list #tags-by-content .col,
+body.tag.list #tags-by-content ul.chart {
+    width: 230px;
+}
+body.tag.list #tags-by-content .col {
+    margin: 0 10px;
+    float: left;
+}
+body.tag.list #tags-by-content .col.last {
+    padding-right: 0;
+}
+body.tag.list #top-tags {
+    margin-top: 2em;
+    clear: left;
+}
+body.tag.list h2 {
+    text-align: center;
+    margin-bottom: 1em;
 }
 body.tag.list #main-content {
     padding-right: 0;
@@ -18,9 +38,11 @@ body.tag.list #main-content {
 body.tag.list #sidebar {
     display: none;
 }
+/*
 body.tag.list ul.chart {
     margin-top: 2em;
 }
+*/
 .tag.detail #tag-photos li {
     float: left;
     width: 75px;

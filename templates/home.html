@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block breadcrumb %}<li>Latest online activity</li><li class="last"><a href="{% url tumblelog_home %}" title="Browse all online activity since 2005">Browse all activity since 2005</a></li>{% endblock %}
+{% block breadcrumb %}<li>Latest online activity</li><li class="last"><a href="{% url tumblelog_home %}" title="Browse all online activity since 2005">More</a></li>{% endblock %}
 {% block body_class %}home{% endblock %}
 {% load threadedcommentstags %}
 {% load custom_tags %}
@@ -33,9 +33,11 @@
 {% get_free_comment_count for photo as comments %}
 <div id="random-photo">
 <h3>Random Photo</h3>
+<p id="photo"><a href="{{ photo.get_absolute_url }}" title="View details and comment on this photo"><img src="{{ photo.medium_url }}"></a></p>
+{% comment %}
 <p class="meta"><span class="date">{{ photo.taken_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ photo.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
 <h2><a href="{{ photo.get_absolute_url }}" title="View details and comment on this photo">{{ photo.title }}</a></h2>
-<p id="photo"><a href="{{ photo.get_absolute_url }}" title="View details and comment on this photo"><img src="{{ photo.medium_url }}"></a></p>
+{% endcomment %}
 {% if related_photos %}
 <h3>Related Photos</h3>
 {% for related in related_photos %}

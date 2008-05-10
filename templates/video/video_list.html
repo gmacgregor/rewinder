@@ -31,15 +31,17 @@
 {% if random_video.embed_code %}
 <div id="random-video">
 <h3>Random Video</h3>
-<p class="meta"><span class="date">{{ random_video.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ video.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
-<h2><a href="{{ random_video.get_absolute_url }}" title="View video details">{{ random_video.title }}</a></h2>
 <div id="video-embed">
 {% autoescape off %}{{ random_video.embed_code }}{% endautoescape %}
 </div>
-<p>Source: <a href="{{ random_video.url }}">{{ random_video.source }}</a></p>
 {% else %}
 <p><a href="{{ random_video.url }}">View it on {{ random_video.source }}</a></p>
 {% endif %}
+<p class="meta"><span class="date">{{ random_video.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ video.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+<h2><a href="{{ random_video.get_absolute_url }}" title="View video details">{{ random_video.title }}</a></h2>
 {% if random_video.description %}{% autoescape off %}{{ random_video.html_description }}{% endautoescape %}{% endif %}
 </div>
+{% comment %}
+<p>Source: <a href="{{ random_video.url }}">{{ random_video.source }}</a></p>
+{% endcomment %}
 {% endblock %}
