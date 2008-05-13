@@ -4,8 +4,11 @@ from tagging.fields import TagField
 from django.dispatch import dispatcher
 from django.db.models import signals
 from threadedcomments.moderation import CommentModerator, moderator
+
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
+from rewinder.lib.models import BigIntegerField
 from rewinder.util.timeconverter import time_to_utc
+
 
 FLICKR_LICENSES = (
     ('0', 'All Rights Reserved'),
@@ -23,7 +26,8 @@ class MyPhotosManager(models.Manager):
         return qs.filter(owner="sixminutes").order_by('-taken_date')
 
 class Photo(models.Model):
-    flickr_id           = models.PositiveIntegerField()
+    #flickr_id           = models.PositiveIntegerField()
+    flickr_id           = BigIntegerField()
     owner               = models.CharField(max_length=50)
     owner_nsid          = models.CharField(max_length=50)
     title               = models.CharField(max_length=200)
