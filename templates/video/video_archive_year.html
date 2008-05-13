@@ -13,7 +13,7 @@
 <div id="year-archive">
 {% for video in object_list %}
 <div class="entry video clearfix">
-<p class="meta"><span class="date">{{ video.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ video.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+<p class="meta"><span class="date">{% utc_to_eastern video.pub_date %}</span> <span class="comments"><a href="{{ video.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
 {% if video.youtube_small_image %}
 <a href="{{ video.get_absolute_url }}"><img src="{{ video.youtube_small_image }}" width="120" height="90" /></a>
 {% endif %}

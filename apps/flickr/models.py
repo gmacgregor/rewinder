@@ -5,6 +5,7 @@ from django.dispatch import dispatcher
 from django.db.models import signals
 from threadedcomments.moderation import CommentModerator, moderator
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
+from rewinder.util.timeconverter import time_to_utc
 
 FLICKR_LICENSES = (
     ('0', 'All Rights Reserved'),
@@ -19,7 +20,7 @@ FLICKR_LICENSES = (
 class MyPhotosManager(models.Manager):
     def get_query_set(self):
         qs = super(MyPhotosManager, self).get_query_set()
-        return qs.filter(owner="sixminutes").order_by('-taken_date').select_related()
+        return qs.filter(owner="sixminutes").order_by('-taken_date')
 
 class Photo(models.Model):
     flickr_id           = models.PositiveIntegerField()
@@ -94,8 +95,9 @@ class Photo(models.Model):
                 self.slug = "untitled-%s" % self.flickr_id
             else:
                 self.slug = slugify(self.title)
-            if self.owner is not "sixminutes":
+            if self.owner != "sixminutes":
                 self.tags = ''
+            self.taken_date = time_to_utc(self.taken_date)
         super(Photo, self).save()
     
     class Meta:

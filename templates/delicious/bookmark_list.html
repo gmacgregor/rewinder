@@ -11,7 +11,7 @@
 {% for bookmark in paginator.object_list %}
 {% get_free_comment_count for bookmark as comments %}
 <div class="entry link">
-<p class="meta"><span class="date">{{ bookmark.saved_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ bookmark.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p> 
+<p class="meta"><span class="date">{% utc_to_eastern bookmark.saved_date %}</span> <span class="comments"><a href="{{ bookmark.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p> 
 <h2><a href="{{ bookmark.get_absolute_url }}">{{ bookmark.description }}</a></h2>
 {% if bookmark.extended_info %}
 <p>{{ bookmark.extended_info }}</p>

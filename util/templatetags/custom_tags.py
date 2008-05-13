@@ -16,7 +16,15 @@ def date_format(token):
     hma = date(token, "g:i a")
     return "%s at %s" % (mdy, hma)
 
-
+@register.simple_tag
+def utc_to_eastern(token):
+    import pytz
+    tz = pytz.timezone(settings.TIME_ZONE)
+    loc_dt = token.replace(tzinfo=pytz.utc).astimezone(tz)
+    mdy = date(loc_dt, "F jS, Y")
+    hma = date(loc_dt, "g:i a")
+    return "%s at %s" % (mdy, hma)
+    
 @register.filter(name='twitter_links')
 @stringfilter
 def twitter_links(tweet):
@@ -110,9 +118,6 @@ def get_popular_tags(parser, token):
     get_popular_tags 200 as limit tags total_count top_count
     """
     bits = token.contents.split()
-    print bits
-    print bits[0]
-    print bits[6]
     if len(bits) != 7:
         raise TemplateSyntaxError, "get_popular_tags tag takes exactly 6 arguments"
     if bits[2] != 'as':
@@ -154,10 +159,10 @@ class RandomPhotoNode(Node):
         self.varname, self.related_by_tag = varname, related_by_tag
     
     def render(self, context):
-        photo = random.choice(Photo.objects.filter(owner__exact='sixminutes'))
+        photo = random.choice(Photo.sixminutes.all())
         tags = Tag.objects.get_for_object(photo)[:1]
         context[self.varname] = photo
-        context[self.related_by_tag] = Photo.objects.filter(owner__exact='sixminutes', tags__icontains=tags[0]).exclude(id__exact=photo.id)[:6]
+        context[self.related_by_tag] = Photo.sixminutes.all().filter(tags__icontains=tags[0]).exclude(id__exact=photo.id)[:6]
         return ''
 
 @register.tag(name="get_random_photo")
