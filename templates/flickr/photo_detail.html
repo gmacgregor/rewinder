@@ -1,4 +1,5 @@
 {% extends "flickr/base.html" %}
+{% load custom_tags %}
 {% block title %}{{ block.super }}: {{ object.title }}{% endblock %}
 {% block body_class %}detail photo{% endblock %}
 {% block breadcrumb %}
@@ -21,7 +22,7 @@
 <h3>Photo Details</h3>
 <dl class="clearfix">
     <dt>Taken on</dt>
-    <dd>{{ object.taken_date|date:"F d Y \a\t h:i a" }}</dd>
+    <dd>{% utc_to_eastern object.taken_date %}</dd>
     <dt>Camera model</dt>
     <dd>{{ object.exif_model }}</dd>
     <dt>Exposure</dt>

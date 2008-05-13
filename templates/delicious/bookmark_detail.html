@@ -12,7 +12,7 @@
 
 {% block content %}
 <div id="link-detail">
-<p class="meta date">Saved on {% date_format object.saved_date %}</p>
+<p class="meta date">Saved on {% utc_to_eastern object.saved_date %}</p>
 <h2>{% autoescape off %}{{ object.description|typogrify }}{% endautoescape %}</h2>
 {% if object.extended_info %}<p>{% autoescape off %}{{ object.extended_info|typogrify }}{% endautoescape %}</p>{% endif %}
 <p><a href="{{ object.url }}" title="Visit site" class="visit">Visit site</a></p>

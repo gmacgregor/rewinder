@@ -11,6 +11,7 @@ from rewinder.apps.geo.models import Place
 from rewinder.apps.generic.models import Source, Person
 from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
+from rewinder.util.timeconverter import time_to_utc
 
 EXTERNAL_VIDEO_WIDTH = 500
 EXTERNAL_VIDEO_HEIGHT = 300
@@ -126,6 +127,7 @@ class Video(models.Model):
             self.video_id = self.get_video_id()
         if not self.embed_code:
             self.embed_code = self.get_embed_code()
+        self.pub_date = time_to_utc(self.pub_date)
         self._process_markup()
         super(Video, self).save()
     

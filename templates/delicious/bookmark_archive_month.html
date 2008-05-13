@@ -15,7 +15,7 @@
 {% for link in object_list %}
 {% get_free_comment_count for link as comments %}
 <div class="entry link">
-<p class="meta"><span class="date">{{ link.saved_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ link.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+<p class="meta"><span class="date">{% utc_to_eastern link.saved_date %}</span> <span class="comments"><a href="{{ link.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
 <h2><a href="{{ link.get_absolute_url }}">{{ link.description }}</a></h2>
 {% if link.extended_info %}
 <p>{{ link.extended_info }}</p>

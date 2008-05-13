@@ -11,7 +11,7 @@
 
 {% block content %}
 <div id="video-detail" class="detail">
-<p class="meta date">{% date_format object.pub_date %}</p>
+<p class="meta date">{% utc_to_eastern object.pub_date %}</p>
 <h2>{{ object.title }}</h2>
 {% if object.embed_code %}
 <div id="video-embed">
