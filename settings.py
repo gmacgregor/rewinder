@@ -82,6 +82,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
+    'django_evolution',
     #'django.contrib.comments',
     'threadedcomments',
     #template utils -- ie. using markdown for presentation
