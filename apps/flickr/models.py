@@ -50,7 +50,7 @@ class Photo(models.Model):
     exif_model          = models.CharField(max_length=50, blank=True)
     exif_orientation    = models.CharField(max_length=50, blank=True)
     exif_exposure       = models.CharField(max_length=50, blank=True)
-    exif_software       = models.CharField(max_length=50, blank=True)
+    exif_software       = models.CharField(max_length=250, blank=True)
     exif_aperture       = models.CharField(max_length=50, blank=True)
     exif_iso            = models.CharField(max_length=50, blank=True)
     exif_metering_mode  = models.CharField(max_length=50, blank=True)
