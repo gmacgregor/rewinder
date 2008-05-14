@@ -2,19 +2,23 @@
 {% block title %}Blog: {{ object.headline }}{% endblock %}
 {% load custom_tags %}
 {% load threadedcommentstags %}
+{% load typogrify %}
 
 {% block content %}
 <div id="article-detail">
-<p class="meta date">Posted on {% date_format object.pub_date %} in {% for category in object.categories.all %}<a href="{% url blog_category_detail slug=category.slug %}">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</a></p>
-<h2>{{ object.headline }}</h2>
+<p class="meta date">Posted on {% date_format object.pub_date %}{% comment %}in {% for category in object.categories.all %}<a href="{% url blog_category_detail slug=category.slug %}">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</a>{% endcomment %}</p>
+<h2>{% autoescape off %}{{ object.headline|typogrify }}{% endautoescape %}</h2>
 
 <div id="teaser">
 {% autoescape off %}
 {{ object.html_teaser }}
 {% endautoescape %}
+{% if object.lead_image %}
+<img src="{{ object.get_lead_image_url }}" alt="{{ object.lead_caption }}" width="{{ object.get_lead_image_width }}" height="{{ object.get_lead_image_height }}" />
+{% endif %}
 </div>
 
-<div id="article-entry">
+<div id="post">
 {% autoescape off %}
 {{ object.html_body }}
 {% endautoescape %}

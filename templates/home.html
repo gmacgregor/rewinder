@@ -3,6 +3,7 @@
 {% block body_class %}home{% endblock %}
 {% load threadedcommentstags %}
 {% load custom_tags %}
+{% load typogrify %}
 
 {% block content %}
 {% get_latest tumblelog.TumblelogItem 10 as logs %}
@@ -21,7 +22,7 @@
     {% for post in latest_posts %}
     {% get_free_comment_count for post as comments %}
     <p class="meta"><span class="date">{{ post.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ post.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
-    <h2><a href="{{ post.get_absolute_url }}">{{ post.headline }}</a></h2>
+    <h2><a href="{{ post.get_absolute_url }}#post">{% autoescape off %}{{ post.headline|typogrify }}{% endautoescape %}</a></h2>
     {% if post.teaser %}
         {% autoescape off %}{{ post.html_teaser }}{% endautoescape %}
         {% endif %}
@@ -35,8 +36,8 @@
 <h3>Random Photo</h3>
 <p id="photo"><a href="{{ photo.get_absolute_url }}" title="View details and comment on this photo"><img src="{{ photo.medium_url }}"></a></p>
 {% comment %}
-<p class="meta"><span class="date">{% utc_to_eastern photo.taken_date %}</span> <span class="comments"><a href="{{ photo.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
-<h2><a href="{{ photo.get_absolute_url }}" title="View details and comment on this photo">{{ photo.title }}</a></h2>
+<p class="meta"><span class="date">{% long_date photo.taken_date %}</span> <span class="comments"><a href="{{ photo.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+<h2><a href="{{ photo.get_absolute_url }}" title="View details and comment on this photo">{% autoescape off %}{{ photo.title|typogrify }}{% endautoescape %}</a></h2>
 {% endcomment %}
 {% if related_photos %}
 <h3>Related Photos</h3>
@@ -50,10 +51,10 @@
 {% get_free_comment_count for random_link as comments %}
 <div id="random-link">
 <h3>Random link</h3>
-<p class="meta"><span class="date">{% utc_to_eastern random_link.saved_date %}</span> <span class="comments"><a href="{{ random_link.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
-<h2><a href="{{ random_link.get_absolute_url }}" title="View link details">{{ random_link.description }}</a></h2>
+<p class="meta"><span class="date">{% long_date random_link.saved_date %}</span> <span class="comments"><a href="{{ random_link.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+<h2><a href="{{ random_link.get_absolute_url }}" title="View link details">{% autoescape off %}{{ random_link.description|typogrify }}{% endautoescape %}</a></h2>
 {% if random_link.extended_info %}
-<p>{{ random_link.extended_info }}</p>
+<p>{% autoescape off %}{{ random_link.extended_info|typogrify }}{% endautoescape %}</p>
 {% endif %}
 <p class="visit"><a href="{{ random_link.url }}" title="Visit site">Visit</a></p>
 </div>

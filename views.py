@@ -13,7 +13,7 @@ def list(request, app, model, ordering='-pub_date'):
     items = model.objects.all().order_by('%s' % ordering)
     if model.__name__.lower() == "tumblelogitem":
         links = Bookmark.objects.count()
-        photos = Photo.objects.all().filter(owner__exact="sixminutes").count()
+        photos = Photo.sixminutes.all().count()
         videos = Video.objects.count()
         tweets = Tweet.objects.count()
         ctx = {'total': items.count(), 'links': links, 'photos': photos, 'videos': videos, 'tweets': tweets}
@@ -30,8 +30,10 @@ def tag_detail(request, tag):
     links = TaggedItem.objects.get_by_model(Bookmark, tag)
     videos = TaggedItem.objects.get_by_model(Video, tag)
     photos = TaggedItem.objects.get_by_model(Photo, tag)
+    count = articles.count() + links.count() + videos.count() + photos.count() 
     tag_dict = {
         'tag': tag,
+        'total': count,
         'articles': articles,
         'links': links,
         'videos': videos,

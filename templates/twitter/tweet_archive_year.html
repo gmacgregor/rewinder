@@ -14,7 +14,7 @@
 {% get_free_comment_count for tweet as comments %}
 {% autoescape off %}
 <div class="entry tweet">
-    <p class="meta"><a href="{% url tweet_home %}">Tweet</a> <span class="date">{% utc_to_eastern tweet.pub_time %}</span> <span class="comments"><a href="{{ tweet.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>    
+    <p class="meta"><a href="{% url tweet_home %}">Tweet</a> <span class="date">{% utc_to_settings tweet.pub_time %}</span> <span class="comments"><a href="{{ tweet.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>    
     <h2>{{ tweet.text|twitter_links }}</h2>
     <p class="visit"><a href="{{ tweet.url }}">View</a></p>
 </div>

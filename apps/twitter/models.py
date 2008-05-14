@@ -5,7 +5,7 @@ from django.db.models import signals
 from rewinder.util.timeconverter import time_to_settings
 from threadedcomments.moderation import CommentModerator, moderator
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
-from rewinder.util.timeconverter import time_to_utc
+#from rewinder.util.timeconverter import time_to_utc
 
 class Tweet(models.Model):
     pub_time            = models.DateTimeField()
@@ -29,10 +29,10 @@ class Tweet(models.Model):
     def url(self):
         return u'http://twitter.com/%s/statuses/%s' % (self.user.screen_name, self.twitter_id)
     
-    def save(self):
-        if not self.id:
-            self.pub_time = time_to_utc(self.pub_time)
-        super(Tweet, self).save()
+    #def save(self):
+    #    if not self.id:
+    #        self.pub_time = time_to_utc(self.pub_time)
+    #    super(Tweet, self).save()
     
     def _next_previous_helper(self, direction):
         return getattr(self, 'get_%s_by_pub_time' % direction)

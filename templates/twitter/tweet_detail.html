@@ -12,7 +12,7 @@
 
 {% block content %}
 <div id="tweet-detail" class="detail">
-<p class="meta date">Tweeted on {% utc_to_eastern object.pub_time %}</p>
+<p class="meta date">Tweeted on {% utc_to_settings object.pub_time %}</p>
 {% autoescape off %}
 <h2>{{ object.text|twitter_links|typogrify }}</h2>
 {% endautoescape %}
@@ -22,14 +22,16 @@
 {% endblock %}
 
 {% block sidebarcontent %}
+{% autoescape off %}
 <div id="next-previous" class="clearfix">
 {% if object.get_previous %}
 <h3>Previous Tweet</h3>
-<p><a href="{{ object.get_previous.get_absolute_url }}">{{ object.get_previous.text }}</a></p>
+<p><a href="{{ object.get_previous.get_absolute_url }}">{{ object.get_previous.text|typogrify }}</a></p>
 {% endif %}
 {% if object.get_next %}
 <h3>Next Tweet</h3>
-<p><a href="{{ object.get_next.get_absolute_url }}">{{ object.get_next.text }}</a></p>
+<p><a href="{{ object.get_next.get_absolute_url }}">{{ object.get_next.text|typogrify }}</a></p>
 {% endif %}
 </div>
+{% endautoescape %}
 {% endblock %}

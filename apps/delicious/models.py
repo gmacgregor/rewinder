@@ -5,7 +5,7 @@ from django.db.models import signals
 from threadedcomments.moderation import CommentModerator, moderator
 from tagging.fields import TagField
 
-from rewinder.util.timeconverter import time_to_utc
+#from rewinder.util.timeconverter import time_to_utc
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
 import datetime
@@ -56,7 +56,7 @@ class Bookmark(models.Model):
             import re
             from django.template.defaultfilters import slugify
             self.slug = slugify(self.description)
-            self.saved_date = time_to_utc(self.saved_date)
+            #self.saved_date = time_to_utc(self.saved_date)
             tags_re = re.compile('[\:|\+|\&|\/|\#|\.]+')
             tags = self.tags.split()
             new_tags = []

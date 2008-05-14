@@ -16,6 +16,7 @@ from rewinder.apps.delicious.models import Bookmark
 #from rewinder.apps.tumblelog.models import TumblelogItem
 #from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
+import os
 
 PUBLISHED_STATUS = 1
 DRAFT_STATUS = 2
@@ -131,6 +132,15 @@ class Article(models.Model):
     def save(self):
         self = self._process_markup()
         super(Article, self).save()
+    
+    def delete(self):
+        images = [self.get_lead_image_filename(), self.get_sidebar_image_filename(), self.get_inline_image_filename()]
+        for i in images:
+            try:
+                os.remove(i)
+            except:
+                pass
+        super(Article, self).delete()
     
     def _process_markup(self):
         self.html_teaser =  typogrify(formatter(self.teaser))

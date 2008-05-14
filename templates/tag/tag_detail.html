@@ -4,22 +4,32 @@
 {% block breadcrumb %}{{ block.super }}<li class="last">{{ tag }}</li>{% endblock %}
 {% block body_class %}tag detail{% endblock %}
 {% load custom_tags %}
+{% load typogrify %}
 
 {% block content %}
-<h2>Things tagged '{{ tag }}'</h2>
+<h2>Things tagged &#8220;{{ tag }}&#8221;</h2>
 <div id="tag-detail">
+{% comment %}
 <ul>
-{% if articles %}<li><a href="{% url tag_detail tag %}#tag-articles">Articles ({{ articles.count }})</a></li>{% endif %}
+{% if articles %}<li><a href="{% url tag_detail tag %}#tag-articles">{{ articles.count }} Articles</a></li>{% endif %}
 {% if photos %}<li><a href="{% url tag_detail tag %}#tag-photos">Photos ({{ photos.count }})</a></li>{% endif %}
 {% if links %}<li><a href="{% url tag_detail tag %}#tag-links">Links ({{ links.count }})</a></li>{% endif %}
 {% if videos %}<li><a href="{% url tag_detail tag %}#tag-videos">Videos ({{ videos.count }})</a></li>{% endif %}
+</ul>
+{% endcomment %}
+
+<ul class="chart">
+<li><a href="#tag-articles" title="Jump to blog posts tagged '{{ tag }}'">Blog posts</a><span class="count">{{ articles.count }}</span><span style="width: {% widthratio articles.count total 190 %}px" class="index">{% widthratio articles.count total 100 %}%</span></li>  
+<li><a href="#tag-photo" title="Jump to photos tagged '{{ tag }}'">Photos</a><span class="count">{{ photos.count }}</span><span style="width: {% widthratio photos.count total 190 %}px" class="index">{% widthratio photos.count total 100 %}%</span></li>
+<li><a href="#tag-links" title="Jump to links tagged '{{ tag }}'">Links</a><span class="count">{{ links.count }}</span><span style="width: {% widthratio links.count total 190 %}px" class="index">{% widthratio links.count total 100 %}%</span></li>
+<li><a href="#tag-videos" title="Jump to videos tagged '{{ tag }}'">Videos</a><span class="count">{{ videos.count }}</span><span style="width: {% widthratio videos.count total 190 %}px" class="index">{% widthratio videos.count total 100 %}%</span></li>
 </ul>
 
 {% if articles %}
 <h3><a href="{% url blog_home %}">Blog posts</a></h3>
 <ul id="tag-articles">
 {% for article in articles %}
-    <li><a href="{{ article.get_absolute_url }}">{{ article }}</a></li>
+    <li><a href="{{ article.get_absolute_url }}">{% autoescape off %}{{ article.headline|typogrify }}{% endautoescape %}</a></li>
 {% endfor %}
 </ul>
 {% endif %}
@@ -28,7 +38,7 @@
 <h3><a href="{% url photo_home %}">Photos</h3>
 <ul id="tag-photos" class="clearfix">
 {% for photo in photos %}
-    <li><a href="{{ photo.get_absolute_url }}" title="View a larger version of this photo"><img class="thumbnail" src="{{ photo.square_url }}" width="75" height="75" alt="{{ photo }}" /></a></li>
+    <li><a href="{{ photo.get_absolute_url }}" title="View a larger version of this photo"><img class="thumbnail" src="{{ photo.square_url }}" width="75" height="75" alt="{{ photo.title }}" /></a></li>
 {% endfor %}
 </ul>
 {% endif %}
@@ -37,7 +47,7 @@
 <h3><a href="{% url bookmark_home %}">Links</a></h3>
 <ul id="tag-links">
 {% for link in links %}
-    <li><a href="{{ link.get_absolute_url }}">{{ link }}</a></li>
+    <li><a href="{{ link.get_absolute_url }}">{% autoescape off %}{{ link.description|typogrify }}{% endautoescape %}</a></li>
 {% endfor %}
 </ul>
 {% endif %}
@@ -46,7 +56,7 @@
 <h3><a href="{% url video_home %}">Videos</a></h3>
 <ul id="tag-videos">
 {% for video in videos %}
-    <li><a href="{{ video.get_absolute_url }}">{{ video }}</a></li>
+    <li><a href="{{ video.get_absolute_url }}">{% autoescape off %}{{ video.title|typogrify }}{% endautoescape %}</a></li>
 {% endfor %}
 </ul>
 {% endif %}

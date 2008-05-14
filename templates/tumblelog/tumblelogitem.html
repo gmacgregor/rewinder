@@ -1,5 +1,6 @@
 {% load custom_tags %}
 {% load threadedcommentstags %}
+{% load typogrify %}
 {% get_free_comment_count for item.get_content_object as comments %}
 {% autoescape off %}
 {% comment %}
@@ -18,17 +19,17 @@
 {% endcomment %}
 {% ifequal item.content_type.name "bookmark" %}
 <div class="entry link">
-    <p class="meta"><a href="{% url bookmark_home %}">Link</a> <span class="date">{% utc_to_eastern item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
-    <h2><a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.description }}</a></h2>
+    <p class="meta"><a href="{% url bookmark_home %}">Link</a> <span class="date">{% utc_to_settings item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+    <h2><a href="{{ item.get_content_object.get_absolute_url }}">{% autoescape off %}{{ item.get_content_object.description|typogrify }}{% endautoescape %}</a></h2>
     {% if item.get_content_object.extended_info %}
-    <p>{{ item.get_content_object.extended_info }}</p>
+    <p>{% autoescape off %}{{ item.get_content_object.extended_info|typogrify }}{% endautoescape %}</p>
     {% endif %}
     <p class="visit"><a href="{{ item.get_content_object.url }}">Visit</a></p>
 </div>
 {% endifequal %}
 {% ifequal item.content_type.name "video" %}
 <div class="entry video clearfix">
-    <p class="meta"><a href="{% url video_home %}">Video</a> <span class="date">{% utc_to_eastern item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p> 
+    <p class="meta"><a href="{% url video_home %}">Video</a> <span class="date">{% long_date item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p> 
     {% if item.get_content_object.youtube_small_image %}
     <a href="{{ item.get_content_object.get_absolute_url }}"><img src="{{ item.get_content_object.youtube_small_image }}" width="120" height="90" /></a>
     {% endif %}
@@ -38,14 +39,14 @@
 {% endifequal %}
 {% ifequal item.content_type.name "photo" %}
 <div class="entry photo">
-    <p class="meta"><a href="{% url photo_home %}">Photo</a> <span class="date">{% utc_to_eastern item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
-    <p class="photo"><a href="{{ item.get_content_object.get_absolute_url }}" style="background-image: url({{ item.get_content_object.medium_url }}); background-repeat: no-repeat;" title="{{ item.get_content_object.title }}">{{ item.get_content_object.title }}</a></p>
+    <p class="meta"><a href="{% url photo_home %}">Photo</a> <span class="date">{% long_date item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+    <p class="photo"><a href="{{ item.get_content_object.get_absolute_url }}" style="background-image: url({{ item.get_content_object.medium_url }}); background-repeat: no-repeat;" title="{{ item.get_content_object.title }}">{% autoescape off %}{{ item.get_content_object.title|typogrify }}{% endautoescape %}</a></p>
 </div>
 {% endifequal %}
 {% ifequal item.content_type.name "tweet" %}
 <div class="entry tweet">
-    <p class="meta"><a href="{% url tweet_home %}">Tweet</a> <span class="date">{% utc_to_eastern item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>    
-    <h2>{{ item.get_content_object.text|twitter_links }}</h2>
+    <p class="meta"><a href="{% url tweet_home %}">Tweet</a> <span class="date">{% utc_to_settings item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>    
+    <h2>{% autoescape off %}{{ item.get_content_object.text|twitter_links|typogrify }}{% endautoescape %}</h2>
     <p class="visit"><a href="{{ item.get_content_object.url }}">View</a></p>
 </div>
 {% endifequal %}

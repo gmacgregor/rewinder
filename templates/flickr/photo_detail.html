@@ -1,5 +1,6 @@
 {% extends "flickr/base.html" %}
 {% load custom_tags %}
+{% load typogrify %}
 {% block title %}{{ block.super }}: {{ object.title }}{% endblock %}
 {% block body_class %}detail photo{% endblock %}
 {% block breadcrumb %}
@@ -11,18 +12,18 @@
 
 {% block content %}
 <div id="photo-detail" class="detail">
-<h2>{{ object.title }}</h2>
+<h2>{% autoescape off %}{{ object.title|typogrify }}{% endautoescape %}</h2>
 <img src="{{ object.medium_url }}" alt="{{ object.title }}">
 {% if object.description %}
 {% autoescape off %}
-<p>{{ object.description }}</p>
+<p>{% autoescape off %}{{ object.description|typogrify }}{% endautoescape %}</p>
 {% endautoescape %}
 {% endif %}
 {% if object.exif_model %}
 <h3>Photo Details</h3>
 <dl class="clearfix">
     <dt>Taken on</dt>
-    <dd>{% utc_to_eastern object.taken_date %}</dd>
+    <dd>{% long_date object.taken_date %}</dd>
     <dt>Camera model</dt>
     <dd>{{ object.exif_model }}</dd>
     <dt>Exposure</dt>
