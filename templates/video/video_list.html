@@ -9,7 +9,7 @@
 {% for video in paginator.object_list %}
 {% get_free_comment_count for video as comments %}
 <div class="entry video clearfix">
-<p class="meta"><span class="date">{% utc_to_eastern video.pub_date %}</span> <span class="comments"><a href="{{ video.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+<p class="meta"><span class="date">{% long_date video.pub_date %}</span> <span class="comments"><a href="{{ video.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
 {% if video.youtube_small_image %}
 <a href="{{ video.get_absolute_url }}"><img src="{{ video.youtube_small_image }}" width="120" height="90" /></a>
 {% endif %}
@@ -37,7 +37,7 @@
 {% else %}
 <p><a href="{{ random_video.url }}">View it on {{ random_video.source }}</a></p>
 {% endif %}
-<p class="meta"><span class="date">{% utc_to_eastern random_video.pub_date %}</span> <span class="comments"><a href="{{ video.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+<p class="meta"><span class="date">{% long_date random_video.pub_date %}</span> <span class="comments"><a href="{{ video.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
 <h2><a href="{{ random_video.get_absolute_url }}" title="View video details">{{ random_video.title }}</a></h2>
 {% if random_video.description %}{% autoescape off %}{{ random_video.html_description }}{% endautoescape %}{% endif %}
 </div>

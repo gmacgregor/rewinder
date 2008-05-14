@@ -7,6 +7,7 @@ from rewinder.apps.blog.models import Article
 from rewinder.apps.flickr.models import Photo
 
 import random
+import pytz
 
 register = Library()
 
@@ -17,12 +18,17 @@ def date_format(token):
     return "%s at %s" % (mdy, hma)
 
 @register.simple_tag
-def utc_to_eastern(token):
-    import pytz
+def utc_to_settings(token):
     tz = pytz.timezone(settings.TIME_ZONE)
     loc_dt = token.replace(tzinfo=pytz.utc).astimezone(tz)
     mdy = date(loc_dt, "F jS, Y")
     hma = date(loc_dt, "g:i a")
+    return "%s at %s" % (mdy, hma)
+   
+@register.simple_tag
+def long_date(token):
+    mdy = date(token, "F jS, Y")
+    hma = date(token, "g:i a")
     return "%s at %s" % (mdy, hma)
     
 @register.filter(name='twitter_links')

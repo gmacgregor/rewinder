@@ -8,6 +8,7 @@
 {% endblock %}
 {% load custom_tags %}
 {% load threadedcommentstags %}
+{% load typogrify %}
 
 {% block content %}
 <h2>Links saved in {{ month|date:"F Y" }} ({{ object_list.count }})</h2>
@@ -15,10 +16,10 @@
 {% for link in object_list %}
 {% get_free_comment_count for link as comments %}
 <div class="entry link">
-<p class="meta"><span class="date">{% utc_to_eastern link.saved_date %}</span> <span class="comments"><a href="{{ link.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
-<h2><a href="{{ link.get_absolute_url }}">{{ link.description }}</a></h2>
+<p class="meta"><span class="date">{% utc_to_settings link.saved_date %}</span> <span class="comments"><a href="{{ link.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+<h2><a href="{{ link.get_absolute_url }}">>{% autoescape off %}{{ link.description|typogrify }}{% endautoescape %}</a></h2>
 {% if link.extended_info %}
-<p>{{ link.extended_info }}</p>
+<p>{% autoescape off %}{{ link.extended_info|typogrify }}{% endautoescape %}</p>
 {% endif %}
 <p class="visit"><a href="{{ link.url }}" title="Visit site">Visit site</a></p>
 </div>

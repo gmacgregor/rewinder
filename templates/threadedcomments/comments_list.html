@@ -11,16 +11,11 @@
 <ol>
 {% for comment in tree %}
 <li>
-<div class="comment clearfix{% if forloop.first %} first{% endif %}" id="c{{ comment.id }}">
-<div class="comment-meta">
-<p class="author">{% if comment.website %}<a href="{{ comment.website }}" title="Visit {{ comment.name }}'s website" rel="nofollow">{% endif %}{{ comment.name }}{% if comment.website %}</a>{% endif %}</p>
-{% if comment.website %}<a href="{{ comment.website }}" title="Visit {{ comment.name }}'s website" rel="nofollow">{% endif %}<img src="{{ comment.email|gravatar }}" alt="Gravatar for {{ comment.name }}" width="50" height="50" />{% if comment.website %}</a>{% endif %}
-<p class="meta date"><a href="#c{{ comment.id }}" title="Permanent link to this comment">{{ comment.date_submitted|date:"M d Y"}}<br />{{ comment.date_submitted|date:"g:h a" }}</a><p>
-</div>
-<div class="remark">
-{% auto_transform_markup comment %}
-<div>
-</div>
+    <div class="comment clearfix{% if forloop.first %} first{% endif %}" id="c{{ comment.id }}">
+        <div class="comment-meta"><p class="author">{% if comment.website %}<a href="{{ comment.website }}" title="Visit {{ comment.name }}'s website" rel="nofollow">{% endif %}{{ comment.name }}{% if comment.website %}</a>{% endif %}</p>
+{% if comment.website %}<a href="{{ comment.website }}" title="Visit {{ comment.name }}'s website" rel="nofollow">{% endif %}<img src="{{ comment.email|gravatar }}" alt="Gravatar for {{ comment.name }}" width="50" height="50" />{% if comment.website %}</a>{% endif %}<p class="meta date"><a href="#c{{ comment.id }}" title="Permanent link to this comment">{{ comment.date_submitted|date:"M d Y"}}<br />{{ comment.date_submitted|date:"g:h a" }}</a><p></div>
+        <div class="remark">{% auto_transform_markup comment %}</div>
+    </div>
 </li>
 {% endfor %}
 </ol>
