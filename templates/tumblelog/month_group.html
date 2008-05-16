@@ -1,11 +1,17 @@
 {% extends "tumblelog/base.html" %}
-
+{% block body_class %}tumblelog month_group{% endblock %}
+{% block title %}Tumblelog archive for {{ showing_date|date:"F, Y" }}{% endblock %}
+{% block breadcrumb %}
+<li><a href="{% url tumblelog_home %}" title="Back to Tumblelog">Tumblelog</a></li>
+<li><a href="{% url tumblelog_archive_year year=showing_date|date:"Y" %}" title="Archive for {{ showing_date|date:"Y" }}">{{ showing_date|date:"Y" }}</a></li>
+<li class="last"><a href="{% url tumblelog_archive_year year=showing_date|date:"Y",month=showing_date|date:"m" %}" title="Archive for {{ showing_date|date:"F Y" }}">{{ showing_date|date:"m" }}</a></li>
+{% endblock %}
 {% block content %}
-<h2>{{ showing_date|date:"F Y"}}: {{ entries.count }} tumblelog items</h2>
-{% regroup entries by pub_date|date:"F" as month_list %}
+<h2>Online activity for {{ showing_date|date:"F, Y" }}</h2>
 
+<div id="tumblelog-archive" class="month">
+{% regroup entries by pub_date|date:"F" as month_list %}
 {% for month in month_list %}
-    
 {% regroup month.list by pub_date|date:"l, F jS" as day_list %}
 
 {% for day in day_list %}
@@ -13,7 +19,7 @@
     {% spaceless %}
     {% for item in day.list|slice:"1" %}
     {% if forloop.first %}
-    <h2><a href="{% url tumblelog_archive_day year=item.pub_date|date:"Y",month=item.pub_date|date:"m",day=item.pub_date|date:"d" %}">{{ day.grouper }}</a></h2>
+    <h3><a href="{% url tumblelog_archive_day year=item.pub_date|date:"Y",month=item.pub_date|date:"m",day=item.pub_date|date:"d" %}">{{ day.grouper }}</a></h3>
     {% endif %}
     {% endfor %}
     {% endspaceless %}
@@ -21,5 +27,27 @@
 {% endfor %}
 
 {% endfor %}
+
+</div>
+{% endblock %}
+
+
+{% block sidebarcontent %}
+
+<div id="archive-{{ showing_date|date:"Ym" }}">
+<p>This chart shows all days in <strong>{{ showing_date|date:"F, Y" }}</strong> that I did something online, with the number of tumblelog entries made on each day as a percentage of <strong>{{ entries.count }}</strong> total entries for the month.</p>
+<p>You can view the details of a given day by clicking either the date below, or to the left.</p>
+<ul class="chart">
+{% regroup entries by pub_date|date:"F" as month_list %}
+{% for month in month_list %}
+{% regroup month.list by pub_date|date:"jS" as day_list %}
+{% for day in day_list %}
+    <li><a href="{% for item in day.list|slice:"1" %}{% if forloop.first %}{% url tumblelog_archive_day year=showing_date|date:"Y",month=showing_date|date:"m",day=item.pub_date|date:"d" %}{% endif %}{% endfor %}" title="View content for {{ showing_date|date:"F"}} {{ day.grouper }}, {{ showing_date|date:"Y" }}">{{ day.grouper }}</a><span class="count">{{ day.list|length }}</span><span style="width: {% widthratio day.list|length entries.count 490 %}px" class="index">{% widthratio day.list|length entries.count 100 %}%</span></li>
+{% endfor %}
+{% endfor %}
+</ul>
+</div>
+
+{% include "tumblelog/archive_year_list.html" %}
 
 {% endblock %}
