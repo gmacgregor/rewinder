@@ -1,13 +1,19 @@
 {% extends "tumblelog/base.html" %}
-
+{% block body_class %}tumblelog year_group{% endblock %}
+{% block title %}Tumblelog archive for {{ showing_date|date:"Y" }}{% endblock %}
+{% block breadcrumb %}
+<li><a href="{% url tumblelog_home %}" title="Back to Tumblelog">Tumblelog</a></li>
+<li class="last"><a href="{% url tumblelog_archive_year year=showing_date|date:"Y" %}" title="Archive for {{ showing_date|date:"Y" }}">{{ showing_date|date:"Y" }}</a></li>
+{% endblock %}
 {% block content %}
-<h2>{{ showing_date|date:"Y" }}: {{ entries.count }} tumblelog items</h2>
+<h2>Online activity for {{ showing_date|date:"Y" }}</h2>
 
+<div id="tumblelog-archive" class="year">
 {% regroup entries by pub_date|date:"F" as date_list %}
 {% for date in date_list %}
     {% regroup date.list|dictsort:"content_type.name" by content_type as type_list %}
     {% spaceless %}
-    <h2>{% for type in type_list %}
+    <h3>{% for type in type_list %}
         {% if forloop.first %}
             {% for item in type.list|slice:"1" %}
                 {% if forloop.first %}
@@ -16,10 +22,28 @@
             {% endfor %}
         {% endif %}
         {% endfor %}
-    </h2>
+    </h3>
     {% endspaceless %}
     <p>{% for type in type_list %}{{ type.list|length }} {{ type.grouper.name }}s{% if not forloop.last %}, {% endif %}{% endfor %}</p>
     
 {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block sidebarcontent %}
+
+<div id="archive-{{ showing_date|date:"Y" }}">
+<p>This chart shows all months in <strong>{{ showing_date|date:"Y" }}</strong> with the number of tumblelog entries made in each month as a percentage of <strong>{{ entries.count }}</strong> total entries for the year.</p>
+<p>You can view the details of a given month by clicking either the month name below, or to the left.</p>
+{% regroup entries by pub_date|date:"F" as month_list %}
+<ul class="chart">
+{% for month in month_list %}
+    <li><a href="{% for item in month.list|slice:"1" %}{% url tumblelog_archive_month year=showing_date|date:"Y",month=item.pub_date|date:"m" %}{% endfor %}" title="View content for {{ month.grouper }}, {{ showing_date|date:"Y" }}">{{ month.grouper }}</a><span class="count">{{ month.list|length }}</span><span style="width: {% widthratio month.list|length entries.count 490 %}px" class="index">{% widthratio month.list|length entries.count 100 %}%</span></li>
+{% endfor %}
+</ul>
+</div>
+
+{% include "tumblelog/archive_year_list.html" %}
 
 {% endblock %}
