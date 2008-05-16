@@ -18,6 +18,10 @@
 {% endcomment %}
 
 {% regroup date.list|dictsort:"content_type.name" by content_type as type_list %}
+{% for type in type_list %}
+{{ type.list|length }} {{ type.grouper.name }}s{% if not forloop.last %},{% endif %}
+{% endfor %}
+    {% comment %}
     {% for type in type_list %}
         <h4>{{ type.grouper }}</h4>
         {% for item in type.list %}
@@ -25,7 +29,7 @@
             
         {% endfor %}
     {% endfor %}
-
+    {% endcomment %}
 
 {% endfor %}
 

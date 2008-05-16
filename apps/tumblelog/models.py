@@ -2,8 +2,19 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.generic import GenericForeignKey
 from django.db import models
+from django.db import connection
 
-
+class TumblelogItemManager(models.Manager):
+    
+    def get_objects_for_year(self, year):
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT t.pub_date, t.content_type, t.object_id, t.content_object
+            FROM tumblelog_tumblelogitem t
+            JOIN ON django_content_type d
+            WHERE t.pub_date = 2007
+            """)
+    
 class TumblelogItem(models.Model):
     '''
     Any TumblelogItem is assumed to contain a pub_date
