@@ -116,21 +116,26 @@ class Article(models.Model):
     sources             = models.ManyToManyField(Source, filter_interface=models.HORIZONTAL, null=True, blank=True)
     
     #images
+    #lead_image          = models.ImageField(upload_to='img/articles/lead/%Y%m%d/', blank=True)
     lead_image          = models.ImageField(upload_to='img/articles/lead/%Y%m%d/', blank=True)
+    remove_lead         = models.BooleanField(u'Remove lead image?')
     lead_caption        = models.CharField(max_length=255, blank=True, help_text=u'Use Markdown syntax for HTML formatting.')
-    html_lead_caption   = models.CharField(max_length=255, blank=True, null=True)
+    html_lead_caption   = models.CharField(max_length=255, blank=True)
     sidebar_image       = models.ImageField(upload_to='img/articles/sidebar/%Y%m%d/', blank=True)
+    remove_sidebar      = models.BooleanField(u'Remove sidebar image?')
     sidebar_caption     = models.CharField(max_length=255, blank=True, help_text=u'Use Markdown syntax for HTML formatting.')
-    html_sidebar_caption= models.CharField(max_length=255, blank=True, null=True)
+    html_sidebar_caption= models.CharField(max_length=255, blank=True)
     inline_image        = models.ImageField(upload_to='img/articles/inline/%Y%m%d/', blank=True)
+    remove_inline       = models.BooleanField(u'Remove inline image?')
     inline_caption      = models.CharField(max_length=255, blank=True, help_text=u'Use Markdown syntax for HTML formatting.')
-    html_inline_caption = models.CharField(max_length=255, blank=True, null=True)
+    html_inline_caption = models.CharField(max_length=255, blank=True)
     
     def __unicode__(self):
         return u'%s' % self.headline
     
     def save(self):
         self = self._process_markup()
+        self = self._process_images()
         super(Article, self).save()
     
     def delete(self):
@@ -138,7 +143,7 @@ class Article(models.Model):
         for i in images:
             try:
                 os.remove(i)
-            except:
+            except OSError:
                 pass
         super(Article, self).delete()
     
@@ -150,6 +155,29 @@ class Article(models.Model):
         self.html_lead_caption =  typogrify(formatter(self.lead_caption))
         self.html_sidebar_caption =  typogrify(formatter(self.sidebar_caption))
         self.html_inline_caption =  typogrify(formatter(self.inline_caption))
+        return self
+    
+    def _process_images(self):
+        if self.remove_lead:
+            try:
+                os.remove(self.get_lead_image_filename())
+            except OSError:
+                # most likely that image doesn't exist
+                pass
+            self.lead_image, self.lead_caption, self.html_lead_caption = '', '', ''
+        if self.remove_sidebar:
+            try:
+                os.remove(self.get_sidebar_image_filename())
+            except OSError:
+                pass
+            self.sidebar_image, self.sidebar_caption, self.html_sidebar_caption = '', '', ''
+        if self.remove_inline:
+            try:
+                os.remove(self.get_inline_image_filename())
+            except OSError:
+                pass
+            self.inline_image, self.inline_caption, self.html_inline_caption = '', '', ''
+        self.remove_lead, self.remove_sidebar, self.remove_inline = False, False, False
         return self
     
     @models.permalink
@@ -175,7 +203,7 @@ class Article(models.Model):
             ('Categorization', {'fields': ('categories', 'tags', 'featured',)}),
             ('Entry', {'fields': ('body',)}),
             ('Related Material', {'fields': ('articles', 'links', 'videos', 'quotes',), 'classes': 'collapse'}),
-            ('Images and Photos', {'fields': ('lead_image', 'lead_caption', 'sidebar_image', 'sidebar_caption', 'inline_image', 'inline_caption',), 'classes': 'collapse'}),
+            ('Images', {'fields': ('lead_image', 'remove_lead', 'lead_caption', 'sidebar_image', 'remove_sidebar', 'sidebar_caption', 'inline_image', 'remove_inline', 'inline_caption',), 'classes': 'collapse'}),
             ('Relevant People, Sources', {'fields': ('people', 'sources',), 'classes': 'collapse'}),
         )
         
