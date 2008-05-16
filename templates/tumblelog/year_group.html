@@ -1,0 +1,25 @@
+{% extends "tumblelog/base.html" %}
+
+{% block content %}
+<h2>{{ showing_date|date:"Y" }}: {{ entries.count }} tumblelog items</h2>
+
+{% regroup entries by pub_date|date:"F" as date_list %}
+{% for date in date_list %}
+    {% regroup date.list|dictsort:"content_type.name" by content_type as type_list %}
+    {% spaceless %}
+    <h2>{% for type in type_list %}
+        {% if forloop.first %}
+            {% for item in type.list|slice:"1" %}
+                {% if forloop.first %}
+                <a href="{% url tumblelog_archive_month year=showing_date|date:"Y",month=item.pub_date|date:"m" %}">{{ date.grouper }}</a>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% endfor %}
+    </h2>
+    {% endspaceless %}
+    <p>{% for type in type_list %}{{ type.list|length }} {{ type.grouper.name }}s{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    
+{% endfor %}
+
+{% endblock %}
