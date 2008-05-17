@@ -12,7 +12,7 @@
 
 {% block content %}
 <div id="tweet-detail" class="detail">
-<p class="meta date">Tweeted on {% utc_to_settings object.pub_time %}</p>
+<p class="meta date">Tweeted on {% utc_to_settings object.pub_time %} <a href="{% url tumblelog_archive_day year=object.pub_time|date:"Y",month=object.pub_time|date:"m",day=object.pub_time|date:"d" %}">More</a></p>
 {% autoescape off %}
 <h2>{{ object.text|twitter_links|typogrify }}</h2>
 {% endautoescape %}

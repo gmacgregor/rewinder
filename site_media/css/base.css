@@ -8,7 +8,8 @@
 
 body {
     font-size: 0.8em;
-    color: #333434;
+    /*color: #333434;*/
+    color: #4d4d4d;
     font-family: "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
 }
 a {
@@ -58,6 +59,20 @@ p {
     margin-top: 0.5em;
     line-height: 1.4em;
 }
+ul {
+    list-style-type: square;
+    list-style-position: inside;
+    margin: 0.5em 0 1em 0;
+}
+ul li {
+    line-height: 1.2em;
+}
+#nav ul,
+#breadcrumb ul,
+ul#tag-photos {
+    list-style-type: none;
+    margin: 0;
+}
 #wrapper {
     width: 1000px;
     margin: 1em 0 0 1em;
@@ -74,11 +89,17 @@ p {
 #nav ul.last {
     margin-right: 0;
 }
+#nav ul li,
+#breadcrumb li,
+ul#tag-photos li { 
+    margin-bottom: 0;
+    line-height: 1;
+}
 #nav ul li a {
     display: block;
     width: 159px;
     padding: 2px 2px 5px 2px;
-    /*border-bottom: 1px solid #eaebeb;*/
+    border-bottom: 1px solid #eaebeb;
 }
 #nav ul li a.last {
     border-bottom: none;
@@ -104,15 +125,19 @@ p {
 body.detail #sidebar {
     margin-top: 50px;
 }*/
-.meta {
+body.detail p.meta,
+#main-content .entry p.meta,
+#sidebar p.meta {
     text-transform: uppercase;
     color: #888;
     font-size: 10px;
 }
-.meta a {
+#main-content .entry p {
+    margin-bottom: 1em;
 }
-.visit a {
-    /*color: #eaebeb;*/
+#main-content .entry p.meta,
+#main-content .entry p.visit {
+    margin-bottom: 0;
 }
 body.detail h2 {
     margin-bottom: 0.5em;
@@ -183,13 +208,14 @@ body.detail h2 {
 .paginator .next {
     right: 0;
 }
-
-
 ul.chart {
     width: 490px;
+    list-style-type: none;
+    margin: 0;
 }
 ul.chart li {
     position: relative;
+    margin-bottom: 0;
 }
 ul.chart li:hover {
     background: #e9e8e8;
@@ -319,16 +345,9 @@ body.preview #comments {
     clear: left;
     padding-bottom: 1em;
 }
-ul.errorlist {
-    list-style-type: square;
-    list-style-position: inside;
-    margin: 0.5em 0 1em 0;
-}
-ul.errorlist li {
-    margin-bottom: 0.5em;
-}
 /* ----------------------------------------------------------------- next/prev */
-#next-previous {
+#next-previous,
+#more-content {
     margin-bottom: 1em;
 }
 #next-previous h3 {
@@ -355,11 +374,11 @@ ul.errorlist li {
     clear: left;
     margin-bottom: 2em;
 }
-
+/*
 #archive-list ul li {
     line-height: 1.4em;
 }
-
+*/
 
 .detail #related-content {
     margin: 1em 0 2em 0;

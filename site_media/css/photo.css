@@ -58,11 +58,11 @@ p.photo a {
     border-bottom: 1px solid #eee;
 }
 #photo-detail dt {
-    width: 60%;
+    width: 50%;
     font-weight: bold;
 }
 #photo-detail dd {
-    width: 40%;
+    width: 50%;
 }
 #photo-detail dt.last,
 #photo-detail dd.last {

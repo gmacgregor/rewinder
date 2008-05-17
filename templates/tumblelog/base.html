@@ -4,10 +4,17 @@
 {% block body_class %}tumblelog home{% endblock %}
 {% block breadcrumb %}
 <li><a href="{% url tumblelog_home %}" title="Back to Tumblelog">Tumblelog</a></li>
-<li class="last"><a href="{% url tags_list %}" title="View all tags">Tags</a></li>
 {% endblock %}
 
 {% block sidebarcontent %}
+<h3>What&#8217;s the tumblelog?</h3>
+<p>The tumblelog represents (most of) my online activity. It&#8217;s an aggregation of:</p>
+    <ul>
+        <li><a href="{% url bookmark_home %}">links</a> that I save to <a href="http://del.icio.us">del.icio.us</a></li>
+        <li><a href="{% url photo_home %}">photos</a> that I share via the photo-sharing site <a href="http://flickr.com">flickr.com</a></li>
+        <li><a href="{% url tweet_home %}">status updates</a> that I post to <a href="http://twitter.com">twitter.com</a></li>
+        <li>interesting and humorous <a href="{% url video_home %}">videos</a> that I&#8217;ve come across</li>
+    </ul>
 
 <p id="total-tumblelog-items">{{ extra.total }}</p>
 <h3>Items in the Tumblelog</h3>

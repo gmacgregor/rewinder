@@ -7,7 +7,7 @@
 {% load typogrify %}
 
 {% block content %}
-<h2>Things tagged &#8220;{{ tag }}&#8221;</h2>
+<h2>I&#8217;ve tagged {{ total }} things with &#8220;{{ tag }}&#8221;</h2>
 <div id="tag-detail">
 {% comment %}
 <ul>
@@ -19,10 +19,18 @@
 {% endcomment %}
 
 <ul class="chart">
-<li><a href="#tag-articles" title="Jump to blog posts tagged '{{ tag }}'">Blog posts</a><span class="count">{{ articles.count }}</span><span style="width: {% widthratio articles.count total 190 %}px" class="index">{% widthratio articles.count total 100 %}%</span></li>  
-<li><a href="#tag-photo" title="Jump to photos tagged '{{ tag }}'">Photos</a><span class="count">{{ photos.count }}</span><span style="width: {% widthratio photos.count total 190 %}px" class="index">{% widthratio photos.count total 100 %}%</span></li>
-<li><a href="#tag-links" title="Jump to links tagged '{{ tag }}'">Links</a><span class="count">{{ links.count }}</span><span style="width: {% widthratio links.count total 190 %}px" class="index">{% widthratio links.count total 100 %}%</span></li>
-<li><a href="#tag-videos" title="Jump to videos tagged '{{ tag }}'">Videos</a><span class="count">{{ videos.count }}</span><span style="width: {% widthratio videos.count total 190 %}px" class="index">{% widthratio videos.count total 100 %}%</span></li>
+{% if articles %}
+<li><a href="#tag-articles" title="Jump to blog posts tagged '{{ tag }}'">Blog posts</a><span class="count">{{ articles.count }}</span><span style="width: {% widthratio articles.count total 490 %}px" class="index">{% widthratio articles.count total 100 %}%</span></li>
+{% endif %}
+{% if photos %}
+<li><a href="#tag-photo" title="Jump to photos tagged '{{ tag }}'">Photos</a><span class="count">{{ photos.count }}</span><span style="width: {% widthratio photos.count total 490 %}px" class="index">{% widthratio photos.count total 100 %}%</span></li>
+{% endif %}
+{% if links %}
+<li><a href="#tag-links" title="Jump to links tagged '{{ tag }}'">Links</a><span class="count">{{ links.count }}</span><span style="width: {% widthratio links.count total 490 %}px" class="index">{% widthratio links.count total 100 %}%</span></li>
+{% endif %}
+{% if videos %}
+<li><a href="#tag-videos" title="Jump to videos tagged '{{ tag }}'">Videos</a><span class="count">{{ videos.count }}</span><span style="width: {% widthratio videos.count total 490 %}px" class="index">{% widthratio videos.count total 100 %}%</span></li>
+{% endif %}
 </ul>
 
 {% if articles %}
