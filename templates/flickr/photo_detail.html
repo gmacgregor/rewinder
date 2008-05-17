@@ -13,7 +13,7 @@
 {% block content %}
 <div id="photo-detail" class="detail">
 <h2>{% autoescape off %}{{ object.title|typogrify }}{% endautoescape %}</h2>
-<img src="{{ object.medium_url }}" alt="{{ object.title }}">
+<img src="{{ object.medium_url }}" alt="{{ object.title }}" />
 {% if object.description %}
 {% autoescape off %}
 <p>{% autoescape off %}{{ object.description|typogrify }}{% endautoescape %}</p>
@@ -42,10 +42,10 @@
 {% block sidebarcontent %}
 <div id="next-previous" class="clearfix">
 {% if object.get_previous %}
-<p class="previous"><a href="{{ object.get_previous.get_absolute_url }}"><img src="{{ object.get_previous.square_url }}" alt="{{ object.get_previous.title }}"></a><a href="{{ object.get_previous.get_absolute_url }}">Previous</a></p>
+<p class="previous"><a href="{{ object.get_previous.get_absolute_url }}"><img src="{{ object.get_previous.square_url }}" alt="{{ object.get_previous.title }}" /></a><a href="{{ object.get_previous.get_absolute_url }}">Previous</a></p>
 {% endif %}
 {% if object.get_next %}
-<p class="next"><a href="{{ object.get_next.get_absolute_url }}"><img src="{{ object.get_next.square_url }}" alt="{{ object.get_next.title }}"></a><a href="{{ object.get_next.get_absolute_url }}">Next</a></p>
+<p class="next"><a href="{{ object.get_next.get_absolute_url }}"><img src="{{ object.get_next.square_url }}" alt="{{ object.get_next.title }}" /></a><a href="{{ object.get_next.get_absolute_url }}">Next</a></p>
 {% endif %}
 </div>
 {{ block.super }}
