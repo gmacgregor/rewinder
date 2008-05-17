@@ -4,15 +4,15 @@
 {% block body_class %}detail tweet{% endblock %}
 {% block breadcrumb %}
 {{ block.super }}
-    <li><a href="{% url tweet_archive_year year=object.pub_time|date:"Y" %}">{{ object.pub_time|date:"Y"}}</a></li>
-    <li><a href="{% url tweet_archive_month year=object.pub_time|date:"Y",month=object.pub_time|date:"m" %}">{{ object.pub_time|date:"m"}}</a></li>
-    <li><a href="{% url tweet_archive_day year=object.pub_time|date:"Y",month=object.pub_time|date:"m",day=object.pub_time|date:"d" %}">{{ object.pub_time|date:"d"}}</a></li>
+    <li><a href="{% url tweet_archive_year year=object.settings_time|date:"Y" %}">{{ object.settings_time|date:"Y"}}</a></li>
+    <li><a href="{% url tweet_archive_month year=object.settings_time|date:"Y",month=object.settings_time|date:"m" %}">{{ object.pub_time|date:"m"}}</a></li>
+    <li><a href="{% url tweet_archive_day year=object.settings_time|date:"Y",month=object.settings_time|date:"m",day=object.settings_time|date:"d" %}">{{ object.settings_time|date:"d"}}</a></li>
 {% endblock %}
 {% load custom_tags %}
 
 {% block content %}
 <div id="tweet-detail" class="detail">
-<p class="meta date">Tweeted on {% utc_to_settings object.pub_time %} <a href="{% url tumblelog_archive_day year=object.pub_time|date:"Y",month=object.pub_time|date:"m",day=object.pub_time|date:"d" %}">More</a></p>
+<p class="meta date">Tweeted on {% utc_to_settings object.pub_time %} <a href="{% url tumblelog_archive_day year=object.settings_time|date:"Y",month=object.settings_time|date:"m",day=object.settings_time|date:"d" %}">More</a></p>
 {% autoescape off %}
 <h2>{{ object.text|twitter_links|typogrify }}</h2>
 {% endautoescape %}
