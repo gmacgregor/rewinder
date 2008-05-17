@@ -16,7 +16,14 @@ class Tweet(models.Model):
     
     def __unicode__(self):
         return u'%s' % (self.text)
-
+    
+    @property
+    def settings_time(self):
+        import pytz
+        tz = pytz.timezone(settings.TIME_ZONE)
+        loc_dt = self.pub_time.replace(tzinfo=pytz.utc).astimezone(tz)
+        return loc_dt
+    
     @models.permalink
     def get_absolute_url(self):
         return ('tweet_detail', (), {
