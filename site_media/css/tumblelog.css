@@ -24,7 +24,7 @@
     float: left;
     margin: 0.5em 0.5em 0 0;
 }
-.tumblelog.home #sidebar p {
+.tumblelog.home #sidebar p#total-tumblelog-items {
     text-align: center;
     /*color: #888;*/
     /*text-transform: uppercase;*/
@@ -34,23 +34,33 @@
     font-size: 150px;
     font-weight: bold;
     color: #333;
-    margin-top: -50px;
+    margin: -30px 0 -20px 0;
 }
+.tumblelog #sidebar p {
+    margin: 0 0 1em 0;
+}
+/*
 .tumblelog.year_group #sidebar p,
 .tumblelog.month_group #sidebar p {
     margin-bottom: 1em;
 }
+*/
 #tumblelog-archive {
     margin-top: 1em;
 }
 #tumblelog-archive h3 {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.2em;
 }
+#tumblelog-archive p {
+    margin: 0 0 1em 0;
+}
+/*
 #tumblelog-archive.year p,
 #tumblelog-archive.month p {
     margin-top: 0;
     margin-bottom: 1em;
 }
+*/
 /*
 .tumblelog #sidebar ul li {
     margin-bottom: 0.5em;

@@ -23,7 +23,7 @@
 <h3>Photo Details</h3>
 <dl class="clearfix">
     <dt>Taken on</dt>
-    <dd>{% long_date object.taken_date %}</dd>
+    <dd>{% long_date object.taken_date %} <a href="{% url tumblelog_archive_day year=object.taken_date|date:"Y",month=object.taken_date|date:"m",day=object.taken_date|date:"d" %}">More</a></dd>
     <dt>Camera model</dt>
     <dd>{{ object.exif_model }}</dd>
     <dt>Exposure</dt>

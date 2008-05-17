@@ -17,7 +17,7 @@
 {% get_free_comment_count for link as comments %}
 <div class="entry link">
 <p class="meta"><span class="date">{% utc_to_settings link.saved_date %}</span> <span class="comments"><a href="{{ link.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
-<h2><a href="{{ link.get_absolute_url }}">>{% autoescape off %}{{ link.description|typogrify }}{% endautoescape %}</a></h2>
+<h2><a href="{{ link.get_absolute_url }}">{% autoescape off %}{{ link.description|typogrify }}{% endautoescape %}</a></h2>
 {% if link.extended_info %}
 <p>{% autoescape off %}{{ link.extended_info|typogrify }}{% endautoescape %}</p>
 {% endif %}

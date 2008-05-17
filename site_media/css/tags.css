@@ -7,8 +7,8 @@
 #tag-detail h3 a {
     color: #000;
 }
+/*#tag-detail ul#tag-photos li,*/
 #tag-detail ul#tag-articles li,
-#tag-detail ul#tag-photos li,
 #tag-detail ul#tag-videos li,
 #tag-detail ul#tag-links li {
     margin-bottom: 0.5em;
