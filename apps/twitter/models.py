@@ -27,9 +27,9 @@ class Tweet(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('tweet_detail', (), {
-            'year': self.pub_time.year,
-            'month': str(self.pub_time.month).zfill(2),
-            'day': str(self.pub_time.day).zfill(2),
+            'year': self.settings_time.year,
+            'month': str(self.settings_time.month).zfill(2),
+            'day': str(self.settings_time.day).zfill(2),
             'object_id': self.id,
             })
     
