@@ -7,7 +7,6 @@ from threadedcomments.moderation import CommentModerator, moderator
 
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 from rewinder.lib.models import BigIntegerField
-#from rewinder.util.timeconverter import time_to_utc
 
 
 FLICKR_LICENSES = (
@@ -102,7 +101,6 @@ class Photo(models.Model):
                 self.slug = slugify(self.title)
             if self.owner != "sixminutes":
                 self.tags = ''
-            #self.taken_date = time_to_utc(self.taken_date)
         super(Photo, self).save()
     
     class Meta:

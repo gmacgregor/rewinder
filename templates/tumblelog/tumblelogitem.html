@@ -19,7 +19,7 @@
 {% endcomment %}
 {% ifequal item.content_type.name "bookmark" %}
 <div class="entry link">
-    <p class="meta"><a href="{% url bookmark_home %}">Link</a> <span class="date">{% utc_to_settings item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+    <p class="meta"><a href="{% url bookmark_home %}">Link</a> <span class="date">{% long_date item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
     <h2><a href="{{ item.get_content_object.get_absolute_url }}">{% autoescape off %}{{ item.get_content_object.description|typogrify }}{% endautoescape %}</a></h2>
     {% if item.get_content_object.extended_info %}
     <p>{% autoescape off %}{{ item.get_content_object.extended_info|typogrify }}{% endautoescape %}</p>
@@ -45,7 +45,7 @@
 {% endifequal %}
 {% ifequal item.content_type.name "tweet" %}
 <div class="entry tweet">
-    <p class="meta"><a href="{% url tweet_home %}">Tweet</a> <span class="date">{% utc_to_settings item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>    
+    <p class="meta"><a href="{% url tweet_home %}">Tweet</a> <span class="date">{% long_date item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>    
     <h2>{% autoescape off %}{{ item.get_content_object.text|twitter_links|typogrify }}{% endautoescape %}</h2>
     <p class="visit"><a href="{{ item.get_content_object.url }}">View</a></p>
 </div>

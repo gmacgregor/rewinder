@@ -5,7 +5,8 @@ from django.db.models import signals
 from rewinder.util.timeconverter import time_to_settings
 from threadedcomments.moderation import CommentModerator, moderator
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
-#from rewinder.util.timeconverter import time_to_utc
+
+from rewinder.util.timeconverter import time_to_settings
 
 class Tweet(models.Model):
     pub_time            = models.DateTimeField()
@@ -17,29 +18,22 @@ class Tweet(models.Model):
     def __unicode__(self):
         return u'%s' % (self.text)
     
-    @property
-    def settings_time(self):
-        import pytz
-        tz = pytz.timezone(settings.TIME_ZONE)
-        loc_dt = self.pub_time.replace(tzinfo=pytz.utc).astimezone(tz)
-        return loc_dt
-    
     @models.permalink
     def get_absolute_url(self):
         return ('tweet_detail', (), {
-            'year': self.settings_time.year,
-            'month': str(self.settings_time.month).zfill(2),
-            'day': str(self.settings_time.day).zfill(2),
+            'year': self.pub_time.year,
+            'month': str(self.pub_time.month).zfill(2),
+            'day': str(self.pub_time.day).zfill(2),
             'object_id': self.id,
             })
     
     def url(self):
         return u'http://twitter.com/%s/statuses/%s' % (self.user.screen_name, self.twitter_id)
     
-    #def save(self):
-    #    if not self.id:
-    #        self.pub_time = time_to_utc(self.pub_time)
-    #    super(Tweet, self).save()
+    def save(self):
+        if not self.id:
+            self.pub_time = time_to_settings(self.pub_time)
+        super(Tweet, self).save()
     
     def _next_previous_helper(self, direction):
         return getattr(self, 'get_%s_by_pub_time' % direction)
