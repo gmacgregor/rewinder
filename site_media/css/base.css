@@ -17,7 +17,8 @@ a {
     color: #035378;
     font-weight: bold;
 }
-a:hover {
+a:hover,
+.visit a:hover {
     text-decoration: underline;
     color: #ab0b31;
 }
@@ -109,7 +110,15 @@ ul#tag-photos li {
     border-bottom: none;
 }
 #nav ul li a:hover,
-#breadcrumb ul li a:hover {
+#breadcrumb ul li a:hover,
+body.tumblelog #nav ul li#nav-tumblelog a,
+body.blog #nav ul li#nav-blog a,
+body.link #nav ul li#nav-link a,
+body.photo #nav ul li#nav-photo a,
+body.video #nav ul li#nav-video a,
+body.tweet #nav ul li#nav-tweet a,
+body.tag #nav ul li#nav-tags a,
+body.flatpage #nav ul li#nav-about a {
     background-color: #42758d;
     color: #fff;
     text-decoration: none;
@@ -142,6 +151,11 @@ body.detail p.meta,
 #main-content .entry p.meta,
 #main-content .entry p.visit {
     margin-bottom: 0;
+}
+.visit a {
+    background: url(http://localhost:8000/site_media/icons/offsite.png) no-repeat right 70%;
+    padding-right: 14px;
+    color: #d2d2d2;
 }
 body.detail h2 {
     margin-bottom: 0.5em;
@@ -201,15 +215,15 @@ body.detail h2 {
 .paginator .pages a {
     margin-right: 0.5em;
 }
-.paginator .next,
-.paginator .previous {
+.paginator span.next,
+.paginator span.previous {
     position: absolute;
     top: 0;
 }
-.paginator .previous {
+.paginator span.previous {
     left: 0;
 }
-.paginator .next {
+.paginator span.next {
     right: 0;
 }
 ul.chart {
@@ -262,6 +276,10 @@ ul.chart li span.index {
     margin-bottom: 2em;
 }
 /* ----------------------------------------------------------------- comment */
+span.comments a {
+    background: url(http://localhost:8000/site_media/icons/comment.png) no-repeat left 60%;
+    padding-left: 16px;
+}
 #comments {
     margin-top: 4em;
 }
@@ -359,15 +377,43 @@ body.preview #comments {
 #next-previous p {
     margin: 0 0 1em 0;
 }
-/*
-.detail.photo #next-previous {
-    margin-top: 0.80em;
+a.previous,
+a.next {
+    background-position: left 50%;
+    background-repeat: no-repeat;
+    padding-left: 17px;
 }
-*/
+a.previous {
+    background-image: url(http://localhost:8000/site_media/icons/arrow-previous.png);
+}
+a.next {
+    background-image: url(http://localhost:8000/site_media/icons/arrow-next.png);
+}
+.detail.photo #next-previous a.previous {
+    padding-left: 20px;
+}
+.detail.photo #next-previous a.next,
+.paginator a.next {
+    background-position: right 50%;
+    padding-left: 0;
+    padding-right: 20px;
+}
+.paginator a.next,
+.paginator a.previous {
+    background-position: left top;
+    padding-bottom: 7px;
+}
+.paginator a.next {
+    background-position: right top;
+}
 .detail.photo #next-previous p {
-    width: 75px;
     float: left;
     margin-right: 10px;
+}
+.detail.photo #next-previous a {
+    display: block;
+    width: 75px;
+    height: 75px;
 }
 #day-archive,
 #month-archive,

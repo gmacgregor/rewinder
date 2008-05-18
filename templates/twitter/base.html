@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load custom_tags %}
 {% block title %}Twitter Tweets{% endblock %}
-{% block body_class %}twitter{% endblock %}
+{% block body_class %}tweet{% endblock %}
 {% block breadcrumb %}{{ block.super }}<li><a href="{% url tweet_home %}" title="Back to all tweets">Tweets</a></li>{% endblock %}
 
 {% block sidebarcontent %}

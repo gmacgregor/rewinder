@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<p class="paginator">{% if paginator.has_previous %}<span class="previous"><a href="{% url tweet_list paginator.previous %}">Previous page</a></span>{% endif %}<span class="pages">{% for page in paginator.page_range %}{% if not page %}...{% else %}<a href="{% url tweet_list page %}">{% ifequal page paginator.page %}[{{ page }}]{% else %}{{ page }}{% endifequal %}</a>{% endif %}{% endfor %}</span>{% if paginator.has_next %}<span class="next"><a href="{% url tweet_list paginator.next %}">Next page</a></span>{% endif %}</p>
+<p class="paginator">{% if paginator.has_previous %}<span class="previous"><a href="{% url tweet_list paginator.previous %}" class="previous">Previous page</a></span>{% endif %}<span class="pages">{% for page in paginator.page_range %}{% if not page %}...{% else %}<a href="{% url tweet_list page %}">{% ifequal page paginator.page %}[{{ page }}]{% else %}{{ page }}{% endifequal %}</a>{% endif %}{% endfor %}</span>{% if paginator.has_next %}<span class="next"><a href="{% url tweet_list paginator.next %}" class="next">Next page</a></span>{% endif %}</p>
 
 {% for tweet in paginator.object_list %}
 {% get_free_comment_count for tweet as comments %}
@@ -18,6 +18,6 @@
 {% endautoescape %}
 {% endfor %}
 
-<p class="paginator">{% if paginator.has_previous %}<span class="previous"><a href="{% url tweet_list paginator.previous %}">Previous page</a></span>{% endif %}<span class="pages">{% for page in paginator.page_range %}{% if not page %}...{% else %}<a href="{% url tweet_list page %}">{% ifequal page paginator.page %}[{{ page }}]{% else %}{{ page }}{% endifequal %}</a>{% endif %}{% endfor %}</span>{% if paginator.has_next %}<span class="next"><a href="{% url tweet_list paginator.next %}">Next page</a></span>{% endif %}</p>
+<p class="paginator">{% if paginator.has_previous %}<span class="previous"><a href="{% url tweet_list paginator.previous %}" class="previous">Previous page</a></span>{% endif %}<span class="pages">{% for page in paginator.page_range %}{% if not page %}...{% else %}<a href="{% url tweet_list page %}">{% ifequal page paginator.page %}[{{ page }}]{% else %}{{ page }}{% endifequal %}</a>{% endif %}{% endfor %}</span>{% if paginator.has_next %}<span class="next"><a href="{% url tweet_list paginator.next %}" class="next">Next page</a></span>{% endif %}</p>
 
 {% endblock %}

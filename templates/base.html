@@ -21,19 +21,19 @@
 <h1><a href="{% url homepage %}" title="Back to homepage">rewinder</a></h1>
 <div id="nav">
 <ul>
-    <li><a href="{% url homepage %}" title="Back to homepage">Home</a></li>
-    <li><a href="{% url tumblelog_home %}" title="View my online activity">Tumblelog</a></li>
-    <li><a href="{% url blog_home %}" title="Go to the blog" class="last">Blog</a></li>
+    <li id="nav-home"><a href="{% url homepage %}" title="Back to homepage">Home</a></li>
+    <li id="nav-tumblelog"><a href="{% url tumblelog_home %}" title="View my online activity">Tumblelog</a></li>
+    <li id="nav-blog"><a href="{% url blog_home %}" title="Go to the blog" class="last">Blog</a></li>
 </ul>
 <ul>
-    <li><a href="{% url bookmark_home %}" title="View all links">Links</a></li>
-    <li><a href="{% url photo_home %}" title="View all photos">Photos</a></li>
-    <li><a href="{% url video_home %}" title="View all videos" class="last">Videos</a></li>
+    <li id="nav-link"><a href="{% url bookmark_home %}" title="View all links">Links</a></li>
+    <li id="nav-photo"><a href="{% url photo_home %}" title="View all photos">Photos</a></li>
+    <li id="nav-video"><a href="{% url video_home %}" title="View all videos" class="last">Videos</a></li>
 </ul>
 <ul>
-    <li><a href="{% url tweet_home %}" title="View all twittertweets">Tweets</a></li>
-    <li><a href="{% url tags_list %}" title="View all tags">Tags</a></li>
-    <li><a href="/about/" title="Read about me/contact me" class="last">About/Contact</a></li>
+    <li id="nav-tweet"><a href="{% url tweet_home %}" title="View all twittertweets">Tweets</a></li>
+    <li id="nav-tags"><a href="{% url tags_list %}" title="View all tags">Tags</a></li>
+    <li id="nav-about"><a href="/about/" title="Read about me/contact me" class="last">About/Contact</a></li>
 </ul>
 </div><!-- /#nav -->
 

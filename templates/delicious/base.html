@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Links{% endblock %}
+{% block body_class %}link{% endblock %}
 {% block breadcrumb %}{{ block.super }}<li><a href="{% url bookmark_home %}" title="Back to all links">Links</a></li>{% endblock %}
 {% block sidebarcontent %}
 

@@ -26,11 +26,11 @@
 <div id="next-previous" class="clearfix">
 {% if object.get_previous %}
 <h3>Previous Tweet</h3>
-<p><a href="{{ object.get_previous.get_absolute_url }}">{{ object.get_previous.text|typogrify }}</a></p>
+<p><a href="{{ object.get_previous.get_absolute_url }}" class="previous" title="Previous tweet">{{ object.get_previous.text|typogrify }}</a></p>
 {% endif %}
 {% if object.get_next %}
 <h3>Next Tweet</h3>
-<p><a href="{{ object.get_next.get_absolute_url }}">{{ object.get_next.text|typogrify }}</a></p>
+<p><a href="{{ object.get_next.get_absolute_url }}" class="next" title="Next tweet">{{ object.get_next.text|typogrify }}</a></p>
 {% endif %}
 </div>
 {% endautoescape %}
