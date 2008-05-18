@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ flatpage.title }}{% endblock %}
+{% block body_class %}flatpage{% endblock %}
+{% block breadcrumb %}<li class="last">About Me</li>{% endblock %}
+{% block content %}
+    {{ flatpage.content }}
+{% endblock %}
+
+{% block sidebarcontent %}
+<h3>Where to find me on the Interwebs</h3>
+<ul>
+    <li>view my <a href="http://www.linkedin.com/in/gmacgregor" title="View my linkedin profile">linkedin profile</a></li>
+    <li>check my <a href="http://www.twitter.com/gmacgregor" title="Check my twitter status">twitter status</a></li>
+    <li>track my <a href="http://del.icio.us/sixminutes" title="Track my del.icio.us links">del.ici.ous links</a></li>
+    <li>stare at my <a href="http://www.flickr.com/photos/sixminutes" title="Stare at my flickr photos">flickr photos</a></li>
+</ul>
+{% endblock %}
