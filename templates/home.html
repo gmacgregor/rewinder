@@ -53,9 +53,7 @@
 <h3>Random link</h3>
 <p class="meta"><span class="date">{% long_date random_link.saved_date %}</span> <span class="comments"><a href="{{ random_link.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
 <h2><a href="{{ random_link.get_absolute_url }}" title="View link details">{% autoescape off %}{{ random_link.description|typogrify }}{% endautoescape %}</a></h2>
-{% if random_link.extended_info %}
-<p>{% autoescape off %}{{ random_link.extended_info|typogrify }}{% endautoescape %}</p>
-{% endif %}
-<p class="visit"><a href="{{ random_link.url }}" title="Visit site">Visit</a></p>
+<p>{% if random_link.extended_info %}{% autoescape off %}{{ random_link.extended_info|typogrify }}{% endautoescape %}
+{% endif %} <span class="visit"><a href="{{ random_link.url }}" title="Visit site">Visit</span></p>
 </div>
 {% endblock %}

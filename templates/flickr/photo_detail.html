@@ -42,10 +42,10 @@
 {% block sidebarcontent %}
 <div id="next-previous" class="clearfix">
 {% if object.get_previous %}
-<p class="previous"><a href="{{ object.get_previous.get_absolute_url }}"><img src="{{ object.get_previous.square_url }}" alt="{{ object.get_previous.title }}" /></a><a href="{{ object.get_previous.get_absolute_url }}">Previous</a></p>
+<p><a href="{{ object.get_previous.get_absolute_url }}" class="previous" title="Previous photo"><img src="{{ object.get_previous.square_url }}" alt="{{ object.get_previous.title }}" /></a></p>
 {% endif %}
 {% if object.get_next %}
-<p class="next"><a href="{{ object.get_next.get_absolute_url }}"><img src="{{ object.get_next.square_url }}" alt="{{ object.get_next.title }}" /></a><a href="{{ object.get_next.get_absolute_url }}">Next</a></p>
+<p><a href="{{ object.get_next.get_absolute_url }}" class="next" title="Next photo"><img src="{{ object.get_next.square_url }}" alt="{{ object.get_next.title }}" /></a></p>
 {% endif %}
 </div>
 {{ block.super }}

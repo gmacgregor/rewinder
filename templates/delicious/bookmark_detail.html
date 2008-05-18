@@ -27,11 +27,11 @@
 <div id="next-previous" class="clearfix">
 {% if object.get_previous %}
 <h3>Previous link</h3>
-<p><a href="{{ object.get_previous.get_absolute_url }}">{% autoescape off %}{{ object.get_previous.description|typogrify }}{% endautoescape %}</a></p>
+<p><a href="{{ object.get_previous.get_absolute_url }}" class="previous" title="Previous link">{% autoescape off %}{{ object.get_previous.description|typogrify }}{% endautoescape %}</a></p>
 {% endif %}
 {% if object.get_next %}
 <h3>Next link</h3>
-<p><a href="{{ object.get_next.get_absolute_url }}">{% autoescape off %}{{ object.get_next.description|typogrify }}{% endautoescape %}</a></p>
+<p><a href="{{ object.get_next.get_absolute_url }}" class="next" title="Next link">{% autoescape off %}{{ object.get_next.description|typogrify }}{% endautoescape %}</a></p>
 {% endif %}
 </div>
 {{ block.super }}

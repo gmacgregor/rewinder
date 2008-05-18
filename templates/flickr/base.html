@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Photos{% endblock %}
+{% block body_class %}photo{% endblock %}
 {% block breadcrumb %}{{ block.super }}<li><a href="{% url photo_home %}">Photos</a></li>{% endblock %}
 {% block sidebarcontent %}
 

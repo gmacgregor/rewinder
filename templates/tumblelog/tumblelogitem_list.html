@@ -1,7 +1,7 @@
 {% extends "tumblelog/base.html" %}
 
 {% block content %}
-<p class="paginator">{% if paginator.has_previous %}<span class="previous"><a href="{% url tumblelog_list paginator.previous %}">Previous page</a></span>{% endif %}<span class="pages">{% for page in paginator.page_range %}{% if not page %}...{% else %}<a href="{% url tumblelog_list page %}">{% ifequal page paginator.page %}[{{ page }}]{% else %}{{ page }}{% endifequal %}</a>{% endif %}{% endfor %}</span>{% if paginator.has_next %}<span class="next"><a href="{% url tumblelog_list paginator.next %}">Next page</a></span>{% endif %}</p>
+<p class="paginator">{% if paginator.has_previous %}<span class="previous"><a href="{% url tumblelog_list paginator.previous %}" class="previous">Previous page</a></span>{% endif %}<span class="pages">{% for page in paginator.page_range %}{% if not page %}...{% else %}<a href="{% url tumblelog_list page %}">{% ifequal page paginator.page %}[{{ page }}]{% else %}{{ page }}{% endifequal %}</a>{% endif %}{% endfor %}</span>{% if paginator.has_next %}<span class="next"><a href="{% url tumblelog_list paginator.next %}" class="next">Next page</a></span>{% endif %}</p>
 
 <div id="tumblelog">
 {% for item in paginator.object_list %}
@@ -9,5 +9,5 @@
 {% endfor %}
 </div><!-- /#tumblelog -->
 
-<p class="paginator">{% if paginator.has_previous %}<span class="previous"><a href="{% url tumblelog_list paginator.previous %}">Previous page</a></span>{% endif %}<span class="pages">{% for page in paginator.page_range %}{% if not page %}...{% else %}<a href="{% url tumblelog_list page %}">{% ifequal page paginator.page %}[{{ page }}]{% else %}{{ page }}{% endifequal %}</a>{% endif %}{% endfor %}</span>{% if paginator.has_next %}<span class="next"><a href="{% url tumblelog_list paginator.next %}">Next page</a></span>{% endif %}</p>
+<p class="paginator">{% if paginator.has_previous %}<span class="previous"><a href="{% url tumblelog_list paginator.previous %}" class="previous">Previous page</a></span>{% endif %}<span class="pages">{% for page in paginator.page_range %}{% if not page %}...{% else %}<a href="{% url tumblelog_list page %}">{% ifequal page paginator.page %}[{{ page }}]{% else %}{{ page }}{% endifequal %}</a>{% endif %}{% endfor %}</span>{% if paginator.has_next %}<span class="next"><a href="{% url tumblelog_list paginator.next %}" class="next">Next page</a></span>{% endif %}</p>
 {% endblock %}
