@@ -5,7 +5,7 @@ from django.db.models import signals
 from threadedcomments.moderation import CommentModerator, moderator
 from tagging.fields import TagField
 
-#from rewinder.util.timeconverter import time_to_utc
+from rewinder.util.timeconverter import time_to_settings
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
 import datetime
@@ -46,6 +46,7 @@ class Bookmark(models.Model):
         return self._next_previous_helper('previous')
             
     def save(self):
+        print 'in save....'
         """
         If this link is being saved for the first time (ie. imported from del.icou.us):
             1. create self.slug based on self.description
@@ -53,10 +54,11 @@ class Bookmark(models.Model):
             3. check if post_elsewhere is true, and if so, attempt to post to del.icio.us
         """
         if not self.id:
+            print 'no id...'
             import re
             from django.template.defaultfilters import slugify
             self.slug = slugify(self.description)
-            #self.saved_date = time_to_utc(self.saved_date)
+            self.saved_date = time_to_settings(self.saved_date)
             tags_re = re.compile('[\:|\+|\&|\/|\#|\.]+')
             tags = self.tags.split()
             new_tags = []
@@ -70,6 +72,7 @@ class Bookmark(models.Model):
                     pydelicious.add(settings.DELICIOUS_USERNAME, settings.DELICIOUS_PASSWORD, self.url, self.description, self.tags, self.extended_info)
                 except:
                     pass
+        print 'done...'
         super(Bookmark, self).save()
     
     class Meta:

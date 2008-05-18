@@ -11,8 +11,8 @@
 {% get_free_comment_count for tweet as comments %}
 {% autoescape off %}
 <div class="entry">
-<p class="meta"><span class="date">{% utc_to_settings tweet.pub_time %}</span> <span class="comments"><a href="{{ tweet.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p> 
-<h2><a href="{{ tweet.get_absolute_url }}">{{ tweet.text|typogrify }}</a></h2>
+<p class="meta"><span class="date">{% long_date tweet.pub_time %}</span> <span class="comments"><a href="{{ tweet.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p> 
+<h2>{{ tweet.text|twitter_links|typogrify }}</h2>
 <p class="visit"><a href="{{ tweet.url }}" title="View status on twitter.com">View</a></p>
 </div>
 {% endautoescape %}
