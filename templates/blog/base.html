@@ -1,3 +1,6 @@
 {% extends "base.html" %}
+{% block extrahead %}
+<link rel="alternate" type="application/rss+xml" href="/feeds/blog/" title="rewinder.ca: Latest blog posts">
+{% endblock %}
 {% block title %}Blog{% endblock %}
 {% block breadcrumb %}{{ block.super }}<li><a href="{% url blog_home %}">Blog</a></li>{% endblock %}

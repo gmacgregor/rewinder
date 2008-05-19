@@ -4,6 +4,14 @@ from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.apps.video.models import Video
 from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.twitter.models import Tweet
+from rewinder.feeds import LatestArticles, LatestLinks, LatestPhotos, LatestVideos
+
+feeds = {
+    'blog': LatestArticles,
+    'links': LatestLinks,
+    'photos': LatestPhotos,
+    'videos': LatestVideos,
+}
 
 urlpatterns = patterns('',
     #url(r'^$', 'django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10), name="homepage"),
@@ -27,6 +35,7 @@ urlpatterns += patterns('',
     (r'^blog/', include('rewinder.apps.blog.urls')),
     url(r'^tags/(?P<tag>[-\w]+)/$', 'rewinder.views.tag_detail', name='tag_detail'),
     url(r'^tags/$', 'rewinder.views.all_tags', name='tags_list'),
+    (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
 )
 
 if settings.DEBUG:

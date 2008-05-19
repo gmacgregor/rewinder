@@ -1,0 +1,4 @@
+{% if obj.extended_info %}
+<p>{% autoescape off %}{{ obj.extended_info }}{% endautoescape %}</p>
+{% endif %}
+<p><a href="{{ obj.url }}">Visit link</a></p>
