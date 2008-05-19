@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block extrahead %}
+<link rel="alternate" type="application/rss+xml" href="/feeds/tweets/" title="rewinder.ca: Latest tweets">
+{% endblock %}
 {% load custom_tags %}
 {% block title %}Twitter Tweets{% endblock %}
 {% block body_class %}tweet home{% endblock %}

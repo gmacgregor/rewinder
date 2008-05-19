@@ -4,13 +4,15 @@ from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.apps.video.models import Video
 from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.twitter.models import Tweet
-from rewinder.feeds import LatestArticles, LatestLinks, LatestPhotos, LatestVideos
+from rewinder.feeds import LatestArticles, LatestLinks, LatestPhotos, LatestVideos, LatestTweets, LatestTumblelog
 
 feeds = {
     'blog': LatestArticles,
     'links': LatestLinks,
     'photos': LatestPhotos,
     'videos': LatestVideos,
+    'tweets':  LatestTweets,
+    'activity': LatestTumblelog,
 }
 
 urlpatterns = patterns('',
@@ -26,8 +28,8 @@ urlpatterns += patterns('',
     (r'^places/', include('rewinder.apps.geo.urls')),
     url(r'^photos/?page=(?P<page>[0-9]+)$', 'rewinder.apps.flickr.views.list', name="photo_list"),
     (r'^photos/', include('rewinder.apps.flickr.urls')),
-    url(r'^activity/?page=(?P<page>[0-9]+)$', 'rewinder.views.list', {'app': 'tumblelog', 'model': TumblelogItem}, name="tumblelog_list"),
-    (r'^activity/', include('rewinder.apps.tumblelog.urls')),
+    url(r'^tumblelog/?page=(?P<page>[0-9]+)$', 'rewinder.views.list', {'app': 'tumblelog', 'model': TumblelogItem}, name="tumblelog_list"),
+    (r'^tumblelog/', include('rewinder.apps.tumblelog.urls')),
     url(r'^tweets/?page=(?P<page>[0-9]+)$', 'rewinder.views.list', {'app': 'twitter', 'model': Tweet, 'ordering': '-pub_time'}, name="tweet_list"),
     (r'^tweets/', include('rewinder.apps.twitter.urls')),
     url(r'^videos/?page=(?P<page>[0-9]+)$', 'rewinder.views.list', {'app': 'video', 'model': Video}, name="video_list"),
