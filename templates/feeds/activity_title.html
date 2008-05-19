@@ -1,0 +1,14 @@
+{% autoescape off %}
+{% ifequal obj.content_type.name "bookmark" %}
+    Link: {{ obj.get_content_object.description }}
+{% endifequal %}
+{% ifequal obj.content_type.name "video" %}
+    Video: {{ obj.get_content_object.title }}
+{% endifequal %}
+{% ifequal obj.content_type.name "photo" %}
+    Photo: {{ obj.get_content_object.title }}
+{% endifequal %}
+{% ifequal obj.content_type.name "tweet" %}
+    Tweet: {{ obj.get_content_object.text }}
+{% endifequal %}
+{% endautoescape %}
