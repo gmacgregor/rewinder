@@ -12,8 +12,8 @@
     <link rel="author" href="/about/" />
     <link rel="top start" href="/" title="rewinder.ca" />
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/base.css" type="text/css" media="screen" />
-    <!--[if lte IE 7]><link rel="stylesheet" href="{{ MEDIA_URL }}css/ie.css" type="text/css" media="screen, projection" /><![endif]-->
     {% block extrahead %}{% endblock %}
+    <!--[if lte IE 7]><link rel="stylesheet" href="{{ MEDIA_URL }}css/ie.css" type="text/css" media="screen, projection" /><![endif]-->
 </head>
 
 <body class="{% block body_class %}{{ value|default_if_none:""}}{% endblock %}">
@@ -58,6 +58,7 @@
 <div id="footer">
 {% block footer %}
 <p><a href="{% url homepage %}">rewinder.ca</a> is copyright 2006-{% now "Y" %} by Greg MacGregor</p>
+<p><a href="http://www.djangoproject.com/"><img src="http://media.djangoproject.com/img/badges/djangosite80x15_grey.gif" alt="A Django site" /></a></p>
 {% endblock %}
 </div><!-- /#footer -->
 </div><!-- /#wrapper -->
