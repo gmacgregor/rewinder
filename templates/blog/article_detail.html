@@ -1,12 +1,19 @@
 {% extends "blog/base.html" %}
 {% block title %}Blog: {{ object.headline }}{% endblock %}
+{% block body_class %}blog detail{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+    <li><a href="{% url article_archive_year year=object.pub_date|date:"Y" %}">{{ object.pub_date|date:"Y"}}</a></li>
+    <li><a href="{% url article_archive_month year=object.pub_date|date:"Y",month=object.pub_date|date:"m" %}">{{ object.pub_date|date:"m"}}</a></li>
+    <li><a href="{% url article_archive_day year=object.pub_date|date:"Y",month=object.pub_date|date:"m",day=object.pub_date|date:"d" %}">{{ object.pub_date|date:"d"}}</a></li>
+{% endblock %}
 {% load custom_tags %}
 {% load threadedcommentstags %}
 {% load typogrify %}
 
 {% block content %}
-<div id="article-detail">
-<p class="meta date">Posted on {% date_format object.pub_date %}{% comment %}in {% for category in object.categories.all %}<a href="{% url blog_category_detail slug=category.slug %}">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</a>{% endcomment %}</p>
+<div id="article-detail" class="entry">
+<p class="meta date">Posted on {% date_format object.pub_date %}</span>{% comment %}in {% for category in object.categories.all %}<a href="{% url blog_category_detail slug=category.slug %}">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</a>{% endcomment %}</p>
 <h2>{% autoescape off %}{{ object.headline|typogrify }}{% endautoescape %}</h2>
 
 <div id="teaser">
@@ -29,4 +36,18 @@
 {% include "tag/tags_for_object.html" %}
 {% include "threadedcomments/comments_list.html" %}
 
+{% endblock %}
+
+{% block sidebarcontent %}
+<div id="next-previous" class="clearfix">
+{% if object.get_previous %}
+<h3>Previous post</h3>
+<p><a href="{{ object.get_previous.get_absolute_url }}" class="previous" title="Previous post">{% autoescape off %}{{ object.get_previous.headline|typogrify }}{% endautoescape %}</a></p>
+{% endif %}
+{% if object.get_next %}
+<h3>Next post</h3>
+<p><a href="{{ object.get_next.get_absolute_url }}" class="next" title="Next post">{% autoescape off %}{{ object.get_next.headline|typogrify }}{% endautoescape %}</a></p>
+{% endif %}
+</div>
+{{ block.super }}
 {% endblock %}
