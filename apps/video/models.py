@@ -13,7 +13,7 @@ from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 #from rewinder.util.timeconverter import time_to_utc
 
-EXTERNAL_VIDEO_WIDTH = 500
+EXTERNAL_VIDEO_WIDTH = 499
 EXTERNAL_VIDEO_HEIGHT = 300
 
 class Video(models.Model):
@@ -108,11 +108,27 @@ class Video(models.Model):
     
     def get_embed_code(self):
         if self.is_type('youtube.com'):
-            embed = '<object width="%s" height="%s"><param name="movie" value="http://www.youtube.com/v/%s&hl=en&color1=0x000000&color2=0x000000&border=1"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/%s&hl=en&color1=0x3a3a3a&color2=0x999999&border=0" type="application/x-shockwave-flash" wmode="transparent" width="%s" height="%s"></embed></object>' % (EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT, self.video_id, self.video_id, EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT)
+            embed = """
+            <object width="%s" height="%s"><param name="movie" value="http://www.youtube.com/v/%s&hl=en">
+            </param><param name="wmode" value="transparent"></param>
+            <embed src="http://www.youtube.com/v/%s&amp;hl=en" type="application/x-shockwave-flash" 
+            wmode="transparent" width="%s" height="%s">
+            </embed></object>""" % (EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT, self.video_id, 
+            self.video_id, EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT)
         elif self.is_type('vimeo.com'):
-            embed = '<object type="application/x-shockwave-flash" width="%s" height="%s" data="http://www.vimeo.com/moogaloop.swf?clip_id=%s&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=1a1819"><param name="quality" value="best" /><param name="allowfullscreen" value="true" /><param name="scale" value="showAll" /><param name="movie" value="http://www.vimeo.com/moogaloop.swf?clip_id=%s&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=1a1819" /></object>' % (EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT, self.video_id, self.video_id)
+            embed = """<object type="application/x-shockwave-flash" width="%s" height="%s" 
+            data="http://www.vimeo.com/moogaloop.swf?clip_id=%s&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=0&amp;
+            show_byline=0&amp;show_portrait=0&amp;color=1a1819">
+            <param name="quality" value="best" /><param name="allowfullscreen" value="true" />
+            <param name="scale" value="showAll" /><param name="movie" value="http://www.vimeo.com/moogaloop.swf?clip_id=%s&amp;
+            server=www.vimeo.com&amp;fullscreen=1&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;
+            color=1a1819" /></object>""" % (EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT, self.video_id, self.video_id)
         elif self.is_type('collegehumor.com'):
-            embed = '<object type="application/x-shockwave-flash" data="http://www.collegehumor.com/moogaloop/moogaloop.swf?clip_id=%s&fullscreen=1" width="%s" height="%s" ><param name="allowfullscreen" value="true" /><param name="movie" quality="best" value="http://www.collegehumor.com/moogaloop/moogaloop.swf?clip_id=%s&fullscreen=1" /></object>' % (self.video_id, EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT, self.video_id)
+            embed = """<object type="application/x-shockwave-flash" 
+            data="http://www.collegehumor.com/moogaloop/moogaloop.swf?clip_id=%s&amp;fullscreen=1" 
+            width="%s" height="%s" ><param name="allowfullscreen" value="true" />
+            <param name="movie" quality="best" value="http://www.collegehumor.com/moogaloop/moogaloop.swf?clip_id=%s
+            &amp;fullscreen=1" /></object>""" % (self.video_id, EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT, self.video_id)
         else:
             embed = None
         return embed

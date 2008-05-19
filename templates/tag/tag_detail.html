@@ -7,7 +7,7 @@
 {% load typogrify %}
 
 {% block content %}
-<h2>I&#8217;ve tagged {{ total }} things with &#8220;{{ tag }}&#8221;</h2>
+<h2>All {{ total }} things tagged &#8220;{{ tag }}&#8221;</h2>
 <div id="tag-detail">
 {% comment %}
 <ul>
@@ -107,5 +107,15 @@
 <li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 490 %}px" class="index"></span></a></li>
 {% endfor %}
 </ul>
+
+{% get_popular_tags_for blog.Article 10 as top_tags top_count %}
+<div class="col last">
+<h3>Top 10 Blog post Tags</h3>
+<ul class="chart">
+{% for num, tag in top_tags %}
+<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 190 %}px" class="index"></span></li>
+{% endfor %}
+</ul>
+</div>
 
 {% endblock %}

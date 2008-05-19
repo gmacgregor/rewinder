@@ -21,6 +21,7 @@ urlpatterns += patterns('django.views.generic.list_detail',
 
 urlpatterns += patterns('django.views.generic.date_based',
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$', 'object_detail', dict(article_dict, month_format='%m'), name='article_detail'),
+    url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/$', 'archive_day', dict(article_dict, month_format='%m'), name='article_archive_day'),
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/$', 'archive_month', dict(article_dict, month_format='%m'), name='article_archive_month'),
     url(r'^(?P<year>\d{4})/$', 'archive_year', dict(article_dict, make_object_list=True), name='article_archive_year'),
 )

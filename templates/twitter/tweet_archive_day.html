@@ -1,6 +1,7 @@
 {% extends "twitter/base.html" %}
 {% block title %}Twitter Tweets: {{ day|date:"F d, Y" }}{% endblock %}
 {% block description %}Twitter tweets made on {{ day|date:"F d, Y" }}{% endblock %}
+{% block body_class %}tweet archive day{% endblock %}
 {% block breadcrumb %}
 {{ block.super }}
     <li><a href="{% url tweet_archive_year year=day|date:"Y" %}" title="View tweets made in {{ day|date:"Y" }}">{{ day|date:"Y" }}</a></li>
@@ -12,8 +13,8 @@
 {% load typogrify %}
 
 {% block content %}
-<h2>Twitter tweets for {{  day|date:"F d, Y" }} ({{ object_list.count }})</h2>
-<div id="year-archive">
+<h2>Twitter tweets for {{  day|date:"F d, Y" }} ({{ object_list.count }}) <a href="{% url tumblelog_archive_day year=day|date:"Y", month=day|date:"m",day=day|date:"d" %}" class="visit" title="View all online activity for {{ day|date:"F d, Y" }}">More</a></h2>
+<div id="day-archive">
 {% for tweet in object_list %}
 {% get_free_comment_count for tweet as comments %}
 {% autoescape off %}

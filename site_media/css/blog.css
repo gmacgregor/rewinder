@@ -1,4 +1,21 @@
+/*
 .home .entry.article .teaser p {
     font-size: 1.3em;
     line-height: 1.2em;
+}
+*/
+#latest-posts {
+    margin-bottom: 2em;
+}
+#article-detail.entry {
+    border-bottom: none;
+}
+#article-detail.entry h4 {
+    color: #333;
+    margin: 1em 0;
+    text-transform: none;
+    font-size: 16px;
+}
+#article-detail.entry p {
+    line-height: 1.4em;
 }

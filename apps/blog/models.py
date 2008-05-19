@@ -147,6 +147,17 @@ class Article(models.Model):
                 pass
         super(Article, self).delete()
     
+    def _next_previous_helper(self, direction):
+        return getattr(self, 'get_%s_by_pub_date_date' % direction)
+    
+    @property
+    def get_next(self):
+        return self._next_previous_helper('next')
+        
+    @property
+    def get_previous(self):
+        return self._next_previous_helper('previous')
+    
     def _process_markup(self):
         self.html_teaser =  typogrify(formatter(self.teaser))
         self.html_summary =  typogrify(formatter(self.summary))

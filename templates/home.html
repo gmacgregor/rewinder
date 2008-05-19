@@ -19,13 +19,15 @@
 {% get_latest_posts 1 as latest_posts %}
 {% if latest_posts %}
 <div id="latest-posts">
+<h3>Latest blog post</h3>
     {% for post in latest_posts %}
     {% get_free_comment_count for post as comments %}
     <p class="meta"><span class="date">{{ post.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ post.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
-    <h2><a href="{{ post.get_absolute_url }}#post">{% autoescape off %}{{ post.headline|typogrify }}{% endautoescape %}</a></h2>
+    <h2><a href="{{ post.get_absolute_url }}">{% autoescape off %}{{ post.headline|typogrify }}{% endautoescape %}</a></h2>
     {% if post.teaser %}
         {% autoescape off %}{{ post.html_teaser }}{% endautoescape %}
-        {% endif %}
+    {% endif %}
+    <p><a href="{{ post.get_absolute_url }}" class="visit">Continue reading</a></p>
     {% endfor %}
 </div>
 {% endif %}

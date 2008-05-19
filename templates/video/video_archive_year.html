@@ -9,7 +9,7 @@
 {% load threadedcommentstags %}
 
 {% block content %}
-<h2>Videos saved in {{ year }} ({{ object_list.count }})</h2>
+<h2>Videos saved in {{ year }} ({{ object_list.count }}) <a href="{% url tumblelog_archive_year year=year %}" class="visit" title="View all online activity for {{ year }}">More</a></h2>
 <div id="year-archive">
 {% for video in object_list %}
 <div class="entry video clearfix">

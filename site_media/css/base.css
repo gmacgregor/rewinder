@@ -12,6 +12,10 @@ body {
     color: #4d4d4d;
     font-family: "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
 }
+#wrapper {
+    width: 1000px;
+    margin: 1em auto 0 auto;
+}
 a {
     text-decoration: none;
     color: #035378;
@@ -44,11 +48,13 @@ h2 {
     color: #333;
     line-height: 1.2em;
     font-size: 1.4em;
-    font-weight: normal;
+    font-weight: bold;
 }
+/*
 h2 a {
     font-weight: normal;
 }
+*/
 h3, h4 {
     font-size: 10px;
     font-weight: bold;
@@ -62,25 +68,23 @@ h3 {
 }
 p {
     margin-top: 0.5em;
-    line-height: 1.4em;
+    line-height: 1.3em;
 }
 ul {
-    list-style-type: square;
-    list-style-position: inside;
-    margin: 0.5em 0 1em 0;
+    list-style-type: disc;
+    list-style-position: outside;
+    padding: 0 0 0 1em;
+    margin: 0.5em 0 1em 0.5em;
 }
 ul li {
-    line-height: 1.2em;
+    margin-bottom: 0.3em;
 }
 #nav ul,
 #breadcrumb ul,
 ul#tag-photos {
     list-style-type: none;
     margin: 0;
-}
-#wrapper {
-    width: 1000px;
-    margin: 1em 0 0 1em;
+    padding: 0;
 }
 #nav {
     width: 490px;
@@ -152,8 +156,9 @@ body.detail p.meta,
 #main-content .entry p.visit {
     margin-bottom: 0;
 }
+a.visit,
 .visit a {
-    background: url(http://localhost:8000/site_media/icons/offsite.png) no-repeat right 70%;
+    background: url(http://media.rewinder.ca/icons/offsite.png) no-repeat right 70%;
     padding-right: 14px;
     color: #d2d2d2;
 }
@@ -230,6 +235,7 @@ ul.chart {
     width: 490px;
     list-style-type: none;
     margin: 0;
+    padding: 0;
 }
 ul.chart li {
     position: relative;
@@ -277,7 +283,7 @@ ul.chart li span.index {
 }
 /* ----------------------------------------------------------------- comment */
 span.comments a {
-    background: url(http://localhost:8000/site_media/icons/comment.png) no-repeat left 60%;
+    background: url(http://media.rewinder.ca/icons/comment.png) no-repeat left 60%;
     padding-left: 16px;
 }
 #comments {
@@ -384,10 +390,10 @@ a.next {
     padding-left: 17px;
 }
 a.previous {
-    background-image: url(http://localhost:8000/site_media/icons/arrow-previous.png);
+    background-image: url(http://media.rewinder.ca/icons/arrow-previous.png);
 }
 a.next {
-    background-image: url(http://localhost:8000/site_media/icons/arrow-next.png);
+    background-image: url(http://media.rewinder.ca/icons/arrow-next.png);
 }
 .detail.photo #next-previous a.previous {
     padding-left: 20px;
@@ -424,11 +430,12 @@ a.next {
     clear: left;
     margin-bottom: 2em;
 }
-/*
-#archive-list ul li {
-    line-height: 1.4em;
+body.tweet #archive-list {
+    margin-top: 2em;
 }
-*/
+body.tweet.detail #archive-list {
+    margin-top: 0;
+}
 
 .detail #related-content {
     margin: 1em 0 2em 0;
@@ -440,4 +447,12 @@ a.next {
     list-style-type: square;
     list-style-position: inside;
 
+}
+.flatpage h2 {
+    margin-bottom: 1em;
+    font-size: 24px;
+}
+.flatpage #main-content li {
+    line-height: 1.2em;
+    margin-bottom: 0.5em;
 }

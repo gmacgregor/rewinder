@@ -46,14 +46,17 @@
 }
 */
 #tumblelog-archive {
-    margin-top: 1em;
+    margin-top: 2em;
 }
 #tumblelog-archive h3 {
+    margin-top: 1em;
     margin-bottom: 0.2em;
 }
+/*
 #tumblelog-archive p {
     margin: 0 0 1em 0;
 }
+*/
 /*
 #tumblelog-archive.year p,
 #tumblelog-archive.month p {
