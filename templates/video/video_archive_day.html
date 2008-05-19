@@ -11,7 +11,7 @@
 {% load threadedcommentstags %}
 
 {% block content %}
-<h2>Videos saved on {{ day|date:"F d, Y" }} ({{ object_list.count }})</h2>
+<h2>Videos saved on {{ day|date:"F d, Y" }} ({{ object_list.count }}) <a href="{% url tumblelog_archive_day year=day|date:"Y", month=day|date:"m",day=day|date:"d" %}" class="visit" title="View all online activity for {{ day|date:"F d, Y" }}">More</a></h2>
 <div id="day-archive">
 {% for video in object_list %}
 <div class="entry video clearfix">

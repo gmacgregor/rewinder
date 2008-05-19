@@ -1,7 +1,7 @@
 {% extends "twitter/base.html" %}
 {% load typogrify %}
 {% block title %}{{ block.super }}: {{ object.text }}{% endblock %}
-{% block body_class %}detail tweet{% endblock %}
+{% block body_class %}tweet detail{% endblock %}
 {% block breadcrumb %}
 {{ block.super }}
     <li><a href="{% url tweet_archive_year year=object.pub_time|date:"Y" %}">{{ object.pub_time|date:"Y"}}</a></li>
@@ -33,5 +33,8 @@
 <p><a href="{{ object.get_next.get_absolute_url }}" class="next" title="Next tweet">{{ object.get_next.text|typogrify }}</a></p>
 {% endif %}
 </div>
+
+{% include "twitter/archive_list.html" %}
+
 {% endautoescape %}
 {% endblock %}

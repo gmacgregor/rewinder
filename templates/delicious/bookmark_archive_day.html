@@ -4,8 +4,8 @@
 {% block breadcrumb %}
 {{ block.super }}
     <li><a href="{% url bookmark_archive_year year=day|date:"Y" %}" title="View all links saved in {{ day|date:"Y" }}">{{ day|date:"Y" }}</a></li>
-    <li><a href="{% url bookmark_archive_month year=day|date:"Y", month=day|date:"m" %}" title="View all videos saved in {{ day|date:"F, Y" }}">{{ day|date:"m" }}</a></li>
-    <li><a href="{% url bookmark_archive_day year=day|date:"Y", month=day|date:"m",day=day|date:"d" %}" title="View all videos saved on  {{ day|date:"F d, Y" }}">{{ day|date:"d" }}</a></li>
+    <li><a href="{% url bookmark_archive_month year=day|date:"Y", month=day|date:"m" %}" title="View all links saved in {{ day|date:"F, Y" }}">{{ day|date:"m" }}</a></li>
+    <li><a href="{% url bookmark_archive_day year=day|date:"Y", month=day|date:"m",day=day|date:"d" %}" title="View all links saved on {{ day|date:"F d, Y" }}">{{ day|date:"d" }}</a></li>
 {% endblock %}
 
 {% load custom_tags %}
@@ -13,7 +13,7 @@
 {% load typogrify %}
 
 {% block content %}
-<h2>Links saved on {{ day|date:"F d, Y" }} ({{ object_list.count }})</h2>
+<h2>Links saved on {{ day|date:"F d, Y" }} ({{ object_list.count }}) <a href="{% url tumblelog_archive_day year=day|date:"Y", month=day|date:"m",day=day|date:"d" %}" class="visit" title="View all online activity for {{ day|date:"F d, Y" }}">More</a></h2>
 <div id="day-archive">
 {% for link in object_list %}
 {% get_free_comment_count for link as comments %}

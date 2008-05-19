@@ -1,6 +1,7 @@
 {% extends "twitter/base.html" %}
 {% block title %}Twitter Tweets: {{ year }}{% endblock %}
 {% block description %}Twitter tweets made in {{ year }}{% endblock %}
+{% block body_class %}tweet archive year{% endblock %}
 {% block breadcrumb %}
 {{ block.super }}
 <li><a href="{% url tweet_archive_year year=year %}" title="View tweets made in {{ year }}">{{ year }}</a></li>{% endblock %}
@@ -9,7 +10,7 @@
 {% load typogrify %}
 
 {% block content %}
-<h2>Twitter tweets for {{ year }} ({{ object_list.count }})</h2>
+<h2>Twitter tweets for {{ year }} ({{ object_list.count }}) <a href="{% url tumblelog_archive_year year=year %}" class="visit" title="View all online activity for {{ year }}">More</a></h2>
 <div id="year-archive">
 {% for tweet in object_list %}
 {% get_free_comment_count for tweet as comments %}
