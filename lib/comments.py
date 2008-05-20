@@ -1,4 +1,7 @@
 import datetime
+import sys
+sys.path.append('/home/gmacgregor/webapps/django/')
+
 from django.conf import settings
 from django.core.management import setup_environ
 from rewinder import settings
