@@ -16,6 +16,10 @@
     margin-top: 1em;
     border: none;
 }
+#sidebar #feeds ul {
+    list-style-type: none;
+    padding-left: 0;
+}
 #sidebar #feeds ul li a {
     background: url(http://media.rewinder.ca/icons/feed.png) no-repeat left 50%;
     padding-left: 16px;
