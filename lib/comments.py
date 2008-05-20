@@ -30,5 +30,5 @@ def enable():
         mod.enable_comments = True
         mod.save()
 
-if __name__ == "main":
+if __name__ == "__main__":
     close()
