@@ -66,7 +66,6 @@
 <p>{% if random_link.extended_info %}{% autoescape off %}{{ random_link.extended_info|typogrify }}{% endautoescape %}
 {% endif %} <span class="visit"><a href="{{ random_link.url }}" title="Visit site">Visit</span></p>
 </div>
-{% endblock %}
 
 <div id="feeds">
 <h3>For your consumption</h3>
@@ -79,3 +78,4 @@
     <li><a href="/feeds/activity/">all of my online activity</a></li>
 </ul>
 </div>
+{% endblock %}
