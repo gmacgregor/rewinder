@@ -32,6 +32,9 @@ strong {
 em {
     font-style: italic;
 }
+abbr {
+    border-bottom: 1px dotted #333;
+}
 h1 {
     float: left;
     width: 500px;
