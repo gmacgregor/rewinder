@@ -1,6 +1,11 @@
-from django.conf import settings
-from rewinder.apps.tumblelog.models import TumblelogItem
 import datetime
+from django.conf import settings
+from django.core.management import setup_environ
+from rewinder import settings
+
+setup_environ(settings)
+
+from rewinder.apps.tumblelog.models import TumblelogItem
 
 
 def close():
