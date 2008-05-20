@@ -19,9 +19,11 @@
 <body class="{% block body_class %}{{ value|default_if_none:""}}{% endblock %}">
 <div id="wrapper">
 <!--[if lte IE 6]>
-<h3>It appears as though you are using Internet Explorer 6 or below.</h3> 
+<div style="text-align: center; border: 2px solid red;">
+<h4>It appears as though you are using Internet Explorer 6 or below.</h4> 
 <p>The bad news is that this website <strong>does not</strong> support your browser.</p>
 <p>Please <a href="http://www.microsoft.com/windows/products/winfamily/ie/default.mspx">upgrade</a> or <a href="http://www.mozilla.com/en-US/firefox/">get something better</a></p>
+</div>
 <![endif]-->
 <h1><a href="{% url homepage %}" title="Back to homepage">rewinder</a></h1>
 <div id="nav">
