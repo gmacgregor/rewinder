@@ -63,4 +63,7 @@
 <p><a href="{{ object.get_next.get_absolute_url }}" class="next" title="Next video">{{ object.get_next.title }}</a></p>
 {% endif %}
 </div>
+
+{{ block.super }}
+
 {% endblock %}
