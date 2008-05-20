@@ -18,4 +18,4 @@ def enable():
     for o in objs:
         mod = o.get_content_object()
         mod.enable_comments = True
-        mode.save()
+        mod.save()
