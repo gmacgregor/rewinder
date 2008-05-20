@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Server Error{% endblock %}
+{% block breadcrumb %}
+<li class="last"><a href="{% url homepage %}">Home</a></li>
+{% endblock %}
+
+{% block content %}
+<h2>Oh crap! Something&#8217;s wrong with the server</h2>
+<p>It looks as though whatever you were trying to access wasn&#8217;t found! It either doesn&#8217;t exist, has been removed from this site or is the result of an error on my part.</p>
+{% endblock %}
