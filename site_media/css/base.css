@@ -334,8 +334,8 @@ body.preview #comments {
 #comment-form #comment-submit input {
     margin: 2em 1em 0 0;
 }
-#comments .comment img {
-    border: 1px solid #eaebeb;
+#comments .comment-meta img {
+    /*border: 1px solid #eaebeb;*/
     padding: 2px;
     margin: 0 10px 10px 0;
 }
