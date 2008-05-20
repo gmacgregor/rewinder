@@ -12,3 +12,10 @@ def close():
             mod = o.get_content_object()
             mod.enable_comments = False
             mod.save()
+
+def enable():
+    objs = TumblelogItem.objects.all()
+    for o in objs:
+        mod = o.get_content_object()
+        mod.enable_comments = True
+        mode.save()
