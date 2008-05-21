@@ -22,7 +22,8 @@ a {
     font-weight: bold;
 }
 a:hover,
-.visit a:hover {
+.visit a:hover,
+a.visit:hover {
     text-decoration: underline;
     color: #ab0b31;
 }
