@@ -444,13 +444,9 @@ body.tweet.detail #archive-list {
     margin: 1em 0 2em 0;
 }
 #related-content ul {
-    margin-top: 0.5em;
-    line-height: 1.4em;
-    color: #888;
-    list-style-type: square;
-    list-style-position: inside;
-
+    padding-left: 0;
 }
+
 .flatpage h2 {
     margin-bottom: 1em;
     font-size: 24px;
