@@ -1,7 +1,7 @@
 {% extends "video/base.html" %}
 {% load custom_tags %}
-{% block title %}Videos: {{ object.description }}{% endblock %}
-{% block body_class %}detail video{% endblock %}
+{% block title %}Videos: {{ object.title }}{% endblock %}
+{% block body_class %}video detail{% endblock %}
 {% block breadcrumb %}
 {{ block.super }}
     <li><a href="{% url video_archive_year year=object.pub_date|date:"Y" %}" title="View all videos from {{ object.pub_date|date:"Y" }}">{{ object.pub_date|date:"Y"}}</a></li>
