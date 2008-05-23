@@ -18,9 +18,9 @@
 <p class="meta"><span class="date">{% long_date link.saved_date %}</span> <span class="comments"><a href="{{ link.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
 <h2><a href="{{ link.get_absolute_url }}">{% autoescape off %}{{ link.description|typogrify }}{% endautoescape %}</a></h2>
 {% if link.extended_info %}
-<p>{% autoescape off %}{{ link.extended_info|typogrify }}{% endautoescape %}</p>
+<p>{% autoescape off %}{{ link.extended_info|typogrify }}{% endautoescape %}{% if link.via_url %} <a href="{{ link.via_url }}">Via</a>{% endif %}</p>
 {% endif %}
-<p class="visit"><a href="{{ link.url }}" title="Visit site">Visit site</a>{% if link.via_url %} (<a href="{{ link.via_url }}">Via</a>){% endif %}</p>
+<p class="visit"><a href="{{ link.url }}" title="Visit site">Visit site</a></p>
 </div>
 {% endfor %}
 

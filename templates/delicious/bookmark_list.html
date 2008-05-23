@@ -15,9 +15,9 @@
 <p class="meta"><span class="date">{% long_date bookmark.saved_date %}</span> <span class="comments"><a href="{{ bookmark.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p> 
 <h2><a href="{{ bookmark.get_absolute_url }}">{% autoescape off %}{{ bookmark.description|typogrify }}{% endautoescape %}</a></h2>
 {% if bookmark.extended_info %}
-<p>{% autoescape off %}{{ bookmark.extended_info|typogrify }}{% endautoescape %}</p>
+<p>{% autoescape off %}{{ bookmark.extended_info|typogrify }}{% endautoescape %}{% if bookmark.via_url %} <a href="{{ bookmark.via_url }}">Via</a>{% endif %}</p>
 {% endif %}
-<p class="visit"><a href="{{ bookmark.url }}" title="Visit site">Visit site</a>{% if bookmark.via_url %} (<a href="{{ bookmark.via_url }}">Via</a>){% endif %}</p>
+<p class="visit"><a href="{{ bookmark.url }}" title="Visit site">Visit site</a></p>
 </div>
 {% endfor %}
 
