@@ -4,7 +4,7 @@
 {% block breadcrumb %}
 <li><a href="{% url tumblelog_home %}" title="Back to Tumblelog">Tumblelog</a></li>
 <li><a href="{% url tumblelog_archive_year year=showing_date|date:"Y" %}" title="Archive for {{ showing_date|date:"Y" }}">{{ showing_date|date:"Y" }}</a></li>
-<li class="last"><a href="{% url tumblelog_archive_year year=showing_date|date:"Y",month=showing_date|date:"m" %}" title="Archive for {{ showing_date|date:"F Y" }}">{{ showing_date|date:"m" }}</a></li>
+<li class="last"><a href="{% url tumblelog_archive_month year=showing_date|date:"Y",month=showing_date|date:"m" %}" title="Archive for {{ showing_date|date:"F Y" }}">{{ showing_date|date:"m" }}</a></li>
 {% endblock %}
 {% block content %}
 <h2>Online activity for {{ showing_date|date:"F, Y" }}</h2>
