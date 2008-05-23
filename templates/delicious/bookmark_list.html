@@ -17,7 +17,7 @@
 {% if bookmark.extended_info %}
 <p>{% autoescape off %}{{ bookmark.extended_info|typogrify }}{% endautoescape %}</p>
 {% endif %}
-<p class="visit"><a href="{{ bookmark.url }}" title="Visit site">Visit site</a></p>
+<p class="visit"><a href="{{ bookmark.url }}" title="Visit site">Visit site</a>{% if bookmark.via_url %} (<a href="{{ bookmark.via_url }}">Via</a>){% endif %}</p>
 </div>
 {% endfor %}
 
