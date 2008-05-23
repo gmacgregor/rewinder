@@ -24,7 +24,7 @@
     {% if item.get_content_object.extended_info %}
     <p>{% autoescape off %}{{ item.get_content_object.extended_info|typogrify }}{% endautoescape %}</p>
     {% endif %}
-    <p class="visit"><a href="{{ item.get_content_object.url }}">Visit</a>{% if item.get_content_object.via_url %} (<a href="{{ item.get_content_object.via_url }}">Via</a>){% endif %}</p>
+    <p class="visit">{% if item.get_content_object.via_url %}<a href="{{ item.get_content_object.via_url }}">Via</a> // {% endif %}<a href="{{ item.get_content_object.url }}">Visit</a></p>
 </div>
 {% endifequal %}
 {% ifequal item.content_type.name "video" %}
