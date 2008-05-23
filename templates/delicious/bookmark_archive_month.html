@@ -21,7 +21,7 @@
 {% if link.extended_info %}
 <p>{% autoescape off %}{{ link.extended_info|typogrify }}{% endautoescape %}</p>
 {% endif %}
-<p class="visit"><a href="{{ link.url }}" title="Visit site">Visit site</a>{% if bookmark.via_url %} (<a href="{{ bookmark.via_url }}">Via</a>){% endif %}</p>
+<p class="visit"><a href="{{ link.url }}" title="Visit site">Visit site</a>{% if link.via_url %} (<a href="{{ link.via_url }}">Via</a>){% endif %}</p>
 </div>
 {% endfor %}
 
