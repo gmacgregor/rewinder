@@ -46,7 +46,7 @@
 {% ifequal item.content_type.name "tweet" %}
 <div class="entry tweet">
     <p class="meta"><a href="{% url tweet_home %}">Tweet</a> <span class="date">{% long_date item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>    
-    <h2>{% autoescape off %}{{ item.get_content_object.text|twitter_links|typogrify }}{% endautoescape %}</h2>
+    <h2>{% autoescape off %}{{ item.get_content_object.text|twitter_links }}{% endautoescape %}</h2>
     <p class="visit"><a href="{{ item.get_content_object.url }}">View</a></p>
 </div>
 {% endifequal %}
