@@ -46,7 +46,7 @@ class LatestTweets(Feed):
     def items(self):
         return Tweet.objects.order_by('-pub_time')[:10]
 
-class Evenrything(Feed):
+class Everything(Feed):
     title = "rewnder.ca: Everything"
     link = "/"
     description = "Word."
