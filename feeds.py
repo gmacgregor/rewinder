@@ -46,16 +46,16 @@ class LatestTweets(Feed):
     def items(self):
         return Tweet.objects.order_by('-pub_time')[:10]
 
-class Everything(Feed):
-    title = "rewnder.ca: Everything"
-    link = "/tumblelog/"
-    description = "Word."
-    
-    def items(self):
-        articles = Article.published_articles.order_by('-pub_date')[:10]
-        logs = TumblelogItem.objects.order_by('-pub_date')[:10]
-        d = dict(articles, logs)
-        print d
+#class Everything(Feed):
+#    title = "rewnder.ca: Everything"
+#    link = "/tumblelog/"
+#    description = "Word."
+#    
+#    def items(self):
+#        articles = Article.published_articles.order_by('-pub_date')[:10]
+#        logs = TumblelogItem.objects.order_by('-pub_date')[:10]
+#        d = dict(articles, logs)
+#           print d
 
 class LatestTumblelog(Feed):
     title = "rewnder.ca: Latest online activity"
