@@ -9,7 +9,7 @@
 {% if obj.get_content_object.description %}
 {% autoescape off %}{{ obj.get_content_object.html_description }}{% endautoescape %}
 {% endif %}
-<p>Watch this video at {{ obj.get_content_object.source }}: <a href="{{ obj.get_content_object.url }}">{{ obj.url }}</a></p>
+<p>Watch this video at {{ obj.get_content_object.source }}: <a href="{{ obj.get_content_object.url }}">{{ obj.get_content_object.url }}</a></p>
 {% endifequal %}
 {% ifequal obj.content_type.name "photo" %}
 <img src="{{ obj.get_content_object.medium_url }}" alt="{{ obj.get_content_object.title }}" />
