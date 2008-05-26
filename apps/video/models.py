@@ -109,8 +109,7 @@ class Video(models.Model):
             <object><param name="wmode" value="transparent"></param>
             <embed src="http://www.youtube.com/v/%s&amp;hl=en" type="application/x-shockwave-flash" 
             wmode="transparent" width="%s" height="%s">
-            </embed></object>""" % (YOUTUBE_WIDTH, YOUTUBE_HEIGHT, self.video_id, 
-            self.video_id, YOUTUBE_WIDTH, YOUTUBE_HEIGHT)
+            </embed></object>""" % (self.video_id, YOUTUBE_WIDTH, YOUTUBE_HEIGHT)
         elif self.is_type('vimeo.com'):
             embed = """<object type="application/x-shockwave-flash" width="%s" height="%s" 
             data="http://www.vimeo.com/moogaloop.swf?clip_id=%s&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=0&amp;
