@@ -13,8 +13,9 @@ from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 #from rewinder.util.timeconverter import time_to_utc
 
-YOUTUBE_WIDTH = 395
-YOUTUBE_HEIGHT = 480
+YOUTUBE_WIDTH = 480
+YOUTUBE_HEIGHT = 395
+
 EXTERNAL_VIDEO_WIDTH = 499
 EXTERNAL_VIDEO_HEIGHT = 300
 
