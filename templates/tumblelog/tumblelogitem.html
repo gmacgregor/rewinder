@@ -30,10 +30,17 @@
 {% ifequal item.content_type.name "video" %}
 <div class="entry video clearfix">
     <p class="meta"><a href="{% url video_home %}">Video</a> <span class="date">{% long_date item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p> 
+    {% comment %}
     {% if item.get_content_object.youtube_small_image %}
     <a href="{{ item.get_content_object.get_absolute_url }}"><img src="{{ item.get_content_object.youtube_small_image }}" width="120" height="90" /></a>
     {% endif %}
+    {% endcomment %}
     <h2><a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.title }}</a></h2>
+    <div class="video-embed">
+    {% spaceless %}
+    {% autoescape off %}{{ item.get_content_object.embed_code }}{% endautoescape %}
+    {% endspaceless %}
+    </div>
     {% if item.get_content_object.html_description %}{% autoescape off %}{{ item.get_content_object.html_description }}{% endautoescape %}{% endif %}
 </div>
 {% endifequal %}
