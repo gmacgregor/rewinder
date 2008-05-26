@@ -10,10 +10,17 @@
 {% get_free_comment_count for video as comments %}
 <div class="entry video clearfix">
 <p class="meta"><span class="date">{% long_date video.pub_date %}</span> <span class="comments"><a href="{{ video.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+{% comment %}
 {% if video.youtube_small_image %}
 <a href="{{ video.get_absolute_url }}"><img src="{{ video.youtube_small_image }}" width="120" height="90" /></a>
 {% endif %}
+{% endcomment %}
 <h2><a href="{{ video.get_absolute_url }}">{{ video.title }}</a></h2>
+<div class="video-embed">
+{% spaceless %}
+{% autoescape off %}{{ object.embed_code }}{% endautoescape %}
+{% endspaceless %}
+</div>
 {% if video.html_description %}{% autoescape off %}{{ video.html_description }}{% endautoescape %}{% endif %}
 </div>
 {% endfor %}
@@ -31,7 +38,7 @@
 {% if random_video.embed_code %}
 <div id="random-video">
 <h3>Random Video</h3>
-<div id="video-embed">
+<div class="video-embed">
 {% autoescape off %}{{ random_video.embed_code }}{% endautoescape %}
 </div>
 {% else %}

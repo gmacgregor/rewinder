@@ -14,7 +14,7 @@
 <p class="meta date">{% long_date object.pub_date %} <a href="{% url tumblelog_archive_day year=object.pub_date|date:"Y",month=object.pub_date|date:"m",day=object.pub_date|date:"d" %}">More</a></p>
 <h2>{{ object.title }}</h2>
 {% if object.embed_code %}
-<div id="video-embed">
+<div class="video-embed">
 {% spaceless %}
 {% autoescape off %}{{ object.embed_code }}{% endautoescape %}
 {% endspaceless %}
