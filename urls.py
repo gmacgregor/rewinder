@@ -4,7 +4,7 @@ from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.apps.video.models import Video
 from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.twitter.models import Tweet
-from rewinder.feeds import LatestArticles, LatestLinks, LatestPhotos, LatestVideos, LatestTweets, LatestTumblelog, Everything
+from rewinder.feeds import LatestArticles, LatestLinks, LatestPhotos, LatestVideos, LatestTweets, LatestTumblelog
 
 feeds = {
     'blog': LatestArticles,
@@ -13,7 +13,6 @@ feeds = {
     'videos': LatestVideos,
     'tweets':  LatestTweets,
     'activity': LatestTumblelog,
-    'everything': Everything,
 }
 
 urlpatterns = patterns('',
