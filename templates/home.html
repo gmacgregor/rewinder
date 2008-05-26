@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block extrahead %}
+<link rel="alternate" type="application/rss+xml" href="/feeds/activity/" title="rewinder.ca: Latest online activity" />
 <link rel="alternate" type="application/rss+xml" href="/feeds/blog/" title="rewinder.ca: Latest blog posts" />
 <link rel="alternate" type="application/rss+xml" href="/feeds/links/" title="rewinder.ca: Latest links" />
 <link rel="alternate" type="application/rss+xml" href="/feeds/photos/" title="rewinder.ca: Latest photos" />
 <link rel="alternate" type="application/rss+xml" href="/feeds/videos/" title="rewinder.ca: Latest videos" />
 <link rel="alternate" type="application/rss+xml" href="/feeds/tweets/" title="rewinder.ca: Latest tweets" />
-<link rel="alternate" type="application/rss+xml" href="/feeds/activity/" title="rewinder.ca: Latest online activity" />
 {% endblock %}
 {% block breadcrumb %}<li>Latest online activity</li><li class="last"><a href="{% url tumblelog_home %}" title="Browse all online activity since 2005">More</a></li>{% endblock %}
 {% block body_class %}home{% endblock %}
