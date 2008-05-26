@@ -82,6 +82,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.flatpages',
     'django.contrib.admin',
+    'django.contrib.sitemaps',
     #'django_evolution',
     #'django.contrib.comments',
     'threadedcomments',

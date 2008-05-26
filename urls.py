@@ -5,6 +5,7 @@ from rewinder.apps.video.models import Video
 from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.twitter.models import Tweet
 from rewinder.feeds import LatestArticles, LatestLinks, LatestPhotos, LatestVideos, LatestTweets, LatestTumblelog
+from rewinder.sitemaps import BlogSitemap, TumblelogSitemap, LinkSitemap, TweetSitemap, PhotoSitemap, VideoSitemap
 
 feeds = {
     'blog': LatestArticles,
@@ -15,8 +16,16 @@ feeds = {
     'activity': LatestTumblelog,
 }
 
+sitemaps = {
+    'blog': BlogSitemap,
+    'tumblelog': TumblelogSitemap,
+    'links': LinkSitemap,
+    'photos': PhotoSitemap,
+    'videos': VideoSitemap,
+    'tweets': TweetSitemap,
+}
+
 urlpatterns = patterns('',
-    #url(r'^$', 'django.views.generic.list_detail.object_list', dict(tumblelog_dict, paginate_by=10), name="homepage"),
     url(r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'home.html'}, name="homepage")
 )
 
@@ -38,6 +47,8 @@ urlpatterns += patterns('',
     url(r'^tags/(?P<tag>[-\w]+)/$', 'rewinder.views.tag_detail', name='tag_detail'),
     url(r'^tags/$', 'rewinder.views.all_tags', name='tags_list'),
     (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
+    (r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+    (r'^sitemap-(?P<section>.+).xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
 
 if settings.DEBUG:
