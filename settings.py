@@ -1,6 +1,4 @@
-# Django settings for sixminutes project.
-
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -10,9 +8,9 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'postgresql_psycopg2'
-DATABASE_NAME = 'rewinder'
-DATABASE_USER = 'postgres'
-DATABASE_PASSWORD = 'faerie'
+DATABASE_NAME = 'gmacgregor_db2_pgsql'
+DATABASE_USER = 'gmacgregor_db2_pgsql'
+DATABASE_PASSWORD = '3360nicola'
 DATABASE_HOST = ''
 DATABASE_PORT = ''
 
@@ -33,16 +31,16 @@ SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = True
+USE_I18N = False
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/Users/gmacgregor/dev/rewinder/site_media/'
+MEDIA_ROOT = '/home/gmacgregor/webapps/static_media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = 'http://localhost:8000/site_media/'
+MEDIA_URL = 'http://media.rewinder.ca/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -74,7 +72,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/Users/gmacgregor/dev/rewinder/templates',
+    '/home/gmacgregor/webapps/django/rewinder/templates',
 )
 
 INSTALLED_APPS = (
@@ -102,7 +100,8 @@ INSTALLED_APPS = (
     'rewinder.apps.geo',
     'rewinder.util', #templatetags
 )
-#TUMBLELOG_MODELS = ('blog.article','delicious.bookmark','flickr.photo','twitter.tweet')
+
+CACHE_BACKEND = 'memcached://74.54.46.146:3268/'
 
 #http://code.google.com/p/django-template-utils/
 MARKUP_FILTER = ('markdown', {})
@@ -143,4 +142,3 @@ DIGG_AUTH = 'http://www.example.com/digg'
 
 DELICIOUS_USERNAME = 'sixminutes'
 DELICIOUS_PASSWORD = 'faerie'
-#TWITTER_USERNAME = 'gmacgregor'
