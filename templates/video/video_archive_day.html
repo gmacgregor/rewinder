@@ -24,7 +24,7 @@
 <h2><a href="{{ video.get_absolute_url }}">{{ video.title }}</a></h2>
 <div class="video-embed">
 {% spaceless %}
-{% autoescape off %}{{ object.embed_code }}{% endautoescape %}
+{% autoescape off %}{{ video.embed_code }}{% endautoescape %}
 {% endspaceless %}
 </div>
 {% if video.html_description %}{% autoescape off %}{{ video.html_description }}{% endautoescape %}{% endif %}
