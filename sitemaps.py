@@ -4,7 +4,7 @@ from rewinder.apps.flickr.models import Photo
 from rewinder.apps.video.models import Video
 from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.twitter.models import Tweet
-from rewinder.apps.Tumblelog.models import TumblelogItem
+from rewinder.apps.tumblelog.models import TumblelogItem
 
 class BlogSitemap(Sitemap):
     changefreq = "never"
