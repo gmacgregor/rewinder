@@ -48,7 +48,7 @@ class LatestTweets(Feed):
 
 class Everything(Feed):
     title = "rewnder.ca: Everything"
-    link = "/"
+    link = "/tumblelog/"
     description = "Word."
     
     def items(self):
@@ -56,7 +56,7 @@ class Everything(Feed):
         logs = TumblelogItem.objects.order_by('-pub_date')[:10]
         d = dict(articles, logs)
         print d
-        
+
 class LatestTumblelog(Feed):
     title = "rewnder.ca: Latest online activity"
     link = "/tumblelog/"
