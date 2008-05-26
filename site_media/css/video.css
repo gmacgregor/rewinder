@@ -1,9 +1,9 @@
-#video-embed {
+.video-embed {
     background-color: #000;
     margin-bottom: 1em;
     width: 500px;
     text-align: center;
 }
-#random-video #video-embed {
+#random-video .video-embed {
     margin-top: 0.5em;
 }
