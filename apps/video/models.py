@@ -106,8 +106,7 @@ class Video(models.Model):
     def get_embed_code(self):
         if self.is_type('youtube.com'):
             embed = """
-            <object><param name="wmode" value="transparent"></param>
-            <embed src="http://www.youtube.com/v/%s&amp;hl=en" type="application/x-shockwave-flash" 
+            <object><embed src="http://www.youtube.com/v/%s&amp;hl=en" type="application/x-shockwave-flash" 
             wmode="transparent" width="%s" height="%s">
             </embed></object>""" % (self.video_id, YOUTUBE_WIDTH, YOUTUBE_HEIGHT)
         elif self.is_type('vimeo.com'):
