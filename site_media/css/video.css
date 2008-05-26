@@ -2,6 +2,7 @@
     background-color: #000;
     margin-bottom: 1em;
     width: 500px;
+    margin: 0 auto;
 }
 #random-video #video-embed {
     margin-top: 0.5em;
