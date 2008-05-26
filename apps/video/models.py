@@ -13,6 +13,8 @@ from rewinder.apps.tumblelog.models import TumblelogItem
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 #from rewinder.util.timeconverter import time_to_utc
 
+YOUTUBE_WIDTH = 395
+YOUTUBE_HEIGHT = 480
 EXTERNAL_VIDEO_WIDTH = 499
 EXTERNAL_VIDEO_HEIGHT = 300
 
@@ -76,12 +78,6 @@ class Video(models.Model):
         else:
             return None
     
-    def youtube_small_image(self):
-        if self.is_type('youtube.com') and self.video_id:
-            return "http://i.ytimg.com/vi/%s/default.jpg" % self.video_id
-        else:
-            return None
-    
     def related_videos(self):
         videos = Video.objects.all().filter(tags__icontains='%s') % self.tags
         return videos
@@ -113,8 +109,8 @@ class Video(models.Model):
             </param><param name="wmode" value="transparent"></param>
             <embed src="http://www.youtube.com/v/%s&amp;hl=en" type="application/x-shockwave-flash" 
             wmode="transparent" width="%s" height="%s">
-            </embed></object>""" % (EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT, self.video_id, 
-            self.video_id, EXTERNAL_VIDEO_WIDTH, EXTERNAL_VIDEO_HEIGHT)
+            </embed></object>""" % (YOUTUBE_WIDTH, YOUTUBE_HEIGHT, self.video_id, 
+            self.video_id, YOUTUBE_WIDTH, YOUTUBE_HEIGHT)
         elif self.is_type('vimeo.com'):
             embed = """<object type="application/x-shockwave-flash" width="%s" height="%s" 
             data="http://www.vimeo.com/moogaloop.swf?clip_id=%s&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=0&amp;
