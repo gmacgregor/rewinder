@@ -21,7 +21,7 @@ class TumblelogSitemap(Sitemap):
     priority = 0.7
     
     def items(self):
-        return TumblelogItem.objects.all()
+        return TumblelogItem.objects.order_by('-pub_date')
     
     def lastmod(self, obj):
         item = obj.get_content_object()
