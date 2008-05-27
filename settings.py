@@ -83,7 +83,7 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.admin',
     'django.contrib.sitemaps',
-    #'django_evolution',
+    'django_evolution',
     #'django.contrib.comments',
     'threadedcomments',
     #template utils -- ie. using markdown for presentation
