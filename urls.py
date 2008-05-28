@@ -30,7 +30,7 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('',
-    (r'^admin/', include('django.contrib.admin.urls')),
+    (r'^publish/', include('django.contrib.admin.urls')),
     (r'^remarks/', include('threadedcomments.urls')),
     url(r'^links/?page=(?P<page>[0-9]+)$', 'rewinder.views.list', {'app': 'delicious', 'model': Bookmark, 'ordering': '-saved_date'}, name="bookmark_list"),
     (r'^links/', include('rewinder.apps.delicious.urls')),
