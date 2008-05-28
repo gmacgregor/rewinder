@@ -5,3 +5,18 @@
 {% endblock %}
 {% block title %}Blog{% endblock %}
 {% block breadcrumb %}{{ block.super }}<li><a href="{% url blog_home %}">Blog</a></li>{% endblock %}
+
+{% block sidebarcontent %}
+<div id="blogroll">
+<h3>Blogroll</h3>
+<p>Blogs you should be reading if you aren&#8217;t already.</p>
+<h4>The SuperNerds Local 151</h4>
+<ul>
+    <li><a href="http://www.beatnikpad.com">Beatnikpad</a></li>
+    <li><a href="http://www.chromewaves.net">Chromewaves</a></li>
+    <li><a href="http://gordasm.org/">Gordasm</a></li>
+    <li><a href="http://www.wishingline.com/notebook/">On a Long Piece of String</a></li>
+    <li><a href="http://www.robotjohnny.com">Robot Johnny</a></li>
+</ul>
+</div>
+{% endblock %}
