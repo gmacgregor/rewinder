@@ -1,0 +1,32 @@
+{% extends "generic/base.html" %}
+{% block title %}Quotes: {{ day|date:"F d, Y" }}{% endblock %}
+{% block description %}Quotes saved on {{ day|date:"F d, Y" }}{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+    <li><a href="{% url quote_archive_year year=day|date:"Y" %}" title="View all videos saved in {{ day|date:"Y" }}">{{ day|date:"Y" }}</a></li>
+    <li><a href="{% url quote_archive_month year=day|date:"Y", month=day|date:"m" %}" title="View all videos saved in {{ day|date:"F, Y" }}">{{ day|date:"m" }}</a></li>
+    <li><a href="{% url quote_archive_day year=day|date:"Y", month=day|date:"m",day=day|date:"d" %}" title="View all videos saved on  {{ day|date:"F d, Y" }}">{{ day|date:"d" }}</a></li>
+{% endblock %}
+{% load custom_tags %}
+{% load typogrify %}
+{% load threadedcommentstags %}
+
+{% block content %}
+<h2>Quotes saved on {{ day|date:"F d, Y" }} ({{ object_list.count }}) <a href="{% url tumblelog_archive_day year=day|date:"Y", month=day|date:"m",day=day|date:"d" %}" class="visit" title="View all online activity for {{ day|date:"F d, Y" }}">More</a></h2>
+<div id="day-archive">
+{% for quote in object_list %}
+<div class="entry quote">
+    <p class="meta"><span class="date">{% long_date quote.pub_date %}</span> <span class="comments"><a href="{{ quote.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+    <blockquote{% if quote.url %} cite="{{ quote.url }}"{% endif %}>{% autoescape off %}{{ quote.html_text }}{% endautoescape %}</blockquote>
+    {% autoescape off %}
+    {% if quote.url %}
+    <p class="cite">&mdash; <a href="{{ quote.url }}">{{ quote.credit|typogrify }}</a></p>
+    {% else %}
+    <p class="cite">&mdash; {{ quote.credit|typogrify }}</p>
+    {% endif %}
+    {% endautoescape %}
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}
