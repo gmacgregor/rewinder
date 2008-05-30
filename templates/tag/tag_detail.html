@@ -15,6 +15,7 @@
 {% if photos %}<li><a href="{% url tag_detail tag %}#tag-photos">Photos ({{ photos.count }})</a></li>{% endif %}
 {% if links %}<li><a href="{% url tag_detail tag %}#tag-links">Links ({{ links.count }})</a></li>{% endif %}
 {% if videos %}<li><a href="{% url tag_detail tag %}#tag-videos">Videos ({{ videos.count }})</a></li>{% endif %}
+{% if quotes %}<li><a href="{% url tag_detail tag %}#tag-quotes">Quotes ({{ Quotes.count }})</a></li>{% endif %}
 </ul>
 {% endcomment %}
 
@@ -30,6 +31,9 @@
 {% endif %}
 {% if videos %}
 <li><a href="#tag-videos" title="Jump to videos tagged '{{ tag }}'">Videos</a><span class="count">{{ videos.count }}</span><span style="width: {% widthratio videos.count total 490 %}px" class="index">{% widthratio videos.count total 100 %}%</span></li>
+{% endif %}
+{% if quotes %}
+<li><a href="#tag-quotes" title="Jump to quotes tagged '{{ tag }}'">Quotes</a><span class="count">{{ quotes.count }}</span><span style="width: {% widthratio quotes.count total 490 %}px" class="index">{% widthratio quotes.count total 100 %}%</span></li>
 {% endif %}
 </ul>
 
@@ -65,6 +69,15 @@
 <ul id="tag-videos">
 {% for video in videos %}
     <li><a href="{{ video.get_absolute_url }}">{% autoescape off %}{{ video.title|typogrify }}{% endautoescape %}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if quotes %}
+<h3><a href="{% url quote_home %}">Quotes</a></h3>
+<ul id="tag-quotes">
+{% for quote in quotes %}
+    <li><a href="{{ quote.get_absolute_url }}">{% autoescape off %}{{ quote.text|typogrify }}{% endautoescape %}</a></li>
 {% endfor %}
 </ul>
 {% endif %}
@@ -111,6 +124,16 @@
 {% get_popular_tags_for blog.Article 10 as top_tags top_count %}
 <div class="col last">
 <h3>Top 10 Blog post Tags</h3>
+<ul class="chart">
+{% for num, tag in top_tags %}
+<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 190 %}px" class="index"></span></li>
+{% endfor %}
+</ul>
+</div>
+
+{% get_popular_tags_for generic.Quote 10 as top_tags top_count %}
+<div class="col last">
+<h3>Top 10 Quote Tags</h3>
 <ul class="chart">
 {% for num, tag in top_tags %}
 <li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 190 %}px" class="index"></span></li>

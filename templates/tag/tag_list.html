@@ -1,17 +1,18 @@
 {% extends "tag/base.html" %}
 {% block body_class %}tag list{% endblock %}
-{% block description %}Top {{ limit }} used tags among all links, photos, videos and blog posts at rewinder.ca{% endblock %}
+{% block description %}Top {{ limit }} used tags among all links, photos, videos, quotes and blog posts at rewinder.ca{% endblock %}
 {% load custom_tags %}
 {% block content %}
 
 <div id="tags-by-content" class="clearfix">
 <h2>Tags by content type</h2>
+
 {% get_popular_tags_for delicious.Bookmark 10 as top_tags top_count %}
-<div class="col">
+<div class="col first">
 <h3>Top 10 Link Tags</h3>
 <ul class="chart">
 {% for num, tag in top_tags %}
-<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 190 %}px" class="index"></span></li>
+<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 184 %}px" class="index"></span></li>
 {% endfor %}
 </ul>
 </div>
@@ -21,7 +22,7 @@
 <h3>Top 10 Photo Tags</h3>
 <ul class="chart">
 {% for num, tag in top_tags %}
-<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 190 %}px" class="index"></span></li>
+<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 184 %}px" class="index"></span></li>
 {% endfor %}
 </ul>
 </div>
@@ -31,17 +32,27 @@
 <h3>Top 10 Video Tags</h3>
 <ul class="chart">
 {% for num, tag in top_tags %}
-<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 190 %}px" class="index"></span></li>
+<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 184 %}px" class="index"></span></li>
 {% endfor %}
 </ul>
 </div>
 
 {% get_popular_tags_for blog.Article 10 as top_tags top_count %}
-<div class="col last">
+<div class="col">
 <h3>Top 10 Blog post Tags</h3>
 <ul class="chart">
 {% for num, tag in top_tags %}
-<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 190 %}px" class="index"></span></li>
+<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 184 %}px" class="index"></span></li>
+{% endfor %}
+</ul>
+</div>
+
+{% get_popular_tags_for generic.Quote 10 as top_tags top_count %}
+<div class="col last">
+<h3>Top 10 Quote Tags</h3>
+<ul class="chart">
+{% for num, tag in top_tags %}
+<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 184 %}px" class="index"></span></li>
 {% endfor %}
 </ul>
 </div>
@@ -50,7 +61,7 @@
 
 <div id="top-tags">
 {% get_popular_tags 200 as limit tags total_count top_count %}
-<h2>Top {{ limit }} used tags among all <a href="{% url bookmark_home %}" title="Browse all links">links</a>, <a href="{% url photo_home %}" title="Browse all photos">photos</a>, <a href="{% url video_home %}" title="Browse all videos">videos</a> and <a href="{% url blog_home %}" title="Browse all blog posts">blog posts</a> of {{ total_count }} total tags</h2>
+<h2>Top {{ limit }} used tags among all <a href="{% url bookmark_home %}" title="Browse all links">links</a>, <a href="{% url photo_home %}" title="Browse all photos">photos</a>, <a href="{% url video_home %}" title="Browse all videos">videos</a>, <a href="{% url quote_home %}" title="Browse all quotes">quotes</a> and <a href="{% url blog_home %}" title="Browse all blog posts">blog posts</a> of {{ total_count }} total tags</h2>
 <ul class="chart">
 {% for num, tag in tags %}
  <li><a href="{% url tag_detail tag %}" rel="tag">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 1000 %}px" class="index">({% widthratio num top_count 100 %}%)</span></a></li>
