@@ -57,4 +57,17 @@
     <p class="visit"><a href="{{ item.get_content_object.url }}">View</a></p>
 </div>
 {% endifequal %}
+{% ifequal item.content_type.name "quote" %}
+<div class="entry quote">
+    <p class="meta"><a href="{% url quote_home %}">Quote</a> <span class="date">{% long_date item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+    <blockquote{% if item.get_content_object.url %} cite="{{ item.get_content_object.url }}"{% endif %}>{% autoescape off %}{{ item.get_content_object.html_text }}{% endautoescape %}</blockquote>
+    {% autoescape off %}
+    {% if item.get_content_object.url %}
+    <p class="cite">&mdash; <a href="{{ item.get_content_object.url }}">{{ item.get_content_object.credit|typogrify }}</a></p>
+    {% else %}
+    <p class="cite">&mdash; {{ item.get_content_object.credit|typogrify }}</p>
+    {% endif %}
+    {% endautoescape %}
+</div>
+{% endifequal %}
 {% endautoescape %}
