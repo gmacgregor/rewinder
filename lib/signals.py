@@ -43,7 +43,7 @@ def create_tumblelog_item(sender, instance):
         if instance.owner != "sixminutes":
             create = False
         pub_date = instance.taken_date
-    elif ctype.name == "video":
+    elif ctype.name == "video" or ctype.name=="quote":
         pub_date = instance.pub_date
     if save:
         try:
