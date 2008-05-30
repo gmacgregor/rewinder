@@ -31,14 +31,14 @@
 <h1><a href="{% url homepage %}" title="Back to homepage">rewinder</a></h1>
 <div id="nav">
 <ul>
-    <li id="nav-home"><a href="{% url homepage %}" title="Back to homepage">Home</a></li>
     <li id="nav-tumblelog"><a href="{% url tumblelog_home %}" title="View my online activity">Tumblelog</a></li>
-    <li id="nav-blog"><a href="{% url blog_home %}" title="Go to the blog" class="last">Blog</a></li>
+    <li id="nav-blog"><a href="{% url blog_home %}" title="Go to the blog">Blog</a></li>
+    <li id="nav-link"><a href="{% url bookmark_home %}" title="View all links" class="last">Links</a></li>
 </ul>
 <ul>
-    <li id="nav-link"><a href="{% url bookmark_home %}" title="View all links">Links</a></li>
     <li id="nav-photo"><a href="{% url photo_home %}" title="View all photos">Photos</a></li>
-    <li id="nav-video"><a href="{% url video_home %}" title="View all videos" class="last">Videos</a></li>
+    <li id="nav-video"><a href="{% url video_home %}" title="View all videos">Videos</a></li>
+    <li id="nav-quote"><a href="{% url quote_home %}" title="View all quotes" class="last">Quotes</a></li>
 </ul>
 <ul>
     <li id="nav-tweet"><a href="{% url tweet_home %}" title="View all twittertweets">Tweets</a></li>
