@@ -6,7 +6,7 @@ from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.video.models import Video
 from rewinder.apps.flickr.models import Photo
 from rewinder.apps.twitter.models import Tweet
-
+from rewinder.apps.generic.models import Quote
 
 def list(request, app, model, ordering='-pub_date'):
     ctx = None
@@ -16,7 +16,8 @@ def list(request, app, model, ordering='-pub_date'):
         photos = Photo.sixminutes.all().count()
         videos = Video.objects.count()
         tweets = Tweet.objects.count()
-        ctx = {'total': items.count(), 'links': links, 'photos': photos, 'videos': videos, 'tweets': tweets}
+        quotes = Quote.objects.count()
+        ctx = {'total': items.count(), 'links': links, 'photos': photos, 'videos': videos, 'tweets': tweets, 'quotes': quotes}
     page = request.GET.get('page', 1)
     paginator = DiggPaginator(items, 10, page=page, body=7, tail=2, padding=3)
     template_name = '%s/%s_list.html' % (app.lower(), model.__name__.lower())
@@ -30,7 +31,8 @@ def tag_detail(request, tag):
     links = TaggedItem.objects.get_by_model(Bookmark, tag)
     videos = TaggedItem.objects.get_by_model(Video, tag)
     photos = TaggedItem.objects.get_by_model(Photo, tag)
-    count = articles.count() + links.count() + videos.count() + photos.count() 
+    quotes = TaggedItem.objects.get_by_model(Quote, tag)
+    count = articles.count() + links.count() + videos.count() + photos.count()  + quotes.count()
     tag_dict = {
         'tag': tag,
         'total': count,
@@ -38,5 +40,6 @@ def tag_detail(request, tag):
         'links': links,
         'videos': videos,
         'photos': photos,
+        'quotes': quotes,
     }
     return render_response(request, 'tag/tag_detail.html', tag_dict)
