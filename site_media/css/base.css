@@ -5,6 +5,7 @@
 @import url("sidebar.css");
 @import url("video.css");
 @import url("blog.css");
+@import url("quotes.css");
 
 body {
     font-size: 0.8em;
