@@ -1,0 +1,30 @@
+{% extends "generic/base.html" %}
+{% block title %}Quotes: {{ year }}{% endblock %}
+{% block description %}Quotes saved in {{ year }}{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+    <li><a href="{% url quote_archive_year year=year %}" title="View all quotes saved in {{ year }}">{{ year }}</a></li>
+{% endblock %}
+{% load custom_tags %}
+{% load typogrify %}
+{% load threadedcommentstags %}
+
+{% block content %}
+<h2>Quotes saved in {{ year }} ({{ object_list.count }}) <a href="{% url tumblelog_archive_year year=year %}" class="visit" title="View all online activity for {{ year }}">More</a></h2>
+<div id="year-archive">
+{% for quote in object_list %}
+<div class="entry quote">
+    <p class="meta"><span class="date">{% long_date quote.pub_date %}</span> <span class="comments"><a href="{{ quote.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+    <blockquote{% if quote.url %} cite="{{ quote.url }}"{% endif %}>{% autoescape off %}{{ quote.html_text }}{% endautoescape %}</blockquote>
+    {% autoescape off %}
+    {% if quote.url %}
+    <p class="cite">&mdash; <a href="{{ quote.url }}">{{ quote.credit|typogrify }}</a></p>
+    {% else %}
+    <p class="cite">&mdash; {{ quote.credit|typogrify }}</p>
+    {% endif %}
+    {% endautoescape %}
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}

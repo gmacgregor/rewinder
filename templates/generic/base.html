@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body_class %}quote list{% endblock %}
+{% block title %}Quotes{% endblock %}
+{% block description %}Quotes from around the internets{% endblock %}
+{% block breadcrumb %}<li><a href="{% url quote_home %}">Quotes</a></li>{% endblock %}
+
+{% block sidebarcontent %}
+{% load custom_tags %}
+{% get_archive_dates generic.Quote as years pub_date %}
+<div id="archive-list">
+<h3>Browse the Quote archive</h3>
+<ul>
+    {% for year in years %}
+    <li><a href="{% url quote_archive_year year=year|date:"Y" %}">{{ year|date:"Y" }}</a></li>
+    {% endfor %}
+</ul>
+</div>
+{% endblock %}
