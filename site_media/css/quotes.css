@@ -1,0 +1,20 @@
+#main-content .entry.quote blockquote,
+#quote-detail blockquote {
+    font-size: 1.4em;
+    color: #333;
+    margin-top: 0.5em;
+}
+#main-content .entry.quote blockquote p,
+#quote-detail blockquote p {
+    background: url(http://media.rewinder.ca/icons/quote.gif) no-repeat left 2%;
+    padding-left: 22px;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    line-height: 1.1em;
+}
+#main-content .entry.quote p.cite,
+#quote-detail p.cite {
+    text-align: right;
+    margin-top: 0;
+    color: #e6e6e6;
+}
