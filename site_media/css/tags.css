@@ -10,7 +10,8 @@
 /*#tag-detail ul#tag-photos li,*/
 #tag-detail ul#tag-articles li,
 #tag-detail ul#tag-videos li,
-#tag-detail ul#tag-links li {
+#tag-detail ul#tag-links li,
+#tag-detail ul#tag-quotes li {
     margin-bottom: 0.5em;
 }
 
@@ -20,14 +21,17 @@ body.tag.list #top-tags ul.chart {
 }
 body.tag.list #tags-by-content .col,
 body.tag.list #tags-by-content ul.chart {
-    width: 230px;
+    width: 184px;
 }
 body.tag.list #tags-by-content .col {
     margin: 0 10px;
     float: left;
 }
+body.tag.list #tags-by-content .col.first {
+    margin-left: 0;
+}
 body.tag.list #tags-by-content .col.last {
-    padding-right: 0;
+    margin-right: 0;
 }
 body.tag.list #top-tags {
     margin-top: 2em;
