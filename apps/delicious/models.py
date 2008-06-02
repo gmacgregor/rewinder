@@ -90,11 +90,11 @@ class Bookmark(models.Model):
     def _delete_image(self):
         filename = settings.MEDIA_ROOT + self.get_image_filename()
         print filename
-        try:
-            os.remove(filename)
-        except OSError:
+        #try:
+        os.remove(filename)
+        #except OSError:
             # most likely that image doesn't exist
-            pass
+            #pass
         if self.image_caption:
             self.image_caption, self.html_image_caption = '', ''
         self.remove_image = False
