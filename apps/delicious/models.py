@@ -88,7 +88,7 @@ class Bookmark(models.Model):
         return self
     
     def _delete_image(self):
-        filename = self.get_image_filename()
+        filename = settings.MEDIA_ROOT + self.get_image_filename()
         print filename
         try:
             os.remove(filename)
