@@ -59,7 +59,7 @@ class Bookmark(models.Model):
             self.saved_date = time_to_settings(self.saved_date)
         self._process_tags()
         if self.remove_image:
-            self._process_image()
+            self._delete_image()
         self._process_markup()
         if self.post_elsewhere:
             self._post_to_delicious()
@@ -87,7 +87,7 @@ class Bookmark(models.Model):
         self.html_image_caption =  typogrify(formatter(self.image_caption))
         return self
     
-    def _process_image(self):
+    def _delete_image(self):
         try:
             os.remove(self.get_image_filename())
         except OSError:
