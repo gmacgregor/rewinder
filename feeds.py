@@ -4,6 +4,7 @@ from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.flickr.models import Photo
 from rewinder.apps.video.models import Video
 from rewinder.apps.twitter.models import Tweet
+from rewinder.apps.generic.models import Quote
 from rewinder.apps.tumblelog.models import TumblelogItem
 
 class LatestArticles(Feed):
@@ -45,6 +46,14 @@ class LatestTweets(Feed):
     
     def items(self):
         return Tweet.objects.order_by('-pub_time')[:10]
+
+class LatestQuotes(Feed):
+    title = "rewinder.ca: Latest quotes"
+    link = "/quotes/"
+    description = "Latest Quotes transcribed by Greg MacGregor"
+    
+    def items(self):
+        return Quote.objects.order_by('-pub_date')[:10]
 
 class LatestTumblelog(Feed):
     title = "rewnder.ca: Latest online activity"
