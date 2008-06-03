@@ -22,6 +22,6 @@
 {% endifequal %}
 {% ifequal obj.content_type.name "quote" %}
 <p>{{ obj.get_content_object.html_text }}</p>
-<p>{% if obj.get_content_object.url %}<a href="{{ obj.get_content_object.url }}">{{ obj.get_content_object.credit }}</a>{% else %}{{ obj.get_content_object.credit }}{% endif %}</p>
+<p>Credit: {% if obj.get_content_object.url %}<a href="{{ obj.get_content_object.url }}">{{ obj.get_content_object.credit }}</a>{% else %}{{ obj.get_content_object.credit }}{% endif %}</p>
 {% endifequal %}
 {% endautoescape %}
