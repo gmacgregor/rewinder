@@ -13,6 +13,7 @@
 <h2>Quotes saved in {{ year }} ({{ object_list.count }}) <a href="{% url tumblelog_archive_year year=year %}" class="visit" title="View all online activity for {{ year }}">More</a></h2>
 <div id="year-archive">
 {% for quote in object_list %}
+{% get_free_comment_count for quote as comments %}
 <div class="entry quote">
     <p class="meta"><span class="date">{% long_date quote.pub_date %}</span> <span class="comments"><a href="{{ quote.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
     <blockquote{% if quote.url %} cite="{{ quote.url }}"{% endif %}>{% autoescape off %}{{ quote.html_text }}{% endautoescape %}</blockquote>
