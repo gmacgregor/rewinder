@@ -6,6 +6,7 @@
 <link rel="alternate" type="application/rss+xml" href="/feeds/photos/" title="rewinder.ca: Latest photos" />
 <link rel="alternate" type="application/rss+xml" href="/feeds/videos/" title="rewinder.ca: Latest videos" />
 <link rel="alternate" type="application/rss+xml" href="/feeds/tweets/" title="rewinder.ca: Latest tweets" />
+<link rel="alternate" type="application/rss+xml" href="/feeds/quotes/" title="rewinder.ca: Latest quotes" />
 {% endblock %}
 {% block breadcrumb %}<li>Latest online activity</li><li class="last"><a href="{% url tumblelog_home %}" title="Browse all online activity since 2005">More</a></li>{% endblock %}
 {% block body_class %}home{% endblock %}
@@ -75,7 +76,9 @@
     <li><a href="/feeds/links/">links</a></li>
     <li><a href="/feeds/photos/">photos</a></li>
     <li><a href="/feeds/videos/">videos</a></li>
-    <li><a href="/feeds/activity/">all of my online activity</a></li>
+    <li><a href="/feeds/quotes/">quotes</a></li>
+    <li><a href="/feeds/tweets/">tweets</a></li>
+    <li><a href="/feeds/activity/">everything (minus blog posts) combined</a></li>
 </ul>
 </div>
 {% endblock %}

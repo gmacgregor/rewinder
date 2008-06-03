@@ -2,6 +2,9 @@
 {% block body_class %}quote list{% endblock %}
 {% block title %}Quotes{% endblock %}
 {% block description %}Quotes from around the internets{% endblock %}
+{% block extrahead %}
+<link rel="alternate" type="application/rss+xml" href="/feeds/quotes/" title="rewinder.ca: Latest quotes" />
+{% endblock %}
 {% block breadcrumb %}<li><a href="{% url quote_home %}">Quotes</a></li>{% endblock %}
 
 {% block sidebarcontent %}
