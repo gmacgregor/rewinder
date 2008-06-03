@@ -5,8 +5,8 @@ from rewinder.apps.video.models import Video
 from rewinder.apps.delicious.models import Bookmark
 from rewinder.apps.twitter.models import Tweet
 from rewinder.apps.generic.models import Quote
-from rewinder.feeds import LatestArticles, LatestLinks, LatestPhotos, LatestVideos, LatestTweets, LatestTumblelog
-from rewinder.sitemaps import BlogSitemap, LinkSitemap, TweetSitemap, PhotoSitemap, VideoSitemap
+from rewinder.feeds import LatestArticles, LatestLinks, LatestPhotos, LatestVideos, LatestTweets, LatestTumblelog, LatestQuotes
+from rewinder.sitemaps import BlogSitemap, LinkSitemap, TweetSitemap, PhotoSitemap, VideoSitemap, QuoteSitemap
 
 feeds = {
     'blog': LatestArticles,
@@ -15,6 +15,7 @@ feeds = {
     'videos': LatestVideos,
     'tweets':  LatestTweets,
     'activity': LatestTumblelog,
+    'quotes': LatestQuotes,
 }
 
 sitemaps = {
@@ -24,6 +25,7 @@ sitemaps = {
     'photos': PhotoSitemap,
     'videos': VideoSitemap,
     'tweets': TweetSitemap,
+    'quotes': QuoteSitemap,
 }
 
 urlpatterns = patterns('',
