@@ -11,4 +11,7 @@
 {% ifequal obj.content_type.name "tweet" %}
     Tweet: {{ obj.get_content_object.text }}
 {% endifequal %}
+{% ifequal obj.content_type.name "quote" %}
+    Quote
+{% endifequal %}
 {% endautoescape %}
