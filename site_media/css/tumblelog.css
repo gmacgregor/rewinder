@@ -6,6 +6,9 @@
 .entry p {
     padding-right: 30px;
 }
+.entry.tweet h2 {
+    font-weight: normal;
+}
 /*
 .entry p {
     margin-top: 0.6em;
