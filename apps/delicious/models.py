@@ -97,7 +97,7 @@ class Bookmark(models.Model):
             pass
         if self.image_caption:
             self.image_caption, self.html_image_caption = '', ''
-        self.image = ''
+        self.image = None
         self.remove_image = False
         return self
     
