@@ -14,6 +14,9 @@
 <div class="entry link">
 <p class="meta"><span class="date">{% long_date bookmark.saved_date %}</span> <span class="comments"><a href="{{ bookmark.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p> 
 <h2><a href="{{ bookmark.get_absolute_url }}">{% autoescape off %}{{ bookmark.description|typogrify }}{% endautoescape %}</a></h2>
+{% if bookmark.image %}
+<img src="{{ bookmark.get_image_url }}" alt="{{ bookmark.image_caption }}" width="{{ bookmark.get_image_width }}" height="{{ bookmark.get_image_height }}" />
+{% endif %}
 {% if bookmark.extended_info %}
 <p>{% autoescape off %}{{ bookmark.extended_info|typogrify }}{% endautoescape %}{% if bookmark.via_url %} <a href="{{ bookmark.via_url }}">Via</a>{% endif %}</p>
 {% endif %}
