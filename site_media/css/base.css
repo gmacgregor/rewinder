@@ -460,3 +460,7 @@ body.tweet.detail #archive-list {
     line-height: 1.2em;
     margin-bottom: 0.5em;
 }
+
+.entry.link h2 img {
+    margin: 1em 0;
+}
