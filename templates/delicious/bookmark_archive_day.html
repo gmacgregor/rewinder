@@ -20,6 +20,9 @@
 <div class="entry link">
 <p class="meta"><span class="date">{% long_date link.saved_date %}</span> <span class="comments"><a href="{{ link.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
 <h2><a href="{{ link.get_absolute_url }}">{% autoescape off %}{{ link.description|typogrify }}{% endautoescape %}</a></h2>
+{% if link.image %}
+<img src="{{ link.get_image_url }}" alt="{{ link.image_caption }}" width="{{ link.get_image_width }}" height="{{ link.get_image_height }}" />
+{% endif %}
 {% if link.extended_info %}
 <p>{% autoescape off %}{{ link.extended_info|typogrify }}{% endautoescape %}{% if link.via_url %} <a href="{{ link.via_url }}">Via</a>{% endif %}</p>
 {% endif %}
