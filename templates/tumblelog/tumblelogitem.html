@@ -21,8 +21,8 @@
 <div class="entry link">
     <p class="meta"><a href="{% url bookmark_home %}">Link</a> <span class="date">{% long_date item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
     <h2><a href="{{ item.get_content_object.get_absolute_url }}">{% autoescape off %}{{ item.get_content_object.description|typogrify }}{% endautoescape %}</a></h2>
-    {% if bookmark.image %}
-    <img src="{{ bookmark.get_image_url }}" alt="{{ bookmark.image_caption }}" width="{{ bookmark.get_image_width }}" height="{{ bookmark.get_image_height }}" />
+    {% if item.image %}
+    <img src="{{ item.get_image_url }}" alt="{{ item.image_caption }}" width="{{ item.get_image_width }}" height="{{ item.get_image_height }}" />
     {% endif %}
     {% if item.get_content_object.extended_info %}
     <p>{% autoescape off %}{{ item.get_content_object.extended_info|typogrify }}{% endautoescape %}{% if item.get_content_object.via_url %} <a href="{{ item.get_content_object.via_url }}">Via</a>{% endif %}</p>
