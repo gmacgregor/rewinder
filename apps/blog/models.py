@@ -175,19 +175,19 @@ class Article(models.Model):
             except OSError:
                 # most likely that image doesn't exist
                 pass
-            self.lead_image, self.lead_caption, self.html_lead_caption = '', '', ''
+            self.lead_image, self.lead_caption, self.html_lead_caption = None, None, None
         if self.remove_sidebar:
             try:
                 os.remove(self.get_sidebar_image_filename())
             except OSError:
                 pass
-            self.sidebar_image, self.sidebar_caption, self.html_sidebar_caption = '', '', ''
+            self.sidebar_image, self.sidebar_caption, self.html_sidebar_caption = None, None, None
         if self.remove_inline:
             try:
                 os.remove(self.get_inline_image_filename())
             except OSError:
                 pass
-            self.inline_image, self.inline_caption, self.html_inline_caption = '', '', ''
+            self.inline_image, self.inline_caption, self.html_inline_caption = None, None, None
         self.remove_lead, self.remove_sidebar, self.remove_inline = False, False, False
         return self
     
