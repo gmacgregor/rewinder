@@ -32,6 +32,8 @@
     {% comment %}<li><a href="{% url blog_home %}" title="View all blog posts">Blog posts</a><span class="count">{{ extra.articles }}</span><span style="width: {% widthratio extra.articles extra.total 490 %}px" class="index">{% widthratio extra.articles extra.total 100 %}%</span></li>{% endcomment %}
 </ul>
 
+{% include "feeds/list.html" %}
+
 {% include "tumblelog/archive_year_list.html" %}
 
 {% endblock %}
