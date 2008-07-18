@@ -11,6 +11,7 @@ from typogrify.templatetags.typogrify import typogrify
 from rewinder.util.timeconverter import time_to_settings
 from rewinder.lib.signals import create_tumblelog_item, kill_tumblelog_item
 
+import os
 import datetime
 import re
 
