@@ -20,8 +20,8 @@
 {% ifequal item.content_type.name "bookmark" %}
 <div class="entry link">
     <p class="meta"><a href="{% url bookmark_home %}">Link</a> <span class="date">{% long_date item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
-    <h2><a href="{{ item.get_content_object.get_absolute_url }}">{% autoescape off %}{{ item.get_content_object.description|typogrify }}{% endautoescape %}</a></h2>
-    {% if item.image %}
+    <h2><a href="{{ item.get_content_object.get_absolute_url }}">{% autoescape off %}{{ item.get_content_object.description|typogrify }}{% endautoescape %}</a></h2>    
+    {% if item.get_content_object.image %}
     <img src="{{ item.get_content_object.get_image_url }}" alt="{{ item.get_content_object.image_caption }}" width="{{ item.get_content_object.get_image_width }}" height="{{ item.get_content_object.get_image_height }}" />
     {% endif %}
     {% if item.get_content_object.extended_info %}
