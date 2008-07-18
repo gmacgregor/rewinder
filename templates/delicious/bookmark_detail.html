@@ -14,6 +14,9 @@
 <div id="link-detail">
 <p class="meta date">Saved on {% long_date object.saved_date %} <a href="{% url tumblelog_archive_day year=object.saved_date|date:"Y",month=object.saved_date|date:"m",day=object.saved_date|date:"d" %}">More</a></p>
 <h2>{% autoescape off %}{{ object.description|typogrify }}{% endautoescape %}</h2>
+{% if object.image %}
+<img src="{{ object.get_image_url }}" alt="{{ object.image_caption }}" width="{{ object.get_image_width }}" height="{{ object.get_image_height }}" />
+{% endif %}
 {% if object.extended_info %}<p>{% autoescape off %}{{ object.extended_info|typogrify }}{% endautoescape %}{% if object.via_url %} <a href="{{ object.via_url }}">Via</a>{% endif %}</p>{% endif %}
 <p><a href="{{ object.url }}" title="Visit site" class="visit">Visit site</a></p>
 </div>
