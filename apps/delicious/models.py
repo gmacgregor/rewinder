@@ -72,6 +72,7 @@ class Bookmark(models.Model):
             pydelicious.add(settings.DELICIOUS_USERNAME, settings.DELICIOUS_PASSWORD, self.url, self.description, self.tags, self.extended_info)
         except:
             pass
+        self.post_elsewhere = False
         return self
     
     def _process_tags(self):
