@@ -24,11 +24,11 @@
     <h2><a href="{{ item.get_content_object.get_absolute_url }}">{% autoescape off %}{{ item.get_content_object.description|typogrify }}{% endautoescape %}</a></h2>
     {% endcomment %}
     <h2><a href="{{ item.get_content_object.url }}">{% autoescape off %}{{ item.get_content_object.description|typogrify }}{% endautoescape %}</a></h2>
-    {% if item.get_content_object.image %}
-    <a href="{{ item.get_content_object.url }}"><img src="{{ item.get_content_object.get_image_url }}" alt="{{ item.get_content_object.image_caption }}" width="{{ item.get_content_object.get_image_width }}" height="{{ item.get_content_object.get_image_height }}" /></a>
-    {% endif %}
     {% if item.get_content_object.extended_info %}
     <p>{% autoescape off %}{{ item.get_content_object.extended_info|typogrify }}{% endautoescape %}{% if item.get_content_object.via_url %} <a href="{{ item.get_content_object.via_url }}">Via</a>{% endif %}</p>
+    {% endif %}
+    {% if item.get_content_object.image %}
+    <p class="image"><a href="{{ item.get_content_object.url }}"><img src="{{ item.get_content_object.get_image_url }}" alt="{{ item.get_content_object.image_caption }}" width="{{ item.get_content_object.get_image_width }}" height="{{ item.get_content_object.get_image_height }}" /></a></p>
     {% endif %}
     <p class="visit"><a href="{{ item.get_content_object.url }}">Visit</a></p>
 </div>
