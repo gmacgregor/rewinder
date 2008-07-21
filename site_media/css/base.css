@@ -461,6 +461,14 @@ body.tweet.detail #archive-list {
     margin-bottom: 0.5em;
 }
 
-.entry.link img {
-    margin: 1em 0 0 0;
+.entry.link p img {
+    margin: 0 1em 1em 0;
+    float: left;
+}
+.entry.link:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
 }
