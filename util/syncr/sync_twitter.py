@@ -1,4 +1,4 @@
-from rewinder.util.syncr.tweet import TwitterSyncr
+from rewinder.syncr.app.tweet import TwitterSyncr
 
 def run():
 	t = TwitterSyncr('gmacgregor', 'faerie')
