@@ -1,0 +1,539 @@
+[
+    {
+        "pk": 1, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Coffee @ Moonbeam in Kensington...", 
+            "enable_comments": true, 
+            "pub_time": "2008-05-17 19:10:28", 
+            "twitter_id": 813845077, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Back from beers with the Supernerds Local 151...", 
+            "enable_comments": true, 
+            "pub_time": "2008-05-16 21:58:16", 
+            "twitter_id": 813261733, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Embarrassing = &quot;waking up&quot; for work at 11:45am :o", 
+            "enable_comments": true, 
+            "pub_time": "2008-05-15 13:16:27", 
+            "twitter_id": 812107370, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Welcome, @lucasmcdonnell! Never thought I'd see you here...", 
+            "enable_comments": true, 
+            "pub_time": "2008-05-13 17:16:10", 
+            "twitter_id": 810536589, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "I'm up? Now!? Weird.", 
+            "enable_comments": true, 
+            "pub_time": "2008-05-13 08:11:29", 
+            "twitter_id": 810129889, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Bike seat just stolen at the Dufferin Mall... for the 3rd effing time. Grrrr...", 
+            "enable_comments": true, 
+            "pub_time": "2008-05-10 15:15:15", 
+            "twitter_id": 808172866, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Waiting for all to be revealed...", 
+            "enable_comments": true, 
+            "pub_time": "2008-05-09 21:59:05", 
+            "twitter_id": 807705354, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "CSS != STD.", 
+            "enable_comments": true, 
+            "pub_time": "2008-05-09 16:01:41", 
+            "twitter_id": 807508051, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "My return &quot;was mailed to you on May 12, 2008&quot;. Nice one, Feds.", 
+            "enable_comments": true, 
+            "pub_time": "2008-05-08 23:39:51", 
+            "twitter_id": 806941099, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "&quot;null is null or not an object&quot;. Fuck you, Microsoft.", 
+            "enable_comments": true, 
+            "pub_time": "2008-05-08 16:51:58", 
+            "twitter_id": 806699177, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Glue in the eye. Not cool.", 
+            "enable_comments": true, 
+            "pub_time": "2008-05-06 09:54:31", 
+            "twitter_id": 804680304, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Oh hai, Twitter... time for bed.", 
+            "enable_comments": true, 
+            "pub_time": "2008-05-05 02:10:58", 
+            "twitter_id": 803662389, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Gearing up...", 
+            "enable_comments": true, 
+            "pub_time": "2008-05-02 21:59:51", 
+            "twitter_id": 802332042, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Helvetica @ 10px or lower in FF != antialiased, but Helvetica Neue is. Blarg.", 
+            "enable_comments": true, 
+            "pub_time": "2008-05-02 13:46:29", 
+            "twitter_id": 802048296, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@gordasm :O That's crazy with a &quot;k&quot;... like krazy!", 
+            "enable_comments": true, 
+            "pub_time": "2008-05-02 10:23:57", 
+            "twitter_id": 801899163, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Can someone remind me again why Firefox occasionally gets &quot;jaggy&quot; around 10px?", 
+            "enable_comments": true, 
+            "pub_time": "2008-05-02 00:58:33", 
+            "twitter_id": 801658935, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Fully aware that I am losing an hour of my life to Rock of Love.", 
+            "enable_comments": true, 
+            "pub_time": "2008-04-30 21:23:31", 
+            "twitter_id": 800837845, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Yeah, great reading. But dude needs a life... Really.", 
+            "enable_comments": true, 
+            "pub_time": "2008-04-30 01:17:45", 
+            "twitter_id": 800123086, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@saila: Painful indeed! Too many returns in the internets have clogged the tubes!", 
+            "enable_comments": true, 
+            "pub_time": "2008-04-30 01:02:36", 
+            "twitter_id": 800115851, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "For a second there I thought I'd lost her T4 :{", 
+            "enable_comments": true, 
+            "pub_time": "2008-04-29 21:56:03", 
+            "twitter_id": 800010458, 
+            "user": 1
+        }
+    },
+    {
+        "pk": 21, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Where do you find design inspiration?", 
+            "enable_comments": true, 
+            "pub_time": "2008-04-28 22:10:39", 
+            "twitter_id": 799190211, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Brightkite invite but no mobile device... I'm such a loser.", 
+            "enable_comments": true, 
+            "pub_time": "2008-04-28 09:55:57", 
+            "twitter_id": 798712148, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@pdinnen Processing?", 
+            "enable_comments": true, 
+            "pub_time": "2008-04-27 23:04:17", 
+            "twitter_id": 798413704, 
+            "user": 1
+        }
+    },
+    {
+        "pk": 24, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Tom Berenger is the 5th and final cylon.", 
+            "pub_time": "2008-04-25 23:20:10", 
+            "twitter_id": 797226998, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "It's official: he's a Man-Child.", 
+            "pub_time": "2008-04-23 16:11:40", 
+            "twitter_id": 795394395, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Well, that was fun!", 
+            "pub_time": "2008-04-23 00:41:16", 
+            "twitter_id": 794858706, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@suzannelong Thanks!", 
+            "pub_time": "2008-04-22 12:17:36", 
+            "twitter_id": 794413499, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Back from Ottawa. Came home to a new desk, chair and table lamp! Thanks, Missus, and for the help @stevetidy...", 
+            "pub_time": "2008-04-20 18:31:06", 
+            "twitter_id": 793207535, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Getting ready to board for Ottawa. First time flying Porter: the lounge is very &quot;boutique-hotel&quot;... I would expect this in Europe, not TO.", 
+            "pub_time": "2008-04-18 11:04:03", 
+            "twitter_id": 791897762, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "MBP now with 4GB RAM! w00t!", 
+            "pub_time": "2008-04-17 23:26:57", 
+            "twitter_id": 791572255, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Torstar cuts their entire internet production staff: http:\/\/tinyurl.com\/6rw7z6. What the?", 
+            "pub_time": "2008-04-17 14:39:34", 
+            "twitter_id": 791289044, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "...what @saila said.", 
+            "pub_time": "2008-04-16 23:07:10", 
+            "twitter_id": 790818980, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "My cron cherry has officially been broken (blushes)...", 
+            "pub_time": "2008-04-15 23:51:23", 
+            "twitter_id": 790030662, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 34, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Beige is to color as Comic Sans is to type.", 
+            "pub_time": "2008-04-15 21:07:24", 
+            "twitter_id": 789948657, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 35, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@saila Must be the midlife pot ;)", 
+            "pub_time": "2008-04-15 14:13:44", 
+            "twitter_id": 789729133, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 36, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@joanna Agreed: totally bush-league.", 
+            "pub_time": "2008-04-14 15:08:23", 
+            "twitter_id": 789062404, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 37, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@wishingline Nice! I scored 30...", 
+            "pub_time": "2008-04-14 14:19:25", 
+            "twitter_id": 789032823, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 38, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "I'm running in circles.", 
+            "pub_time": "2008-04-13 00:34:15", 
+            "twitter_id": 788116593, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 39, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@jmcnally &quot;even a girl&quot;... EEEEEEEEEWWWWWWWWWWWWW!", 
+            "pub_time": "2008-04-11 17:31:02", 
+            "twitter_id": 787465290, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 40, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@wishingline Blustery.", 
+            "pub_time": "2008-04-11 09:39:15", 
+            "twitter_id": 787174607, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 41, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "America is awesome.", 
+            "pub_time": "2008-04-10 23:54:10", 
+            "twitter_id": 786929498, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 42, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Dear IT: People around here would like you more if you didn't choose to block Groove Salad or anything else Soma...", 
+            "pub_time": "2008-04-10 14:56:14", 
+            "twitter_id": 786657743, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 43, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "My Spanish is good enough to know that the design &amp; implementation here rocks: http:\/\/www.soitu.es\/", 
+            "pub_time": "2008-04-10 12:30:16", 
+            "twitter_id": 786569873, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 44, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@jmcnally Nice! I'll keep my fingers crossed...", 
+            "pub_time": "2008-04-09 20:10:42", 
+            "twitter_id": 786117867, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 45, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Your daily dose of awesome: http:\/\/tinyurl.com\/3yvwue", 
+            "pub_time": "2008-04-09 15:02:36", 
+            "twitter_id": 785956011, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 46, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@mathewi Come take a peek!", 
+            "pub_time": "2008-04-07 17:29:17", 
+            "twitter_id": 784657504, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 47, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "Officially working on a pimped out 24&quot; iMac (@ the office)", 
+            "pub_time": "2008-04-07 16:48:18", 
+            "twitter_id": 784635722, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 48, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "&lt;nerd&gt;This time tomorrow night I'll be an hour away from the BSG season 4 premiere!&lt;\/nerd&gt;", 
+            "pub_time": "2008-04-03 20:53:36", 
+            "twitter_id": 782500944, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 49, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "stupid date formatting...", 
+            "pub_time": "2008-04-03 14:14:02", 
+            "twitter_id": 782304873, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 50, 
+        "model": "twitter.tweet", 
+        "fields": {
+            "text": "@jesselegg  Yeah, I did, thanks! Was late and I was being stupid...", 
+            "pub_time": "2008-04-03 09:40:44", 
+            "twitter_id": 782138520, 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "twitter.twitteruser", 
+        "fields": {
+            "screen_name": "gmacgregor", 
+            "url": "http:\/\/www.sixminutes.ca", 
+            "description": "", 
+            "thumbnail_url": "http:\/\/s3.amazonaws.com\/twitter_production\/profile_images\/18042692\/tony_normal.jpg", 
+            "followers": [], 
+            "location": "Toronto", 
+            "friends": [], 
+            "name": "Greg MacGregor"
+        }
+    }
+]

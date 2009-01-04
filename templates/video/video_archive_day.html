@@ -1,0 +1,35 @@
+{% extends "video/base.html" %}
+{% block title %}Videos: {{ day|date:"F d, Y" }}{% endblock %}
+{% block description %}Videos saved in {{ day|date:"F d, Y" }}{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+    <li><a href="{% url video_archive_year year=day|date:"Y" %}" title="View all videos saved in {{ day|date:"Y" }}">{{ day|date:"Y" }}</a></li>
+    <li><a href="{% url video_archive_month year=day|date:"Y", month=day|date:"m" %}" title="View all videos saved in {{ day|date:"F, Y" }}">{{ day|date:"m" }}</a></li>
+    <li><a href="{% url quote_archive_day year=day|date:"Y", month=day|date:"m",day=day|date:"d" %}" title="View all videos saved on  {{ day|date:"F d, Y" }}">{{ day|date:"d" }}</a></li>
+{% endblock %}
+{% load custom_tags %}
+{% load threadedcommentstags %}
+
+{% block content %}
+<h2>Videos saved on {{ day|date:"F d, Y" }} ({{ object_list.count }}) <a href="{% url tumblelog_archive_day year=day|date:"Y", month=day|date:"m",day=day|date:"d" %}" class="visit" title="View all online activity for {{ day|date:"F d, Y" }}">More</a></h2>
+<div id="day-archive">
+{% for video in object_list %}
+<div class="entry video clearfix">
+<p class="meta"><span class="date">{% long_date video.pub_date %}</span> <span class="comments"><a href="{{ video.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+{% comment %}
+{% if video.youtube_small_image %}
+<a href="{{ video.get_absolute_url }}"><img src="{{ video.youtube_small_image }}" width="120" height="90" /></a>
+{% endif %}
+{% endcomment %}
+<h2><a href="{{ video.get_absolute_url }}">{{ video.title }}</a></h2>
+<div class="video-embed">
+{% spaceless %}
+{% autoescape off %}{{ video.embed_code }}{% endautoescape %}
+{% endspaceless %}
+</div>
+{% if video.html_description %}{% autoescape off %}{{ video.html_description }}{% endautoescape %}{% endif %}
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}

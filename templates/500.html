@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}500: Server Error{% endblock %}
+{% block extrahead %}
+<link rel="stylesheet" href="http://media.rewinder.ca/css/base.css" type="text/css" media="screen" />
+{% endblock %}
+{% block breadcrumb %}
+<li class="last"><a href="{% url homepage %}">Home</a></li>
+{% endblock %}
+
+{% block content %}
+<h2>Cannot compute!</h2>
+<p>You&#8217;re seeing this page because something has gone awry with the internets. Why don&#8217;t you go grab a coffee, maybe take a walk while I look into the issue.</p>
+<p>If the problem persists feel free to shoot me a note: gmacgregor[at]gmail.com</p>
+{% endblock %}

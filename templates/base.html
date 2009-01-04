@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-ca">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="robots" content="follow" />
+    <meta name="author" content="Greg MacGregor"/>
+    <meta name="description" content="{% block description %}{{ value|default:"rewinder.ca is the place that Toronto-based WebMaker Greg MacGregor calls home" }}{% endblock %}"/>
+    <meta name="keywords" content="web development, web design, web standards, toronto, tumblelog, lifestream" />
+    <meta name="verify-v1" content="RQexKIWoAGk4f9If2zthP/DPLiyywqsKIl49V4J0ts8=" />
+    <title>rewinder.ca ~ {% block title %}{{ value|default_if_none:"This is the place that Toronto-based WebMaker Greg MacGregor calls home"}}{% endblock %}</title>
+    <link rel="openid.server" href="http://openid.claimid.com/server" />
+    <link rel="openid.delegate" href="https://openid.claimid.com/rewinder" />
+    <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
+    <link rel="author" href="/about/" />
+    <link rel="top start" href="/" title="rewinder.ca" />
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/base.css" type="text/css" media="screen" />
+    {% block extrahead %}{% endblock %}
+    <!--[if lte IE 7]><link rel="stylesheet" href="{{ MEDIA_URL }}css/ie.css" type="text/css" media="screen, projection" /><![endif]-->
+</head>
+
+<body class="{% block body_class %}{{ value|default_if_none:""}}{% endblock %}">
+<div id="wrapper">
+<!--[if lte IE 6]>
+<div style="text-align: center; border: 2px solid red; padding: 1em; margin-bottom: 2em;">
+<h4>It appears as though you are using Internet Explorer 6 or below.</h4> 
+<p>The bad news is that this website <strong>does not</strong> support your browser.</p>
+<p>Please <a href="http://www.microsoft.com/windows/products/winfamily/ie/default.mspx">upgrade</a> or <a href="http://www.mozilla.com/en-US/firefox/">get something better</a></p>
+</div>
+<![endif]-->
+<h1><a href="{% url homepage %}" title="Back to homepage">rewinder</a></h1>
+<div id="nav">
+<ul>
+    <li id="nav-tumblelog"><a href="{% url tumblelog_home %}" title="View my online activity">Tumblelog</a></li>
+    <li id="nav-blog"><a href="{% url blog_home %}" title="Go to the blog">Blog</a></li>
+    <li id="nav-link"><a href="{% url bookmark_home %}" title="View all links" class="last">Links</a></li>
+</ul>
+<ul>
+    <li id="nav-photo"><a href="{% url photo_home %}" title="View all photos">Photos</a></li>
+    <li id="nav-video"><a href="{% url video_home %}" title="View all videos">Videos</a></li>
+    <li id="nav-quote"><a href="{% url quote_home %}" title="View all quotes" class="last">Quotes</a></li>
+</ul>
+<ul>
+    <li id="nav-tweet"><a href="{% url tweet_home %}" title="View all twittertweets">Tweets</a></li>
+    <li id="nav-tags"><a href="{% url tags_list %}" title="View all tags">Tags</a></li>
+    <li id="nav-about"><a href="/about/" title="Read about me/contact me" class="last">About/Contact</a></li>
+</ul>
+</div><!-- /#nav -->
+
+{% spaceless %}
+<div id="breadcrumb" class="clearfix">
+<ul>
+{% block breadcrumb %}{% endblock %}
+</ul>
+</div>
+{% endspaceless %}
+
+<div id="main-content">
+{% block content %}{% endblock %}
+</div><!-- /#main-content -->
+
+{% block sidebar %}
+<div id="sidebar">
+{% block sidebarcontent %}{% endblock %}
+</div><!-- /#sidebar -->
+{% endblock %}
+
+<div id="footer">
+{% block footer %}
+<p><a href="{% url homepage %}">rewinder.ca</a> is copyright 2005-{% now "Y" %} by Greg MacGregor</p>
+<p><a href="http://www.djangoproject.com/"><img src="http://media.djangoproject.com/img/badges/djangosite80x15_grey.gif" alt="A Django site" /></a></p>
+{% endblock %}
+</div><!-- /#footer -->
+</div><!-- /#wrapper -->
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+_uacct = "UA-103971-2";
+urchinTracker();
+</script>
+
+</body>
+</html>

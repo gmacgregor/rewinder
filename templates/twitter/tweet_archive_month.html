@@ -1,0 +1,28 @@
+{% extends "twitter/base.html" %}
+{% block title %}Twitter Tweets: {{ month|date:"F, Y" }}{% endblock %}
+{% block description %}Twitter tweets made in {{ month|date:"F, Y" }}{% endblock %}
+{% block body_class %}tweet archive month{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+    <li><a href="{% url tweet_archive_year year=month|date:"Y" %}" title="View tweets made in {{ month|date:"Y" }}">{{ month|date:"Y" }}</a></li>
+    <li><a href="{% url tweet_archive_month year=month|date:"Y", month=month|date:"m" %}" title="View tweets made in {{ month|date:"F, Y" }}">{{ month|date:"m" }}</a></li>
+{% endblock %}
+{% load custom_tags %}
+{% load threadedcommentstags %}
+{% load typogrify %}
+
+{% block content %}
+<h2>Twitter tweets for {{  month|date:"F Y" }} ({{ object_list.count }}) <a href="{% url tumblelog_archive_month year=month|date:"Y", month=month|date:"m" %}" class="visit" title="View all online activity for {{ month|date:"F Y" }}">More</a></h2>
+<div id="month-archive">
+{% for tweet in object_list %}
+{% get_free_comment_count for tweet as comments %}
+{% autoescape off %}
+<div class="entry tweet">
+    <p class="meta"><a href="{% url tweet_home %}">Tweet</a> <span class="date">{% long_date tweet.pub_time %}</span> <span class="comments"><a href="{{ tweet.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>    
+    <h2>{{ tweet.text|twitter_links|typogrify }}</h2>
+    <p class="visit"><a href="{{ tweet.url }}">View</a></p>
+</div>
+{% endautoescape %}
+{% endfor %}
+</div>
+{% endblock %}

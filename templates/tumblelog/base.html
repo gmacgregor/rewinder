@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block extrahead %}
+<link rel="alternate" type="application/rss+xml" href="/feeds/activity/" title="rewinder.ca: Latest online activity" />
+{% endblock %}
+{% load custom_tags %}
+{% block title %}Tumblelog{% endblock %}
+{% block body_class %}tumblelog home{% endblock %}
+{% block breadcrumb %}
+<li><a href="{% url tumblelog_home %}" title="Back to Tumblelog">Tumblelog</a></li>
+{% endblock %}
+
+{% block sidebarcontent %}
+<h3>What&#8217;s the tumblelog?</h3>
+<p>The tumblelog represents (most of) my online activity. It&#8217;s the aggregation of:</p>
+<ul>
+    <li><a href="{% url bookmark_home %}">links</a> that I save to <a href="http://del.icio.us">del.icio.us</a></li>
+    <li><a href="{% url photo_home %}">photos</a> that I share via the photo-sharing site <a href="http://flickr.com">flickr.com</a></li>
+    <li><a href="{% url tweet_home %}">status updates</a> that I post to <a href="http://twitter.com">twitter.com</a></li>
+    <li>interesting and humorous <a href="{% url video_home %}">videos</a> that I&#8217;ve come across</li>
+    <li><a href="{% url quote_home %}">quotes</a> from around the internets</li>
+</ul>
+
+
+<p id="total-tumblelog-items">{{ extra.total }}</p>
+<h3>Items in the Tumblelog</h3>
+<ul class="chart">
+    <li><a href="{% url bookmark_home %}" title="View all links">Links</a><span class="count">{{ extra.links }}</span><span style="width: {% widthratio extra.links extra.total 490 %}px" class="index">{% widthratio extra.links extra.total 100 %}%</span></li>
+    <li><a href="{% url tweet_home %}" title="View all twitter status updates">Tweets</a><span class="count">{{ extra.tweets }}</span><span style="width: {% widthratio extra.tweets extra.total 490 %}px" class="index">{% widthratio extra.tweets extra.total 100 %}%</span></li>
+    <li><a href="{% url video_home %}" title="View all videos">Videos</a><span class="count">{{ extra.videos }}</span><span style="width: {% widthratio extra.videos extra.total 490 %}px" class="index">{% widthratio extra.videos extra.total 100 %}%</span></li>
+    <li><a href="{% url photo_home %}" title="View all photos">Photos</a><span class="count">{{ extra.photos }}</span><span style="width: {% widthratio extra.photos extra.total 490 %}px" class="index">{% widthratio extra.photos extra.total 100 %}%</span></li>
+    <li><a href="{% url quote_home %}" title="View all quotes">Quotes</a><span class="count">{{ extra.quotes }}</span><span style="width: {% widthratio extra.quotes extra.total 490 %}px" class="index">{% widthratio extra.quotes extra.total 100 %}%</span></li>
+    {% comment %}<li><a href="{% url blog_home %}" title="View all blog posts">Blog posts</a><span class="count">{{ extra.articles }}</span><span style="width: {% widthratio extra.articles extra.total 490 %}px" class="index">{% widthratio extra.articles extra.total 100 %}%</span></li>{% endcomment %}
+</ul>
+
+{% include "feeds/list.html" %}
+
+{% include "tumblelog/archive_year_list.html" %}
+
+{% endblock %}

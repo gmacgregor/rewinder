@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block body_class %}preview{% endblock %}
+{% block title %}Preview your comment{% endblock %}
+{% block breadcrumb %}<li>Preview your comment</li>{% endblock %}
+{% load threadedcommentstags %}
+
+{% block content %}
+{% load gravatar %}
+{% get_gravatar_url for comment.email as gravatar %}
+
+{% if form.errors %}
+<h2>Slow down, tiger!</h2>
+<ul class="errorlist">
+{% for error in form.errors %}
+    {% ifequal error "name" %}
+    <li>Your name is required</li>
+    {% endifequal %}
+    {% ifequal error "comment" %}
+    <li>A comment is required (duh!)</li>
+    {% endifequal %}
+    {% ifequal error "website" %}
+    <li>You need to format your website url like: http://www.example.com</li>
+    {% endifequal %}
+    {% ifequal error "email" %}
+    <li>The format of your email address is invalid</li>
+    {% endifequal %}
+{% endfor %}
+</ul>
+{% endif %}
+
+<div id="comments">
+<ol>
+    <li><div class="comment clearfix">
+        <div class="comment-meta">
+            <p class="author">{% if comment.website %}<a href="{{ comment.website }}" title="Visit {{ comment.name }}'s website">{% endif %}{{ comment.name }}{% if comment.website %}</a>{% endif %}</p>
+            {% if comment.website %}<a href="{{ comment.website }}" title="Visit {{ comment.name }}'s website">{% endif %}<img src="{{ comment.email|gravatar }}" alt="Gravatar for {{ comment.name }}" width="50" height="50" />{% if comment.website %}</a>{% endif %}
+            <p class="meta date"><a href="#c{{ comment.id }}" title="Permanent link to this comment">{{ comment.date_submitted|date:"M d Y"}}<br />{{ comment.date_submitted|date:"g:h a" }}</a><p>
+        </div>
+        <div class="remark">
+            {% if comment %}
+                {% auto_transform_markup comment %}
+            {% endif %}
+        <div>
+        </div>
+    </li>
+</ol>
+</div>
+
+
+<p>You can use <a href="http://daringfireball.net/projects/markdown/syntax">Markdown syntax</a> to format your comment as need be: HTML will do you no good. Your email address will not be disclosed to any third party and is strictly used as a means of displaying your <a href="http://en.gravatar.com/">gravatar</a>, if you have one.</p>
+<form method="post" action="" id="comment-form">
+    <p><label for="id_comment">Comment (required)</label>{{ form.comment }}</p>
+    <p>{{ form.name }}<label for="id_name">Name (required)</label></p>
+    <p>{{ form.email }}<label for="id_email">Email</label></p>
+    <p>{{ form.website }}<label for="id_website">Website</label></p>
+    <div id="comment-submit">
+    <input type="submit" name="preview" value="Preview" />
+    <input type="submit" name="post" value="Post" />
+    </div>
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+{% endblock %}

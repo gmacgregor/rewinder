@@ -1,0 +1,28 @@
+{% extends "flickr/base.html" %}
+{% load custom_tags %}
+{% block title %}Photos: {{ day|date:"F d, Y" }}{% endblock %}
+{% block description %}Photos taken on {{ day|date:"F d, Y" }}{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+    <li><a href="{% url photo_archive_year year=day|date:"Y" %}" title="View all photos take in {{ day|date:"Y" }}">{{ day|date:"Y" }}</a></li>
+    <li><a href="{% url photo_archive_month year=day|date:"Y", month=day|date:"m" %}" title="View all photos take in {{ day|date:"F, Y" }}">{{ day|date:"m" }}</a></li>
+    <li><a href="{% url photo_archive_day year=day|date:"Y", month=day|date:"m",day=day|date:"d" %}" title="View photos taken on {{ day|date:"F d, Y" }}">{{ day|date:"d" }}</a></li>
+{% endblock %}
+{% load custom_tags %}
+{% load threadedcommentstags %}
+
+{% block content %}
+<h2>Photos created on {{ day|date:"F d, Y" }} ({{ object_list.count }}) <a href="{% url tumblelog_archive_day year=day|date:"Y", month=day|date:"m",day=day|date:"d" %}" class="visit" title="View all online activity for {{ day|date:"F d, Y" }}">More</a></h2>
+<div id="day-archive">
+{% for photo in object_list %}
+{% get_free_comment_count for photo as comments %}
+<div class="entry photo">
+<p class="meta"><span class="date">{% long_date photo.taken_date %}</span> <span class="comments"><a href="{{ photo.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+<p class="photo">
+<a href="{{ photo.get_absolute_url }}" style="background-image: url({{ photo.medium_url }}); background-repeat: no-repeat;" title="{{ photo.title }}">{{ photo.title }}</a>
+</p>    
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}

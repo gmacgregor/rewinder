@@ -1,0 +1,88 @@
+.entry {
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+}
+.entry p {
+    padding-right: 30px;
+}
+.entry.tweet h2 {
+    font-weight: normal;
+}
+/*
+.entry p {
+    margin-top: 0.6em;
+}
+*/
+/*.entry p.visit {
+    margin-top: 0.5em;
+    line-height: 1.4em;
+}*/
+/*
+.entry .visit {
+    text-align: right;
+}
+*/
+.entry.video a img {
+    float: left;
+    margin: 0.5em 0.5em 0 0;
+}
+.tumblelog.home #sidebar p#total-tumblelog-items {
+    text-align: center;
+    /*color: #888;*/
+    /*text-transform: uppercase;*/
+    /*letter-spacing: 5px;*/
+    /*font-size: 0.8em;*/
+    /*line-height: 1;*/
+    font-size: 150px;
+    font-weight: bold;
+    color: #333;
+    margin: -30px 0 -20px 0;
+}
+.tumblelog #sidebar p {
+    margin: 0 0 1em 0;
+}
+/*
+.tumblelog.year_group #sidebar p,
+.tumblelog.month_group #sidebar p {
+    margin-bottom: 1em;
+}
+*/
+#tumblelog-archive {
+    margin-top: 2em;
+}
+#tumblelog-archive h3 {
+    margin-top: 1em;
+    margin-bottom: 0.2em;
+}
+/*
+#tumblelog-archive p {
+    margin: 0 0 1em 0;
+}
+*/
+/*
+#tumblelog-archive.year p,
+#tumblelog-archive.month p {
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+*/
+/*
+.tumblelog #sidebar ul li {
+    margin-bottom: 0.5em;
+}*/
+/*
+.tumblelog #sidebar span#total-tumblelog-items {
+}
+*/
+.tumblelog #month-detail div.entry,
+.tumblelog #month-detail h4 {
+    padding-left: 40px;
+}
+.tumblelog #month-detail .day h2 {
+    font-weight: bold;
+    font-size: 24px;
+}
+.tumblelog #month-detail div.entry h2 {
+    font-size: 1.3em;
+}
