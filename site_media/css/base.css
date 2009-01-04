@@ -1,0 +1,480 @@
+@import url("reset.css");
+@import url("tumblelog.css");
+@import url("photo.css");
+@import url("tags.css");
+@import url("sidebar.css");
+@import url("video.css");
+@import url("blog.css");
+@import url("quotes.css");
+
+body {
+    font-size: 0.8em;
+    /*color: #333434;*/
+    color: #4d4d4d;
+    font-family: "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
+}
+#wrapper {
+    width: 1000px;
+    margin: 1em auto 0 auto;
+}
+a {
+    text-decoration: none;
+    color: #035378;
+    font-weight: bold;
+}
+a:hover,
+.visit a:hover,
+a.visit:hover {
+    text-decoration: underline;
+    color: #ab0b31;
+}
+strong {
+    font-weight: bold;
+}
+em {
+    font-style: italic;
+}
+abbr {
+    border-bottom: 1px dotted #333;
+}
+h1 {
+    float: left;
+    width: 500px;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: -1px;
+}
+h1 a,
+h4,
+#nav ul li a {
+    color: #000;
+}
+h2 {
+    color: #333;
+    line-height: 1.2em;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+/*
+h2 a {
+    font-weight: normal;
+}
+*/
+h3, h4 {
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+h3 {
+    margin-bottom: 1em;
+    padding-top: 0.5em;
+    /*color: #888;*/
+    border-top: 1px solid #eaebeb;
+}
+p {
+    margin-top: 0.5em;
+    line-height: 1.3em;
+}
+ul {
+    list-style-type: disc;
+    list-style-position: outside;
+    padding: 0 0 0 1em;
+    margin: 0.5em 0 1em 0.5em;
+}
+ul li {
+    margin-bottom: 0.3em;
+}
+#nav ul,
+#breadcrumb ul,
+ul#tag-photos {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#nav {
+    width: 490px;
+    float: right;
+}
+#nav ul {
+    width: 163px;
+    float: left;    
+    text-align: right;
+}
+#nav ul.last {
+    margin-right: 0;
+}
+#nav ul li,
+#breadcrumb li,
+ul#tag-photos li { 
+    margin-bottom: 0;
+    line-height: 1;
+}
+#nav ul li a {
+    display: block;
+    width: 159px;
+    padding: 2px 2px 5px 2px;
+    border-bottom: 1px solid #eaebeb;
+}
+#nav ul li a.last {
+    border-bottom: none;
+}
+#nav ul li a:hover,
+#breadcrumb ul li a:hover,
+body.tumblelog #nav ul li#nav-tumblelog a,
+body.blog #nav ul li#nav-blog a,
+body.link #nav ul li#nav-link a,
+body.photo #nav ul li#nav-photo a,
+body.quote #nav ul li#nav-quote a,
+body.video #nav ul li#nav-video a,
+body.tweet #nav ul li#nav-tweet a,
+body.tag #nav ul li#nav-tags a,
+body.flatpage #nav ul li#nav-about a {
+    background-color: #42758d;
+    color: #fff;
+    text-decoration: none;
+}
+#main-content,
+#sidebar {
+    float: left;
+}
+#main-content {
+    min-height: 40em;
+    width: 489px;
+    padding: 10px 10px 4em 0;
+    border-right: 1px solid #eaebeb;
+    overflow: hidden;
+}
+/*
+body.detail #sidebar {
+    margin-top: 50px;
+}*/
+body.detail p.meta,
+#main-content .entry p.meta,
+#sidebar p.meta {
+    text-transform: uppercase;
+    color: #888;
+    font-size: 10px;
+}
+#main-content .entry p {
+    margin-bottom: 1em;
+}
+#main-content .entry p.meta,
+#main-content .entry p.visit {
+    margin-bottom: 0;
+}
+a.visit,
+.visit a {
+    background: url(http://media.rewinder.ca/icons/offsite.png) no-repeat right 70%;
+    padding-right: 14px;
+    color: #d2d2d2;
+}
+body.detail h2 {
+    margin-bottom: 0.5em;
+    padding-bottom: 0.2em;
+    font-size: 1.8em;
+    /*border-bottom: 1px solid #eaebeb;*/
+}
+.tweet.detail h2 { font-weight: normal; }
+/*
+.detail p {
+    margin-bottom: 0.5em;
+}*/
+#footer {
+    clear: left;
+    padding-top: 10px;
+    width: 1000px;
+    border-top: 1px solid #000;
+    font-size: 11px;
+    margin-bottom: 2em;
+}
+/* ----------------------------------------------------------------- breadcrumb */
+
+#breadcrumb {
+    clear: both;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #d2d2d2; /*eaebeb*/
+    font-weight: bold;
+    background-color: #e6e6e6;
+    min-height: 23px;
+}
+#breadcrumb ul li {
+    background-color: #fff;
+    display: block;
+    float: left;
+    border-right: 1px solid #d2d2d2;
+    padding: 5px 7px 6px 5px;
+}
+#breadcrumb ul li a {
+    display: block;
+    float: left;
+    margin: -5px -7px -6px -5px;
+    padding: inherit;
+}
+#breadcrumb ul li.first {
+}
+#breadcrumb ul li.last {
+}
+
+/* ----------------------------------------------------------------- pagination */
+.paginator {
+    font-size: 11px;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    position: relative;
+    text-align: center;
+    border-bottom: 1px solid #eaebeb;
+}
+.paginator .pages a {
+    margin-right: 0.5em;
+}
+.paginator span.next,
+.paginator span.previous {
+    position: absolute;
+    top: 0;
+}
+.paginator span.previous {
+    left: 0;
+}
+.paginator span.next {
+    right: 0;
+}
+ul.chart {
+    width: 490px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+ul.chart li {
+    position: relative;
+    margin-bottom: 0;
+}
+ul.chart li:hover {
+    background: #e9e8e8;
+}
+ul.chart li:hover .index {
+    background-color: #cfcfcf;
+}
+ul.chart li a,
+ul.chart li span.count {
+    font-size: 11px;
+}
+ul.chart li a {
+    position: relative;
+    display: block;
+    color: #125a95;
+    padding: 0 0 0 5px;
+    line-height: 1.9em;
+    border-bottom: 1px solid #d2d2d2;
+    z-index: 2;
+}
+ul.chart li a:hover {
+    text-decoration: none;
+}
+ul.chart li span.count {
+    position: absolute;
+    top: 20%;
+    right: 3px;
+    z-index: 3;
+}
+ul.chart li span.index {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;    
+    background-color: #e9e8e8;
+    text-indent: -3000em;
+}
+#sidebar ul.chart {
+    margin-bottom: 2em;
+}
+/* ----------------------------------------------------------------- comment */
+span.comments a {
+    background: url(http://media.rewinder.ca/icons/comment.png) no-repeat left 60%;
+    padding-left: 16px;
+}
+#comments {
+    margin-top: 4em;
+}
+body.preview #comments {
+    margin-top: 1em;
+}
+#comment-form {
+    margin-top: 1.5em;
+}
+#comment-form label {
+    display: block;
+    font-weight: bold;
+    padding-bottom: 0.3em;
+}
+#comments #post-comment {
+    margin-top: 4em;
+}
+#comment-form input,
+#comment-form textarea {
+    font-size: 1em;
+    font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
+}
+#comment-form p {
+    float: left;
+    margin-top: 0;
+}
+#comment-form input[type="text"] {
+    width: 149px;
+    padding: 2px;
+    margin: 0 10px 0.2em 0;
+}
+#comment-form input[type="text"],
+#comment-form textarea {
+   border: 1px solid #ccc; 
+}
+#comment-form #id_website {
+    margin-right: 0;
+    width: 151px;
+}
+#comment-form textarea {
+    width: 475px;
+    height: 150px;
+    margin: 0 0 0.5em 0;
+    padding: 5px;
+}
+#comment-form #comment-submit input {
+    margin: 2em 1em 0 0;
+}
+#comments .comment-meta img {
+    /*border: 1px solid #eaebeb;*/
+    padding: 2px;
+    margin: 0 10px 10px 0;
+}
+#comments .comment {
+    width: 490px;
+    border-top: 1px solid #eaebeb;
+    margin-bottom: 2em;
+}
+#comments .comment.first {
+    border-top-color: transparent;
+}
+#comments .comment .comment-meta {
+    float: left;
+    width: 115px;
+    padding-right: 10px;
+    line-height: 1.4em;
+}
+#comments .comment .date a {
+    color: #888;
+}
+#comments .comment .author {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+#comments .comment p.meta {
+    margin-top: 0;
+}
+#comments .comment .remark {
+    /*margin-left: 125px;*/
+    width: 320px;
+    padding-right: 25px;
+    float: left;
+}
+#comment-submit {
+    clear: left;
+    padding-bottom: 1em;
+}
+/* ----------------------------------------------------------------- next/prev */
+#next-previous,
+#more-content {
+    margin-bottom: 1em;
+}
+#next-previous h3 {
+}
+#next-previous p {
+    margin: 0 0 1em 0;
+}
+a.previous,
+a.next {
+    background-position: left 50%;
+    background-repeat: no-repeat;
+    padding-left: 17px;
+}
+a.previous {
+    background-image: url(http://media.rewinder.ca/icons/arrow-previous.png);
+}
+a.next {
+    background-image: url(http://media.rewinder.ca/icons/arrow-next.png);
+}
+.detail.photo #next-previous a.previous {
+    padding-left: 20px;
+}
+.detail.photo #next-previous a.next,
+.paginator a.next {
+    background-position: right 50%;
+    padding-left: 0;
+    padding-right: 20px;
+}
+.paginator a.next,
+.paginator a.previous {
+    background-position: left top;
+    padding-bottom: 7px;
+}
+.paginator a.next {
+    background-position: right top;
+}
+.detail.photo #next-previous p {
+    float: left;
+    margin-right: 10px;
+}
+.detail.photo #next-previous a {
+    display: block;
+    width: 75px;
+    height: 75px;
+}
+#day-archive,
+#month-archive,
+#year-archive  {
+    margin-top: 2em;
+}
+#archive-list {
+    clear: left;
+    margin-bottom: 2em;
+}
+body.tweet #archive-list {
+    margin-top: 2em;
+}
+body.tweet.detail #archive-list {
+    margin-top: 0;
+}
+
+.detail #related-content {
+    margin: 1em 0 2em 0;
+}
+/*
+#related-content ul {
+    padding-left: 0;
+}
+*/
+.flatpage h2 {
+    margin-bottom: 1em;
+    font-size: 24px;
+}
+.flatpage #main-content li {
+    line-height: 1.2em;
+    margin-bottom: 0.5em;
+}
+
+.entry.link img {
+    margin: 1em 0 0 0;
+}
+/*
+
+.entry.link p img {
+    margin: 0 1em 1em 0;
+    float: left;
+}
+.entry.link:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+*/

@@ -1,0 +1,9 @@
+.video-embed {
+    background-color: #000;
+    margin: 0.5em 0 1em 0;
+    width: 500px;
+    text-align: center;
+}
+body.video.detail .video-embed {
+    margin-top: 0;
+}

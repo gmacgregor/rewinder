@@ -1,0 +1,45 @@
+{% extends "generic/base.html" %}
+{% load custom_tags %}
+{% load typogrify %}
+{% block title %}Quotes: {{ object.text }}{% endblock %}
+{% block body_class %}quote detail{% endblock %}
+{% block breadcrumb %}
+    {{ block.super }}
+    <li><a href="{% url quote_archive_year year=object.pub_date|date:"Y" %}" title="View all quotes from {{ object.pub_date|date:"Y" }}">{{ object.pub_date|date:"Y"}}</a></li>
+    <li><a href="{% url quote_archive_month year=object.pub_date|date:"Y",month=object.pub_date|date:"m" %}"  title="View all quotes from {{ object.pub_date|date:"F Y" }}">{{ object.pub_date|date:"m"}}</a></li>
+    <li><a href="{% url quote_archive_day year=object.pub_date|date:"Y",month=object.pub_date|date:"m",day=object.pub_date|date:"d" %}"  title="View all quotes from {{ object.pub_date|date:"F d, Y" }}">{{ object.pub_date|date:"d"}}</a></li>
+{% endblock %}
+
+{% block content %}
+<div id="quote-detail" class="detail">
+<p class="meta date">{% long_date object.pub_date %} <a href="{% url tumblelog_archive_day year=object.pub_date|date:"Y",month=object.pub_date|date:"m",day=object.pub_date|date:"d" %}">More</a></p>
+<blockquote{% if object.url %} cite="{{ object.url }}"{% endif %}>{% autoescape off %}{{ object.html_text }}{% endautoescape %}</blockquote>
+{% autoescape off %}
+{% if object.url %}
+<p class="cite">&mdash; <a href="{{ object.url }}">{{ object.credit|typogrify }}</a></p>
+{% else %}
+<p class="cite">&mdash; {{ object.credit|typogrify }}</p>
+{% endif %}
+{% endautoescape %}
+</div>
+
+{% include "tag/tags_for_object.html" %}
+{% include "threadedcomments/comments_list.html" %}
+
+{% endblock %}
+
+{% block sidebarcontent %}
+<div id="next-previous" class="clearfix">
+{% if object.get_previous %}
+<h3>Previous Quote</h3>
+<p><a href="{{ object.get_previous.get_absolute_url }}" class="previous" title="Previous quote">{{ object.text }}</a></p>
+{% endif %}
+{% if object.get_next %}
+<h3>Next Quote</h3>
+<p><a href="{{ object.get_next.get_absolute_url }}" class="next" title="Next quote">{{ object.get_next.text }}</a></p>
+{% endif %}
+</div>
+
+{{ block.super }}
+
+{% endblock %}

@@ -1,0 +1,80 @@
+{% load custom_tags %}
+{% load threadedcommentstags %}
+{% load typogrify %}
+{% get_free_comment_count for item.get_content_object as comments %}
+{% autoescape off %}
+{% comment %}
+{% ifequal item.content_type.name "article" %}
+<div class="entry article">
+    <p class="meta"><a href="{% url blog_home %}">Post</a> <span class="date">{{ item.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>    
+    <h2><a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.headline }}</a></h2>
+    {% if item.get_content_object.teaser %}
+    <div class="teaser">
+    {{ item.get_content_object.html_teaser }}
+    </div>
+    {% endif %}
+    <p><a href="{{ item.get_content_object.get_absolute_url }}">Continue reading...</a></p>
+</div>
+{% endifequal %}
+{% endcomment %}
+{% ifequal item.content_type.name "bookmark" %}
+<div class="entry link">
+    <p class="meta"><a href="{% url bookmark_home %}">Link</a> <span class="date">{% long_date item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+    {% comment %}
+    <h2><a href="{{ item.get_content_object.get_absolute_url }}">{% autoescape off %}{{ item.get_content_object.description|typogrify }}{% endautoescape %}</a></h2>
+    {% endcomment %}
+    <h2><a href="{{ item.get_content_object.url }}">{% autoescape off %}{{ item.get_content_object.description|typogrify }}{% endautoescape %}</a></h2>
+    {% if item.get_content_object.extended_info %}
+    <p>{% autoescape off %}
+    {% if item.get_content_object.image %}
+    <a href="{{ item.get_content_object.url }}"><img src="{{ item.get_content_object.get_image_url }}" alt="{{ item.get_content_object.image_caption }}" width="{{ item.get_content_object.get_image_width }}" height="{{ item.get_content_object.get_image_height }}" /></a>
+    {% endif %}        
+    {{ item.get_content_object.extended_info|typogrify }}{% endautoescape %}{% if item.get_content_object.via_url %} <a href="{{ item.get_content_object.via_url }}">Via</a>{% endif %}</p>
+    {% endif %}
+    <p class="visit"><a href="{{ item.get_content_object.url }}">Visit</a></p>
+</div>
+{% endifequal %}
+{% ifequal item.content_type.name "video" %}
+<div class="entry video clearfix">
+    <p class="meta"><a href="{% url video_home %}">Video</a> <span class="date">{% long_date item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p> 
+    {% comment %}
+    {% if item.get_content_object.youtube_small_image %}
+    <a href="{{ item.get_content_object.get_absolute_url }}"><img src="{{ item.get_content_object.youtube_small_image }}" width="120" height="90" /></a>
+    {% endif %}
+    {% endcomment %}
+    <h2><a href="{{ item.get_content_object.get_absolute_url }}">{{ item.get_content_object.title }}</a></h2>
+    <div class="video-embed">
+    {% spaceless %}
+    {% autoescape off %}{{ item.get_content_object.embed_code }}{% endautoescape %}
+    {% endspaceless %}
+    </div>
+    {% if item.get_content_object.html_description %}{% autoescape off %}{{ item.get_content_object.html_description }}{% endautoescape %}{% endif %}
+</div>
+{% endifequal %}
+{% ifequal item.content_type.name "photo" %}
+<div class="entry photo">
+    <p class="meta"><a href="{% url photo_home %}">Photo</a> <span class="date">{% long_date item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+    <p class="photo"><a href="{{ item.get_content_object.get_absolute_url }}" style="background-image: url({{ item.get_content_object.medium_url }}); background-repeat: no-repeat;" title="{{ item.get_content_object.title }}">{% autoescape off %}{{ item.get_content_object.title|typogrify }}{% endautoescape %}</a></p>
+</div>
+{% endifequal %}
+{% ifequal item.content_type.name "tweet" %}
+<div class="entry tweet">
+    <p class="meta"><a href="{% url tweet_home %}">Tweet</a> <span class="date">{% long_date item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+    <h2>{% autoescape off %}{{ item.get_content_object.text|twitter_links|typogrify }}{% endautoescape %}</h2>
+    <p class="visit"><a href="{{ item.get_content_object.url }}">View</a></p>
+</div>
+{% endifequal %}
+{% ifequal item.content_type.name "quote" %}
+<div class="entry quote">
+    <p class="meta"><a href="{% url quote_home %}">Quote</a> <span class="date">{% long_date item.pub_date %}</span> <span class="comments"><a href="{{ item.get_content_object.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+    <blockquote{% if item.get_content_object.url %} cite="{{ item.get_content_object.url }}"{% endif %}>{% autoescape off %}{{ item.get_content_object.html_text }}{% endautoescape %}</blockquote>
+    {% autoescape off %}
+    {% if item.get_content_object.url %}
+    <p class="cite">&mdash; <a href="{{ item.get_content_object.url }}">{{ item.get_content_object.credit|typogrify }}</a></p>
+    {% else %}
+    <p class="cite">&mdash; {{ item.get_content_object.credit|typogrify }}</p>
+    {% endif %}
+    {% endautoescape %}
+</div>
+{% endifequal %}
+{% endautoescape %}

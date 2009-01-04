@@ -1,0 +1,29 @@
+{% extends "blog/base.html" %}
+{% block title %}Blog: {{ day|date:"F d, Y" }}{% endblock %}
+{% block description %}Blog posts written on {{ day|date:"F d, Y" }}{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+    <li><a href="{% url article_archive_year year=day|date:"Y" %}" title="View all blog posts written in {{ day|date:"Y" }}">{{ day|date:"Y" }}</a></li>
+    <li><a href="{% url article_archive_month year=day|date:"Y", month=day|date:"m" %}" title="View all blog posts written in {{ day|date:"F, Y" }}">{{ day|date:"m" }}</a></li>
+    <li><a href="{% url article_archive_day year=day|date:"Y", month=day|date:"m",day=day|date:"d" %}" title="View all blog posts saved on  {{ day|date:"F d, Y" }}">{{ day|date:"d" }}</a></li>
+{% endblock %}
+
+{% load custom_tags %}
+{% load threadedcommentstags %}
+{% load typogrify %}
+
+{% block content %}
+<h2>Blog posts written on {{ day|date:"F d, Y" }} ({{ object_list.count }}) <a href="{% url tumblelog_archive_day year=day|date:"Y", month=day|date:"m",day=day|date:"d" %}" class="visit" title="View all online activity for {{ day|date:"F d, Y" }}">More</a></h2>
+<div id="day-archive">
+{% for article in object_list %}
+{% get_free_comment_count for article as comments %}
+<div class="entry article">
+<p class="meta"><span class="date">{{ article.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ article.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p> 
+<h2><a href="{{ article.get_absolute_url }}">{{ article.headline }}</a></h2>
+{% autoescape off %}{{ article.html_teaser }}{% endautoescape %}
+<p><a href="{{ article.get_absolute_url }}" class="visit">Continue reading</a></p>
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}

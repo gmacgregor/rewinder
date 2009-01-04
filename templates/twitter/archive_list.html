@@ -1,0 +1,10 @@
+{% load custom_tags %}
+{% get_archive_dates twitter.Tweet as years pub_time %}
+<div id="archive-list">
+<h3>Browse the Twitter archive</h3>
+<ul>
+    {% for year in years %}
+    <li><a href="{% url tweet_archive_year year=year|date:"Y" %}">{{ year|date:"Y" }}</a></li>
+    {% endfor %}
+</ul>
+</div>
