@@ -1,5 +1,8 @@
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+# MINE
+BASEPATH = ''
 
 ADMINS = (
     ('Greg MacGregor', 'gmacgregor@gmail.com'),
@@ -7,10 +10,11 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+# prod: gmacgregor_db2_pgsql / 3360nicola
 DATABASE_ENGINE = 'postgresql_psycopg2'
-DATABASE_NAME = 'gmacgregor_db2_pgsql'
-DATABASE_USER = 'gmacgregor_db2_pgsql'
-DATABASE_PASSWORD = '3360nicola'
+DATABASE_NAME = 'rewinder'
+DATABASE_USER = 'postgres'
+DATABASE_PASSWORD = ''
 DATABASE_HOST = ''
 DATABASE_PORT = ''
 
@@ -35,12 +39,12 @@ USE_I18N = False
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/home/gmacgregor/webapps/static_media/'
+MEDIA_ROOT = '/Users/gmacgregor/dev/rewinder/static_media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = 'http://media.rewinder.ca/'
+MEDIA_URL = 'http://localhost:8000/site_media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -72,7 +76,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/gmacgregor/webapps/django/rewinder/templates',
+    '/Users/gmacgregor/dev/rewinder/templates',
 )
 
 INSTALLED_APPS = (
@@ -83,26 +87,31 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.admin',
     'django.contrib.sitemaps',
-    'django_evolution',
+    #'django_evolution',
     #'django.contrib.comments',
-    'threadedcomments',
+    ##'threadedcomments',
     #template utils -- ie. using markdown for presentation
     'template_utils',
     'tagging',
     'typogrify',
     'comment_utils',
-    'rewinder.apps.blog',
-    'rewinder.apps.tumblelog',
-    'rewinder.apps.delicious',
-    'rewinder.apps.flickr',
-    'rewinder.apps.twitter',
-    'rewinder.apps.video',
-    'rewinder.apps.generic',
-    'rewinder.apps.geo',
+    #'rewinder.apps.blog',
+    #'rewinder.apps.tumblelog',
+    'syncr.flickr',
+    'syncr.delicious',
+    'syncr.youtube',
+    'syncr.twitter',
+    'syncr.readernaut',
+    #'rewinder.apps.delicious',
+    #'rewinder.apps.flickr',
+    #'rewinder.apps.twitter',
+    #'rewinder.apps.video',
+    #'rewinder.apps.generic',
+    #'rewinder.apps.geo',
     'rewinder.util', #templatetags
 )
 
-CACHE_BACKEND = 'memcached://74.54.46.146:3268/'
+#CACHE_BACKEND = 'memcached://74.54.46.146:3268/'
 
 #http://code.google.com/p/django-template-utils/
 MARKUP_FILTER = ('markdown', {})
@@ -133,8 +142,11 @@ RATING_CHOICES = (
     ('5', '5'), 
 )
 
-FLICKR_API_KEY = 'c5b82d5a4ae7101366113790d947da9e'
-FLICKR_API_SECRET = '072822dd97710515'
+FLICKR_KEY = 'c5b82d5a4ae7101366113790d947da9e'
+FLICKR_SECRET = '072822dd97710515'
+
+# syncr.readernaut
+READERNAUT_USERNAME = 'gmacgregor'
 
 YOUTUBE_API_KEY = 'AI39si7dE0uopXa7u6wVFzAQZF0_B3NOtztaYqK9pLzSafZOu7TScU-g2dvLmaMEmgpvocgoCGnZQUBUGMjr-4MnxfulgA7KWA'
 YOUTUBE_DEV_ID = 'MlRUm9Gt1ro'
