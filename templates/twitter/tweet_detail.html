@@ -1,0 +1,40 @@
+{% extends "twitter/base.html" %}
+{% load typogrify %}
+{% block title %}{{ block.super }}: {{ object.text }}{% endblock %}
+{% block body_class %}tweet detail{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+    <li><a href="{% url tweet_archive_year year=object.pub_time|date:"Y" %}">{{ object.pub_time|date:"Y"}}</a></li>
+    <li><a href="{% url tweet_archive_month year=object.pub_time|date:"Y",month=object.pub_time|date:"m" %}">{{ object.pub_time|date:"m"}}</a></li>
+    <li><a href="{% url tweet_archive_day year=object.pub_time|date:"Y",month=object.pub_time|date:"m",day=object.pub_time|date:"d" %}">{{ object.pub_time|date:"d"}}</a></li>
+{% endblock %}
+{% load custom_tags %}
+
+{% block content %}
+<div id="tweet-detail" class="detail">
+<p class="meta date">Tweeted on {% long_date object.pub_time %} <a href="{% url tumblelog_archive_day year=object.pub_time|date:"Y",month=object.pub_time|date:"m",day=object.pub_time|date:"d" %}">More</a></p>
+{% autoescape off %}
+<h2>{{ object.text|twitter_links|typogrify }}</h2>
+{% endautoescape %}
+<p class="visit"><a href="{{ object.url }}" title="View status on twitter.com">View</a></p>
+</div>
+{% include "threadedcomments/comments_list.html" %}
+{% endblock %}
+
+{% block sidebarcontent %}
+{% autoescape off %}
+<div id="next-previous" class="clearfix">
+{% if object.get_previous %}
+<h3>Previous Tweet</h3>
+<p><a href="{{ object.get_previous.get_absolute_url }}" class="previous" title="Previous tweet">{{ object.get_previous.text|typogrify }}</a></p>
+{% endif %}
+{% if object.get_next %}
+<h3>Next Tweet</h3>
+<p><a href="{{ object.get_next.get_absolute_url }}" class="next" title="Next tweet">{{ object.get_next.text|typogrify }}</a></p>
+{% endif %}
+</div>
+
+{% include "twitter/archive_list.html" %}
+
+{% endautoescape %}
+{% endblock %}

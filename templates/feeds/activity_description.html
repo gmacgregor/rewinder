@@ -1,0 +1,27 @@
+{% autoescape off %}
+{% ifequal obj.content_type.name "bookmark" %}
+{% if obj.get_content_object.extended_info %}
+<p>{% autoescape off %}{{ obj.get_content_object.extended_info }}{% endautoescape %}</p>
+{% endif %}
+<p><a href="{{ obj.get_content_object.url }}">Visit link</a></p>
+{% endifequal %}
+{% ifequal obj.content_type.name "video" %}
+{% if obj.get_content_object.description %}
+{% autoescape off %}{{ obj.get_content_object.html_description }}{% endautoescape %}
+{% endif %}
+<p>Watch this video at {{ obj.get_content_object.source }}: <a href="{{ obj.get_content_object.url }}">{{ obj.get_content_object.url }}</a></p>
+{% endifequal %}
+{% ifequal obj.content_type.name "photo" %}
+<img src="{{ obj.get_content_object.medium_url }}" alt="{{ obj.get_content_object.title }}" />
+{% if obj.get_content_object.description %}
+<p>{% autoescape off %}{{ obj.get_content_object.description }}{% endautoescape %}</p>
+{% endif %}
+{% endifequal %}
+{% ifequal obj.content_type.name "tweet" %}
+<p>{{ obj.get_content_object.text }}</p>
+{% endifequal %}
+{% ifequal obj.content_type.name "quote" %}
+<p>{{ obj.get_content_object.html_text }}</p>
+<p>Credit: {% if obj.get_content_object.url %}<a href="{{ obj.get_content_object.url }}">{{ obj.get_content_object.credit }}</a>{% else %}{{ obj.get_content_object.credit }}{% endif %}</p>
+{% endifequal %}
+{% endautoescape %}

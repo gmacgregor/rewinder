@@ -1,0 +1,4 @@
+<img src="{{ obj.medium_url }}" alt="{{ obj.title }}" />
+{% if obj.description %}
+<p>{% autoescape off %}{{ obj.description }}{% endautoescape %}</p>
+{% endif %}

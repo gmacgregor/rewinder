@@ -1,0 +1,52 @@
+{% extends "flickr/base.html" %}
+{% load custom_tags %}
+{% load typogrify %}
+{% block title %}{{ block.super }}: {{ object.title }}{% endblock %}
+{% block body_class %}detail photo{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+    <li><a href="{% url photo_archive_year year=object.taken_date|date:"Y" %}">{{ object.taken_date|date:"Y"}}</a></li>
+    <li><a href="{% url photo_archive_month year=object.taken_date|date:"Y",month=object.taken_date|date:"m" %}">{{ object.taken_date|date:"m"}}</a></li>
+    <li><a href="{% url photo_archive_day year=object.taken_date|date:"Y",month=object.taken_date|date:"m",day=object.taken_date|date:"d" %}">{{ object.taken_date|date:"d"}}</a></li>
+{% endblock %}
+
+{% block content %}
+<div id="photo-detail" class="detail">
+<h2>{% autoescape off %}{{ object.title|typogrify }}{% endautoescape %}</h2>
+<img src="{{ object.medium_url }}" alt="{{ object.title }}" />
+{% if object.description %}
+{% autoescape off %}
+<p>{% autoescape off %}{{ object.description|typogrify }}{% endautoescape %}</p>
+{% endautoescape %}
+{% endif %}
+{% if object.exif_model %}
+<h3>Photo Details</h3>
+<dl class="clearfix">
+    <dt>Taken on</dt>
+    <dd>{% long_date object.taken_date %} <a href="{% url tumblelog_archive_day year=object.taken_date|date:"Y",month=object.taken_date|date:"m",day=object.taken_date|date:"d" %}">More</a></dd>
+    <dt>Camera model</dt>
+    <dd>{{ object.exif_model }}</dd>
+    <dt>Exposure</dt>
+    <dd>{{ object.exif_exposure }}</dd>
+    <dt>Aperture</dt>
+    <dd>{{ object.exif_aperture }}</dd>
+    <dt class="last">Focal length</dt>
+    <dd class="last">{{ object.exif_focal_length }}</dd>
+</dl>
+{% endif %}
+</div>
+{% include "tag/tags_for_object.html" %}
+{% include "threadedcomments/comments_list.html" %}
+{% endblock %}
+
+{% block sidebarcontent %}
+<div id="next-previous" class="clearfix">
+{% if object.get_previous %}
+<p><a href="{{ object.get_previous.get_absolute_url }}" class="previous" title="Previous photo"><img src="{{ object.get_previous.square_url }}" alt="{{ object.get_previous.title }}" /></a></p>
+{% endif %}
+{% if object.get_next %}
+<p><a href="{{ object.get_next.get_absolute_url }}" class="next" title="Next photo"><img src="{{ object.get_next.square_url }}" alt="{{ object.get_next.title }}" /></a></p>
+{% endif %}
+</div>
+{{ block.super }}
+{% endblock %}

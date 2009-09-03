@@ -1,0 +1,4 @@
+{% if obj.description %}
+{% autoescape off %}{{ obj.html_description }}{% endautoescape %}
+{% endif %}
+<p>Watch this video at {{ obj.source }}: <a href="{{ obj.url }}">{{ obj.url }}</a></p>

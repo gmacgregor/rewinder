@@ -1,0 +1,78 @@
+#random-photo {
+    /*position: relative;*/
+    overflow: hidden;
+}
+
+#random-photo #photo {
+    margin-bottom: 1em;
+}
+/*
+#random-photo h2 {
+   position: absolute;
+   top: 60px;
+   left: 10px;
+}
+#random-photo h2 a {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #fff;
+}
+*/
+p.photo {
+    margin-bottom: 10px;
+    width: 500px;
+    background: #000;
+    padding-right: 0;
+}
+p.photo a {
+    display: block;
+    height: 0;
+    padding-top: 150px;
+    overflow: hidden;
+    background-position: 50% 50%;
+}
+.thumbnail {
+    float: left;
+    margin: 0 10px 10px 0;
+}
+.home .thumbnail {
+    margin-right: 8px;
+}
+.thumbnail.last {
+    margin-right: 0;
+}
+#photo-detail dl {
+    margin: 1em 0;
+}
+#photo-detail h3 {
+    border-top: 1px solid #ccc;
+    margin: 2em 0 1em 0;
+    padding-top: 0.5em;
+}
+#photo-detail img {
+    margin-bottom: 1em;
+}
+#photo-detail dt,
+#photo-detail dd {
+    float: left;
+    padding: 0.5em 0;
+    border-bottom: 1px solid #eee;
+}
+#photo-detail dt {
+    width: 50%;
+    font-weight: bold;
+}
+#photo-detail dd {
+    width: 50%;
+}
+#photo-detail dt.last,
+#photo-detail dd.last {
+    border-bottom: none;
+}
+#photo-faves p {
+    margin-bottom: 1em;
+}
+#photo-faves .photo img {
+    float: left;
+    margin: 0 10px 10px 0;
+}

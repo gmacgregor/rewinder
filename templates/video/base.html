@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block extrahead %}
+<link rel="alternate" type="application/rss+xml" href="/feeds/videos/" title="rewinder.ca: Latest videos" />
+{% endblock %}
+{% block description %}Videos that I find entertaining or informtaive{% endblock %}
+{% block title %}Videos{% endblock %}
+{% block body_class %}video{% endblock %}
+{% block breadcrumb %}{{ block.super }}<li><a href="{% url video_home %}">Videos</a></li>{% endblock %}
+
+{% block sidebarcontent %}
+{% load custom_tags %}
+{% get_archive_dates video.Video as years pub_date %}
+<div id="archive-list">
+<h3>Browse the Video archive</h3>
+<ul>
+    {% for year in years %}
+    <li><a href="{% url video_archive_year year=year|date:"Y" %}">{{ year|date:"Y" }}</a></li>
+    {% endfor %}
+</ul>
+</div>
+
+{% get_popular_tags_for video.Video 20 as top_tags top_count %}
+<h3>Top 20 Video Tags</h3>
+<ul class="chart">
+{% for num, tag in top_tags %}
+<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 490 %}px" class="index">{% widthratio num top_count 100 %}%</span></li>
+{% endfor %}
+</ul>
+
+{% endblock %}
