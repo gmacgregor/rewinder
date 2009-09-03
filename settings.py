@@ -2,15 +2,15 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Greg MacGregor', 'gmacgregor@gmail.com'),
+    ('', ''),
 )
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = 'postgresql_psycopg2'
-DATABASE_NAME = 'gmacgregor_db2_pgsql'
-DATABASE_USER = 'gmacgregor_db2_pgsql'
-DATABASE_PASSWORD = '3360nicola'
+DATABASE_ENGINE = ''
+DATABASE_NAME = ''
+DATABASE_USER = ''
+DATABASE_PASSWORD = ''
 DATABASE_HOST = ''
 DATABASE_PORT = ''
 
@@ -48,7 +48,7 @@ MEDIA_URL = 'http://media.rewinder.ca/'
 ADMIN_MEDIA_PREFIX = '/media/'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'y#h#&g^gba9=#x@q#v)a(-##s4$f6$r%vm9#%=b5s=d)v0+=^p'
+SECRET_KEY = 'KEY'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -102,7 +102,7 @@ INSTALLED_APPS = (
     'rewinder.util', #templatetags
 )
 
-CACHE_BACKEND = 'memcached://74.54.46.146:3268/'
+CACHE_BACKEND = ''
 
 #http://code.google.com/p/django-template-utils/
 MARKUP_FILTER = ('markdown', {})
@@ -118,7 +118,7 @@ GRAVATAR_SIZE = 50
 FORCE_LOWERCASE_TAGS = True
 
 #comment_utils
-AKISMET_API_KEY = '2d963b0633db'
+AKISMET_API_KEY = ''
 COMMENTS_AKISMET = True
 COMMENTS_CLOSE_AFTER = 60
 COMMENTS_MODERATE_AFTER = 30
@@ -133,13 +133,13 @@ RATING_CHOICES = (
     ('5', '5'), 
 )
 
-FLICKR_API_KEY = 'c5b82d5a4ae7101366113790d947da9e'
-FLICKR_API_SECRET = '072822dd97710515'
+FLICKR_API_KEY = ''
+FLICKR_API_SECRET = ''
 
-YOUTUBE_API_KEY = 'AI39si7dE0uopXa7u6wVFzAQZF0_B3NOtztaYqK9pLzSafZOu7TScU-g2dvLmaMEmgpvocgoCGnZQUBUGMjr-4MnxfulgA7KWA'
-YOUTUBE_DEV_ID = 'MlRUm9Gt1ro'
+YOUTUBE_API_KEY = ''
+YOUTUBE_DEV_ID = ''
 
-DIGG_AUTH = 'http://www.example.com/digg'
+DIGG_AUTH = ''
 
-DELICIOUS_USERNAME = 'sixminutes'
-DELICIOUS_PASSWORD = 'faerie'
+DELICIOUS_USERNAME = ''
+DELICIOUS_PASSWORD = ''
