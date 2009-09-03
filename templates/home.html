@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block extrahead %}
+<link rel="alternate" type="application/rss+xml" href="/feeds/activity/" title="rewinder.ca: Latest online activity" />
+<link rel="alternate" type="application/rss+xml" href="/feeds/blog/" title="rewinder.ca: Latest blog posts" />
+<link rel="alternate" type="application/rss+xml" href="/feeds/links/" title="rewinder.ca: Latest links" />
+<link rel="alternate" type="application/rss+xml" href="/feeds/photos/" title="rewinder.ca: Latest photos" />
+<link rel="alternate" type="application/rss+xml" href="/feeds/videos/" title="rewinder.ca: Latest videos" />
+<link rel="alternate" type="application/rss+xml" href="/feeds/tweets/" title="rewinder.ca: Latest tweets" />
+<link rel="alternate" type="application/rss+xml" href="/feeds/quotes/" title="rewinder.ca: Latest quotes" />
+{% endblock %}
+{% block breadcrumb %}<li>Latest online activity</li><li class="last"><a href="{% url tumblelog_home %}" title="Browse all online activity since 2005">More</a></li>{% endblock %}
+{% block body_class %}home{% endblock %}
+{% load threadedcommentstags %}
+{% load custom_tags %}
+{% load typogrify %}
+
+{% block content %}
+{% get_latest tumblelog.TumblelogItem 10 as logs %}
+<div id="tumblelog">
+{% for item in logs %}
+    {% include "tumblelog/tumblelogitem.html" %}
+{% endfor %}
+</div><!-- /#tumblelog -->
+{% endblock %}
+
+{% block sidebarcontent %}
+
+{% get_latest_posts 1 as latest_posts %}
+{% if latest_posts %}
+<div id="latest-posts">
+<h3>Latest blog post</h3>
+    {% for post in latest_posts %}
+    {% get_free_comment_count for post as comments %}
+    <p class="meta"><span class="date">{{ post.pub_date|date:"M d Y \a\t g:i a" }}</span> <span class="comments"><a href="{{ post.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+    <h2><a href="{{ post.get_absolute_url }}">{% autoescape off %}{{ post.headline|typogrify }}{% endautoescape %}</a></h2>
+    {% if post.teaser %}
+        {% autoescape off %}{{ post.html_teaser }}{% endautoescape %}
+    {% endif %}
+    <p><a href="{{ post.get_absolute_url }}" class="visit">Continue reading</a></p>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% get_random_photo as photo related_photos %}
+{% get_free_comment_count for photo as comments %}
+<div id="random-photo">
+<h3>Random Photo</h3>
+<p id="photo"><a href="{{ photo.get_absolute_url }}" title="View details and comment on this photo"><img src="{{ photo.medium_url }}" alt="{{ photo.title }}" /></a></p>
+{% comment %}
+<p class="meta"><span class="date">{% long_date photo.taken_date %}</span> <span class="comments"><a href="{{ photo.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+<h2><a href="{{ photo.get_absolute_url }}" title="View details and comment on this photo">{% autoescape off %}{{ photo.title|typogrify }}{% endautoescape %}</a></h2>
+{% endcomment %}
+{% if related_photos %}
+<h3>Related Photos</h3>
+{% for related in related_photos %}
+<div class="thumbnail{% if forloop.last %} last{% endif %}"><a href="{{ related.get_absolute_url }}" title="View larger size of this photo"><img src="{{ related.square_url }}" width="75" height="75" alt="{{ related.title }}" /></a></div>
+{% endfor %}
+{% endif %}
+</div>
+
+{% get_random delicious.Bookmark 200 as random_link %}
+{% get_free_comment_count for random_link as comments %}
+<div id="random-link">
+<h3>Random link</h3>
+<p class="meta"><span class="date">{% long_date random_link.saved_date %}</span> <span class="comments"><a href="{{ random_link.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+<h2><a href="{{ random_link.get_absolute_url }}" title="View link details">{% autoescape off %}{{ random_link.description|typogrify }}{% endautoescape %}</a></h2>
+<p>{% if random_link.extended_info %}{% autoescape off %}{{ random_link.extended_info|typogrify }}{% endautoescape %}
+{% endif %} <span class="visit"><a href="{{ random_link.url }}" title="Visit site">Visit</a></span></p>
+</div>
+
+{% include "feeds/list.html" %}
+
+{% endblock %}

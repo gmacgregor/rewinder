@@ -1,0 +1,38 @@
+[
+    {
+        "pk": 1, 
+        "model": "generic.source", 
+        "fields": {
+            "category": 1, 
+            "description": "The world's most popular video sharing site", 
+            "title": "youtube.com", 
+            "url": "http:\/\/www.youtube.com\/watch?v=kJmvYFZwPco", 
+            "created_on": "2008-05-03 15:51:58", 
+            "last_modified": "2008-05-03 15:51:58", 
+            "slug": "youtube"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "generic.source", 
+        "fields": {
+            "category": 1, 
+            "description": "Video site.", 
+            "title": "vimeo.com", 
+            "url": "http:\/\/www.vimeo.com\/", 
+            "created_on": "2008-05-06 16:23:09", 
+            "last_modified": "2008-05-06 16:23:09", 
+            "slug": "vimeo"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "generic.sourcecategory", 
+        "fields": {
+            "created_on": "2008-05-03 15:51:55", 
+            "last_modified": "2008-05-03 15:51:55", 
+            "slug": "video", 
+            "title": "Video"
+        }
+    }
+]

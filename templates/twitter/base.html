@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block extrahead %}
+<link rel="alternate" type="application/rss+xml" href="/feeds/tweets/" title="rewinder.ca: Latest tweets" />
+{% endblock %}
+{% load custom_tags %}
+{% block title %}Twitter Tweets{% endblock %}
+{% block body_class %}tweet home{% endblock %}
+{% block breadcrumb %}{{ block.super }}<li><a href="{% url tweet_home %}" title="Back to all tweets">Tweets</a></li>{% endblock %}
+
+{% block sidebarcontent %}
+<!-- <h3>What&#8217;s a Tweet?</h3> -->
+<p>A tweet is a 140 character-or-less description of what I am doing. Tweets are posted to the website <a href="http://www.twitter.com">twitter.com</a></p>
+<p><a href="http://www.twitter.com/gmacgregor/" title="View my twitter feed">twitter.com/gmacgregor</a></p>
+
+{% include "twitter/archive_list.html" %}
+
+{% endblock %}

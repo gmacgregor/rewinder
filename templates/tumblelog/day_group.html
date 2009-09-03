@@ -1,0 +1,25 @@
+{% extends "tumblelog/base.html" %}
+{% block body_class %}tumblelog day_group{% endblock %}
+{% block title %}Tumblelog archive for {{ showing_date|date:"F d, Y" }}{% endblock %}
+{% block breadcrumb %}
+<li><a href="{% url tumblelog_home %}" title="Back to Tumblelog">Tumblelog</a></li>
+<li><a href="{% url tumblelog_archive_year year=showing_date|date:"Y" %}" title="Archive for {{ showing_date|date:"Y" }}">{{ showing_date|date:"Y" }}</a></li>
+<li><a href="{% url tumblelog_archive_month year=showing_date|date:"Y",month=showing_date|date:"m" %}" title="Archive for {{ showing_date|date:"F Y" }}">{{ showing_date|date:"m" }}</a></li>
+<li class="last"><a href="{% url tumblelog_archive_day year=showing_date|date:"Y",month=showing_date|date:"m",day=showing_date|date:"d" %}" title="Archive for {{ showing_date|date:"F d, Y" }}">{{ showing_date|date:"d" }}</a></li>
+{% endblock %}
+{% block content %}
+<h2>On {{ showing_date|date:"l, F jS Y" }} I did {{ entries.count }} thing{{ entries.count|pluralize }} online</h2>
+
+<div id="tumblelog-archive" class="day">
+{% for item in entries %}
+    {% include "tumblelog/tumblelogitem.html" %}
+{% endfor %}
+</div>
+{% endblock %}
+
+
+{% block sidebarcontent %}
+
+{% include "tumblelog/archive_year_list.html" %}
+
+{% endblock %}

@@ -1,0 +1,144 @@
+{% extends "tag/base.html" %}
+{% block title %}{{ block.super }}: {{ tag }}{% endblock %}
+{% block description %}All things at rewinder.ca tagged '{{ tag }}'{% endblock %}
+{% block breadcrumb %}{{ block.super }}<li class="last">{{ tag }}</li>{% endblock %}
+{% block body_class %}tag detail{% endblock %}
+{% load custom_tags %}
+{% load typogrify %}
+
+{% block content %}
+<h2>All {{ total }} things tagged &#8220;{{ tag }}&#8221;</h2>
+<div id="tag-detail">
+{% comment %}
+<ul>
+{% if articles %}<li><a href="{% url tag_detail tag %}#tag-articles">{{ articles.count }} Articles</a></li>{% endif %}
+{% if photos %}<li><a href="{% url tag_detail tag %}#tag-photos">Photos ({{ photos.count }})</a></li>{% endif %}
+{% if links %}<li><a href="{% url tag_detail tag %}#tag-links">Links ({{ links.count }})</a></li>{% endif %}
+{% if videos %}<li><a href="{% url tag_detail tag %}#tag-videos">Videos ({{ videos.count }})</a></li>{% endif %}
+{% if quotes %}<li><a href="{% url tag_detail tag %}#tag-quotes">Quotes ({{ Quotes.count }})</a></li>{% endif %}
+</ul>
+{% endcomment %}
+
+<ul class="chart">
+{% if articles %}
+<li><a href="#tag-articles" title="Jump to blog posts tagged '{{ tag }}'">Blog posts</a><span class="count">{{ articles.count }}</span><span style="width: {% widthratio articles.count total 490 %}px" class="index">{% widthratio articles.count total 100 %}%</span></li>
+{% endif %}
+{% if photos %}
+<li><a href="#tag-photo" title="Jump to photos tagged '{{ tag }}'">Photos</a><span class="count">{{ photos.count }}</span><span style="width: {% widthratio photos.count total 490 %}px" class="index">{% widthratio photos.count total 100 %}%</span></li>
+{% endif %}
+{% if links %}
+<li><a href="#tag-links" title="Jump to links tagged '{{ tag }}'">Links</a><span class="count">{{ links.count }}</span><span style="width: {% widthratio links.count total 490 %}px" class="index">{% widthratio links.count total 100 %}%</span></li>
+{% endif %}
+{% if videos %}
+<li><a href="#tag-videos" title="Jump to videos tagged '{{ tag }}'">Videos</a><span class="count">{{ videos.count }}</span><span style="width: {% widthratio videos.count total 490 %}px" class="index">{% widthratio videos.count total 100 %}%</span></li>
+{% endif %}
+{% if quotes %}
+<li><a href="#tag-quotes" title="Jump to quotes tagged '{{ tag }}'">Quotes</a><span class="count">{{ quotes.count }}</span><span style="width: {% widthratio quotes.count total 490 %}px" class="index">{% widthratio quotes.count total 100 %}%</span></li>
+{% endif %}
+</ul>
+
+{% if articles %}
+<h3><a href="{% url blog_home %}">Blog posts</a></h3>
+<ul id="tag-articles">
+{% for article in articles %}
+    <li><a href="{{ article.get_absolute_url }}">{% autoescape off %}{{ article.headline|typogrify }}{% endautoescape %}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if photos %}
+<h3><a href="{% url photo_home %}">Photos</h3>
+<ul id="tag-photos" class="clearfix">
+{% for photo in photos %}
+    <li><a href="{{ photo.get_absolute_url }}" title="View a larger version of this photo"><img class="thumbnail" src="{{ photo.square_url }}" width="75" height="75" alt="{{ photo.title }}" /></a></li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if links %}
+<h3><a href="{% url bookmark_home %}">Links</a></h3>
+<ul id="tag-links">
+{% for link in links %}
+    <li><a href="{{ link.get_absolute_url }}">{% autoescape off %}{{ link.description|typogrify }}{% endautoescape %}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if videos %}
+<h3><a href="{% url video_home %}">Videos</a></h3>
+<ul id="tag-videos">
+{% for video in videos %}
+    <li><a href="{{ video.get_absolute_url }}">{% autoescape off %}{{ video.title|typogrify }}{% endautoescape %}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if quotes %}
+<h3><a href="{% url quote_home %}">Quotes</a></h3>
+<ul id="tag-quotes">
+{% for quote in quotes %}
+    <li><a href="{{ quote.get_absolute_url }}">{% autoescape off %}{{ quote.text|typogrify }}{% endautoescape %}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+
+</div>
+{% endblock %}
+
+{% block sidebarcontent %}
+
+{% comment %}
+{% get_popular_tags 10 as limit tags total_count top_count %}
+<h3>Top {{ limit }} used tags among all <a href="{% url bookmark_home %}" title="Browse all links">links</a>, <a href="{% url photo_home %}" title="Browse all photos">photos</a>, <a href="{% url video_home %}" title="Browse all videos">videos</a> and <a href="{% url blog_home %}" title="Browse all blog posts">blog posts</a> of {{ total_count }} total tags</h3>
+<ul class="chart">
+{% for num, tag in tags %}
+ <li><a href="{% url tag_detail tag %}" rel="tag">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 495 %}px" class="index">({% widthratio num top_count 100 %}%)</span></a></li>
+{% endfor %}
+</ul>
+{% endcomment %}
+
+{% get_popular_tags_for delicious.Bookmark 10 as top_tags top_count %}
+<h3>Top 10 Link Tags</h3>
+<ul class="chart">
+{% for num, tag in top_tags %}
+<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 490 %}px" class="index"></span></a></li>
+{% endfor %}
+</ul>
+
+{% get_popular_tags_for flickr.Photo 10 as top_tags top_count %}
+<h3>Top 10 Photo Tags</h3>
+<ul class="chart">
+{% for num, tag in top_tags %}
+<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 490 %}px" class="index"></span></a></li>
+{% endfor %}
+</ul>
+
+{% get_popular_tags_for video.Video 10 as top_tags top_count %}
+<h3>Top 10 Video Tags</h3>
+<ul class="chart">
+{% for num, tag in top_tags %}
+<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 490 %}px" class="index"></span></a></li>
+{% endfor %}
+</ul>
+
+{% get_popular_tags_for blog.Article 10 as top_tags top_count %}
+<div class="col last">
+<h3>Top 10 Blog post Tags</h3>
+<ul class="chart">
+{% for num, tag in top_tags %}
+<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 190 %}px" class="index"></span></li>
+{% endfor %}
+</ul>
+</div>
+
+{% get_popular_tags_for generic.Quote 10 as top_tags top_count %}
+<div class="col last">
+<h3>Top 10 Quote Tags</h3>
+<ul class="chart">
+{% for num, tag in top_tags %}
+<li><a href="{% url tag_detail tag %}">{{ tag }}</a><span class="count">{{ num }}</span><span style="width: {% widthratio num top_count 190 %}px" class="index"></span></li>
+{% endfor %}
+</ul>
+</div>
+
+{% endblock %}

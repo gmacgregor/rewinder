@@ -1,0 +1,41 @@
+{% extends "delicious/base.html" %}
+{% load custom_tags %}
+{% load typogrify %}
+{% block title %}Links: {{ object.description }}{% endblock %}
+{% block body_class %}detail link{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+    <li><a href="{% url bookmark_archive_year year=object.saved_date|date:"Y" %}">{{ object.saved_date|date:"Y"}}</a></li>
+    <li><a href="{% url bookmark_archive_month year=object.saved_date|date:"Y",month=object.saved_date|date:"m" %}">{{ object.saved_date|date:"m"}}</a></li>
+    <li><a href="{% url bookmark_archive_day year=object.saved_date|date:"Y",month=object.saved_date|date:"m",day=object.saved_date|date:"d" %}">{{ object.saved_date|date:"d"}}</a></li>
+{% endblock %}
+
+{% block content %}
+<div id="link-detail">
+<p class="meta date">Saved on {% long_date object.saved_date %} <a href="{% url tumblelog_archive_day year=object.saved_date|date:"Y",month=object.saved_date|date:"m",day=object.saved_date|date:"d" %}">More</a></p>
+<h2>{% autoescape off %}{{ object.description|typogrify }}{% endautoescape %}</h2>
+{% if object.image %}
+<img src="{{ object.get_image_url }}" alt="{{ object.image_caption }}" width="{{ object.get_image_width }}" height="{{ object.get_image_height }}" />
+{% endif %}
+{% if object.extended_info %}<p>{% autoescape off %}{{ object.extended_info|typogrify }}{% endautoescape %}{% if object.via_url %} <a href="{{ object.via_url }}">Via</a>{% endif %}</p>{% endif %}
+<p><a href="{{ object.url }}" title="Visit site" class="visit">Visit site</a></p>
+</div>
+
+{% include "tag/tags_for_object.html" %}
+{% include "threadedcomments/comments_list.html" %}
+
+{% endblock %}
+
+{% block sidebarcontent %}
+<div id="next-previous" class="clearfix">
+{% if object.get_previous %}
+<h3>Previous link</h3>
+<p><a href="{{ object.get_previous.get_absolute_url }}" class="previous" title="Previous link">{% autoescape off %}{{ object.get_previous.description|typogrify }}{% endautoescape %}</a></p>
+{% endif %}
+{% if object.get_next %}
+<h3>Next link</h3>
+<p><a href="{{ object.get_next.get_absolute_url }}" class="next" title="Next link">{% autoescape off %}{{ object.get_next.description|typogrify }}{% endautoescape %}</a></p>
+{% endif %}
+</div>
+{{ block.super }}
+{% endblock %}

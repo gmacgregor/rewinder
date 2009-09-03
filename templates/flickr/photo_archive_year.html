@@ -1,0 +1,25 @@
+{% extends "flickr/base.html" %}
+{% load custom_tags %}
+{% block title %}Photos: {{ year }}{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+    <li><a href="{% url photo_archive_year year=year %}">{{ year }}</a></li>
+{% endblock %}
+{% load custom_tags %}
+{% load threadedcommentstags %}
+
+{% block content %}
+<h2>Photos created in {{ year }} ({{ object_list.count }}) <a href="{% url tumblelog_archive_year year=year %}" class="visit" title="View all online activity for {{ year }}">More</a></h2>
+<div id="year-archive">
+{% for photo in object_list %}
+{% get_free_comment_count for photo as comments %}
+<div class="entry photo">
+<p class="meta"><span class="date">{% long_date photo.taken_date %}</span> <span class="comments"><a href="{{ photo.get_absolute_url }}#comments">{{ comments }} comment{{ comments|pluralize}}</a></span></p>
+<p class="photo">
+<a href="{{ photo.get_absolute_url }}" style="background-image: url({{ photo.medium_url }}); background-repeat: no-repeat;" title="{{ photo.title }}">{{ photo.title }}</a>
+</p>    
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}

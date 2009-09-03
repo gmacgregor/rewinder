@@ -1,0 +1,16 @@
+{% extends "flickr/base.html" %}
+{% block breadcrumb %}{{ block.super }}<li class="last">Favourites</li>{% endblock %}
+
+{% block content %}
+<div id="photo-faves">
+<h2>My favourite flickr photos by other users of <a href="http://www.flickr.com">flickr.com</a></h2>
+{% for photo in photos %}
+    <div class="photo">
+    <a href="{{ photo.photopage_url }}"><img src="{{ photo.square_url }}" width="75" height="75" alt="{{ photo.title }}" /></a>
+    <!-- <p><strong>{{ photo.title }}</strong> by <a href="{{ photo.photopage_url }}">{{ photo.owner }}</a> -->
+    </div>
+{% endfor %}
+</div>
+{% endblock %}
+
+{% block sidebar %}{% endblock %}
