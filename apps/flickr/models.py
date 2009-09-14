@@ -40,7 +40,7 @@ class Photo(models.Model):
     medium_url          = models.URLField()
     thumbnail_url       = models.URLField()
     tags                = TagField()
-    enable_comments     = models.BooleanField(default=True)
+    enable_comments     = models.BooleanField(default=settings.COMMENTS_ENABLE)
     license             = models.CharField(max_length=50, choices=FLICKR_LICENSES)
     geo_latitude        = models.CharField(max_length=50, blank=True)
     geo_longitude       = models.CharField(max_length=50, blank=True)
