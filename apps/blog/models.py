@@ -86,7 +86,7 @@ class Article(models.Model):
     categories          = models.ManyToManyField(Category, filter_interface=models.HORIZONTAL, null=True, blank=True)
     featured            = models.BooleanField('Featured article?', default=False)
     tags                = TagField()
-    enable_comments     = models.BooleanField(default=True)
+    enable_comments     = models.BooleanField(default=settings.COMMENTS_ENABLE)
     
     #managers
     objects             = models.Manager()
