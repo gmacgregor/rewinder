@@ -31,7 +31,7 @@ class Video(models.Model):
     commentary          = models.TextField(blank=True, help_text=u'Your opinion/additional comments about the video.  Use Markdown syntax for HTML formatting. Optional.')
     html_commentary     = models.TextField(blank=True, null=True)
     tags                = TagField()
-    enable_comments     = models.BooleanField(default=True)
+    enable_comments     = models.BooleanField(default=settings.COMMENTS_ENABLE)
     
     #meta
     video_id            = models.CharField(u'Video ID', max_length=100, null=True, blank=True, help_text=u"The 'id' of the video. For example: http://youtube.com/watch?v=NakX-vtxYhI the 'id' is 'NakX-vtxYhI'. The system will make an attempt to determine this if not supplied.")
