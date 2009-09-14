@@ -42,7 +42,7 @@ class LatestVideos(Feed):
 class LatestTweets(Feed):
     title = "rewinder.ca: Latest twitter tweets"
     link = "/tweets/"
-    description = "Latest Twitter tweets by Greg MacGregor"
+    description = "Latest twitter tweets"
     
     def items(self):
         return Tweet.objects.order_by('-pub_time')[:10]
@@ -50,15 +50,15 @@ class LatestTweets(Feed):
 class LatestQuotes(Feed):
     title = "rewinder.ca: Latest quotes"
     link = "/quotes/"
-    description = "Latest Quotes transcribed by Greg MacGregor"
+    description = "Latest quotes"
     
     def items(self):
         return Quote.objects.order_by('-pub_date')[:10]
 
 class LatestTumblelog(Feed):
-    title = "rewnder.ca: Latest online activity"
+    title = "rewinder.ca: Latest online activity"
     link = "/tumblelog/"
-    description = "Greg MacGregor's latest online activity"
+    description = "My latest online activity"
     
     def items(self):
         return TumblelogItem.objects.order_by('-pub_date')[:10]
