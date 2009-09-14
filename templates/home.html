@@ -25,6 +25,7 @@
 
 {% block sidebarcontent %}
 
+{% comment %}
 {% get_latest_posts 1 as latest_posts %}
 {% if latest_posts %}
 <div id="latest-posts">
@@ -40,6 +41,7 @@
     {% endfor %}
 </div>
 {% endif %}
+{% endcomment %}
 
 {% get_random_photo as photo related_photos %}
 {% get_free_comment_count for photo as comments %}
