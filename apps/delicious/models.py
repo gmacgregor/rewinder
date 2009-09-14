@@ -28,7 +28,7 @@ class Bookmark(models.Model):
     extended_info           = models.CharField(max_length=255, blank=True)
     post_hash               = models.CharField(max_length=100, null=True, blank=True)
     via_url                 = models.URLField(u'Via URL', verify_exists=False, blank=True, null=True, help_text=u'The URL of the site where you spotted the link. Optional.')
-    enable_comments         = models.BooleanField(default=True)
+    enable_comments         = models.BooleanField(default=settings.COMMENTS_ENABLE)
     post_elsewhere          = models.BooleanField(u'Post to del.icio.us', default=False, help_text=u'If checked, this link will be posted both to your weblog and to your del.icio.us account.')
     
     def __unicode__(self):
