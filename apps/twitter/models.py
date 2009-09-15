@@ -13,7 +13,7 @@ class Tweet(models.Model):
     twitter_id          = models.PositiveIntegerField()
     text                = models.TextField()
     user                = models.ForeignKey('TwitterUser')
-    enable_comments     = models.BooleanField(default=True)
+    enable_comments     = models.BooleanField(default=settings.COMMENTS_ENABLE)
     
     def __unicode__(self):
         return u'%s' % (self.text)
