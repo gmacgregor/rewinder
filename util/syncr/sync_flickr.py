@@ -5,7 +5,7 @@ api_secret = '072822dd97710515'
 
 def run():
     f = FlickrSyncr(api_key, api_secret)
-    f.syncRecentPhotos('sixminutes', days=1)
+    f.syncRecentPhotos('sixminutes', days=30)
 
 def favs():
     f = FlickrSyncr(api_key, api_secret)
